@@ -8,7 +8,6 @@
 <meta name="keywords" content="空き店舗,テナント承継,居抜き,物件管理,空室削減,創業支援,自治体連携,滋賀,大津">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;700&family=Shippori+Mincho+B1:wght@400;500;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
-
 <style>
 /* ═══════════════════════════════════════════
    TOKENS
@@ -30,7 +29,6 @@
   --line:      rgba(198,162,74,0.2);
   --ease:      cubic-bezier(0.25,0.8,0.25,1);
 }
-
 /* ═══════════════════════════════════════════
    RESET
 ═══════════════════════════════════════════ */
@@ -43,7 +41,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 ::-webkit-scrollbar{width:3px}
 ::-webkit-scrollbar-track{background:var(--navy)}
 ::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:2px}
-
 /* ═══════════════════════════════════════════
    NAV
 ═══════════════════════════════════════════ */
@@ -81,7 +78,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   padding:9px 22px;font-weight:700;transition:all 0.2s;
 }
 .btn-nav-solid:hover{background:var(--gold-lt)}
-
 /* hamburger */
 .ham{display:none;flex-direction:column;gap:5px;padding:6px}
 .ham span{display:block;width:22px;height:1.5px;background:var(--cream);transition:0.2s}
@@ -100,7 +96,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   position:absolute;top:24px;right:28px;
   font-size:1.6rem;color:var(--smoke);
 }
-
 /* ═══════════════════════════════════════════
    HERO
 ═══════════════════════════════════════════ */
@@ -109,7 +104,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   display:flex;flex-direction:column;justify-content:flex-end;
   overflow:hidden;
 }
-
 /* animated grid bg */
 .hero-grid{
   position:absolute;inset:0;
@@ -123,7 +117,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   0%{background-position:0 0}
   100%{background-position:80px 80px}
 }
-
 /* radial glow */
 .hero-glow{
   position:absolute;inset:0;
@@ -131,7 +124,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
     radial-gradient(ellipse 55% 65% at 70% 45%,rgba(198,162,74,0.07) 0%,transparent 60%),
     radial-gradient(ellipse 40% 50% at 20% 80%,rgba(28,48,74,0.8) 0%,transparent 50%);
 }
-
 /* large decorative text */
 .hero-deco{
   position:absolute;
@@ -143,7 +135,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   line-height:1;pointer-events:none;white-space:nowrap;
   animation:fadeIn 2s ease both;
 }
-
 .hero-inner{
   position:relative;z-index:2;
   max-width:1200px;margin:0 auto;width:100%;
@@ -151,7 +142,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   display:grid;grid-template-columns:1fr 420px;
   gap:60px;align-items:end;
 }
-
 .hero-left{}
 .hero-label{
   font-family:'Cormorant Garamond',serif;
@@ -162,7 +152,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   animation:fadeUp 0.8s ease both;
 }
 .hero-label::before{content:'';display:block;width:36px;height:1px;background:var(--gold-dim)}
-
 .hero-h1{
   font-family:'Shippori Mincho B1',serif;
   font-size:clamp(2.8rem,5vw,4.4rem);
@@ -182,7 +171,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   font-weight:400;color:rgba(246,241,231,0.6);
   margin-top:12px;
 }
-
 .hero-btns{
   display:flex;gap:14px;flex-wrap:wrap;
   animation:fadeUp 0.8s 0.18s ease both;
@@ -201,7 +189,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   padding:16px 28px;transition:all 0.25s;
 }
 .btn-hero-s:hover{border-color:var(--gold);color:var(--gold)}
-
 /* Hero right — stat card */
 .hero-stat-card{
   background:rgba(19,32,51,0.85);
@@ -229,7 +216,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   font-size:0.82rem;color:var(--cream);line-height:1.9;
 }
 .stat-phrase span{color:var(--gold)}
-
 /* scroll hint */
 .hero-scroll{
   position:absolute;bottom:32px;left:52px;z-index:2;
@@ -247,7 +233,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   0%,100%{width:40px;opacity:1}
   50%{width:70px;opacity:0.5}
 }
-
 /* ═══════════════════════════════════════════
    STRIP
 ═══════════════════════════════════════════ */
@@ -274,7 +259,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   0%{transform:translateX(0)}
   100%{transform:translateX(-50%)}
 }
-
 /* ═══════════════════════════════════════════
    SECTION UTILITY
 ═══════════════════════════════════════════ */
@@ -292,16 +276,13 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   font-weight:700;line-height:1.38;margin-bottom:18px;
 }
 .sec-lead{font-size:0.9rem;line-height:2.15;opacity:0.75;max-width:540px}
-
 /* light section */
 .sec-light{background:var(--cream);color:var(--navy)}
 .sec-light .sec-label{color:var(--gold-dim)}
 .sec-light .sec-label::after{background:var(--gold-dim)}
 .sec-light .sec-lead{opacity:0.7;color:var(--warm)}
-
 /* mid section */
 .sec-mid{background:var(--navy-mid)}
-
 /* ═══════════════════════════════════════════
    PROBLEM
 ═══════════════════════════════════════════ */
@@ -336,7 +317,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   font-size:1rem;font-weight:700;color:var(--cream);margin-bottom:10px;
 }
 .prob-desc{font-size:0.82rem;color:var(--smoke);line-height:2}
-
 .problem-quote{
   margin-top:2px;
   background:var(--gold-faint);
@@ -353,7 +333,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   font-size:1.2rem;font-weight:500;color:var(--cream);line-height:1.8;
 }
 .problem-quote blockquote span{color:var(--gold)}
-
 /* ═══════════════════════════════════════════
    THREE-PARTY MODEL
 ═══════════════════════════════════════════ */
@@ -397,7 +376,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   font-size:0.68rem;color:var(--gold);letter-spacing:0.1em;
   border:1px solid var(--line);
 }
-
 .model-arrow{
   display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;
   color:var(--gold-dim);font-size:1.2rem;
@@ -406,7 +384,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   font-size:0.6rem;letter-spacing:0.15em;color:var(--gold-dim);
   text-align:center;font-family:'Cormorant Garamond',serif;
 }
-
 /* municipality band */
 .muni-band{
   margin-top:24px;
@@ -435,7 +412,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   font-size:1.5rem;color:var(--gold);font-weight:300;display:block;line-height:1;
 }
 .muni-badge-l{font-size:0.62rem;color:var(--smoke);letter-spacing:0.1em;display:block;margin-top:4px}
-
 /* ═══════════════════════════════════════════
    SERVICE FLOW
 ═══════════════════════════════════════════ */
@@ -472,7 +448,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   font-size:0.6rem;letter-spacing:0.18em;color:var(--gold-dim);
   border:1px solid rgba(198,162,74,0.35);padding:3px 10px;
 }
-
 .flow-bottom{
   grid-column:1 / -1;
   margin-top:2px;background:var(--navy);color:var(--cream);
@@ -482,7 +457,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 .flow-bottom-item .flow-cell-phase{color:var(--gold-dim)}
 .flow-bottom-item .flow-cell-title{color:var(--cream)}
 .flow-bottom-item .flow-cell-desc{color:var(--smoke)}
-
 /* ═══════════════════════════════════════════
    GATE SYSTEM
 ═══════════════════════════════════════════ */
@@ -514,7 +488,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   font-size:0.9rem;font-weight:700;color:var(--cream);margin-bottom:3px;
 }
 .gate-axis-desc{font-size:0.72rem;color:var(--smoke);line-height:1.8}
-
 .gate-visual{
   position:sticky;top:90px;
 }
@@ -560,7 +533,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 }
 .gate-audience:hover{border-color:var(--gold-dim)}
 .gate-audience-icon{font-size:1.1rem;flex-shrink:0}
-
 /* ═══════════════════════════════════════════
    PARTNER SYSTEM
 ═══════════════════════════════════════════ */
@@ -595,7 +567,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   font-size:0.72rem;color:var(--gold-dim);
   border-bottom:1px solid rgba(198,162,74,0.3);padding-bottom:2px;
 }
-
 .partner-visual{
   background:var(--navy);padding:48px 40px;
   position:relative;overflow:hidden;
@@ -627,7 +598,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 }
 .pv-fee-label{font-size:0.7rem;color:var(--smoke);letter-spacing:0.12em;position:relative;z-index:1}
 .pv-note{font-size:0.65rem;color:var(--gold-dim);margin-top:6px;position:relative;z-index:1}
-
 /* ═══════════════════════════════════════════
    FOR FOUNDERS BRIDGE
 ═══════════════════════════════════════════ */
@@ -664,7 +634,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   padding:14px 32px;transition:all 0.25s;
 }
 .btn-founders:hover{background:var(--gold-lt)}
-
 /* ═══════════════════════════════════════════
    TRUST
 ═══════════════════════════════════════════ */
@@ -687,7 +656,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 }
 .trust-n small{font-size:1.1rem}
 .trust-l{font-size:0.75rem;color:var(--smoke);line-height:1.75}
-
 .trust-badges{
   display:grid;grid-template-columns:1fr 1fr;
   gap:2px;margin-top:2px;background:rgba(255,255,255,0.03);
@@ -705,7 +673,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   font-size:0.9rem;font-weight:700;color:var(--cream);margin-bottom:6px;
 }
 .trust-badge-desc{font-size:0.78rem;color:var(--smoke);line-height:1.9}
-
 /* ═══════════════════════════════════════════
    CONTACT
 ═══════════════════════════════════════════ */
@@ -725,7 +692,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 .promise-check{color:var(--gold-dim);font-size:1rem;flex-shrink:0;margin-top:2px}
 .promise-text{font-size:0.8rem;color:var(--warm);line-height:1.85}
 .promise-text strong{color:var(--navy)}
-
 /* Form */
 .contact-form{background:var(--white);border:1px solid rgba(13,27,42,0.08);padding:44px 40px}
 .fgroup{margin-bottom:20px}
@@ -756,7 +722,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .ferr{font-size:0.68rem;color:#B85C38;margin-top:5px;display:none}
 .finput.err,.fselect.err{border-color:#B85C38}
-
 .fprivacy{font-size:0.7rem;color:var(--warm);line-height:1.85;margin-bottom:20px}
 .btn-submit{
   width:100%;background:var(--navy);color:var(--gold);
@@ -767,7 +732,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 }
 .btn-submit:hover{background:var(--gold);color:var(--navy)}
 .btn-submit:disabled{opacity:0.5;cursor:not-allowed}
-
 .form-success{display:none;text-align:center;padding:48px 32px}
 .form-success.show{display:block}
 .fs-icon{font-size:2.8rem;display:block;margin-bottom:16px}
@@ -776,7 +740,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:10px;
 }
 .fs-body{font-size:0.82rem;color:var(--warm);line-height:2}
-
 /* ═══════════════════════════════════════════
    FINAL CTA
 ═══════════════════════════════════════════ */
@@ -798,7 +761,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 .r1{width:600px;height:600px}
 .r2{width:400px;height:400px;border-color:rgba(198,162,74,0.1)}
 .r3{width:220px;height:220px;border-color:rgba(198,162,74,0.14)}
-
 .final-inner{
   max-width:680px;margin:0 auto;padding:110px 52px;
   text-align:center;position:relative;z-index:1;
@@ -827,7 +789,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   font-size:0.82rem;letter-spacing:0.15em;padding:18px 32px;transition:all 0.25s;
 }
 .btn-fs:hover{border-color:var(--gold);color:var(--gold)}
-
 /* ═══════════════════════════════════════════
    FOOTER
 ═══════════════════════════════════════════ */
@@ -871,7 +832,6 @@ footer{
 .footer-sub-links{display:flex;gap:20px}
 .footer-sub-links a{font-size:0.6rem;color:rgba(196,186,166,0.3);letter-spacing:0.1em;transition:color 0.2s}
 .footer-sub-links a:hover{color:var(--gold-dim)}
-
 /* ═══════════════════════════════════════════
    ANIMATIONS
 ═══════════════════════════════════════════ */
@@ -889,7 +849,6 @@ footer{
 .reveal.vis{opacity:1;transform:none}
 .d1{transition-delay:0.1s}.d2{transition-delay:0.2s}
 .d3{transition-delay:0.3s}.d4{transition-delay:0.4s}
-
 /* ═══════════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════════ */
@@ -929,7 +888,6 @@ footer{
 </style>
 </head>
 <body>
-
 <!-- ══ NAV ══ -->
 <nav id="nav">
   <a href="#" class="nav-logo">Bridge<em>Cycle</em></a>
@@ -942,14 +900,13 @@ footer{
     <a href="#contact">お問い合わせ</a>
   </div>
   <div class="nav-cta-wrap nav-links">
-    <a href="bc_founder_lp_v2.html" class="btn-nav-ghost" target="_blank">創業希望の方へ</a>
+    <a href="lp.html" class="btn-nav-ghost" target="_blank">創業希望の方へ</a>
     <a href="#contact" class="btn-nav-solid">資料請求</a>
   </div>
   <div class="ham" id="ham" onclick="toggleMob()">
     <span></span><span></span><span></span>
   </div>
 </nav>
-
 <!-- mobile nav -->
 <div class="mob-nav" id="mobNav">
   <button class="mob-close" onclick="toggleMob()">✕</button>
@@ -959,15 +916,13 @@ footer{
   <a href="#gate" onclick="toggleMob()">GATE診断</a>
   <a href="#partner" onclick="toggleMob()">パートナー</a>
   <a href="#contact" onclick="toggleMob()">お問い合わせ</a>
-  <a href="bc_founder_lp_v2.html" onclick="toggleMob()" target="_blank">創業希望の方へ →</a>
+  <a href="lp.html" onclick="toggleMob()" target="_blank">創業希望の方へ →</a>
 </div>
-
 <!-- ══ HERO ══ -->
 <section class="hero" id="hero">
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
   <div class="hero-deco">BC</div>
-
   <div class="hero-inner">
     <div class="hero-left">
       <p class="hero-label">BRIDGE CYCLE 株式会社</p>
@@ -1005,7 +960,6 @@ footer{
   </div>
   <p class="hero-scroll">Scroll</p>
 </section>
-
 <!-- ══ STRIP ══ -->
 <div class="strip">
   <div class="strip-track" id="stripTrack">
@@ -1024,7 +978,6 @@ footer{
     <span class="strip-item">次の店主が、看板を引き継ぐ</span>
   </div>
 </div>
-
 <!-- ══ PROBLEM ══ -->
 <section id="problem">
   <div class="sec">
@@ -1065,7 +1018,6 @@ footer{
     </div>
   </div>
 </section>
-
 <!-- ══ THREE-PARTY MODEL ══ -->
 <section id="model" class="sec-mid">
   <div class="sec">
@@ -1117,7 +1069,6 @@ footer{
     </div>
   </div>
 </section>
-
 <!-- ══ SERVICE FLOW ══ -->
 <section id="service" class="sec-light">
   <div class="sec">
@@ -1173,7 +1124,6 @@ footer{
     </div>
   </div>
 </section>
-
 <!-- ══ GATE SYSTEM ══ -->
 <section id="gate">
   <div class="sec">
@@ -1278,7 +1228,6 @@ footer{
     </div>
   </div>
 </section>
-
 <!-- ══ PARTNER SYSTEM ══ -->
 <section id="partner" class="sec-light">
   <div class="sec">
@@ -1329,7 +1278,6 @@ footer{
     </div>
   </div>
 </section>
-
 <!-- ══ FOR FOUNDERS BRIDGE ══ -->
 <section id="founders">
   <div class="founders-inner">
@@ -1337,17 +1285,16 @@ footer{
       <p class="sec-label reveal">For Founders</p>
       <h2 class="reveal">「次の店主」を目指す方へ</h2>
       <p class="reveal">開業を夢見ているけれど、資金・物件・経験の壁で一歩踏み出せていない方。BRIDGE CYCLEの創業者向けページでは、GATE診断から開業支援の詳細をご覧いただけます。</p>
-      <a href="bc_founder_lp_v2.html" class="btn-founders reveal" target="_blank">創業者向けページへ →</a>
+      <a href="lp.html" class="btn-founders reveal" target="_blank">創業者向けページへ →</a>
     </div>
     <div class="founders-right reveal d2">
       <span class="founders-right-icon">🔑</span>
       <p class="founders-right-h">無料GATE診断を受ける</p>
       <p class="founders-right-body">6軸・12問で開業準備度をスコア化。<br>強みと課題を「見える化」し、<br>あなたに合った開業プランを提案します。</p>
-      <a href="bc_founder_lp_v2.html#gate" class="btn-founders" target="_blank">GATE診断を始める（無料）</a>
+      <a href="lp.html#gate" class="btn-founders" target="_blank">GATE診断を始める（無料）</a>
     </div>
   </div>
 </section>
-
 <!-- ══ TRUST ══ -->
 <section id="trust" class="sec-mid">
   <div class="sec">
@@ -1393,7 +1340,6 @@ footer{
     </div>
   </div>
 </section>
-
 <!-- ══ CONTACT ══ -->
 <section id="contact" class="sec-light">
   <div class="sec">
@@ -1433,7 +1379,6 @@ footer{
           <form id="contactForm" novalidate>
             <input type="hidden" name="_subject" value="【BRIDGE CYCLE HP】新規お問い合わせ">
             <input type="hidden" name="お問い合わせ種別" id="inqType" value="未選択">
-
             <div class="fgroup">
               <label class="flabel">お問い合わせ種別<span class="req">必須</span></label>
               <select class="fselect" id="ftype" onchange="document.getElementById('inqType').value=this.value">
@@ -1446,7 +1391,6 @@ footer{
               </select>
               <p class="ferr" id="err-type">種別を選択してください</p>
             </div>
-
             <div class="frow">
               <div class="fgroup">
                 <label class="flabel" for="fname">お名前<span class="req">必須</span></label>
@@ -1458,25 +1402,20 @@ footer{
                 <input class="finput" type="text" id="fcomp" name="会社名・団体名" placeholder="株式会社〇〇">
               </div>
             </div>
-
             <div class="fgroup">
               <label class="flabel" for="femail">メールアドレス<span class="req">必須</span></label>
               <input class="finput" type="email" id="femail" name="メールアドレス" placeholder="your@email.com" autocomplete="email">
               <p class="ferr" id="err-email">正しいメールアドレスを入力してください</p>
             </div>
-
             <div class="fgroup">
               <label class="flabel" for="ftel">電話番号</label>
               <input class="finput" type="tel" id="ftel" name="電話番号" placeholder="090-0000-0000" autocomplete="tel">
             </div>
-
             <div class="fgroup">
               <label class="flabel" for="fmsg">ご相談内容・背景</label>
               <textarea class="ftextarea" id="fmsg" name="ご相談内容" placeholder="管理物件の状況、ご検討の背景、知りたいことなどをご自由にお書きください。"></textarea>
             </div>
-
             <p class="fprivacy">ご入力いただいた個人情報は、お問い合わせへの回答および当社サービスのご案内にのみ使用します。第三者への提供は行いません。</p>
-
             <button type="button" class="btn-submit" id="subBtn" onclick="doSubmit()">
               送信する（返信48時間以内）
             </button>
@@ -1486,7 +1425,6 @@ footer{
     </div>
   </div>
 </section>
-
 <!-- ══ FINAL CTA ══ -->
 <section id="final">
   <div class="final-rings">
@@ -1506,11 +1444,10 @@ footer{
     </p>
     <div class="final-btns reveal">
       <a href="#contact" class="btn-fp">資料請求・無料相談</a>
-      <a href="bc_founder_lp_v2.html" class="btn-fs" target="_blank">創業希望者向けページ</a>
+      <a href="lp.html" class="btn-fs" target="_blank">創業希望者向けページ</a>
     </div>
   </div>
 </section>
-
 <!-- ══ FOOTER ══ -->
 <footer>
   <div class="footer-top">
@@ -1533,7 +1470,7 @@ footer{
         <a href="#partner">認定パートナー制度</a>
         <a href="#trust">信頼の根拠</a>
         <a href="#contact">お問い合わせ</a>
-        <a href="bc_founder_lp_v2.html" target="_blank">創業希望者向けページ →</a>
+        <a href="lp.html" target="_blank">創業希望者向けページ →</a>
       </div>
     </div>
     <div>
@@ -1561,7 +1498,6 @@ footer{
     </div>
   </div>
 </footer>
-
 <!-- ══ SCRIPTS ══ -->
 <script>
 /* NAV */
@@ -1569,52 +1505,36 @@ window.addEventListener('scroll',()=>{
   document.getElementById('nav').style.borderBottomColor =
     window.scrollY>60?'rgba(198,162,74,0.3)':'rgba(198,162,74,0.2)';
 });
-
 /* MOBILE MENU */
 function toggleMob(){
   document.getElementById('mobNav').classList.toggle('open');
 }
-
 /* SCROLL REVEAL */
 const ro=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')});
 },{threshold:0.1,rootMargin:'0px 0px -36px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
-
 /* FORM SUBMIT */
 async function doSubmit(){
   let ok=true;
-
   const ftype=document.getElementById('ftype');
   const errT=document.getElementById('err-type');
   if(!ftype.value){ftype.classList.add('err');errT.style.display='block';ok=false}
   else{ftype.classList.remove('err');errT.style.display='none'}
-
   const fname=document.getElementById('fname');
   const errN=document.getElementById('err-name');
   if(!fname.value.trim()){fname.classList.add('err');errN.style.display='block';ok=false}
   else{fname.classList.remove('err');errN.style.display='none'}
-
   const femail=document.getElementById('femail');
   const errE=document.getElementById('err-email');
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(femail.value.trim())){
     femail.classList.add('err');errE.style.display='block';ok=false
   }else{femail.classList.remove('err');errE.style.display='none'}
-
   if(!ok)return;
-
   const btn=document.getElementById('subBtn');
   btn.disabled=true;btn.textContent='送信中...';
-
-  /* ────────────────────────────────────────────
-     Formspree設定:
-     https://formspree.io/ で登録後、発行されたエンドポイントを設定
-     例: const EP='https://formspree.io/f/xxxxxxxx';
-  ──────────────────────────────────────────── */
   const EP=''; // ← Formspreeエンドポイントをここに設定
-
   const data=new FormData(document.getElementById('contactForm'));
-
   if(EP){
     try{
       const r=await fetch(EP,{method:'POST',body:data,headers:{Accept:'application/json'}});
@@ -1629,7 +1549,6 @@ async function doSubmit(){
   window.location.href=`mailto:info@bridgecycleco.com?subject=${subj}&body=${body}`;
   showSuccess();
 }
-
 function showSuccess(){
   document.getElementById('contactFormWrap').style.display='none';
   document.getElementById('formSuccess').classList.add('show');
