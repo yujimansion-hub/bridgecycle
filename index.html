@@ -3,16 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ホーム | BRIDGE CYCLE — 遅すぎる相談を、早い接続に変える</title>
-<meta name="description" content="BRIDGE CYCLE（ブリッジサイクル）は、管理会社から得る退去予兆案件を起点に、GATE選抜・融資前倒し・認定パートナー伴走で飲食テナントの空室ロスを構造的に削減する承継インフラです。大津・京都を重点地域に展開。">
-<meta name="keywords" content="空き店舗,テナント承継,居抜き,物件管理,空室削減,創業支援,自治体連携,滋賀,大津">
+<title>ホーム | BRIDGE CYCLE — 空き店舗を、次の灯りへ</title>
+<meta name="description" content="BRIDGE CYCLE（ブリッジサイクル）は、退去前の空き店舗と次の創業者をつなぐ、物件管理会社向けの空室削減支援サービスです。管理会社が入力するだけで動く、GATE診断×8ステップ伴走の新しい空室対策です。">
+<meta name="keywords" content="空き店舗,テナント承継,居抜き,物件管理,空室削減,創業支援,GATE診断,中小企業診断士,滋賀,大津">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;700&family=Shippori+Mincho+B1:wght@400;500;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+
 <style>
-/* ═══════════════════════════════════════════
-   SCROLL OFFSET — fixed nav compensation
-═══════════════════════════════════════════ */
-html { scroll-padding-top: 80px; }
 /* ═══════════════════════════════════════════
    TOKENS
 ═══════════════════════════════════════════ */
@@ -33,11 +30,12 @@ html { scroll-padding-top: 80px; }
   --line:      rgba(198,162,74,0.2);
   --ease:      cubic-bezier(0.25,0.8,0.25,1);
 }
+
 /* ═══════════════════════════════════════════
    RESET
 ═══════════════════════════════════════════ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;font-size:16px}
+html{scroll-behavior:smooth;scroll-padding-top:80px;font-size:16px}
 body{background:var(--navy);color:var(--cream);font-family:'Noto Serif JP',serif;overflow-x:hidden;line-height:1.85}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
@@ -45,6 +43,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 ::-webkit-scrollbar{width:3px}
 ::-webkit-scrollbar-track{background:var(--navy)}
 ::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:2px}
+
 /* ═══════════════════════════════════════════
    NAV
 ═══════════════════════════════════════════ */
@@ -82,6 +81,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   padding:9px 22px;font-weight:700;transition:all 0.2s;
 }
 .btn-nav-solid:hover{background:var(--gold-lt)}
+
 /* hamburger */
 .ham{display:none;flex-direction:column;gap:5px;padding:6px}
 .ham span{display:block;width:22px;height:1.5px;background:var(--cream);transition:0.2s}
@@ -100,6 +100,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   position:absolute;top:24px;right:28px;
   font-size:1.6rem;color:var(--smoke);
 }
+
 /* ═══════════════════════════════════════════
    HERO
 ═══════════════════════════════════════════ */
@@ -108,6 +109,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   display:flex;flex-direction:column;justify-content:flex-end;
   overflow:hidden;
 }
+
 /* animated grid bg */
 .hero-grid{
   position:absolute;inset:0;
@@ -121,6 +123,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   0%{background-position:0 0}
   100%{background-position:80px 80px}
 }
+
 /* radial glow */
 .hero-glow{
   position:absolute;inset:0;
@@ -128,6 +131,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
     radial-gradient(ellipse 55% 65% at 70% 45%,rgba(198,162,74,0.07) 0%,transparent 60%),
     radial-gradient(ellipse 40% 50% at 20% 80%,rgba(28,48,74,0.8) 0%,transparent 50%);
 }
+
 /* large decorative text */
 .hero-deco{
   position:absolute;
@@ -139,6 +143,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   line-height:1;pointer-events:none;white-space:nowrap;
   animation:fadeIn 2s ease both;
 }
+
 .hero-inner{
   position:relative;z-index:2;
   max-width:1200px;margin:0 auto;width:100%;
@@ -146,6 +151,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   display:grid;grid-template-columns:1fr 420px;
   gap:60px;align-items:end;
 }
+
 .hero-left{}
 .hero-label{
   font-family:'Cormorant Garamond',serif;
@@ -156,6 +162,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   animation:fadeUp 0.8s ease both;
 }
 .hero-label::before{content:'';display:block;width:36px;height:1px;background:var(--gold-dim)}
+
 .hero-h1{
   font-family:'Shippori Mincho B1',serif;
   font-size:clamp(2.8rem,5vw,4.4rem);
@@ -175,6 +182,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   font-weight:400;color:rgba(246,241,231,0.6);
   margin-top:12px;
 }
+
 .hero-btns{
   display:flex;gap:14px;flex-wrap:wrap;
   animation:fadeUp 0.8s 0.18s ease both;
@@ -193,6 +201,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   padding:16px 28px;transition:all 0.25s;
 }
 .btn-hero-s:hover{border-color:var(--gold);color:var(--gold)}
+
 /* Hero right — stat card */
 .hero-stat-card{
   background:rgba(19,32,51,0.85);
@@ -220,6 +229,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   font-size:0.82rem;color:var(--cream);line-height:1.9;
 }
 .stat-phrase span{color:var(--gold)}
+
 /* scroll hint */
 .hero-scroll{
   position:absolute;bottom:32px;left:52px;z-index:2;
@@ -237,6 +247,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   0%,100%{width:40px;opacity:1}
   50%{width:70px;opacity:0.5}
 }
+
 /* ═══════════════════════════════════════════
    STRIP
 ═══════════════════════════════════════════ */
@@ -263,6 +274,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   0%{transform:translateX(0)}
   100%{transform:translateX(-50%)}
 }
+
 /* ═══════════════════════════════════════════
    SECTION UTILITY
 ═══════════════════════════════════════════ */
@@ -280,13 +292,16 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   font-weight:700;line-height:1.38;margin-bottom:18px;
 }
 .sec-lead{font-size:0.9rem;line-height:2.15;opacity:0.75;max-width:540px}
+
 /* light section */
 .sec-light{background:var(--cream);color:var(--navy)}
 .sec-light .sec-label{color:var(--gold-dim)}
 .sec-light .sec-label::after{background:var(--gold-dim)}
 .sec-light .sec-lead{opacity:0.7;color:var(--warm)}
+
 /* mid section */
 .sec-mid{background:var(--navy-mid)}
+
 /* ═══════════════════════════════════════════
    PROBLEM
 ═══════════════════════════════════════════ */
@@ -321,6 +336,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   font-size:1rem;font-weight:700;color:var(--cream);margin-bottom:10px;
 }
 .prob-desc{font-size:0.82rem;color:var(--smoke);line-height:2}
+
 .problem-quote{
   margin-top:2px;
   background:var(--gold-faint);
@@ -337,6 +353,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   font-size:1.2rem;font-weight:500;color:var(--cream);line-height:1.8;
 }
 .problem-quote blockquote span{color:var(--gold)}
+
 /* ═══════════════════════════════════════════
    THREE-PARTY MODEL
 ═══════════════════════════════════════════ */
@@ -380,6 +397,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   font-size:0.68rem;color:var(--gold);letter-spacing:0.1em;
   border:1px solid var(--line);
 }
+
 .model-arrow{
   display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;
   color:var(--gold-dim);font-size:1.2rem;
@@ -388,6 +406,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   font-size:0.6rem;letter-spacing:0.15em;color:var(--gold-dim);
   text-align:center;font-family:'Cormorant Garamond',serif;
 }
+
 /* municipality band */
 .muni-band{
   margin-top:24px;
@@ -416,6 +435,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   font-size:1.5rem;color:var(--gold);font-weight:300;display:block;line-height:1;
 }
 .muni-badge-l{font-size:0.62rem;color:var(--smoke);letter-spacing:0.1em;display:block;margin-top:4px}
+
 /* ═══════════════════════════════════════════
    SERVICE FLOW
 ═══════════════════════════════════════════ */
@@ -452,6 +472,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   font-size:0.6rem;letter-spacing:0.18em;color:var(--gold-dim);
   border:1px solid rgba(198,162,74,0.35);padding:3px 10px;
 }
+
 .flow-bottom{
   grid-column:1 / -1;
   margin-top:2px;background:var(--navy);color:var(--cream);
@@ -461,6 +482,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 .flow-bottom-item .flow-cell-phase{color:var(--gold-dim)}
 .flow-bottom-item .flow-cell-title{color:var(--cream)}
 .flow-bottom-item .flow-cell-desc{color:var(--smoke)}
+
 /* ═══════════════════════════════════════════
    GATE SYSTEM
 ═══════════════════════════════════════════ */
@@ -492,6 +514,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   font-size:0.9rem;font-weight:700;color:var(--cream);margin-bottom:3px;
 }
 .gate-axis-desc{font-size:0.72rem;color:var(--smoke);line-height:1.8}
+
 .gate-visual{
   position:sticky;top:90px;
 }
@@ -537,6 +560,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 }
 .gate-audience:hover{border-color:var(--gold-dim)}
 .gate-audience-icon{font-size:1.1rem;flex-shrink:0}
+
 /* ═══════════════════════════════════════════
    PARTNER SYSTEM
 ═══════════════════════════════════════════ */
@@ -571,6 +595,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   font-size:0.72rem;color:var(--gold-dim);
   border-bottom:1px solid rgba(198,162,74,0.3);padding-bottom:2px;
 }
+
 .partner-visual{
   background:var(--navy);padding:48px 40px;
   position:relative;overflow:hidden;
@@ -602,6 +627,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 }
 .pv-fee-label{font-size:0.7rem;color:var(--smoke);letter-spacing:0.12em;position:relative;z-index:1}
 .pv-note{font-size:0.65rem;color:var(--gold-dim);margin-top:6px;position:relative;z-index:1}
+
 /* ═══════════════════════════════════════════
    FOR FOUNDERS BRIDGE
 ═══════════════════════════════════════════ */
@@ -638,6 +664,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   padding:14px 32px;transition:all 0.25s;
 }
 .btn-founders:hover{background:var(--gold-lt)}
+
 /* ═══════════════════════════════════════════
    TRUST
 ═══════════════════════════════════════════ */
@@ -660,6 +687,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 }
 .trust-n small{font-size:1.1rem}
 .trust-l{font-size:0.75rem;color:var(--smoke);line-height:1.75}
+
 .trust-badges{
   display:grid;grid-template-columns:1fr 1fr;
   gap:2px;margin-top:2px;background:rgba(255,255,255,0.03);
@@ -677,6 +705,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   font-size:0.9rem;font-weight:700;color:var(--cream);margin-bottom:6px;
 }
 .trust-badge-desc{font-size:0.78rem;color:var(--smoke);line-height:1.9}
+
 /* ═══════════════════════════════════════════
    CONTACT
 ═══════════════════════════════════════════ */
@@ -696,6 +725,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 .promise-check{color:var(--gold-dim);font-size:1rem;flex-shrink:0;margin-top:2px}
 .promise-text{font-size:0.8rem;color:var(--warm);line-height:1.85}
 .promise-text strong{color:var(--navy)}
+
 /* Form */
 .contact-form{background:var(--white);border:1px solid rgba(13,27,42,0.08);padding:44px 40px}
 .fgroup{margin-bottom:20px}
@@ -726,6 +756,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 .frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .ferr{font-size:0.68rem;color:#B85C38;margin-top:5px;display:none}
 .finput.err,.fselect.err{border-color:#B85C38}
+
 .fprivacy{font-size:0.7rem;color:var(--warm);line-height:1.85;margin-bottom:20px}
 .btn-submit{
   width:100%;background:var(--navy);color:var(--gold);
@@ -736,6 +767,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 }
 .btn-submit:hover{background:var(--gold);color:var(--navy)}
 .btn-submit:disabled{opacity:0.5;cursor:not-allowed}
+
 .form-success{display:none;text-align:center;padding:48px 32px}
 .form-success.show{display:block}
 .fs-icon{font-size:2.8rem;display:block;margin-bottom:16px}
@@ -744,6 +776,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:10px;
 }
 .fs-body{font-size:0.82rem;color:var(--warm);line-height:2}
+
 /* ═══════════════════════════════════════════
    FINAL CTA
 ═══════════════════════════════════════════ */
@@ -765,6 +798,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 .r1{width:600px;height:600px}
 .r2{width:400px;height:400px;border-color:rgba(198,162,74,0.1)}
 .r3{width:220px;height:220px;border-color:rgba(198,162,74,0.14)}
+
 .final-inner{
   max-width:680px;margin:0 auto;padding:110px 52px;
   text-align:center;position:relative;z-index:1;
@@ -793,6 +827,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   font-size:0.82rem;letter-spacing:0.15em;padding:18px 32px;transition:all 0.25s;
 }
 .btn-fs:hover{border-color:var(--gold);color:var(--gold)}
+
 /* ═══════════════════════════════════════════
    FOOTER
 ═══════════════════════════════════════════ */
@@ -836,6 +871,7 @@ footer{
 .footer-sub-links{display:flex;gap:20px}
 .footer-sub-links a{font-size:0.6rem;color:rgba(196,186,166,0.3);letter-spacing:0.1em;transition:color 0.2s}
 .footer-sub-links a:hover{color:var(--gold-dim)}
+
 /* ═══════════════════════════════════════════
    ANIMATIONS
 ═══════════════════════════════════════════ */
@@ -853,6 +889,7 @@ footer{
 .reveal.vis{opacity:1;transform:none}
 .d1{transition-delay:0.1s}.d2{transition-delay:0.2s}
 .d3{transition-delay:0.3s}.d4{transition-delay:0.4s}
+
 /* ═══════════════════════════════════════════
    RESPONSIVE
 ═══════════════════════════════════════════ */
@@ -892,6 +929,7 @@ footer{
 </style>
 </head>
 <body>
+
 <!-- ══ NAV ══ -->
 <nav id="nav">
   <a href="#" class="nav-logo">Bridge<em>Cycle</em></a>
@@ -904,13 +942,14 @@ footer{
     <a href="#contact">お問い合わせ</a>
   </div>
   <div class="nav-cta-wrap nav-links">
-    <a href="lp.html" class="btn-nav-ghost" target="_blank">創業希望の方へ</a>
+    <a href="lp.html" class="btn-nav-ghost">創業希望の方へ</a>
     <a href="#contact" class="btn-nav-solid">資料請求</a>
   </div>
   <div class="ham" id="ham" onclick="toggleMob()">
     <span></span><span></span><span></span>
   </div>
 </nav>
+
 <!-- mobile nav -->
 <div class="mob-nav" id="mobNav">
   <button class="mob-close" onclick="toggleMob()">✕</button>
@@ -920,25 +959,26 @@ footer{
   <a href="#gate" onclick="toggleMob()">GATE診断</a>
   <a href="#partner" onclick="toggleMob()">パートナー</a>
   <a href="#contact" onclick="toggleMob()">お問い合わせ</a>
-  <a href="lp.html" onclick="toggleMob()" target="_blank">創業希望の方へ →</a>
+  <a href="lp.html" onclick="toggleMob()">創業希望の方へ →</a>
 </div>
+
 <!-- ══ HERO ══ -->
 <section class="hero" id="hero">
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
   <div class="hero-deco">BC</div>
+
   <div class="hero-inner">
     <div class="hero-left">
-      <p class="hero-label">BRIDGE CYCLE 株式会社</p>
+      <p class="hero-label">物件管理会社・不動産オーナーの方へ</p>
       <h1 class="hero-h1">
-        <span class="accent">遅すぎる相談を、早い接続に変える。</span>
-        退去予兆から次の開業まで、<br>
-        前倒しで接続する承継インフラ。
-        <span class="sub-line">管理会社入力型 × GATE選抜 × 認定パートナー制度</span>
+        <span class="accent">退去の連絡が来てから動いても、遅い。</span>
+        閉まる前に次のテナントを確保する、<br>新しい空室対策です。
+        <span class="sub-line">管理会社入力型 × GATE選抜 × BC認定パートナー診断士による伴走</span>
       </h1>
       <div class="hero-btns">
-        <a href="#contact" class="btn-hero-p">資料請求・ご相談（無料）</a>
-        <a href="#model" class="btn-hero-s">仕組みを見る →</a>
+        <a href="#contact" class="btn-hero-p">まず資料請求・ご相談（無料）</a>
+        <a href="#model" class="btn-hero-s">どんな仕組みか見る →</a>
       </div>
     </div>
     <div>
@@ -954,189 +994,199 @@ footer{
         </div>
         <div class="stat-div"></div>
         <p class="stat-phrase">
-          管理会社の退去予兆情報を起点に、<br>
-          <span>物件決定前に</span>創業者を選抜。<br>
-          空室期間と開業初期投資を<br>
-          同時に圧縮する構造を設計する。
+          退去予兆の段階で管理会社から情報を受け取り、<br>
+          GATE診断・事業計画・融資申込まで<br>
+          <span>物件決定前に完了させる。</span><br>
+          だから、空室期間が短くなります。
         </p>
       </div>
     </div>
   </div>
   <p class="hero-scroll">Scroll</p>
 </section>
+
 <!-- ══ STRIP ══ -->
 <div class="strip">
   <div class="strip-track" id="stripTrack">
-    <span class="strip-item">遅すぎる相談を、早い接続に変える</span>
-    <span class="strip-item">管理会社入力型で退去予兆を早期捕捉</span>
-    <span class="strip-item">ST1〜ST8の前倒し承継支援</span>
-    <span class="strip-item">物件決定前にGATE診断で選抜</span>
-    <span class="strip-item">融資想定額を契約前に算出・打診</span>
-    <span class="strip-item">認定パートナー診断士が開業後も伴走</span>
+    <span class="strip-item">退去予兆の段階から動く</span>
+    <span class="strip-item">管理会社が情報を入力するだけでいい</span>
+    <span class="strip-item">GATE診断で入居候補者の質を担保する</span>
+    <span class="strip-item">物件決定前に融資の目処を立てる</span>
+    <span class="strip-item">空室期間を最小化する8ステップ</span>
+    <span class="strip-item">BC認定パートナー診断士が伴走</span>
     <!-- duplicate for seamless loop -->
-    <span class="strip-item">遅すぎる相談を、早い接続に変える</span>
-    <span class="strip-item">管理会社入力型で退去予兆を早期捕捉</span>
-    <span class="strip-item">ST1〜ST8の前倒し承継支援</span>
-    <span class="strip-item">物件決定前にGATE診断で選抜</span>
-    <span class="strip-item">融資想定額を契約前に算出・打診</span>
-    <span class="strip-item">認定パートナー診断士が開業後も伴走</span>
+    <span class="strip-item">退去予兆の段階から動く</span>
+    <span class="strip-item">管理会社が情報を入力するだけでいい</span>
+    <span class="strip-item">GATE診断で入居候補者の質を担保する</span>
+    <span class="strip-item">物件決定前に融資の目処を立てる</span>
+    <span class="strip-item">空室期間を最小化する8ステップ</span>
+    <span class="strip-item">BC認定パートナー診断士が伴走</span>
   </div>
 </div>
+
 <!-- ══ PROBLEM ══ -->
 <section id="problem">
   <div class="sec">
     <p class="sec-label reveal">The Problem</p>
-    <h2 class="sec-h2 reveal">物件管理会社が直面する、<br>テナント空白の構造問題</h2>
+    <h2 class="sec-h2 reveal">「退去の連絡が来てから動き始める」<br>それが、空室長期化の本当の原因です</h2>
     <p class="sec-lead reveal">
-      閉店は突然来ます。告知から退去まで平均2〜3ヶ月。<br>
-      その間に次のテナントを確保できる会社は、ほとんどありません。
+      閉店告知から退去まで、平均2〜3ヶ月。<br>
+      その後から次のテナントを探しても、空室期間は半年以上になりがちです。
     </p>
     <div class="problem-layout">
       <div class="problem-cell reveal">
         <span class="prob-num">01</span>
-        <p class="prob-title">閉店情報が管理会社に届くのは「退去直前」</p>
-        <p class="prob-desc">テナントが閉店を管理会社に告知するのは、退去の1〜2ヶ月前が大半。次の入居者を探し始めるタイミングが遅く、空室期間が長期化します。</p>
+        <p class="prob-title">「退去します」と言われた時点で、もう遅い</p>
+        <p class="prob-desc">告知から退去まで1〜2ヶ月。その後から募集をかけても、入居審査・契約・準備で数ヶ月かかります。結果として空室が半年〜1年続くケースが珍しくありません。</p>
       </div>
       <div class="problem-cell reveal d1">
         <span class="prob-num">02</span>
-        <p class="prob-title">スケルトン返却で次の入居ハードルが上がる</p>
-        <p class="prob-desc">テナントが内装・設備を撤去して退去すると、次の入居者は初期費用が数百万円規模に。それが入居ハードルを引き上げ、空室が長引く要因になります。</p>
+        <p class="prob-title">スケルトン返却で、次の入居者が来なくなる</p>
+        <p class="prob-desc">設備・内装を撤去して返却されると、次の入居者の初期費用は数百万円規模に跳ね上がります。それが入居ハードルを上げ、さらに空室が長引く悪循環です。</p>
       </div>
       <div class="problem-cell reveal d2">
         <span class="prob-num">03</span>
-        <p class="prob-title">閉店テナントへの支援手段がない</p>
-        <p class="prob-desc">閉店を決意したテナントに対して、管理会社ができることは限られています。円満な退去と次への引き継ぎを実現する仕組みが、業界全体で欠如しています。</p>
+        <p class="prob-title">「いい入居者かどうか」を判断する基準がない</p>
+        <p class="prob-desc">やる気がある応募者でも、資金計画や事業の実現性がわからないまま契約すると、開業後すぐに退去になるリスクがあります。審査の根拠が「感覚」になっています。</p>
       </div>
       <div class="problem-cell reveal d3">
         <span class="prob-num">04</span>
-        <p class="prob-title">創業希望者と物件情報がつながっていない</p>
-        <p class="prob-desc">開業を夢見る人は多い。しかし初期費用の壁と情報の非対称性により、適切な物件に出会えずに断念するケースが後を絶ちません。</p>
+        <p class="prob-title">「開業したい人」と「空き店舗」がつながっていない</p>
+        <p class="prob-desc">開業を希望している人は地域にいます。でも「どこに相談すればいいかわからない」という状態が続いており、管理会社の空き情報と出会えていません。</p>
       </div>
     </div>
     <div class="problem-quote reveal">
       <div class="problem-quote-bar"></div>
       <blockquote>
-        相談は来る。でも、<span>いつも遅い。</span><br>
-        物件が決まった後では、もう変えられない。<br>
-        BRIDGE CYCLEは、そのタイミングを変える。
+        退去前から動ける仕組みがあれば、<br>
+        <span>空室ゼロを目指すことができます。</span>
       </blockquote>
     </div>
   </div>
 </section>
+
 <!-- ══ THREE-PARTY MODEL ══ -->
 <section id="model" class="sec-mid">
   <div class="sec">
     <p class="sec-label reveal">The Model</p>
-    <h2 class="sec-h2 reveal">管理会社起点の、退去予兆接続モデル</h2>
+    <h2 class="sec-h2 reveal">BRIDGE CYCLEがやっていること、<br>シンプルに言うとこうです</h2>
     <p class="sec-lead reveal">
-      管理会社は退去予兆情報を最も早く把握できる利害関係者です。<br>
-      BRIDGE CYCLEはその情報を起点に、選抜・融資前倒し・開業後伴走までを一気通貫で接続します。
+      管理会社が退去予兆を入力する→BRIDGE CYCLEが動く→次のテナント候補が決まる。<br>
+      管理会社・閉店テナント・創業者の三者が、全員メリットを得る仕組みです。
     </p>
     <div class="model-diagram reveal">
       <div class="model-node">
         <span class="node-icon">🏢</span>
         <p class="node-title">物件管理会社</p>
-        <p class="node-desc">空室リスクを最小化。閉店前から次の入居者候補を確保できる体制へ。</p>
+        <p class="node-desc">退去予兆の段階で物件情報を入力するだけ。次のテナント候補の確保をBRIDGE CYCLEが担います。</p>
         <div class="node-benefit">✓ 空室期間の短縮</div>
       </div>
       <div class="model-arrow">
         <span>⇄</span>
-        <p class="model-arrow-label">情報連携<br>信頼担保</p>
+        <p class="model-arrow-label">情報連携<br>候補者紹介</p>
       </div>
       <div class="model-node center-node">
         <span class="node-icon">🌉</span>
         <p class="node-title">BRIDGE CYCLE</p>
-        <p class="node-desc">退去予兆情報を受け取り、GATE選抜・融資前倒し・認定パートナー接続を設計・実行します。</p>
-        <div class="node-benefit">入口設計・選抜・データ統括</div>
+        <p class="node-desc">GATE診断・事業計画・融資申込を「物件決定前」に完了させ、すぐ動ける入居候補者を用意します。</p>
+        <div class="node-benefit">8ステップで伴走</div>
       </div>
       <div class="model-arrow">
         <span>⇄</span>
-        <p class="model-arrow-label">マッチング<br>伴走支援</p>
+        <p class="model-arrow-label">マッチング<br>開業伴走</p>
       </div>
       <div class="model-node">
         <span class="node-icon">🔑</span>
         <p class="node-title">創業希望者</p>
-        <p class="node-desc">既存設備を引き継ぎ、初期費用を最大半減。自治体支援で安心の開業スタート。</p>
+        <p class="node-desc">設備・内装を引き継ぎ、初期費用を大幅に抑えた状態で開業できます。「融資が通った状態」で交渉に臨めます。</p>
         <div class="node-benefit">✓ 低コスト開業を実現</div>
       </div>
     </div>
     <div class="muni-band reveal">
-      <span class="muni-band-icon">🏛️</span>
+      <span class="muni-band-icon">📋</span>
       <div>
-        <p class="muni-band-label">Municipality</p>
-        <p class="muni-band-title">自治体後援広報が、初期集客の主軸になる</p>
-        <p class="muni-band-desc">自治体の後援を取得することで、広報誌掲載・自治体公式SNS・イベント共催による集客が可能になります。認定経営革新等支援機関（2026年6月登録予定）として、<strong>制度的信用</strong>を集客と選抜の両面に活用します。</p>
+        <p class="muni-band-label">管理会社の動き方</p>
+        <p class="muni-band-title">入力するだけ。あとはBRIDGE CYCLEが動きます</p>
+        <p class="muni-band-desc">退去予兆・物件概要・オーナー意向をシステムに入力するだけで、BRIDGE CYCLEがGATE診断済みの創業者候補を手配します。管理会社の業務負荷を増やさずに、空室対策を前倒しで進められます。<strong>実装支援料は基準賃料の50%×3回（目安：75万円）</strong>で、成功報酬型の設計です。</p>
       </div>
       <div class="muni-badge">
-        <span class="muni-badge-num">2026<small>年</small></span>
-        <span class="muni-badge-l">認定経営支援機関<br>登録予定</span>
+        <span class="muni-badge-num">75<small>万円</small></span>
+        <span class="muni-badge-l">実装支援料の目安<br>（成功報酬型）</span>
       </div>
     </div>
   </div>
 </section>
+
 <!-- ══ SERVICE FLOW ══ -->
 <section id="service" class="sec-light">
   <div class="sec">
     <p class="sec-label reveal">Service Flow</p>
-    <h2 class="sec-h2 reveal">ST1〜ST8：退去通知から開業後データ返却まで</h2>
+    <h2 class="sec-h2 reveal">ST1〜ST8：管理会社が動かなくても<br>空室が埋まっていく8ステップ</h2>
     <p class="sec-lead reveal">
-      管理会社が退去予兆案件を入力する瞬間から、認定パートナー伴走・月次データ蓄積まで、BRIDGE CYCLEが一気通貫で設計します。
+      管理会社がやることは「物件情報を入力する」だけ。<br>
+      あとはBRIDGE CYCLEとBC認定パートナー診断士が動きます。
     </p>
     <div class="flow-grid reveal">
       <div class="flow-cell">
         <p class="flow-cell-phase">ST 1</p>
-        <p class="flow-cell-title">管理会社 アカウント発行</p>
-        <p class="flow-cell-desc">管理会社にアカウントを発行し、入力ルール・写真基準・差戻し基準を共有。1件のテスト登録で稼働開始します。</p>
-        <span class="flow-cell-tag">初期費用なし・成果報酬型</span>
+        <p class="flow-cell-title">管理会社が物件情報を入力</p>
+        <p class="flow-cell-desc">退去予兆・賃料・オーナー意向など物件情報をシステムに入力します。ここからBRIDGE CYCLEが動き始めます。管理会社の追加業務は、これだけです。</p>
+        <span class="flow-cell-tag">管理会社の入力だけで完了</span>
         <span class="flow-cell-num">01</span>
       </div>
       <div class="flow-cell">
         <p class="flow-cell-phase">ST 2</p>
-        <p class="flow-cell-title">退去予兆案件の入力</p>
-        <p class="flow-cell-desc">管理会社が更新迷い・賃料負担・解約可能性のある退去予兆案件を入力。所在地・賃料・設備・写真・引渡時期を3項目・30秒で登録します。</p>
+        <p class="flow-cell-title">GATE診断で入居候補者の適性を確認</p>
+        <p class="flow-cell-desc">動機・資金力・適合性・経験・計画性・承継条件の6軸でスコアリング。「なんとなく良さそう」ではなく、客観的な根拠で候補者を絞り込みます。</p>
         <span class="flow-cell-num">02</span>
       </div>
       <div class="flow-cell">
         <p class="flow-cell-phase">ST 3</p>
-        <p class="flow-cell-title">案件審査・公開判定</p>
-        <p class="flow-cell-desc">BC本部が案件を審査し、紹介可能な案件概要シートに整理。承継余地・設備状況・条件制約を精査して創業候補者へ提示できる状態に整えます。</p>
+        <p class="flow-cell-title">事業計画を一緒に作る</p>
+        <p class="flow-cell-desc">BC認定パートナー中小企業診断士が、損益シミュレーション・売上計画を含む事業計画書を創業希望者と共同作成。「開業後に失敗しない計画」にします。</p>
         <span class="flow-cell-num">03</span>
       </div>
       <div class="flow-cell">
         <p class="flow-cell-phase">ST 4</p>
-        <p class="flow-cell-title">創業希望者の集客・一次選抜</p>
-        <p class="flow-cell-desc">自治体後援広報・LINE診断・イベントで創業希望者を集客。行動履歴スコアリング（最大35点）でGATEへ進む候補者を選定します。</p>
-        <span class="flow-cell-tag">年2回イベント開催</span>
+        <p class="flow-cell-title">物件決定前に融資の目処を立てる</p>
+        <p class="flow-cell-desc">日本政策金融公庫への融資申請を物件契約より先に完了させます。「融資が通った状態」で物件交渉に入るため、オーナーへの説明責任が果たしやすくなります。</p>
+        <span class="flow-cell-tag">補助金・助成金も同時確認</span>
         <span class="flow-cell-num">04</span>
       </div>
       <div class="flow-bottom">
         <div class="flow-bottom-item">
           <p class="flow-cell-phase">ST 5</p>
-          <p class="flow-cell-title">GATE有料支援（出店可否診断・計画・融資前倒し）</p>
-          <p class="flow-cell-desc">6軸診断で出店可否を評価し、事業計画・融資想定額算出・金融機関への事前打診を物件契約前に完了。「紹介できる人」へ引き上げます。</p>
+          <p class="flow-cell-title">物件契約・設備承継交渉</p>
+          <p class="flow-cell-desc">賃貸契約・前テナントからの設備引き継ぎ交渉・食品衛生法等の許認可手続きをチェックリストで管理。抜け漏れなく進めます。</p>
         </div>
         <div class="flow-bottom-item">
-          <p class="flow-cell-phase">ST 6 — ST 7</p>
-          <p class="flow-cell-title">オーナー紹介・条件調整・契約・開業</p>
-          <p class="flow-cell-desc">GATE通過者を不動産オーナーへ紹介し、承継条件を調整。管理会社・宅建業者と連携して物件契約・引渡し・開業準備を完了します。</p>
+          <p class="flow-cell-phase">ST 6</p>
+          <p class="flow-cell-title">内装工事・開業準備</p>
+          <p class="flow-cell-desc">引き継いだ設備を活かした最小限の工事で開業準備を進めます。SNS集客・プレオープン設計もサポートします。</p>
+        </div>
+        <div class="flow-bottom-item">
+          <p class="flow-cell-phase">ST 7</p>
+          <p class="flow-cell-title">グランドオープン</p>
+          <p class="flow-cell-desc">開業当日まで伴走。空室が「次の灯り」に変わる瞬間を、BRIDGE CYCLEと管理会社が一緒に迎えます。</p>
         </div>
         <div class="flow-bottom-item">
           <p class="flow-cell-phase">ST 8</p>
-          <p class="flow-cell-title">認定パートナー伴走・データ返却</p>
-          <p class="flow-cell-desc">BC認定パートナー診断士が開業後90日〜180日の運営改善を担当。月次報告データをBC本部へ返却し、次案件のGATE選別精度を継続的に向上させます。</p>
+          <p class="flow-cell-title">開業後90〜180日のフォロー</p>
+          <p class="flow-cell-desc">BC認定パートナー診断士が開業後の経営状況をモニタリング。早期撤退リスクを減らし、テナントの継続率を高めます。</p>
         </div>
       </div>
     </div>
   </div>
 </section>
+
 <!-- ══ GATE SYSTEM ══ -->
 <section id="gate">
   <div class="sec">
     <p class="sec-label reveal">GATE System</p>
-    <h2 class="sec-h2 reveal">GATE診断 — 「やりたい人」を「紹介できる人」に変える</h2>
+    <h2 class="sec-h2 reveal">GATE診断 ——「感覚」ではなく<br>「6つの根拠」で入居候補者を選ぶ</h2>
     <p class="sec-lead reveal">
-      6軸スコアリングで支援前と目標スコアを可視化。<br>
-      どの軸が紹介可能水準に達していないかを特定し、集中的に引き上げます。
+      入居希望者のやる気だけで判断すると、開業後に失敗するリスクがあります。<br>
+      GATE診断は、6軸のスコアで「本当に開業できる人か」を客観的に確認します。
     </p>
     <div class="gate-layout">
       <div class="gate-axes">
@@ -1144,88 +1194,88 @@ footer{
           <span class="gate-axis-letter">①</span>
           <div>
             <p class="gate-axis-title">動機・コミット</p>
-            <p class="gate-axis-desc">「なぜ開きたいか」が言語化されているか。理由・背景・覚悟が具体的に語れることが紹介可水準の目安。</p>
+            <p class="gate-axis-desc">なぜこのお店をやりたいか。覚悟と理由が明確かどうか。「なんとなく」と「本気」はここで分かれます。</p>
           </div>
         </div>
         <div class="gate-axis reveal d1">
           <span class="gate-axis-letter">②</span>
           <div>
             <p class="gate-axis-title">資金力・調達余力</p>
-            <p class="gate-axis-desc">自己資金額と融資想定額を算出し、政策公庫枠・地銀枠で資金目安を提示。自己資金200万円以上または融資計画が現実的であることが基準。</p>
+            <p class="gate-axis-desc">自己資金・融資見込み・返済余力。「開業できても続かない」を防ぐために、資金面を正直に確認します。</p>
           </div>
         </div>
         <div class="gate-axis reveal d2">
           <span class="gate-axis-letter">③</span>
           <div>
             <p class="gate-axis-title">適合性</p>
-            <p class="gate-axis-desc">希望業態と物件条件・設備の整合度。業態ミスマッチは引継設備を無駄にする。設備再利用効率が高い業態を選択しているかを確認。</p>
+            <p class="gate-axis-desc">希望業種と物件の立地・客層が合っているか。「好きなものを売る」と「その場所で売れる」は違います。</p>
           </div>
         </div>
         <div class="gate-axis reveal d3">
           <span class="gate-axis-letter">④</span>
           <div>
             <p class="gate-axis-title">経験</p>
-            <p class="gate-axis-desc">飲食業・接客業・店舗運営の実務経験。完全未経験は補強プランが必要。何らかの現場経験または補完パートナーがいることが目安。</p>
+            <p class="gate-axis-desc">業界経験・調理歴・接客・経営の実務力。ゼロでも開業は可能ですが、補強計画が必要かどうかを判断します。</p>
           </div>
         </div>
         <div class="gate-axis reveal">
           <span class="gate-axis-letter">⑤</span>
           <div>
             <p class="gate-axis-title">計画性</p>
-            <p class="gate-axis-desc">収支試算・損益分岐・開業後初動の具体度。「なんとかなる」は低評価。損益分岐点と融資返済計画が試算済みであることが基準。</p>
+            <p class="gate-axis-desc">損益の試算・開業スケジュールの具体度。「何となくいけそう」ではなく数字で語れる状態かどうかを確認します。</p>
           </div>
         </div>
         <div class="gate-axis reveal d1">
           <span class="gate-axis-letter">⑥</span>
           <div>
             <p class="gate-axis-title">承継条件</p>
-            <p class="gate-axis-desc">引継設備・造作の活用意思と制約の理解度。新装前提は承継案件に不適。居抜き前提で計画が設計されていることが紹介可水準の目安。</p>
+            <p class="gate-axis-desc">設備・什器・ノウハウの引き継ぎ条件が整合しているか。居抜き特有のリスクを事前に確認します。</p>
           </div>
         </div>
       </div>
       <div class="gate-visual reveal d2">
         <div class="gate-card">
-          <p class="gate-card-label">GATE — 6-Axis Scoring</p>
-          <h3 class="gate-card-h">A判定（85点以上）の通過者だけが、<br>管理会社・オーナーへ接続される</h3>
-          <p class="gate-card-body">感覚やコネではなく、6軸スコアリングが承継適格者を示します。GATE診断時点で融資想定額を算出・金融機関へ事前打診済みのため、「資金の裏付けがある候補者」として管理会社へ提示できます。</p>
+          <p class="gate-card-label">GATE — 6軸スコアリング</p>
+          <h3 class="gate-card-h">管理会社・オーナーへの<br>説明責任を果たせる根拠になる</h3>
+          <p class="gate-card-body">「感覚的にいい人そう」ではなく、6軸のスコアで入居候補者の適性を示せます。オーナーへの入居者紹介時の説得力が、まったく変わります。</p>
           <div class="gate-score-mock">
             <div class="gsm-item">
-              <p class="gsm-label">動機・コミット</p>
-              <div class="gsm-track"><div class="gsm-fill" style="width:88%"></div></div>
-            </div>
-            <div class="gsm-item">
-              <p class="gsm-label">資金力・調達余力</p>
-              <div class="gsm-track"><div class="gsm-fill" style="width:72%"></div></div>
-            </div>
-            <div class="gsm-item">
-              <p class="gsm-label">適合性</p>
-              <div class="gsm-track"><div class="gsm-fill" style="width:91%"></div></div>
-            </div>
-            <div class="gsm-item">
-              <p class="gsm-label">経験</p>
-              <div class="gsm-track"><div class="gsm-fill" style="width:65%"></div></div>
-            </div>
-            <div class="gsm-item">
-              <p class="gsm-label">計画性</p>
-              <div class="gsm-track"><div class="gsm-fill" style="width:78%"></div></div>
-            </div>
-            <div class="gsm-item">
-              <p class="gsm-label">承継条件</p>
+              <p class="gsm-label">① 動機・コミット</p>
               <div class="gsm-track"><div class="gsm-fill" style="width:85%"></div></div>
+            </div>
+            <div class="gsm-item">
+              <p class="gsm-label">② 資金力</p>
+              <div class="gsm-track"><div class="gsm-fill" style="width:70%"></div></div>
+            </div>
+            <div class="gsm-item">
+              <p class="gsm-label">③ 適合性</p>
+              <div class="gsm-track"><div class="gsm-fill" style="width:90%"></div></div>
+            </div>
+            <div class="gsm-item">
+              <p class="gsm-label">④ 経験</p>
+              <div class="gsm-track"><div class="gsm-fill" style="width:60%"></div></div>
+            </div>
+            <div class="gsm-item">
+              <p class="gsm-label">⑤ 計画性</p>
+              <div class="gsm-track"><div class="gsm-fill" style="width:75%"></div></div>
+            </div>
+            <div class="gsm-item">
+              <p class="gsm-label">⑥ 承継条件</p>
+              <div class="gsm-track"><div class="gsm-fill" style="width:80%"></div></div>
             </div>
           </div>
           <div class="gate-audiences">
             <div class="gate-audience">
               <span class="gate-audience-icon">🏢</span>
-              管理会社・不動産オーナー：融資打診済みの候補者を受け取る選抜保証として
+              管理会社・オーナー向け：「なぜこの人を選んだか」を数字で説明できる
             </div>
             <div class="gate-audience">
-              <span class="gate-audience-icon">💴</span>
-              金融機関：物件契約前の事前打診で「前向き検討」の感触を先取りできる
+              <span class="gate-audience-icon">🎓</span>
+              BC認定パートナー診断士：スコアをもとに補強計画を立て、伴走の質を上げる
             </div>
             <div class="gate-audience">
               <span class="gate-audience-icon">🔑</span>
-              創業希望者：弱軸を特定し、集中補強で紹介可能水準まで引き上げる
+              創業希望者：自分の強みと弱みを把握して、準備を効率よく進める
             </div>
           </div>
         </div>
@@ -1233,56 +1283,58 @@ footer{
     </div>
   </div>
 </section>
+
 <!-- ══ PARTNER SYSTEM ══ -->
 <section id="partner" class="sec-light">
   <div class="sec">
     <p class="sec-label reveal">Partner System</p>
-    <h2 class="sec-h2 reveal">BC認定パートナー制度</h2>
+    <h2 class="sec-h2 reveal">BC認定パートナー中小企業診断士</h2>
     <p class="sec-lead reveal">
-      BC本部が入口設計・選抜・データ統括を担い、<br>開業後の運営改善支援は認定パートナー専門家が実行する分業体制を構築します。
+      GATE診断・事業計画・融資支援・開業後フォロー。<br>この一連を担う専門家が、BRIDGE CYCLEと一緒に動きます。
     </p>
     <div class="partner-layout">
       <div class="partner-text">
-        <p class="reveal">BRIDGE CYCLEは「入口を握る」組織として機能します。開業後90日〜180日の運営改善は、BC認定パートナーの中小企業診断士が標準SOPに基づいて実行。月次報告データをBC本部へ返却することで、次案件のGATE選別精度を継続的に高めます。</p>
-        <p class="reveal">認定パートナーには案件ごとの伴走報酬が発生します。BRIDGE CYCLEからの紹介案件は、自ら集客せずに受注できる安定した収益源となります。2年目以降に段階的に外部連携を拡大します。</p>
+        <p class="reveal">BRIDGE CYCLEの伴走を支える中心的な存在が、<strong>BC認定パートナー中小企業診断士</strong>です。GATE診断のスコアリング、事業計画書の共同作成、融資申請の支援——これらすべてを担う、経営支援の専門家です。</p>
+        <p class="reveal">中小企業診断士として独立している方、もしくは支援機関に所属している方を対象に、BRIDGE CYCLEが案件を紹介します。見込み客を自ら開拓する必要はありません。スコアが出ている案件だけが届くため、支援の質を保ちながら受注できます。</p>
         <div class="partner-cards">
           <div class="partner-card reveal">
-            <span class="partner-card-icon">📊</span>
+            <span class="partner-card-icon">📋</span>
             <div>
-              <p class="partner-card-title">BC認定 中小企業診断士</p>
-              <p class="partner-card-desc">開業後90日〜180日の運営改善を担当。月次面談・売上確認・資金繰りチェック・改善提案・報告書提出をSOPに基づき実行。月次データをBC本部へ返却します。</p>
-              <span class="partner-fee">1案件あたり伴走報酬 15万円（BC本部より支払い）</span>
+              <p class="partner-card-title">GATE診断の実施・スコアリング</p>
+              <p class="partner-card-desc">6軸・各5点満点で創業希望者の開業準備度を定量評価。「なぜこのスコアか」を言語化し、管理会社・オーナーへの説明材料にします。</p>
+              <span class="partner-fee">GATEパック 30万円（外国人対応 45万円）の一部</span>
             </div>
           </div>
           <div class="partner-card reveal d1">
-            <span class="partner-card-icon">🔨</span>
+            <span class="partner-card-icon">📊</span>
             <div>
-              <p class="partner-card-title">BC認定工務店</p>
-              <p class="partner-card-desc">承継物件の現状確認・改装見積もり・工事施工を担当。居抜き承継案件の内装・設備改修工事のマッチング機会を案件発生時に受け取ります。</p>
-              <span class="partner-fee">年間登録料 10万円 + 案件ごとのマッチング機会</span>
+              <p class="partner-card-title">事業計画書の共同作成</p>
+              <p class="partner-card-desc">損益シミュレーション・売上計画を含む、融資審査が通る水準の事業計画書を創業希望者と共同で作成します。「開業後に失敗しない計画」にすることが目的です。</p>
+              <span class="partner-fee">融資前倒し支援として機能</span>
             </div>
           </div>
           <div class="partner-card reveal d2">
-            <span class="partner-card-icon">⚖️</span>
+            <span class="partner-card-icon">🔄</span>
             <div>
-              <p class="partner-card-title">BC認定 申請取次行政書士</p>
-              <p class="partner-card-desc">外国人創業者の在留資格・会社設立・許認可申請を一体で進行管理。通常の創業支援では扱いにくい煩雑さ自体を付加価値に変えます。</p>
-              <span class="partner-fee">案件紹介料（外国人案件版 45万円パックに含む）</span>
+              <p class="partner-card-title">開業後フォロー（90〜180日）</p>
+              <p class="partner-card-desc">開業後の経営状況をモニタリング。早期撤退リスクを減らし、テナントの継続率を高めます。管理会社にとっても「長く入居してもらえる」安心感につながります。</p>
+              <span class="partner-fee">ST8 フォロー報酬</span>
             </div>
           </div>
         </div>
       </div>
       <div class="partner-visual reveal d2">
-        <p class="pv-label">BC認定パートナー診断士 — 役割設計</p>
-        <h3 class="pv-h">入口はBC本部。<br>運営改善は認定パートナーが担う。</h3>
-        <p class="pv-body">BC本部は案件入口・GATE判定・管理会社リレーション・データ統括を握り続けます。認定パートナー診断士は開業後の運営改善実行を担い、月次報告でBC本部へデータを返却。スケールアップとキャッシュ蓄積を並走させる体制です。</p>
+        <p class="pv-label">BC認定パートナー中小企業診断士 — 収益モデル</p>
+        <h3 class="pv-h">営業不要。スコア済みの案件が<br>届く仕組みです。</h3>
+        <p class="pv-body">BRIDGE CYCLEが管理会社・物件・創業希望者とのやり取りを担当します。診断士がすべき「診断と計画と伴走」だけに集中できる体制です。</p>
         <span class="pv-fee-big">15<small style="font-size:1.4rem">万円</small></span>
-        <p class="pv-fee-label">1案件あたりの認定パートナーへの伴走報酬</p>
-        <p class="pv-note">※実装支援料第3回払い（開業6か月後）の受領タイミングで支払います。</p>
+        <p class="pv-fee-label">BC認定パートナー診断士への1案件あたり報酬目安</p>
+        <p class="pv-note">※案件規模により異なります。詳細はお問い合わせください。</p>
       </div>
     </div>
   </div>
 </section>
+
 <!-- ══ FOR FOUNDERS BRIDGE ══ -->
 <section id="founders">
   <div class="founders-inner">
@@ -1300,6 +1352,7 @@ footer{
     </div>
   </div>
 </section>
+
 <!-- ══ TRUST ══ -->
 <section id="trust" class="sec-mid">
   <div class="sec">
@@ -1314,17 +1367,17 @@ footer{
       <div class="trust-num-cell reveal d1">
         <span class="trust-icon">📅</span>
         <span class="trust-n">20<small>年</small></span>
-        <p class="trust-l">商工会経営指導員として<br>蓄積した現場経験</p>
+        <p class="trust-l">元商工会経営指導員として<br>蓄積した中小企業支援の現場経験</p>
       </div>
       <div class="trust-num-cell reveal d2">
-        <span class="trust-icon">🏛️</span>
-        <span class="trust-n">2026<small>年</small></span>
-        <p class="trust-l">認定経営革新等支援機関<br>登録予定（6月）</p>
+        <span class="trust-icon">📐</span>
+        <span class="trust-n">GATE<small> 6軸</small></span>
+        <p class="trust-l">動機・資金・適合性など6軸で<br>テナントの質を定量評価</p>
       </div>
       <div class="trust-num-cell reveal d3">
         <span class="trust-icon">⚙️</span>
         <span class="trust-n">8<small>step</small></span>
-        <p class="trust-l">退去予兆から開業後データ返却まで<br>一気通貫の承継OS</p>
+        <p class="trust-l">管理会社入力から<br>開業後フォローまで一貫支援</p>
       </div>
     </div>
     <div class="trust-badges">
@@ -1338,13 +1391,14 @@ footer{
       <div class="trust-badge-cell reveal d1">
         <span class="trust-badge-icon">🤝</span>
         <div>
-          <p class="trust-badge-title">実装支援料型 — 物件媒介報酬に見えない設計</p>
-          <p class="trust-badge-desc">主収益は不動産オーナーからの実装支援料（基準賃料の50%相当額×3回分割）。物件媒介報酬に見えない設計で、案件設計・進行管理・創業支援で収益化します。</p>
+          <p class="trust-badge-title">非媒介設計による利益相反ゼロ</p>
+          <p class="trust-badge-desc">BRIDGE CYCLEは不動産媒介を行いません。手数料ビジネスではなく、承継成功報酬型の設計により、三者全員の利益が一致します。</p>
         </div>
       </div>
     </div>
   </div>
 </section>
+
 <!-- ══ CONTACT ══ -->
 <section id="contact" class="sec-light">
   <div class="sec">
@@ -1353,11 +1407,11 @@ footer{
     <div class="contact-layout">
       <div class="reveal">
         <p class="contact-info-h">
-          まずは、お話を<br>聞かせてください。
+          まず、話してみてください。<br>それだけで、動き始めます。
         </p>
         <p class="contact-info-body">
-          「管理会社として退去予兆案件の連携を始めたい」「物件オーナーとして空室削減の仕組みを知りたい」「BC認定パートナー診断士として参画したい」「創業支援で融資前倒しの仕組みを使いたい」——どのようなご相談でも構いません。<br><br>
-          担当者が個別に状況を確認し、最適なご提案をいたします。
+          「自社の物件で試してみたい」「仕組みをもう少し詳しく知りたい」「BC認定パートナーとして参画したい」——どの段階のご相談でも構いません。<br><br>
+          資料送付・個別ヒアリングのどちらにも対応します。まずはお気軽にご連絡ください。
         </p>
         <div class="contact-promises">
           <div class="promise">
@@ -1378,25 +1432,26 @@ footer{
         <div class="form-success" id="formSuccess">
           <span class="fs-icon">✉️</span>
           <p class="fs-h">お問い合わせを受け付けました</p>
-          <p class="fs-body">ご入力のメールアドレスに確認メールをお送りしました。<br>担当者より48時間以内にご連絡いたします。<br><br><strong>BRIDGE CYCLE 株式会社<br>代表取締役　中村裕二</strong></p>
+          <p class="fs-body">ご入力のメールアドレスに確認メールをお送りしました。<br>担当者より48時間以内にご連絡いたします。<br><br><strong>BRIDGE CYCLE 株式会社</strong></p>
         </div>
         <div class="contact-form" id="contactFormWrap">
           <form id="contactForm" novalidate>
             <input type="hidden" name="_subject" value="【BRIDGE CYCLE HP】新規お問い合わせ">
             <input type="hidden" name="お問い合わせ種別" id="inqType" value="未選択">
+
             <div class="fgroup">
               <label class="flabel">お問い合わせ種別<span class="req">必須</span></label>
               <select class="fselect" id="ftype" onchange="document.getElementById('inqType').value=this.value">
                 <option value="">選択してください</option>
-                <option>物件管理会社として退去予兆連携を検討したい</option>
-                <option>不動産オーナーとして空室削減策を知りたい</option>
-                <option>BC認定パートナー診断士として参画したい</option>
-                <option>創業希望者としてGATE診断・計画支援を受けたい</option>
+                <option>物件管理会社として導入を検討したい</option>
+                <option>自治体として連携を検討したい</option>
+                <option>BC認定パートナーとして参画したい</option>
                 <option>資料請求のみ</option>
                 <option>その他・詳細を聞きたい</option>
               </select>
               <p class="ferr" id="err-type">種別を選択してください</p>
             </div>
+
             <div class="frow">
               <div class="fgroup">
                 <label class="flabel" for="fname">お名前<span class="req">必須</span></label>
@@ -1408,20 +1463,25 @@ footer{
                 <input class="finput" type="text" id="fcomp" name="会社名・団体名" placeholder="株式会社〇〇">
               </div>
             </div>
+
             <div class="fgroup">
               <label class="flabel" for="femail">メールアドレス<span class="req">必須</span></label>
               <input class="finput" type="email" id="femail" name="メールアドレス" placeholder="your@email.com" autocomplete="email">
               <p class="ferr" id="err-email">正しいメールアドレスを入力してください</p>
             </div>
+
             <div class="fgroup">
               <label class="flabel" for="ftel">電話番号</label>
               <input class="finput" type="tel" id="ftel" name="電話番号" placeholder="090-0000-0000" autocomplete="tel">
             </div>
+
             <div class="fgroup">
               <label class="flabel" for="fmsg">ご相談内容・背景</label>
               <textarea class="ftextarea" id="fmsg" name="ご相談内容" placeholder="管理物件の状況、ご検討の背景、知りたいことなどをご自由にお書きください。"></textarea>
             </div>
+
             <p class="fprivacy">ご入力いただいた個人情報は、お問い合わせへの回答および当社サービスのご案内にのみ使用します。第三者への提供は行いません。</p>
+
             <button type="button" class="btn-submit" id="subBtn" onclick="doSubmit()">
               送信する（返信48時間以内）
             </button>
@@ -1431,6 +1491,7 @@ footer{
     </div>
   </div>
 </section>
+
 <!-- ══ FINAL CTA ══ -->
 <section id="final">
   <div class="final-rings">
@@ -1441,30 +1502,30 @@ footer{
   <div class="final-inner">
     <p class="final-sub reveal">Take Action</p>
     <h2 class="final-h reveal">
-      遅すぎる相談を、<br>
-      <span>早い接続に変える。</span>
+      退去の連絡を待つより、<br>
+      <span>閉まる前に動いた方が、早い。</span>
     </h2>
     <p class="final-body reveal">
-      管理会社の退去予兆情報が動いた瞬間に、<br>承継の準備を始める。<br>
-      BRIDGE CYCLEは、その構造を地域に実装します。
+      管理会社が入力するだけで、<br>BRIDGE CYCLEが次のテナントを探し始めます。<br>
+      空室になる前に、動き出せる仕組みです。
     </p>
     <div class="final-btns reveal">
-      <a href="#contact" class="btn-fp">資料請求・無料相談</a>
+      <a href="#contact" class="btn-fp">まず、話してみる（無料）</a>
       <a href="lp.html" class="btn-fs" target="_blank">創業希望者向けページ</a>
     </div>
   </div>
 </section>
+
 <!-- ══ FOOTER ══ -->
 <footer>
   <div class="footer-top">
     <div>
       <span class="footer-logo-main">Bridge<em>Cycle</em></span>
       <p class="footer-tagline">
-        遅すぎる相談を、早い接続に変える。<br>
-        管理会社起点の退去予兆接続から開業後伴走まで。<br><br>
+        空き店舗を次の灯りへ。<br>
+        閉まる前に動く、承継支援の新しい形。<br><br>
         BRIDGE CYCLE 株式会社<br>
-        代表取締役　中村裕二<br>
-        滋賀県大津市におの浜2-1-28-1302
+        滋賀県大津市
       </p>
     </div>
     <div>
@@ -1487,11 +1548,11 @@ footer{
           Email：<a href="mailto:info@bridgecycleco.com">info@bridgecycleco.com</a>
         </p>
         <p class="footer-contact-item">
-          〒520-0801 滋賀県大津市<br>
-          におの浜2-1-28-1302
+          所在地：滋賀県大津市<br>
+          （詳細はお問い合わせください）
         </p>
         <p class="footer-contact-item" style="margin-top:12px">
-          <a href="https://yujimansion-hub.github.io/bridgecycle/" target="_blank" rel="noopener">yujimansion-hub.github.io/bridgecycle/</a>
+          <a href="https://www.bridgecycleco.com/" target="_blank" rel="noopener">www.bridgecycleco.com</a>
         </p>
       </div>
     </div>
@@ -1505,6 +1566,7 @@ footer{
     </div>
   </div>
 </footer>
+
 <!-- ══ SCRIPTS ══ -->
 <script>
 /* NAV */
@@ -1512,36 +1574,52 @@ window.addEventListener('scroll',()=>{
   document.getElementById('nav').style.borderBottomColor =
     window.scrollY>60?'rgba(198,162,74,0.3)':'rgba(198,162,74,0.2)';
 });
+
 /* MOBILE MENU */
 function toggleMob(){
   document.getElementById('mobNav').classList.toggle('open');
 }
+
 /* SCROLL REVEAL */
 const ro=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')});
 },{threshold:0.1,rootMargin:'0px 0px -36px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
 /* FORM SUBMIT */
 async function doSubmit(){
   let ok=true;
+
   const ftype=document.getElementById('ftype');
   const errT=document.getElementById('err-type');
   if(!ftype.value){ftype.classList.add('err');errT.style.display='block';ok=false}
   else{ftype.classList.remove('err');errT.style.display='none'}
+
   const fname=document.getElementById('fname');
   const errN=document.getElementById('err-name');
   if(!fname.value.trim()){fname.classList.add('err');errN.style.display='block';ok=false}
   else{fname.classList.remove('err');errN.style.display='none'}
+
   const femail=document.getElementById('femail');
   const errE=document.getElementById('err-email');
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(femail.value.trim())){
     femail.classList.add('err');errE.style.display='block';ok=false
   }else{femail.classList.remove('err');errE.style.display='none'}
+
   if(!ok)return;
+
   const btn=document.getElementById('subBtn');
   btn.disabled=true;btn.textContent='送信中...';
+
+  /* ────────────────────────────────────────────
+     Formspree設定:
+     https://formspree.io/ で登録後、発行されたエンドポイントを設定
+     例: const EP='https://formspree.io/f/xxxxxxxx';
+  ──────────────────────────────────────────── */
   const EP=''; // ← Formspreeエンドポイントをここに設定
+
   const data=new FormData(document.getElementById('contactForm'));
+
   if(EP){
     try{
       const r=await fetch(EP,{method:'POST',body:data,headers:{Accept:'application/json'}});
@@ -1556,6 +1634,7 @@ async function doSubmit(){
   window.location.href=`mailto:info@bridgecycleco.com?subject=${subj}&body=${body}`;
   showSuccess();
 }
+
 function showSuccess(){
   document.getElementById('contactFormWrap').style.display='none';
   document.getElementById('formSuccess').classList.add('show');
