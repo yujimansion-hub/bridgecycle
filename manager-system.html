@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>管理会社システム | BRIDGE CYCLE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+/* ══════════════════════════════════════════
+   DESIGN TOKENS
+══════════════════════════════════════════ */
+:root {
+  --navy:     #0D1B2A;
+  --navy-mid: #152336;
+  --navy-lt:  #1E3350;
+  --gold:     #C9A84C;
+  --gold-lt:  #E2C47A;
+  --gold-dim: #8A7040;
+  --cream:    #F7F2E8;
+  --cream-dk: #EDE6D4;
+  --smoke:    #C8BEAA;
+  --warm:     #7A6A52;
+  --rust:     #B85C38;
+  --sage:     #3D5A4C;
+  --white:    #FFFFFF;
+  --sidebar-w: 220px;
+  --r: 6px;
+  --shadow: 0 2px 12px rgba(13,27,42,0.10);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 15px; }
+body {
+  background: var(--cream);
+  color: var(--navy);
+  font-family: 'Noto Serif JP', serif;
+  display: flex;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ══════════════════════════════════════════
+   SIDEBAR
+══════════════════════════════════════════ */
+#sidebar {
+  width: var(--sidebar-w);
+  min-height: 100vh;
+  background: var(--navy);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 100;
+}
+.sidebar-logo {
+  padding: 28px 20px 20px;
+  border-bottom: 1px solid rgba(201,168,76,0.2);
+}
+.sidebar-logo .brand {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--gold);
+  font-size: 1.1rem;
+  letter-spacing: 0.15em;
+  line-height: 1.4;
+}
+.sidebar-logo .brand em { font-style: italic; color: var(--gold-lt); }
+.sidebar-logo .subtitle {
+  color: var(--smoke);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  margin-top: 4px;
+}
+nav.sidebar-nav {
+  flex: 1;
+  padding: 16px 0;
+}
+.nav-section {
+  padding: 8px 20px 4px;
+  color: var(--gold-dim);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  color: var(--smoke);
+  cursor: pointer;
+  font-size: 0.82rem;
+  transition: all 0.2s;
+  border-left: 3px solid transparent;
+}
+.nav-item:hover { background: rgba(201,168,76,0.08); color: var(--gold-lt); }
+.nav-item.active {
+  background: rgba(201,168,76,0.12);
+  color: var(--gold);
+  border-left-color: var(--gold);
+}
+.nav-item .icon { font-size: 1rem; width: 20px; text-align: center; }
+.sidebar-footer {
+  padding: 16px 20px;
+  border-top: 1px solid rgba(201,168,76,0.1);
+  color: var(--warm);
+  font-size: 0.6rem;
+  line-height: 1.8;
+}
+
+/* ══════════════════════════════════════════
+   MAIN CONTENT
+══════════════════════════════════════════ */
+#main {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.topbar {
+  background: var(--white);
+  border-bottom: 1px solid var(--cream-dk);
+  padding: 14px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.topbar-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: 0.05em;
+}
+.topbar-actions { display: flex; gap: 10px; }
+.page-content {
+  padding: 28px 32px;
+  flex: 1;
+}
+
+/* ══════════════════════════════════════════
+   PAGES (visibility)
+══════════════════════════════════════════ */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ══════════════════════════════════════════
+   CARDS & GRID
+══════════════════════════════════════════ */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.stat-card {
+  background: var(--white);
+  border-radius: var(--r);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  border-top: 3px solid var(--gold);
+}
+.stat-card .label { color: var(--warm); font-size: 0.72rem; letter-spacing: 0.08em; }
+.stat-card .value { font-size: 2rem; font-weight: 700; color: var(--navy); margin: 6px 0 2px; }
+.stat-card .sub { color: var(--smoke); font-size: 0.68rem; }
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.section-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--navy);
+  border-left: 3px solid var(--gold);
+  padding-left: 10px;
+}
+
+/* ══════════════════════════════════════════
+   BUTTONS
+══════════════════════════════════════════ */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 18px;
+  border-radius: var(--r);
+  font-family: inherit;
+  font-size: 0.8rem;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.btn-primary {
+  background: var(--navy);
+  color: var(--gold);
+  border: 1px solid var(--gold-dim);
+}
+.btn-primary:hover { background: var(--navy-lt); }
+.btn-gold {
+  background: var(--gold);
+  color: var(--navy);
+}
+.btn-gold:hover { background: var(--gold-lt); }
+.btn-ghost {
+  background: transparent;
+  color: var(--navy);
+  border: 1px solid var(--cream-dk);
+}
+.btn-ghost:hover { background: var(--cream-dk); }
+.btn-danger {
+  background: transparent;
+  color: var(--rust);
+  border: 1px solid var(--rust);
+  font-size: 0.72rem;
+  padding: 4px 10px;
+}
+.btn-danger:hover { background: var(--rust); color: var(--white); }
+.btn-sm { padding: 5px 12px; font-size: 0.72rem; }
+
+/* ══════════════════════════════════════════
+   TABLE
+══════════════════════════════════════════ */
+.table-wrap {
+  background: var(--white);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+thead { background: var(--navy); color: var(--gold); }
+thead th {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 400;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+tbody tr { border-bottom: 1px solid var(--cream-dk); }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: rgba(247,242,232,0.6); }
+tbody td { padding: 11px 16px; color: var(--navy); vertical-align: middle; }
+.td-action { display: flex; gap: 6px; align-items: center; }
+
+/* ══════════════════════════════════════════
+   FORMS
+══════════════════════════════════════════ */
+.form-card {
+  background: var(--white);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+  padding: 28px;
+  margin-bottom: 20px;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 24px;
+}
+.form-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+.form-grid.cols-1 { grid-template-columns: 1fr; }
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+.form-group.span-2 { grid-column: span 2; }
+.form-group.span-3 { grid-column: span 3; }
+label.form-label {
+  font-size: 0.72rem;
+  color: var(--warm);
+  letter-spacing: 0.05em;
+}
+label.form-label .req {
+  color: var(--rust);
+  margin-left: 3px;
+}
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="tel"],
+select,
+textarea {
+  width: 100%;
+  padding: 9px 12px;
+  background: var(--cream);
+  border: 1px solid var(--cream-dk);
+  border-radius: var(--r);
+  font-family: inherit;
+  font-size: 0.82rem;
+  color: var(--navy);
+  transition: border-color 0.2s;
+}
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+  background: var(--white);
+}
+textarea { resize: vertical; min-height: 80px; }
+.form-row {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--cream-dk);
+}
+
+/* ══════════════════════════════════════════
+   BADGE / STATUS
+══════════════════════════════════════════ */
+.badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 20px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.badge-st1 { background: #EEF2FF; color: #3730A3; }
+.badge-st2 { background: #FEF3C7; color: #92400E; }
+.badge-st3 { background: #FEF3C7; color: #92400E; }
+.badge-st4 { background: #FFF7ED; color: #C2410C; }
+.badge-st5 { background: #ECFDF5; color: #065F46; }
+.badge-st6 { background: #ECFDF5; color: #065F46; }
+.badge-st7 { background: #F0FDF4; color: #166534; }
+.badge-st8 { background: #14532D; color: #BBF7D0; }
+.badge-jp { background: #EFF6FF; color: #1E40AF; }
+.badge-foreign { background: #FDF4FF; color: #7E22CE; }
+
+/* ══════════════════════════════════════════
+   GATE SCORING
+══════════════════════════════════════════ */
+.gate-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.gate-axis {
+  background: var(--cream);
+  border-radius: var(--r);
+  padding: 16px;
+}
+.gate-axis-label {
+  font-size: 0.78rem;
+  color: var(--navy);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.gate-axis-desc {
+  font-size: 0.67rem;
+  color: var(--warm);
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+.gate-stars {
+  display: flex;
+  gap: 6px;
+}
+.gate-star {
+  width: 32px; height: 32px;
+  border-radius: var(--r);
+  border: 2px solid var(--cream-dk);
+  background: var(--white);
+  font-size: 0.82rem;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--smoke);
+  font-weight: 700;
+  transition: all 0.15s;
+}
+.gate-star:hover { border-color: var(--gold); color: var(--gold); }
+.gate-star.selected { background: var(--gold); border-color: var(--gold); color: var(--navy); }
+.gate-score-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+.gate-score-num { font-size: 1.4rem; font-weight: 700; color: var(--navy); }
+.gate-score-max { font-size: 0.7rem; color: var(--warm); }
+.gate-total-card {
+  background: var(--navy);
+  color: var(--white);
+  border-radius: var(--r);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.gate-total-label { color: var(--smoke); font-size: 0.72rem; }
+.gate-total-score {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+.gate-total-score span { font-size: 1rem; color: var(--smoke); }
+.gate-verdict {
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 20px;
+}
+.verdict-pass { background: #14532D; color: #BBF7D0; }
+.verdict-review { background: #92400E; color: #FEF3C7; }
+.verdict-fail { background: #7F1D1D; color: #FECACA; }
+.chart-wrap {
+  background: var(--white);
+  border-radius: var(--r);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+  max-width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ══════════════════════════════════════════
+   ST PROGRESS BAR
+══════════════════════════════════════════ */
+.st-progress {
+  display: flex;
+  gap: 0;
+  margin: 8px 0;
+}
+.st-step {
+  flex: 1;
+  height: 6px;
+  background: var(--cream-dk);
+  position: relative;
+}
+.st-step::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+.st-step.done::after { transform: scaleX(1); }
+.st-step:first-child { border-radius: 3px 0 0 3px; }
+.st-step:last-child { border-radius: 0 3px 3px 0; }
+
+/* ══════════════════════════════════════════
+   MODAL
+══════════════════════════════════════════ */
+.modal-overlay {
+  display: none;
+  position: fixed; inset: 0;
+  background: rgba(13,27,42,0.7);
+  z-index: 500;
+  align-items: center;
+  justify-content: center;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--white);
+  border-radius: var(--r);
+  width: min(720px, 95vw);
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+.modal-header {
+  padding: 20px 28px;
+  border-bottom: 1px solid var(--cream-dk);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background: var(--white);
+  z-index: 1;
+}
+.modal-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  border-left: 3px solid var(--gold);
+  padding-left: 10px;
+}
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--warm);
+  padding: 4px;
+}
+.modal-body { padding: 24px 28px; }
+
+/* ══════════════════════════════════════════
+   TENANT DETAIL PANEL
+══════════════════════════════════════════ */
+.detail-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.detail-section-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--warm);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--cream-dk);
+}
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--cream-dk);
+  font-size: 0.8rem;
+}
+.detail-row:last-child { border-bottom: none; }
+.detail-row .key { color: var(--warm); flex-shrink: 0; margin-right: 12px; }
+.detail-row .val { font-weight: 700; text-align: right; }
+
+/* ══════════════════════════════════════════
+   REPORT (print)
+══════════════════════════════════════════ */
+.report-wrap {
+  background: var(--white);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+  padding: 36px 40px;
+  max-width: 800px;
+}
+.report-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--navy);
+}
+.report-brand {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  color: var(--navy);
+  letter-spacing: 0.1em;
+}
+.report-brand em { color: var(--gold); font-style: italic; }
+.report-date { font-size: 0.72rem; color: var(--warm); text-align: right; }
+.report-section { margin-bottom: 24px; }
+.report-section-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--navy);
+  background: var(--cream-dk);
+  padding: 6px 12px;
+  margin-bottom: 12px;
+  border-left: 4px solid var(--gold);
+}
+.report-property-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  font-size: 0.78rem;
+}
+.report-prop-item { padding: 8px 0; border-bottom: 1px solid var(--cream-dk); }
+.report-prop-item .k { color: var(--warm); font-size: 0.68rem; margin-bottom: 2px; }
+.report-prop-item .v { font-weight: 700; }
+.report-gate-table { width: 100%; font-size: 0.78rem; border-collapse: collapse; }
+.report-gate-table th {
+  background: var(--navy);
+  color: var(--gold);
+  padding: 7px 12px;
+  font-weight: 400;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+}
+.report-gate-table td {
+  padding: 7px 12px;
+  border-bottom: 1px solid var(--cream-dk);
+}
+.report-gate-table tr:last-child td { border-bottom: none; }
+.score-bar {
+  display: inline-flex;
+  gap: 3px;
+}
+.score-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--cream-dk);
+}
+.score-dot.filled { background: var(--gold); }
+
+@media print {
+  #sidebar, .topbar, .topbar-actions, #report-controls { display: none !important; }
+  #main { margin-left: 0 !important; }
+  .page { display: none !important; }
+  #page-report { display: block !important; }
+  .report-wrap { box-shadow: none; padding: 0; }
+  body { background: white; }
+}
+
+/* ══════════════════════════════════════════
+   EMPTY STATE
+══════════════════════════════════════════ */
+.empty-state {
+  text-align: center;
+  padding: 48px 20px;
+  color: var(--smoke);
+}
+.empty-state .icon { font-size: 2.5rem; margin-bottom: 12px; }
+.empty-state .msg { font-size: 0.85rem; }
+
+/* ══════════════════════════════════════════
+   ALERT
+══════════════════════════════════════════ */
+.alert {
+  padding: 12px 16px;
+  border-radius: var(--r);
+  font-size: 0.8rem;
+  margin-bottom: 16px;
+}
+.alert-info { background: #EFF6FF; color: #1E40AF; border: 1px solid #BFDBFE; }
+.alert-success { background: #F0FDF4; color: #166534; border: 1px solid #BBF7D0; }
+
+/* ══════════════════════════════════════════
+   SELECT TENANT for GATE
+══════════════════════════════════════════ */
+.tenant-select-card {
+  background: var(--white);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.tenant-select-card:hover { border-color: var(--gold-dim); }
+.tenant-select-card.selected-tenant { border-color: var(--gold); background: #FFFBEE; }
+</style>
+</head>
+<body>
+
+<!-- ══ SIDEBAR ══ -->
+<div id="sidebar">
+  <div class="sidebar-logo">
+    <div class="brand">Bridge<em>Cycle</em></div>
+    <div class="subtitle">管理会社システム</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">メイン</div>
+    <div class="nav-item active" data-page="dashboard" onclick="navigate('dashboard')">
+      <span class="icon">📊</span> ダッシュボード
+    </div>
+    <div class="nav-section">物件・テナント</div>
+    <div class="nav-item" data-page="property" onclick="navigate('property')">
+      <span class="icon">🏪</span> 空き店舗登録
+    </div>
+    <div class="nav-item" data-page="tenants" onclick="navigate('tenants')">
+      <span class="icon">👤</span> テナント候補管理
+    </div>
+    <div class="nav-section">診断・出力</div>
+    <div class="nav-item" data-page="gate" onclick="navigate('gate')">
+      <span class="icon">🎯</span> GATE診断
+    </div>
+    <div class="nav-item" data-page="report" onclick="navigate('report')">
+      <span class="icon">📄</span> レポート出力
+    </div>
+  </nav>
+  <div class="sidebar-footer">
+    Bridge<strong>Cycle</strong>株式会社<br>
+    代表取締役　中村裕二<br>
+    〒520-0801 滋賀県大津市<br>
+    におの浜2-1-28-1302
+  </div>
+</div>
+
+<!-- ══ MAIN ══ -->
+<div id="main">
+  <div class="topbar">
+    <div class="topbar-title" id="topbar-title">ダッシュボード</div>
+    <div class="topbar-actions" id="topbar-actions"></div>
+  </div>
+  <div class="page-content">
+
+    <!-- ── PAGE: DASHBOARD ── -->
+    <div class="page active" id="page-dashboard">
+      <div class="stat-grid" id="stat-grid">
+        <div class="stat-card">
+          <div class="label">登録物件数</div>
+          <div class="value" id="stat-props">0</div>
+          <div class="sub">件</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">テナント候補数</div>
+          <div class="value" id="stat-tenants">0</div>
+          <div class="sub">名</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">GATE診断済</div>
+          <div class="value" id="stat-gate">0</div>
+          <div class="sub">名</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">ST8 開業完了</div>
+          <div class="value" id="stat-st8">0</div>
+          <div class="sub">件</div>
+        </div>
+      </div>
+
+      <div class="section-header">
+        <div class="section-title">最近のテナント候補</div>
+        <button class="btn btn-primary btn-sm" onclick="navigate('tenants')">一覧へ →</button>
+      </div>
+      <div class="table-wrap" id="dash-recent-wrap">
+        <div class="empty-state">
+          <div class="icon">📋</div>
+          <div class="msg">テナント候補を登録すると一覧が表示されます</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PAGE: PROPERTY ── -->
+    <div class="page" id="page-property">
+      <div class="section-header" style="margin-bottom:20px;">
+        <div class="section-title">空き店舗ヒアリング入力</div>
+        <button class="btn btn-primary btn-sm" onclick="showAddPropertyModal()">＋ 新規物件登録</button>
+      </div>
+      <div id="property-list-wrap">
+        <div class="empty-state">
+          <div class="icon">🏪</div>
+          <div class="msg">物件を登録してください</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PAGE: TENANTS ── -->
+    <div class="page" id="page-tenants">
+      <div class="section-header" style="margin-bottom:20px;">
+        <div class="section-title">テナント候補管理</div>
+        <button class="btn btn-primary btn-sm" onclick="showAddTenantModal()">＋ 候補者登録</button>
+      </div>
+      <div id="tenant-list-wrap">
+        <div class="empty-state">
+          <div class="icon">👤</div>
+          <div class="msg">テナント候補を登録してください</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PAGE: GATE ── -->
+    <div class="page" id="page-gate">
+      <div class="alert alert-info">
+        対象のテナント候補を選択してGATE診断（6軸スコアリング）を実施します。
+      </div>
+      <div id="gate-tenant-select-area">
+        <div class="section-title" style="margin-bottom:12px;">テナント候補を選択</div>
+        <div id="gate-tenant-list"></div>
+      </div>
+      <div id="gate-scoring-area" style="display:none;">
+        <div class="gate-total-card">
+          <div>
+            <div class="gate-total-label">診断対象</div>
+            <div style="font-size:1rem;font-weight:700;margin-top:4px;" id="gate-target-name">—</div>
+          </div>
+          <div style="text-align:right;">
+            <div class="gate-total-label">総合スコア</div>
+            <div class="gate-total-score" id="gate-total-score">0<span> / 30</span></div>
+          </div>
+          <div id="gate-verdict" class="gate-verdict verdict-review">判定中</div>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="gateChart" width="320" height="320"></canvas>
+        </div>
+        <div class="section-title" style="margin-bottom:16px;">6軸評価</div>
+        <div class="gate-grid" id="gate-axes-wrap"></div>
+        <div class="form-row" style="margin-top:24px;">
+          <button class="btn btn-ghost" onclick="cancelGate()">← 候補選択に戻る</button>
+          <button class="btn btn-gold" onclick="saveGate()">💾 診断結果を保存</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PAGE: REPORT ── -->
+    <div class="page" id="page-report">
+      <div id="report-controls" class="section-header" style="margin-bottom:16px;">
+        <div class="section-title">レポート出力</div>
+        <div style="display:flex;gap:10px;">
+          <select id="report-property-select" style="width:220px;" onchange="renderReport()">
+            <option value="">— 物件を選択 —</option>
+          </select>
+          <button class="btn btn-gold" onclick="window.print()">🖨 印刷 / PDF保存</button>
+        </div>
+      </div>
+      <div class="report-wrap" id="report-content">
+        <div class="empty-state">
+          <div class="icon">📄</div>
+          <div class="msg">上記から物件を選択するとレポートが生成されます</div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /page-content -->
+</div><!-- /main -->
+
+<!-- ══ MODAL: ADD PROPERTY ══ -->
+<div class="modal-overlay" id="modal-property">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">空き店舗ヒアリング登録</div>
+      <button class="modal-close" onclick="closeModal('modal-property')">✕</button>
+    </div>
+    <div class="modal-body">
+      <form id="form-property" onsubmit="saveProperty(event)">
+        <div style="margin-bottom:12px;font-size:0.72rem;font-weight:700;color:var(--warm);letter-spacing:0.1em;">▍物件基本情報</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">物件名 <span class="req">*</span></label>
+            <input type="text" id="p-name" required placeholder="例：大津駅前テナント101">
+          </div>
+          <div class="form-group">
+            <label class="form-label">所在地</label>
+            <input type="text" id="p-address" placeholder="例：滋賀県大津市...">
+          </div>
+          <div class="form-group">
+            <label class="form-label">基準賃料（万円/月）</label>
+            <input type="number" id="p-rent" min="0" step="0.1" placeholder="例：16.7">
+          </div>
+          <div class="form-group">
+            <label class="form-label">面積（㎡）</label>
+            <input type="number" id="p-area" min="0" step="0.1" placeholder="例：45.0">
+          </div>
+          <div class="form-group">
+            <label class="form-label">間取り・用途</label>
+            <input type="text" id="p-layout" placeholder="例：1F路面・飲食可">
+          </div>
+          <div class="form-group">
+            <label class="form-label">空き開始時期</label>
+            <input type="text" id="p-vacant-since" placeholder="例：2026年3月">
+          </div>
+        </div>
+
+        <div style="margin:20px 0 12px;font-size:0.72rem;font-weight:700;color:var(--warm);letter-spacing:0.1em;">▍ヒアリング内容</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">退去理由・経緯</label>
+            <select id="p-vacancy-reason">
+              <option value="">選択してください</option>
+              <option>閉業（経営不振）</option>
+              <option>閉業（後継者不在）</option>
+              <option>移転</option>
+              <option>契約満了</option>
+              <option>新築・建替え</option>
+              <option>その他</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">退去予兆</label>
+            <select id="p-vacancy-sign">
+              <option value="">選択してください</option>
+              <option>なし（突発）</option>
+              <option>3ヶ月前に申告</option>
+              <option>6ヶ月前に申告</option>
+              <option>1年以上前から予兆</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">オーナー意向</label>
+            <select id="p-owner-intent">
+              <option value="">選択してください</option>
+              <option>業種不問・早期充填希望</option>
+              <option>業種指定あり</option>
+              <option>外国人テナント可</option>
+              <option>外国人テナント不可</option>
+              <option>承継・引継ぎ優先</option>
+              <option>リノベ・改装OK</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">融資前倒し相談</label>
+            <select id="p-loan-advance">
+              <option value="">選択してください</option>
+              <option>対応済み</option>
+              <option>未対応（要調整）</option>
+              <option>不要</option>
+            </select>
+          </div>
+          <div class="form-group span-2">
+            <label class="form-label">備考・特記事項</label>
+            <textarea id="p-note" placeholder="オーナーの特別要望・物件の特徴など自由記入"></textarea>
+          </div>
+        </div>
+        <div class="form-row">
+          <button type="button" class="btn btn-ghost" onclick="closeModal('modal-property')">キャンセル</button>
+          <button type="submit" class="btn btn-gold">登録する</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MODAL: ADD TENANT ══ -->
+<div class="modal-overlay" id="modal-tenant">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">テナント候補登録</div>
+      <button class="modal-close" onclick="closeModal('modal-tenant')">✕</button>
+    </div>
+    <div class="modal-body">
+      <form id="form-tenant" onsubmit="saveTenant(event)">
+        <div style="margin-bottom:12px;font-size:0.72rem;font-weight:700;color:var(--warm);letter-spacing:0.1em;">▍基本情報</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">氏名 <span class="req">*</span></label>
+            <input type="text" id="t-name" required placeholder="例：田中 太郎">
+          </div>
+          <div class="form-group">
+            <label class="form-label">区分 <span class="req">*</span></label>
+            <select id="t-type" required>
+              <option value="">選択してください</option>
+              <option value="jp">日本人</option>
+              <option value="foreign">外国人</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">電話番号</label>
+            <input type="tel" id="t-tel" placeholder="例：090-0000-0000">
+          </div>
+          <div class="form-group">
+            <label class="form-label">メールアドレス</label>
+            <input type="email" id="t-email" placeholder="例：tanaka@example.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">業種・業態</label>
+            <input type="text" id="t-business" placeholder="例：カフェ・焙煎豆販売">
+          </div>
+          <div class="form-group">
+            <label class="form-label">対象物件</label>
+            <select id="t-property-id">
+              <option value="">— 物件を紐付ける —</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="margin:20px 0 12px;font-size:0.72rem;font-weight:700;color:var(--warm);letter-spacing:0.1em;">▍進捗管理</div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">現在のSTステータス</label>
+            <select id="t-st">
+              <option value="1">ST1 ヒアリング完了</option>
+              <option value="2">ST2 GATE診断中</option>
+              <option value="3">ST3 事業計画作成中</option>
+              <option value="4">ST4 融資申込中</option>
+              <option value="5">ST5 物件契約中</option>
+              <option value="6">ST6 内装工事中</option>
+              <option value="7">ST7 開業準備中</option>
+              <option value="8">ST8 開業完了</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">GATEパック</label>
+            <select id="t-gate-pack">
+              <option value="">未申込</option>
+              <option value="jp">日本人版（30万円）</option>
+              <option value="foreign">外国人版（45万円）</option>
+            </select>
+          </div>
+          <div class="form-group span-2">
+            <label class="form-label">備考・面談メモ</label>
+            <textarea id="t-note" placeholder="ヒアリング内容・特記事項など"></textarea>
+          </div>
+        </div>
+        <div class="form-row">
+          <button type="button" class="btn btn-ghost" onclick="closeModal('modal-tenant')">キャンセル</button>
+          <button type="submit" class="btn btn-gold">登録する</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MODAL: TENANT DETAIL ══ -->
+<div class="modal-overlay" id="modal-tenant-detail">
+  <div class="modal" style="width:min(760px,95vw);">
+    <div class="modal-header">
+      <div class="modal-title" id="detail-modal-title">テナント詳細</div>
+      <button class="modal-close" onclick="closeModal('modal-tenant-detail')">✕</button>
+    </div>
+    <div class="modal-body" id="detail-modal-body"></div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════
+//  DATA LAYER
+// ══════════════════════════════════════════
+const DB = {
+  load(key) {
+    try { return JSON.parse(localStorage.getItem('bc_' + key) || '[]'); } catch { return []; }
+  },
+  save(key, data) {
+    localStorage.setItem('bc_' + key, JSON.stringify(data));
+  },
+  uid() {
+    return Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+  }
+};
+
+const GATE_AXES = [
+  { id: 'motivation', label: '① 動機・コミット', desc: '出店への覚悟・理由の明確さ・転換不退転度' },
+  { id: 'finance',    label: '② 資金力・調達余力', desc: '自己資金額・融資見込み・返済余力' },
+  { id: 'fit',        label: '③ 適合性', desc: '物件業種適合・立地理解・ターゲット整合' },
+  { id: 'experience', label: '④ 経験', desc: '業界経験・修業歴・経営経験の有無' },
+  { id: 'plan',       label: '⑤ 計画性', desc: '事業計画の具体度・損益シミュレーション・開業スケジュール' },
+  { id: 'succession', label: '⑥ 承継条件', desc: '設備・什器引継ぎ・スタッフ継続・ノウハウ移転の条件整合' }
+];
+
+const ST_LABELS = {
+  1: 'ST1 ヒアリング', 2: 'ST2 GATE診断', 3: 'ST3 事業計画',
+  4: 'ST4 融資申込', 5: 'ST5 物件契約', 6: 'ST6 内装工事',
+  7: 'ST7 開業準備', 8: 'ST8 開業完了'
+};
+
+let gateChart = null;
+let currentGateTenantId = null;
+let gateScores = { motivation: 0, finance: 0, fit: 0, experience: 0, plan: 0, succession: 0 };
+
+// ══════════════════════════════════════════
+//  NAVIGATION
+// ══════════════════════════════════════════
+const PAGE_TITLES = {
+  dashboard: 'ダッシュボード',
+  property: '空き店舗ヒアリング入力',
+  tenants: 'テナント候補管理',
+  gate: 'GATE診断',
+  report: 'レポート出力'
+};
+
+function navigate(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  document.querySelector(`[data-page="${page}"]`).classList.add('active');
+  document.getElementById('topbar-title').textContent = PAGE_TITLES[page];
+
+  // Render page
+  if (page === 'dashboard') renderDashboard();
+  else if (page === 'property') renderPropertyList();
+  else if (page === 'tenants') renderTenantList();
+  else if (page === 'gate') renderGatePage();
+  else if (page === 'report') renderReportPage();
+}
+
+// ══════════════════════════════════════════
+//  MODALS
+// ══════════════════════════════════════════
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+// ══════════════════════════════════════════
+//  DASHBOARD
+// ══════════════════════════════════════════
+function renderDashboard() {
+  const props = DB.load('properties');
+  const tenants = DB.load('tenants');
+  const gateDone = tenants.filter(t => t.gate && Object.values(t.gate).some(v => v > 0));
+  const st8 = tenants.filter(t => t.st === '8' || t.st === 8);
+
+  document.getElementById('stat-props').textContent = props.length;
+  document.getElementById('stat-tenants').textContent = tenants.length;
+  document.getElementById('stat-gate').textContent = gateDone.length;
+  document.getElementById('stat-st8').textContent = st8.length;
+
+  const wrap = document.getElementById('dash-recent-wrap');
+  if (!tenants.length) {
+    wrap.innerHTML = `<div class="empty-state"><div class="icon">📋</div><div class="msg">テナント候補を登録すると一覧が表示されます</div></div>`;
+    return;
+  }
+  const recent = [...tenants].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0)).slice(0, 5);
+  wrap.innerHTML = `
+    <table>
+      <thead><tr><th>氏名</th><th>区分</th><th>業種</th><th>対象物件</th><th>STステータス</th><th>操作</th></tr></thead>
+      <tbody>
+        ${recent.map(t => `
+          <tr>
+            <td><strong>${t.name}</strong></td>
+            <td><span class="badge badge-${t.type === 'foreign' ? 'foreign' : 'jp'}">${t.type === 'foreign' ? '外国人' : '日本人'}</span></td>
+            <td>${t.business || '—'}</td>
+            <td>${getPropertyName(t.propertyId)}</td>
+            <td><span class="badge badge-st${t.st}">${ST_LABELS[t.st] || 'ST' + t.st}</span></td>
+            <td><div class="td-action">
+              <button class="btn btn-ghost btn-sm" onclick="showTenantDetail('${t.id}')">詳細</button>
+            </div></td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>`;
+}
+
+// ══════════════════════════════════════════
+//  PROPERTY
+// ══════════════════════════════════════════
+function showAddPropertyModal() {
+  document.getElementById('form-property').reset();
+  document.getElementById('form-property').removeAttribute('data-edit-id');
+  openModal('modal-property');
+}
+
+function saveProperty(e) {
+  e.preventDefault();
+  const props = DB.load('properties');
+  const editId = document.getElementById('form-property').getAttribute('data-edit-id');
+  const item = {
+    id: editId || DB.uid(),
+    name: document.getElementById('p-name').value,
+    address: document.getElementById('p-address').value,
+    rent: document.getElementById('p-rent').value,
+    area: document.getElementById('p-area').value,
+    layout: document.getElementById('p-layout').value,
+    vacantSince: document.getElementById('p-vacant-since').value,
+    vacancyReason: document.getElementById('p-vacancy-reason').value,
+    vacancySign: document.getElementById('p-vacancy-sign').value,
+    ownerIntent: document.getElementById('p-owner-intent').value,
+    loanAdvance: document.getElementById('p-loan-advance').value,
+    note: document.getElementById('p-note').value,
+    createdAt: editId ? (props.find(p=>p.id===editId)||{}).createdAt : Date.now()
+  };
+  if (editId) {
+    const idx = props.findIndex(p => p.id === editId);
+    if (idx !== -1) props[idx] = item;
+  } else {
+    props.push(item);
+  }
+  DB.save('properties', props);
+  closeModal('modal-property');
+  renderPropertyList();
+}
+
+function renderPropertyList() {
+  const props = DB.load('properties');
+  const wrap = document.getElementById('property-list-wrap');
+  if (!props.length) {
+    wrap.innerHTML = `<div class="empty-state"><div class="icon">🏪</div><div class="msg">「新規物件登録」から空き店舗情報を入力してください</div></div>`;
+    return;
+  }
+  wrap.innerHTML = `
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>物件名</th><th>所在地</th><th>賃料（万円）</th><th>面積（㎡）</th>
+            <th>退去理由</th><th>オーナー意向</th><th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${props.map(p => `
+            <tr>
+              <td><strong>${p.name}</strong></td>
+              <td>${p.address || '—'}</td>
+              <td>${p.rent ? p.rent + ' 万円' : '—'}</td>
+              <td>${p.area ? p.area + ' ㎡' : '—'}</td>
+              <td>${p.vacancyReason || '—'}</td>
+              <td>${p.ownerIntent || '—'}</td>
+              <td><div class="td-action">
+                <button class="btn btn-ghost btn-sm" onclick="editProperty('${p.id}')">編集</button>
+                <button class="btn btn-danger" onclick="deleteProperty('${p.id}')">削除</button>
+              </div></td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    </div>`;
+}
+
+function editProperty(id) {
+  const props = DB.load('properties');
+  const p = props.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('p-name').value = p.name || '';
+  document.getElementById('p-address').value = p.address || '';
+  document.getElementById('p-rent').value = p.rent || '';
+  document.getElementById('p-area').value = p.area || '';
+  document.getElementById('p-layout').value = p.layout || '';
+  document.getElementById('p-vacant-since').value = p.vacantSince || '';
+  document.getElementById('p-vacancy-reason').value = p.vacancyReason || '';
+  document.getElementById('p-vacancy-sign').value = p.vacancySign || '';
+  document.getElementById('p-owner-intent').value = p.ownerIntent || '';
+  document.getElementById('p-loan-advance').value = p.loanAdvance || '';
+  document.getElementById('p-note').value = p.note || '';
+  document.getElementById('form-property').setAttribute('data-edit-id', id);
+  openModal('modal-property');
+}
+
+function deleteProperty(id) {
+  if (!confirm('この物件を削除しますか？')) return;
+  const props = DB.load('properties').filter(p => p.id !== id);
+  DB.save('properties', props);
+  renderPropertyList();
+}
+
+function getPropertyName(id) {
+  if (!id) return '—';
+  const p = DB.load('properties').find(x => x.id === id);
+  return p ? p.name : '—';
+}
+
+// ══════════════════════════════════════════
+//  TENANT
+// ══════════════════════════════════════════
+function showAddTenantModal() {
+  document.getElementById('form-tenant').reset();
+  document.getElementById('form-tenant').removeAttribute('data-edit-id');
+  // populate property select
+  populatePropertySelect('t-property-id');
+  openModal('modal-tenant');
+}
+
+function populatePropertySelect(selectId) {
+  const props = DB.load('properties');
+  const sel = document.getElementById(selectId);
+  const current = sel.value;
+  sel.innerHTML = `<option value="">— 物件を紐付ける —</option>`;
+  props.forEach(p => {
+    const opt = document.createElement('option');
+    opt.value = p.id;
+    opt.textContent = p.name;
+    sel.appendChild(opt);
+  });
+  sel.value = current;
+}
+
+function saveTenant(e) {
+  e.preventDefault();
+  const tenants = DB.load('tenants');
+  const editId = document.getElementById('form-tenant').getAttribute('data-edit-id');
+  const item = {
+    id: editId || DB.uid(),
+    name: document.getElementById('t-name').value,
+    type: document.getElementById('t-type').value,
+    tel: document.getElementById('t-tel').value,
+    email: document.getElementById('t-email').value,
+    business: document.getElementById('t-business').value,
+    propertyId: document.getElementById('t-property-id').value,
+    st: document.getElementById('t-st').value,
+    gatePack: document.getElementById('t-gate-pack').value,
+    note: document.getElementById('t-note').value,
+    gate: editId ? (tenants.find(t => t.id === editId) || {}).gate || null : null,
+    createdAt: editId ? (tenants.find(t => t.id === editId) || {}).createdAt : Date.now()
+  };
+  if (editId) {
+    const idx = tenants.findIndex(t => t.id === editId);
+    if (idx !== -1) tenants[idx] = item;
+  } else {
+    tenants.push(item);
+  }
+  DB.save('tenants', tenants);
+  closeModal('modal-tenant');
+  renderTenantList();
+}
+
+function renderTenantList() {
+  const tenants = DB.load('tenants');
+  const wrap = document.getElementById('tenant-list-wrap');
+  if (!tenants.length) {
+    wrap.innerHTML = `<div class="empty-state"><div class="icon">👤</div><div class="msg">「候補者登録」からテナント候補を入力してください</div></div>`;
+    return;
+  }
+  wrap.innerHTML = `
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>氏名</th><th>区分</th><th>業種</th><th>対象物件</th><th>ST進捗</th><th>GATE</th><th>GATEパック</th><th>操作</th></tr>
+        </thead>
+        <tbody>
+          ${tenants.map(t => {
+            const gateTotal = t.gate ? Object.values(t.gate).reduce((s,v)=>s+v,0) : null;
+            const gateDisp = gateTotal !== null ? `<span style="font-weight:700;color:var(--navy)">${gateTotal}<small style="color:var(--warm)">/30</small></span>` : '<span style="color:var(--smoke)">未診断</span>';
+            const packLabel = { jp: '日本人版 30万円', foreign: '外国人版 45万円' };
+            return `
+            <tr>
+              <td><strong>${t.name}</strong></td>
+              <td><span class="badge badge-${t.type === 'foreign' ? 'foreign' : 'jp'}">${t.type === 'foreign' ? '外国人' : '日本人'}</span></td>
+              <td>${t.business || '—'}</td>
+              <td>${getPropertyName(t.propertyId)}</td>
+              <td>
+                <div class="st-progress">
+                  ${[1,2,3,4,5,6,7,8].map(n => `<div class="st-step ${parseInt(t.st) >= n ? 'done' : ''}"></div>`).join('')}
+                </div>
+                <div style="font-size:0.68rem;color:var(--warm);margin-top:2px;">${ST_LABELS[t.st] || 'ST' + t.st}</div>
+              </td>
+              <td>${gateDisp}</td>
+              <td>${packLabel[t.gatePack] || '<span style="color:var(--smoke)">未申込</span>'}</td>
+              <td><div class="td-action">
+                <button class="btn btn-ghost btn-sm" onclick="showTenantDetail('${t.id}')">詳細</button>
+                <button class="btn btn-ghost btn-sm" onclick="editTenant('${t.id}')">編集</button>
+                <button class="btn btn-ghost btn-sm" onclick="goGate('${t.id}')">GATE</button>
+                <button class="btn btn-danger" onclick="deleteTenant('${t.id}')">削除</button>
+              </div></td>
+            </tr>
+          `}).join('')}
+        </tbody>
+      </table>
+    </div>`;
+}
+
+function editTenant(id) {
+  const tenants = DB.load('tenants');
+  const t = tenants.find(x => x.id === id);
+  if (!t) return;
+  populatePropertySelect('t-property-id');
+  document.getElementById('t-name').value = t.name || '';
+  document.getElementById('t-type').value = t.type || '';
+  document.getElementById('t-tel').value = t.tel || '';
+  document.getElementById('t-email').value = t.email || '';
+  document.getElementById('t-business').value = t.business || '';
+  document.getElementById('t-property-id').value = t.propertyId || '';
+  document.getElementById('t-st').value = t.st || '1';
+  document.getElementById('t-gate-pack').value = t.gatePack || '';
+  document.getElementById('t-note').value = t.note || '';
+  document.getElementById('form-tenant').setAttribute('data-edit-id', id);
+  openModal('modal-tenant');
+}
+
+function deleteTenant(id) {
+  if (!confirm('この候補者を削除しますか？')) return;
+  const tenants = DB.load('tenants').filter(t => t.id !== id);
+  DB.save('tenants', tenants);
+  renderTenantList();
+}
+
+function showTenantDetail(id) {
+  const tenants = DB.load('tenants');
+  const t = tenants.find(x => x.id === id);
+  if (!t) return;
+  const packLabel = { jp: '日本人版 30万円', foreign: '外国人版 45万円' };
+  const gateTotal = t.gate ? Object.values(t.gate).reduce((s,v)=>s+v,0) : null;
+
+  document.getElementById('detail-modal-title').textContent = `テナント詳細 — ${t.name}`;
+  document.getElementById('detail-modal-body').innerHTML = `
+    <div class="detail-two-col">
+      <div>
+        <div class="detail-section-title">基本情報</div>
+        ${[
+          ['氏名', `<strong>${t.name}</strong>`],
+          ['区分', t.type === 'foreign' ? '外国人' : '日本人'],
+          ['業種・業態', t.business || '—'],
+          ['電話番号', t.tel || '—'],
+          ['メール', t.email || '—'],
+          ['対象物件', getPropertyName(t.propertyId)],
+          ['GATEパック', packLabel[t.gatePack] || '未申込'],
+          ['STステータス', ST_LABELS[t.st] || 'ST' + t.st],
+        ].map(([k,v]) => `<div class="detail-row"><span class="key">${k}</span><span class="val">${v}</span></div>`).join('')}
+        ${t.note ? `<div style="margin-top:12px;font-size:0.78rem;color:var(--warm);background:var(--cream);padding:10px;border-radius:var(--r);">${t.note}</div>` : ''}
+      </div>
+      <div>
+        <div class="detail-section-title">GATE診断結果</div>
+        ${t.gate ? `
+          <div style="text-align:center;padding:12px 0;">
+            <div style="font-size:2rem;font-weight:700;color:var(--navy)">${gateTotal}<span style="font-size:1rem;color:var(--warm)">/30</span></div>
+            <div style="margin:4px 0 12px;">${gateVerdict(gateTotal)}</div>
+          </div>
+          ${GATE_AXES.map(ax => `
+            <div class="detail-row">
+              <span class="key" style="font-size:0.72rem;">${ax.label}</span>
+              <span class="val">
+                <span class="score-bar">
+                  ${[1,2,3,4,5].map(n => `<span class="score-dot ${(t.gate[ax.id]||0) >= n ? 'filled' : ''}"></span>`).join('')}
+                </span>
+                <strong style="margin-left:6px;">${t.gate[ax.id] || 0}</strong>
+              </span>
+            </div>
+          `).join('')}
+        ` : `<div class="empty-state" style="padding:24px 0;"><div class="icon" style="font-size:1.5rem;">🎯</div><div class="msg" style="font-size:0.78rem;">未診断<br><button class="btn btn-primary btn-sm" style="margin-top:8px;" onclick="closeModal('modal-tenant-detail');goGate('${t.id}')">GATE診断へ</button></div></div>`}
+      </div>
+    </div>
+    <div style="margin-top:16px;">
+      <div class="detail-section-title">ST進捗</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        ${[1,2,3,4,5,6,7,8].map(n => `
+          <div style="flex:1;min-width:80px;background:${parseInt(t.st)>=n?'var(--navy)':'var(--cream-dk)'};color:${parseInt(t.st)>=n?'var(--gold)':'var(--warm)'};border-radius:var(--r);padding:8px;text-align:center;font-size:0.68rem;">
+            <div style="font-weight:700;">ST${n}</div>
+            <div style="margin-top:2px;">${ST_LABELS[n].replace('ST'+n+' ','')}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+  openModal('modal-tenant-detail');
+}
+
+function gateVerdict(total) {
+  if (total >= 22) return `<span class="gate-verdict verdict-pass">✅ 通過推奨</span>`;
+  if (total >= 15) return `<span class="gate-verdict verdict-review">⚠️ 要検討</span>`;
+  return `<span class="gate-verdict verdict-fail">❌ 再検討</span>`;
+}
+
+// ══════════════════════════════════════════
+//  GATE
+// ══════════════════════════════════════════
+function goGate(tenantId) {
+  navigate('gate');
+  setTimeout(() => selectGateTenant(tenantId), 100);
+}
+
+function renderGatePage() {
+  const tenants = DB.load('tenants');
+  const area = document.getElementById('gate-tenant-list');
+  if (!tenants.length) {
+    area.innerHTML = `<div class="empty-state"><div class="icon">👤</div><div class="msg">テナント候補を登録してからGATE診断を実施してください</div></div>`;
+    return;
+  }
+  area.innerHTML = tenants.map(t => {
+    const gateTotal = t.gate ? Object.values(t.gate).reduce((s,v)=>s+v,0) : null;
+    return `
+      <div class="tenant-select-card" id="gtc-${t.id}" onclick="selectGateTenant('${t.id}')">
+        <div>
+          <strong style="font-size:0.9rem;">${t.name}</strong>
+          <span class="badge badge-${t.type === 'foreign' ? 'foreign' : 'jp'}" style="margin-left:8px;">${t.type === 'foreign' ? '外国人' : '日本人'}</span>
+          <div style="font-size:0.72rem;color:var(--warm);margin-top:4px;">${t.business || '業種未設定'} ／ ${getPropertyName(t.propertyId)}</div>
+        </div>
+        <div style="text-align:right;">
+          ${gateTotal !== null ?
+            `<div style="font-size:1.2rem;font-weight:700;">${gateTotal}<span style="font-size:0.7rem;color:var(--warm)">/30</span></div>
+             <div style="font-size:0.68rem;margin-top:2px;">${gateVerdict(gateTotal)}</div>` :
+            `<span style="font-size:0.72rem;color:var(--smoke);">未診断</span>`}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function selectGateTenant(id) {
+  const tenants = DB.load('tenants');
+  const t = tenants.find(x => x.id === id);
+  if (!t) return;
+  currentGateTenantId = id;
+  gateScores = t.gate ? { ...t.gate } : { motivation: 0, finance: 0, fit: 0, experience: 0, plan: 0, succession: 0 };
+
+  document.querySelectorAll('.tenant-select-card').forEach(c => c.classList.remove('selected-tenant'));
+  const card = document.getElementById('gtc-' + id);
+  if (card) card.classList.add('selected-tenant');
+
+  document.getElementById('gate-target-name').textContent = t.name;
+  document.getElementById('gate-tenant-select-area').style.display = 'none';
+  document.getElementById('gate-scoring-area').style.display = 'block';
+
+  renderGateAxes();
+  updateGateTotal();
+  renderGateChart();
+}
+
+function cancelGate() {
+  currentGateTenantId = null;
+  document.getElementById('gate-tenant-select-area').style.display = 'block';
+  document.getElementById('gate-scoring-area').style.display = 'none';
+}
+
+function renderGateAxes() {
+  const wrap = document.getElementById('gate-axes-wrap');
+  wrap.innerHTML = GATE_AXES.map(ax => `
+    <div class="gate-axis">
+      <div class="gate-axis-label">${ax.label}</div>
+      <div class="gate-axis-desc">${ax.desc}</div>
+      <div class="gate-stars">
+        ${[1,2,3,4,5].map(n => `
+          <div class="gate-star ${gateScores[ax.id] >= n ? 'selected' : ''}"
+               onclick="setGateScore('${ax.id}', ${n})">${n}</div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function setGateScore(axisId, val) {
+  gateScores[axisId] = val;
+  renderGateAxes();
+  updateGateTotal();
+  updateGateChart();
+}
+
+function updateGateTotal() {
+  const total = Object.values(gateScores).reduce((s, v) => s + v, 0);
+  document.getElementById('gate-total-score').innerHTML = `${total}<span> / 30</span>`;
+  const v = document.getElementById('gate-verdict');
+  if (total >= 22) { v.textContent = '✅ 通過推奨'; v.className = 'gate-verdict verdict-pass'; }
+  else if (total >= 15) { v.textContent = '⚠️ 要検討'; v.className = 'gate-verdict verdict-review'; }
+  else { v.textContent = '❌ 再検討'; v.className = 'gate-verdict verdict-fail'; }
+}
+
+function renderGateChart() {
+  const ctx = document.getElementById('gateChart').getContext('2d');
+  if (gateChart) gateChart.destroy();
+  gateChart = new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels: GATE_AXES.map(a => a.label),
+      datasets: [{
+        label: 'GATE診断',
+        data: GATE_AXES.map(a => gateScores[a.id] || 0),
+        backgroundColor: 'rgba(201,168,76,0.2)',
+        borderColor: '#C9A84C',
+        borderWidth: 2,
+        pointBackgroundColor: '#C9A84C',
+        pointRadius: 4,
+      }]
+    },
+    options: {
+      scales: { r: { min: 0, max: 5, ticks: { stepSize: 1, font: { size: 9 } }, pointLabels: { font: { size: 10 } } } },
+      plugins: { legend: { display: false } },
+      animation: { duration: 300 }
+    }
+  });
+}
+
+function updateGateChart() {
+  if (!gateChart) { renderGateChart(); return; }
+  gateChart.data.datasets[0].data = GATE_AXES.map(a => gateScores[a.id] || 0);
+  gateChart.update();
+}
+
+function saveGate() {
+  if (!currentGateTenantId) return;
+  const tenants = DB.load('tenants');
+  const idx = tenants.findIndex(t => t.id === currentGateTenantId);
+  if (idx === -1) return;
+  tenants[idx].gate = { ...gateScores };
+  // Auto-advance to ST2 if still at ST1
+  if (parseInt(tenants[idx].st) === 1) tenants[idx].st = '2';
+  DB.save('tenants', tenants);
+  cancelGate();
+  renderGatePage();
+  alert('GATE診断結果を保存しました。');
+}
+
+// ══════════════════════════════════════════
+//  REPORT
+// ══════════════════════════════════════════
+function renderReportPage() {
+  const props = DB.load('properties');
+  const sel = document.getElementById('report-property-select');
+  const current = sel.value;
+  sel.innerHTML = `<option value="">— 物件を選択 —</option>`;
+  props.forEach(p => {
+    const opt = document.createElement('option');
+    opt.value = p.id;
+    opt.textContent = p.name;
+    sel.appendChild(opt);
+  });
+  if (current) { sel.value = current; renderReport(); }
+}
+
+function renderReport() {
+  const propId = document.getElementById('report-property-select').value;
+  const wrap = document.getElementById('report-content');
+  if (!propId) {
+    wrap.innerHTML = `<div class="empty-state"><div class="icon">📄</div><div class="msg">上記から物件を選択するとレポートが生成されます</div></div>`;
+    return;
+  }
+  const props = DB.load('properties');
+  const tenants = DB.load('tenants');
+  const p = props.find(x => x.id === propId);
+  const pts = tenants.filter(t => t.propertyId === propId);
+  if (!p) return;
+
+  const now = new Date().toLocaleDateString('ja-JP', { year: 'numeric', month: 'long', day: 'numeric' });
+  const gateSection = pts.filter(t => t.gate).map(t => {
+    const total = Object.values(t.gate).reduce((s,v)=>s+v,0);
+    return `
+      <tr>
+        <td><strong>${t.name}</strong></td>
+        <td>${t.type === 'foreign' ? '外国人' : '日本人'}</td>
+        <td>${t.business || '—'}</td>
+        ${GATE_AXES.map(ax => `<td style="text-align:center;">${t.gate[ax.id] || 0}</td>`).join('')}
+        <td style="text-align:center;font-weight:700;">${total}</td>
+        <td style="text-align:center;">${total >= 22 ? '通過推奨' : total >= 15 ? '要検討' : '再検討'}</td>
+      </tr>`;
+  }).join('');
+
+  wrap.innerHTML = `
+    <div class="report-header">
+      <div>
+        <div class="report-brand">Bridge<em>Cycle</em></div>
+        <div style="font-size:0.72rem;color:var(--warm);margin-top:4px;">空き店舗活用支援　ヒアリング・診断レポート</div>
+      </div>
+      <div class="report-date">
+        作成日：${now}<br>
+        Bridge<strong>Cycle</strong>株式会社<br>
+        代表取締役　中村裕二
+      </div>
+    </div>
+
+    <div class="report-section">
+      <div class="report-section-title">■ 物件情報</div>
+      <div class="report-property-grid">
+        ${[
+          ['物件名', p.name],
+          ['所在地', p.address || '—'],
+          ['基準賃料', p.rent ? p.rent + ' 万円/月' : '—'],
+          ['面積', p.area ? p.area + ' ㎡' : '—'],
+          ['間取り・用途', p.layout || '—'],
+          ['空き開始', p.vacantSince || '—'],
+          ['退去理由', p.vacancyReason || '—'],
+          ['退去予兆', p.vacancySign || '—'],
+          ['オーナー意向', p.ownerIntent || '—'],
+          ['融資前倒し', p.loanAdvance || '—'],
+        ].map(([k,v]) => `<div class="report-prop-item"><div class="k">${k}</div><div class="v">${v}</div></div>`).join('')}
+      </div>
+      ${p.note ? `<div style="margin-top:12px;padding:10px;background:var(--cream);font-size:0.78rem;border-left:3px solid var(--gold);">備考：${p.note}</div>` : ''}
+    </div>
+
+    <div class="report-section">
+      <div class="report-section-title">■ テナント候補一覧（${pts.length}名）</div>
+      ${pts.length ? `
+        <table class="report-gate-table">
+          <thead>
+            <tr>
+              <th>氏名</th><th>区分</th><th>業種</th><th>STステータス</th><th>GATEパック</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${pts.map(t => `
+              <tr>
+                <td><strong>${t.name}</strong></td>
+                <td>${t.type === 'foreign' ? '外国人' : '日本人'}</td>
+                <td>${t.business || '—'}</td>
+                <td>${ST_LABELS[t.st] || 'ST' + t.st}</td>
+                <td>${t.gatePack === 'jp' ? '日本人版 30万円' : t.gatePack === 'foreign' ? '外国人版 45万円' : '未申込'}</td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      ` : '<p style="font-size:0.8rem;color:var(--warm);padding:8px 0;">この物件に紐付いたテナント候補はありません。</p>'}
+    </div>
+
+    ${gateSection ? `
+    <div class="report-section">
+      <div class="report-section-title">■ GATE診断スコア一覧</div>
+      <table class="report-gate-table">
+        <thead>
+          <tr>
+            <th>氏名</th><th>区分</th><th>業種</th>
+            ${GATE_AXES.map(a => `<th style="text-align:center;">${a.label.slice(0,4)}</th>`).join('')}
+            <th style="text-align:center;">合計</th><th style="text-align:center;">判定</th>
+          </tr>
+        </thead>
+        <tbody>${gateSection}</tbody>
+      </table>
+      <div style="font-size:0.68rem;color:var(--warm);margin-top:8px;">
+        ※ 判定基準：22点以上＝通過推奨 ／ 15〜21点＝要検討 ／ 14点以下＝再検討
+      </div>
+    </div>` : ''}
+
+    <div style="margin-top:36px;border-top:1px solid var(--cream-dk);padding-top:12px;font-size:0.68rem;color:var(--smoke);text-align:center;">
+      Bridge<strong>Cycle</strong>株式会社　〒520-0801 滋賀県大津市におの浜2-1-28-1302
+      https://yujimansion-hub.github.io/bridgecycle/
+    </div>
+  `;
+}
+
+// ══════════════════════════════════════════
+//  INIT
+// ══════════════════════════════════════════
+renderDashboard();
+</script>
+</body>
+</html>
