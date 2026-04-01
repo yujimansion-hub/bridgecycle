@@ -908,7 +908,7 @@ footer {
     <h2 class="cta-title reveal">閉める前に、一度だけ<br>話してみてください。</h2>
     <p class="cta-sub reveal">費用のこと、時期のこと、設備のこと——どんなことでも構いません。BRIDGE CYCLEの相談は、すべて無料です。判断はその後にしてください。</p>
     <div class="cta-btns">
-      <a href="mailto:info@bridgecycle.jp" class="cta-btn-main">無料相談を申し込む</a>
+      <a href="mailto:info@bridgecycleco.com" class="cta-btn-main">無料相談を申し込む</a>
     </div>
     <p class="cta-free-note">相談料・紹介料など、退店希望者への費用は一切かかりません</p>
   </div>
@@ -917,12 +917,19 @@ footer {
 <!-- ── FOOTER ── -->
 <footer>
   <a href="index.html" class="footer-logo">BRIDGE CYCLE</a>
+  <div style="font-size:0.65rem;color:rgba(200,190,170,0.45);line-height:1.9;text-align:center;">
+    BRIDGE CYCLE 株式会社　代表取締役　中村裕二<br>
+    滋賀県大津市におの浜2-1-28-1302<br>
+    <a href="mailto:info@bridgecycleco.com" style="color:var(--gold-dim);text-decoration:none;">info@bridgecycleco.com</a>
+    　｜
+    <a href="https://yujimansion-hub.github.io/bridgecycle/" target="_blank" rel="noopener" style="color:var(--gold-dim);text-decoration:none;">yujimansion-hub.github.io/bridgecycle</a>
+  </div>
   <div class="footer-links">
     <a href="index.html">管理会社の方へ</a>
     <a href="lp.html">創業希望者の方へ</a>
     <a href="exit.html">閉店をお考えの方へ</a>
   </div>
-  <div class="footer-copy">© 2025 BRIDGE CYCLE. All rights reserved.</div>
+  <div class="footer-copy">© 2026 BRIDGE CYCLE 株式会社. All rights reserved.</div>
 </footer>
 
 <script>
