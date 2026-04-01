@@ -81,7 +81,7 @@ nav {
 .hero-left {
   background: var(--navy);
   display: flex; flex-direction: column; justify-content: center;
-  padding: 140px 80px 80px 80px;
+  padding: 120px 72px 72px 72px;
   position: relative;
   overflow: hidden;
 }
@@ -102,44 +102,48 @@ nav {
 }
 
 .hero-eyebrow {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.72rem; letter-spacing: 0.4em;
-  color: var(--gold); text-transform: uppercase;
-  margin-bottom: 28px;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.7rem; letter-spacing: 0.18em;
+  color: var(--gold);
+  margin-bottom: 24px;
   display: flex; align-items: center; gap: 16px;
   animation: fadeUp 0.8s ease both;
 }
 .hero-eyebrow::before {
   content: ''; display: block;
-  width: 40px; height: 1px; background: var(--gold-dim);
+  width: 36px; height: 1px; background: var(--gold-dim); flex-shrink: 0;
 }
 
 .hero-title {
   font-family: 'Shippori Mincho B1', serif;
-  font-size: clamp(2.6rem, 4.5vw, 3.8rem);
+  font-size: clamp(2.2rem, 3.8vw, 3.2rem);
   font-weight: 800;
-  line-height: 1.3;
+  line-height: 1.35;
   color: var(--cream);
-  margin-bottom: 28px;
+  margin-bottom: 24px;
   animation: fadeUp 0.8s 0.1s ease both;
 }
 .hero-title em {
   display: block;
   font-style: normal;
   color: var(--gold);
-  font-size: clamp(1.4rem, 2.4vw, 2rem);
-  font-weight: 400;
-  letter-spacing: 0.06em;
-  margin-bottom: 10px;
-  line-height: 1.6;
+  font-size: clamp(1.05rem, 1.8vw, 1.4rem);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  margin-bottom: 14px;
+  line-height: 1.7;
+  border-left: 2px solid var(--gold-dim);
+  padding-left: 14px;
 }
 
 .hero-subtitle {
-  font-size: 0.9rem; color: var(--smoke); line-height: 2.1;
-  max-width: 340px;
+  font-size: 0.85rem; color: var(--smoke); line-height: 2.1;
+  max-width: 460px;
   animation: fadeUp 0.8s 0.2s ease both;
 }
 .hero-subtitle strong { color: var(--gold-lt); }
+.hero-subtitle p { margin-bottom: 14px; }
+.hero-subtitle p:last-child { margin-bottom: 0; }
 
 .hero-btns {
   display: flex; gap: 16px; margin-top: 48px;
@@ -746,17 +750,16 @@ footer {
 <!-- ── HERO ── -->
 <section class="hero">
   <div class="hero-left">
-    <p class="hero-eyebrow">飲食店開業支援 — 閉まる前に動く</p>
+    <p class="hero-eyebrow">低投資で始める飲食店開業 — 物件より先に整えること</p>
     <h1 class="hero-title">
-      <em>物件より先に、<br>融資の目処を立てる。</em>
-      それだけで、<br>開業の成功率は変わる。
+      <em>自己資金が少なくても、<br>飲食店は開ける。</em>
+      ただし、物件から<br>決めてはいけません。
     </h1>
-    <p class="hero-subtitle">
-      閉まりかけの飲食店には、<strong>厨房設備・内装がそのまま残っています。</strong><br>
-      そこを引き継ぐことで初期費用を大幅に抑えられる——<br>
-      でも、動き出すタイミングと順番が重要です。<br>
-      BRIDGE CYCLEは、その「正しい順番」で伴走します。
-    </p>
+    <div class="hero-subtitle">
+      <p>閉まりかけの店には、厨房設備や内装が残っています。そこを引き継げば、<strong>ゼロからつくるよりずっと低投資で始められます。</strong></p>
+      <p>でも、その前に必要なのは、<strong>融資の目処</strong>と<strong>事業計画</strong>です。</p>
+      <p>BRIDGE CYCLEは、物件を決める前に「借りられるか」「続けられるか」を整えるところから始める——<strong>低投資で始めたい人のための、飲食店開業の新しい順番</strong>です。</p>
+    </div>
     <div class="hero-btns">
       <a href="#pain" class="btn-primary">自分に当てはまるか確認する</a>
       <a href="#flow" class="btn-ghost">どんな流れか見る</a>
