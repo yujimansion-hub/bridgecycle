@@ -3,933 +3,1979 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>閉店をお考えの方へ | BRIDGE CYCLE</title>
+<title>ホーム | BRIDGE CYCLE — 空き店舗を、次の灯りへ</title>
+<meta name="description" content="BRIDGE CYCLE（ブリッジサイクル）は、退去前の空き店舗と次の創業者をつなぐ、物件管理会社向けの空室削減支援サービスです。管理会社が入力するだけで動く、GATE診断×8ステップ伴走の新しい空室対策です。">
+<meta name="keywords" content="空き店舗,テナント承継,居抜き,物件管理,空室削減,創業支援,GATE診断,中小企業診断士,滋賀,大津">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;700&family=Shippori+Mincho+B1:wght@400;500;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;700&family=Shippori+Mincho+B1:wght@400;500;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+
 <style>
+/* ═══════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════ */
 :root {
-  --navy:     #0D1B2A;
-  --navy-mid: #132033;
-  --navy-lt:  #1E3350;
-  --gold:     #C9A84C;
-  --gold-lt:  #E2C47A;
-  --gold-dim: #8A7040;
-  --cream:    #F7F2E8;
-  --cream-dk: #EDE6D4;
-  --smoke:    #C8BEAA;
-  --warm:     #7A6A52;
-  --rust:     #B85C38;
-  --sage:     #3D5A4C;
-  --white:    #FFFFFF;
-  --r: 0.6rem;
+  --navy:      #0B1927;
+  --navy-mid:  #132033;
+  --navy-lt:   #1C304A;
+  --navy-pale: #243B56;
+  --gold:      #C6A24A;
+  --gold-lt:   #DFC080;
+  --gold-dim:  #7E6530;
+  --gold-faint:rgba(198,162,74,0.12);
+  --cream:     #F6F1E7;
+  --cream-dk:  #EDE5D0;
+  --smoke:     #C4BAA6;
+  --warm:      #7A6A52;
+  --white:     #FFFFFF;
+  --line:      rgba(198,162,74,0.2);
+  --ease:      cubic-bezier(0.25,0.8,0.25,1);
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+/* ═══════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px;font-size:16px}
+body{background:var(--navy);color:var(--cream);font-family:'Noto Serif JP',serif;overflow-x:hidden;line-height:1.85}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--navy)}
+::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:2px}
 
-body {
-  background: var(--cream);
-  color: var(--navy);
-  font-family: 'Noto Serif JP', serif;
-  overflow-x: hidden;
-  line-height: 1.85;
+/* ═══════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════ */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:400;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 52px;height:68px;
+  background:rgba(11,25,39,0.94);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+  transition:background 0.3s;
 }
+.nav-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1rem;font-weight:400;letter-spacing:0.28em;
+  color:var(--cream);text-transform:uppercase;
+}
+.nav-logo em{color:var(--gold);font-style:normal}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{
+  font-size:0.7rem;letter-spacing:0.14em;
+  color:var(--smoke);transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta-wrap{display:flex;gap:10px}
+.btn-nav-ghost{
+  font-size:0.68rem;letter-spacing:0.18em;
+  border:1px solid var(--gold-dim);color:var(--gold);
+  padding:9px 20px;transition:all 0.2s;
+}
+.btn-nav-ghost:hover{background:var(--gold);color:var(--navy)}
+.btn-nav-solid{
+  font-size:0.68rem;letter-spacing:0.18em;
+  background:var(--gold);color:var(--navy);
+  padding:9px 22px;font-weight:700;transition:all 0.2s;
+}
+.btn-nav-solid:hover{background:var(--gold-lt)}
 
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--cream-dk); }
-::-webkit-scrollbar-thumb { background: var(--gold-dim); }
-
-/* ── NAV ── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 18px 48px;
-  background: rgba(247,242,232,0.92);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(201,168,76,0.2);
+/* hamburger */
+.ham{display:none;flex-direction:column;gap:5px;padding:6px}
+.ham span{display:block;width:22px;height:1.5px;background:var(--cream);transition:0.2s}
+.mob-nav{
+  display:none;position:fixed;inset:0;z-index:390;
+  background:var(--navy);flex-direction:column;
+  justify-content:center;align-items:center;gap:36px;
 }
-.nav-logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1rem; font-weight: 400; letter-spacing: 0.3em;
-  color: var(--navy); text-decoration: none; text-transform: uppercase;
+.mob-nav.open{display:flex}
+.mob-nav a{
+  font-family:'Shippori Mincho B1',serif;
+  font-size:1.25rem;letter-spacing:0.15em;color:var(--cream);
 }
-.nav-logo em { color: var(--gold); font-style: normal; }
-.nav-links { display: flex; gap: 32px; align-items: center; }
-.nav-links a {
-  font-size: 0.72rem; letter-spacing: 0.15em; color: var(--warm);
-  text-decoration: none; transition: color 0.2s;
-}
-.nav-links a:hover { color: var(--gold); }
-.nav-cta {
-  font-size: 0.72rem; letter-spacing: 0.2em;
-  background: var(--navy); color: var(--gold) !important;
-  padding: 10px 24px; border: none;
-  transition: all 0.3s !important;
-}
-.nav-cta:hover { background: var(--gold) !important; color: var(--navy) !important; }
-
-/* ── HERO ── */
-.hero {
-  min-height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-left {
-  background: var(--navy);
-  display: flex; flex-direction: column; justify-content: center;
-  padding: 120px 72px 72px 72px;
-  position: relative;
-  overflow: hidden;
-}
-.hero-left::before {
-  content: '';
-  position: absolute;
-  width: 500px; height: 500px; border-radius: 50%;
-  border: 1px solid rgba(201,168,76,0.1);
-  top: -150px; right: -200px;
-}
-.hero-left::after {
-  content: '';
-  position: absolute;
-  width: 280px; height: 280px; border-radius: 50%;
-  border: 1px solid rgba(201,168,76,0.08);
-  bottom: 60px; left: -80px;
+.mob-nav a:hover{color:var(--gold)}
+.mob-close{
+  position:absolute;top:24px;right:28px;
+  font-size:1.6rem;color:var(--smoke);
 }
 
-.hero-eyebrow {
-  font-family: 'Noto Serif JP', serif;
-  font-size: 0.7rem; letter-spacing: 0.18em;
-  color: var(--gold);
-  margin-bottom: 24px;
-  display: flex; align-items: center; gap: 16px;
-  animation: fadeUp 0.8s ease both;
-}
-.hero-eyebrow::before {
-  content: ''; display: block;
-  width: 36px; height: 1px; background: var(--gold-dim); flex-shrink: 0;
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+.hero{
+  min-height:100vh;position:relative;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  overflow:hidden;
 }
 
-.hero-title {
-  font-family: 'Shippori Mincho B1', serif;
-  font-size: clamp(2rem, 3.6vw, 3rem);
-  font-weight: 800;
-  line-height: 1.35;
-  color: var(--cream);
-  margin-bottom: 24px;
-  animation: fadeUp 0.8s 0.1s ease both;
+/* animated grid bg */
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(198,162,74,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(198,162,74,0.04) 1px,transparent 1px);
+  background-size:80px 80px;
+  animation:gridDrift 30s linear infinite;
 }
-.hero-title em {
-  display: block;
-  font-style: normal;
-  color: var(--gold);
-  font-size: clamp(1rem, 1.7vw, 1.35rem);
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  margin-bottom: 14px;
-  line-height: 1.7;
-  border-left: 2px solid var(--gold-dim);
-  padding-left: 14px;
+@keyframes gridDrift{
+  0%{background-position:0 0}
+  100%{background-position:80px 80px}
 }
 
-.hero-subtitle {
-  font-size: 0.85rem; color: var(--smoke); line-height: 2.1;
-  max-width: 460px;
-  animation: fadeUp 0.8s 0.2s ease both;
-}
-.hero-subtitle strong { color: var(--gold-lt); }
-.hero-subtitle p { margin-bottom: 14px; }
-.hero-subtitle p:last-child { margin-bottom: 0; }
-
-.hero-btns {
-  display: flex; gap: 16px; margin-top: 48px; flex-wrap: wrap;
-  animation: fadeUp 0.8s 0.3s ease both;
-}
-.btn-primary {
-  display: inline-block;
-  background: var(--gold); color: var(--navy);
-  font-size: 0.8rem; letter-spacing: 0.2em;
-  padding: 16px 36px; text-decoration: none;
-  font-weight: 700; font-family: 'Noto Serif JP', serif;
-  transition: all 0.3s;
-  position: relative; overflow: hidden;
-}
-.btn-primary::after { content: '→'; position: absolute; right: -20px; transition: right 0.3s; }
-.btn-primary:hover { padding-right: 52px; background: var(--gold-lt); }
-.btn-primary:hover::after { right: 16px; }
-.btn-ghost {
-  display: inline-block;
-  border: 1px solid rgba(201,168,76,0.4); color: var(--smoke);
-  font-size: 0.8rem; letter-spacing: 0.15em;
-  padding: 16px 32px; text-decoration: none;
-  transition: all 0.3s;
-}
-.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
-
-.hero-right {
-  background: var(--cream-dk);
-  display: flex; flex-direction: column; justify-content: center;
-  align-items: center; padding: 120px 60px 80px;
-  position: relative;
+/* radial glow */
+.hero-glow{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 55% 65% at 70% 45%,rgba(198,162,74,0.07) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 50% at 20% 80%,rgba(28,48,74,0.8) 0%,transparent 50%);
 }
 
-/* Cost comparison card */
-.cost-card {
-  background: var(--white);
-  border: 1px solid rgba(13,27,42,0.1);
-  padding: 40px;
-  box-shadow: 0 20px 60px rgba(13,27,42,0.08);
-  width: 100%; max-width: 380px;
-  animation: fadeUp 0.8s 0.3s ease both;
-}
-.cost-card-label {
-  font-size: 0.68rem; letter-spacing: 0.2em; color: var(--warm);
-  margin-bottom: 20px;
-  display: flex; align-items: center; gap: 10px;
-}
-.cost-card-label::after { content: ''; flex: 1; height: 1px; background: var(--cream-dk); }
-.cost-row {
-  display: flex; justify-content: space-between; align-items: baseline;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--cream-dk);
-}
-.cost-row:last-of-type { border-bottom: none; }
-.cost-item-name { font-size: 0.78rem; color: var(--warm); }
-.cost-before {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.3rem; font-weight: 300;
-  color: var(--rust);
-  text-decoration: line-through;
-  opacity: 0.7;
-}
-.cost-after {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.6rem; font-weight: 400;
-  color: var(--sage);
-}
-.cost-unit { font-size: 0.65rem; color: var(--smoke); margin-left: 4px; }
-.cost-total-row {
-  margin-top: 20px;
-  padding: 16px 20px;
-  background: rgba(61,90,76,0.06);
-  border: 1px solid rgba(61,90,76,0.15);
-  display: flex; justify-content: space-between; align-items: center;
-}
-.cost-total-label { font-size: 0.75rem; color: var(--sage); font-weight: 700; }
-.cost-total-val {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2rem; color: var(--sage); font-weight: 400;
-}
-.cost-note {
-  font-size: 0.65rem; color: var(--smoke); margin-top: 12px; line-height: 1.8;
+/* large decorative text */
+.hero-deco{
+  position:absolute;
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(8rem,18vw,20rem);
+  font-weight:300;letter-spacing:-0.02em;
+  color:rgba(198,162,74,0.04);
+  top:50%;right:-2%;transform:translateY(-50%);
+  line-height:1;pointer-events:none;white-space:nowrap;
+  animation:fadeIn 2s ease both;
 }
 
-/* ── SECTION BASE ── */
-section { padding: 100px 0; }
-.container { max-width: 1100px; margin: 0 auto; padding: 0 48px; }
-
-.sec-label {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.72rem; letter-spacing: 0.35em; color: var(--gold-dim);
-  display: flex; align-items: center; gap: 14px;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-}
-.sec-label::after { content: ''; flex: 1; max-width: 60px; height: 1px; background: var(--gold-dim); }
-
-.sec-title {
-  font-family: 'Shippori Mincho B1', serif;
-  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
-  font-weight: 800; line-height: 1.4;
-  margin-bottom: 20px;
-}
-.sec-lead {
-  font-size: 0.88rem; color: var(--warm); line-height: 2;
-  max-width: 640px; margin-bottom: 56px;
+.hero-inner{
+  position:relative;z-index:2;
+  max-width:1200px;margin:0 auto;width:100%;
+  padding:0 52px 90px;
+  display:grid;grid-template-columns:1fr 420px;
+  gap:60px;align-items:end;
 }
 
-/* ── PAIN SECTION ── */
-.pain-section { background: var(--navy-mid); }
-.pain-section .sec-title { color: var(--cream); }
-.pain-section .sec-lead { color: var(--smoke); }
-.pain-section .sec-label { color: var(--gold-dim); }
+.hero-left{}
+.hero-label{
+  font-family:'Cormorant Garamond',serif;
+  font-size:0.68rem;letter-spacing:0.44em;
+  color:var(--gold);text-transform:uppercase;
+  margin-bottom:28px;
+  display:flex;align-items:center;gap:16px;
+  animation:fadeUp 0.8s ease both;
+}
+.hero-label::before{content:'';display:block;width:36px;height:1px;background:var(--gold-dim)}
 
-.pain-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-  margin-top: 0;
+.hero-h1{
+  font-family:'Shippori Mincho B1',serif;
+  font-size:clamp(2.8rem,5vw,4.4rem);
+  font-weight:800;line-height:1.2;color:var(--white);
+  margin-bottom:36px;
+  animation:fadeUp 0.8s 0.08s ease both;
 }
-.pain-card {
-  background: rgba(255,255,255,0.04);
-  padding: 40px 32px;
-  border-top: 2px solid rgba(201,168,76,0.2);
-  position: relative;
+.hero-h1 .accent{
+  display:block;color:var(--gold);
+  font-size:clamp(1.4rem,2.6vw,2rem);
+  font-weight:300;letter-spacing:0.1em;
+  margin-bottom:10px;
 }
-.pain-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 3.5rem; font-weight: 300;
-  color: rgba(201,168,76,0.15);
-  position: absolute; top: 20px; right: 24px;
-  line-height: 1;
-}
-.pain-icon {
-  width: 44px; height: 44px; margin-bottom: 20px;
-  background: rgba(201,168,76,0.1);
-  border: 1px solid rgba(201,168,76,0.2);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.1rem;
-}
-.pain-title {
-  font-family: 'Shippori Mincho B1', serif;
-  font-size: 1.05rem; font-weight: 700;
-  color: var(--cream);
-  margin-bottom: 12px;
-  line-height: 1.5;
-}
-.pain-body {
-  font-size: 0.8rem; color: var(--smoke); line-height: 2;
-}
-.pain-figure {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.4rem; color: var(--rust);
-  margin-top: 14px; display: block;
+.hero-h1 .sub-line{
+  display:block;
+  font-size:clamp(1.4rem,2.3vw,1.8rem);
+  font-weight:400;color:rgba(246,241,231,0.6);
+  margin-top:12px;
 }
 
-/* ── SOLUTION SECTION ── */
-.solution-inner {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center;
+.hero-btns{
+  display:flex;gap:14px;flex-wrap:wrap;
+  animation:fadeUp 0.8s 0.18s ease both;
 }
-.solution-visual {
-  position: relative;
+.btn-hero-p{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--gold);color:var(--navy);
+  font-size:0.8rem;letter-spacing:0.2em;font-weight:700;
+  padding:16px 34px;transition:all 0.25s;
 }
-.solution-diagram {
-  width: 100%;
+.btn-hero-p:hover{background:var(--gold-lt);transform:translateY(-2px)}
+.btn-hero-s{
+  display:inline-flex;align-items:center;gap:10px;
+  border:1px solid var(--gold-dim);color:var(--smoke);
+  font-size:0.78rem;letter-spacing:0.16em;
+  padding:16px 28px;transition:all 0.25s;
 }
-.solution-text .sec-lead { margin-bottom: 32px; }
-.solution-list { list-style: none; }
-.solution-list li {
-  display: flex; gap: 16px; align-items: flex-start;
-  padding: 16px 0;
-  border-bottom: 1px solid rgba(201,168,76,0.12);
-  font-size: 0.85rem; line-height: 1.9;
+.btn-hero-s:hover{border-color:var(--gold);color:var(--gold)}
+
+/* Hero right — stat card */
+.hero-stat-card{
+  background:rgba(19,32,51,0.85);
+  border:1px solid var(--line);
+  backdrop-filter:blur(12px);
+  padding:36px 32px;
+  animation:fadeUp 0.8s 0.28s ease both;
 }
-.solution-list li:last-child { border-bottom: none; }
-.solution-list .check {
-  width: 22px; height: 22px; border-radius: 50%;
-  background: rgba(61,90,76,0.1);
-  border: 1px solid var(--sage);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; margin-top: 4px;
-  font-size: 0.65rem; color: var(--sage);
+.hero-stat-card::before{
+  content:'';display:block;
+  height:2px;
+  background:linear-gradient(90deg,var(--gold-dim),var(--gold),var(--gold-dim));
+  margin-bottom:28px;
+}
+.stat-row{display:flex;align-items:baseline;gap:8px;margin-bottom:20px}
+.stat-n{
+  font-family:'Cormorant Garamond',serif;
+  font-size:3.2rem;font-weight:300;color:var(--gold);line-height:1;
+}
+.stat-n small{font-size:1.3rem}
+.stat-l{font-size:0.72rem;color:var(--smoke);letter-spacing:0.1em;line-height:1.7}
+.stat-div{height:1px;background:rgba(255,255,255,0.06);margin:20px 0}
+.stat-phrase{
+  font-family:'Shippori Mincho B1',serif;
+  font-size:0.82rem;color:var(--cream);line-height:1.9;
+}
+.stat-phrase span{color:var(--gold)}
+
+/* scroll hint */
+.hero-scroll{
+  position:absolute;bottom:32px;left:52px;z-index:2;
+  display:flex;align-items:center;gap:12px;
+  font-size:0.6rem;letter-spacing:0.3em;color:var(--gold-dim);
+  text-transform:uppercase;font-family:'Cormorant Garamond',serif;
+  animation:fadeUp 1s 0.5s ease both;
+}
+.hero-scroll::after{
+  content:'';display:block;width:40px;height:1px;
+  background:linear-gradient(90deg,var(--gold-dim),transparent);
+  animation:scrollLine 2s ease-in-out infinite;
+}
+@keyframes scrollLine{
+  0%,100%{width:40px;opacity:1}
+  50%{width:70px;opacity:0.5}
 }
 
-/* ── FLOW SECTION ── */
-.flow-section { background: var(--navy-mid); }
-.flow-section .sec-title { color: var(--cream); }
-.flow-section .sec-lead { color: var(--smoke); }
-.flow-section .sec-label { color: var(--gold-dim); }
-
-.flow-steps {
-  display: flex; gap: 0; align-items: stretch;
-  margin-top: 56px;
+/* ═══════════════════════════════════════════
+   STRIP
+═══════════════════════════════════════════ */
+.strip{
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:24px 0;overflow:hidden;position:relative;
 }
-.flow-step {
-  flex: 1;
-  background: rgba(255,255,255,0.04);
-  padding: 36px 28px;
-  position: relative;
-  border-top: 1px solid rgba(201,168,76,0.15);
+.strip-track{
+  display:flex;gap:0;
+  animation:marquee 24s linear infinite;
+  white-space:nowrap;
 }
-.flow-step:not(:last-child)::after {
-  content: '→';
-  position: absolute; right: -14px; top: 50%;
-  transform: translateY(-50%);
-  font-size: 1rem; color: var(--gold-dim);
-  z-index: 1; background: var(--navy-mid);
-  padding: 4px;
+.strip-item{
+  display:inline-flex;align-items:center;gap:28px;
+  padding:0 40px;
+  font-family:'Shippori Mincho B1',serif;
+  font-size:0.8rem;letter-spacing:0.24em;color:var(--smoke);
+  white-space:nowrap;
 }
-.flow-step-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.75rem; letter-spacing: 0.3em;
-  color: var(--gold-dim); margin-bottom: 14px;
+.strip-item::after{
+  content:'◆';font-size:0.4rem;color:var(--gold-dim);flex-shrink:0;
 }
-.flow-step-title {
-  font-family: 'Shippori Mincho B1', serif;
-  font-size: 0.95rem; font-weight: 700;
-  color: var(--cream); margin-bottom: 10px;
-  line-height: 1.5;
-}
-.flow-step-body { font-size: 0.75rem; color: var(--smoke); line-height: 1.9; }
-.flow-step.highlight { background: rgba(201,168,76,0.08); border-top-color: var(--gold); }
-.flow-step.highlight .flow-step-title { color: var(--gold-lt); }
-
-/* ── FREE SECTION ── */
-.free-section { background: var(--cream-dk); }
-.free-inner {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center;
-}
-.free-badge {
-  text-align: center; padding: 60px 48px;
-  border: 1px solid rgba(13,27,42,0.08);
-  background: var(--white);
-  box-shadow: 0 20px 60px rgba(13,27,42,0.06);
-}
-.free-badge-label {
-  font-size: 0.7rem; letter-spacing: 0.3em; color: var(--warm); margin-bottom: 20px;
-}
-.free-badge-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 6rem; font-weight: 300; color: var(--sage);
-  line-height: 1;
-}
-.free-badge-unit { font-size: 0.9rem; color: var(--sage); margin-top: 4px; letter-spacing: 0.2em; }
-.free-badge-desc {
-  margin-top: 24px; font-size: 0.78rem; color: var(--warm); line-height: 2;
-}
-.free-badge-rule {
-  margin-top: 20px; padding: 14px 20px;
-  background: rgba(61,90,76,0.06);
-  border: 1px solid rgba(61,90,76,0.12);
-  font-size: 0.73rem; color: var(--sage); line-height: 1.9;
-}
-.free-text .sec-lead { margin-bottom: 32px; }
-
-/* ── FIGURE STYLES ── */
-.fig-frame { margin-top: 48px; border: 1px solid var(--line,rgba(255,255,255,0.1)); overflow: hidden; }
-.fig-frame svg { width: 100%; height: auto; display: block; }
-.fig-caption { font-size: 0.68rem; color: var(--smoke); padding: 12px 24px; letter-spacing: 0.08em; border-top: 1px solid rgba(255,255,255,0.08); background: rgba(0,0,0,0.15); }
-.fig-frame.fig-light { border-color: rgba(13,27,42,0.1); }
-.fig-frame.fig-light .fig-caption { background: var(--cream-dk); color: var(--warm); border-color: rgba(13,27,42,0.06); }
-
-/* ── VOICE SECTION ── */
-.voice-grid {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
-}
-.voice-card {
-  background: var(--white);
-  border: 1px solid rgba(13,27,42,0.06);
-  padding: 36px;
-  position: relative;
-}
-.voice-card::before {
-  content: '\201C';
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 4rem; color: rgba(201,168,76,0.2);
-  position: absolute; top: 16px; left: 20px;
-  line-height: 1;
-}
-.voice-quote {
-  font-size: 0.85rem; line-height: 2; color: var(--navy);
-  margin-bottom: 20px; padding-top: 16px;
-}
-.voice-quote strong { color: var(--sage); }
-.voice-meta {
-  font-size: 0.7rem; color: var(--smoke); letter-spacing: 0.1em;
-  display: flex; gap: 16px; align-items: center;
-}
-.voice-meta::before { content: '—'; }
-.voice-tag {
-  display: inline-block;
-  font-size: 0.62rem; letter-spacing: 0.12em; color: var(--warm);
-  border: 1px solid rgba(201,168,76,0.3); padding: 3px 10px;
-  margin-right: 8px;
+@keyframes marquee{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
 }
 
-/* ── CTA SECTION ── */
-.cta-section {
-  background: var(--navy);
-  text-align: center; padding: 120px 48px;
+/* ═══════════════════════════════════════════
+   SECTION UTILITY
+═══════════════════════════════════════════ */
+.sec{max-width:1140px;margin:0 auto;padding:100px 52px}
+.sec-label{
+  font-family:'Cormorant Garamond',serif;
+  font-size:0.65rem;letter-spacing:0.44em;
+  color:var(--gold);text-transform:uppercase;
+  margin-bottom:14px;display:flex;align-items:center;gap:14px;
 }
-.cta-eyebrow {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.75rem; letter-spacing: 0.4em; color: var(--gold-dim);
-  margin-bottom: 24px; text-transform: uppercase;
+.sec-label::after{content:'';flex:1;max-width:48px;height:1px;background:var(--gold-dim)}
+.sec-h2{
+  font-family:'Shippori Mincho B1',serif;
+  font-size:clamp(1.7rem,2.8vw,2.6rem);
+  font-weight:700;line-height:1.38;margin-bottom:18px;
 }
-.cta-title {
-  font-family: 'Shippori Mincho B1', serif;
-  font-size: clamp(1.6rem, 3vw, 2.6rem);
-  font-weight: 800; color: var(--cream);
-  line-height: 1.5; margin-bottom: 20px;
+.sec-lead{font-size:0.9rem;line-height:2.15;opacity:0.75;max-width:540px}
+
+/* light section */
+.sec-light{background:var(--cream);color:var(--navy)}
+.sec-light .sec-label{color:var(--gold-dim)}
+.sec-light .sec-label::after{background:var(--gold-dim)}
+.sec-light .sec-lead{opacity:0.7;color:var(--warm)}
+
+/* mid section */
+.sec-mid{background:var(--navy-mid)}
+
+/* ═══════════════════════════════════════════
+   PROBLEM
+═══════════════════════════════════════════ */
+#problem{}
+.problem-layout{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:2px;margin-top:56px;
+  background:rgba(255,255,255,0.04);
 }
-.cta-sub {
-  font-size: 0.85rem; color: var(--smoke); max-width: 560px;
-  margin: 0 auto 48px; line-height: 2;
+.problem-cell{
+  background:var(--navy-mid);
+  padding:44px 40px;
+  border:1px solid rgba(255,255,255,0.04);
+  transition:background 0.3s;
+  position:relative;overflow:hidden;
 }
-.cta-btns { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
-.cta-btn-main {
-  display: inline-block;
-  background: var(--gold); color: var(--navy);
-  font-size: 0.85rem; letter-spacing: 0.2em; font-weight: 700;
-  font-family: 'Noto Serif JP', serif;
-  padding: 20px 56px; text-decoration: none;
-  transition: all 0.3s;
+.problem-cell::before{
+  content:'';position:absolute;
+  top:0;left:0;right:0;height:2px;
+  background:transparent;transition:background 0.3s;
 }
-.cta-btn-main:hover { background: var(--gold-lt); }
-.cta-free-note {
-  margin-top: 20px;
-  font-size: 0.72rem; color: var(--smoke); letter-spacing: 0.12em;
+.problem-cell:hover{background:var(--navy-lt)}
+.problem-cell:hover::before{background:var(--gold)}
+.prob-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:3.5rem;font-weight:300;
+  color:rgba(198,162,74,0.18);line-height:1;
+  display:block;margin-bottom:14px;
+}
+.prob-title{
+  font-family:'Shippori Mincho B1',serif;
+  font-size:1rem;font-weight:700;color:var(--cream);margin-bottom:10px;
+}
+.prob-desc{font-size:0.82rem;color:var(--smoke);line-height:2}
+
+.problem-quote{
+  margin-top:2px;
+  background:var(--gold-faint);
+  border:1px solid var(--line);
+  padding:44px 52px;
+  display:flex;align-items:center;gap:40px;
+}
+.problem-quote-bar{
+  flex-shrink:0;width:2px;height:80px;
+  background:linear-gradient(to bottom,var(--gold),var(--gold-dim));
+}
+.problem-quote blockquote{
+  font-family:'Shippori Mincho B1',serif;
+  font-size:1.2rem;font-weight:500;color:var(--cream);line-height:1.8;
+}
+.problem-quote blockquote span{color:var(--gold)}
+
+/* ═══════════════════════════════════════════
+   THREE-PARTY MODEL
+═══════════════════════════════════════════ */
+#model{background:var(--navy-mid)}
+.model-diagram{
+  margin-top:60px;
+  display:grid;grid-template-columns:1fr 80px 1fr 80px 1fr;
+  gap:0;align-items:center;
+}
+.model-node{
+  background:var(--navy-lt);
+  border:1px solid var(--line);
+  padding:32px 24px;text-align:center;
+  transition:border-color 0.3s,transform 0.3s;
+  position:relative;
+}
+.model-node:hover{border-color:var(--gold);transform:translateY(-4px)}
+.model-node.center-node{
+  background:var(--navy);
+  border-color:var(--gold-dim);
+  padding:36px 24px;
+}
+.model-node.center-node::before{
+  content:'';position:absolute;inset:-1px;
+  border:1px solid var(--gold);
+  animation:pulseBorder 3s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes pulseBorder{
+  0%,100%{opacity:0.5}50%{opacity:1}
+}
+.node-icon{font-size:2rem;display:block;margin-bottom:14px}
+.node-title{
+  font-family:'Shippori Mincho B1',serif;
+  font-size:1rem;font-weight:700;color:var(--cream);margin-bottom:8px;
+}
+.node-desc{font-size:0.72rem;color:var(--smoke);line-height:1.9}
+.node-benefit{
+  margin-top:14px;padding:8px 12px;
+  background:var(--gold-faint);
+  font-size:0.68rem;color:var(--gold);letter-spacing:0.1em;
+  border:1px solid var(--line);
 }
 
-/* ── FOOTER ── */
-footer {
-  background: var(--navy);
-  border-top: 1px solid rgba(201,168,76,0.15);
-  padding: 48px;
-  display: flex; justify-content: space-between; align-items: center;
+.model-arrow{
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;
+  color:var(--gold-dim);font-size:1.2rem;
 }
-.footer-logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 0.9rem; letter-spacing: 0.3em; color: var(--gold-dim);
-  text-decoration: none;
-}
-.footer-copy { font-size: 0.65rem; color: rgba(200,190,170,0.4); letter-spacing: 0.1em; }
-.footer-links { display: flex; gap: 24px; }
-.footer-links a { font-size: 0.65rem; color: var(--smoke); text-decoration: none; letter-spacing: 0.1em; }
-.footer-links a:hover { color: var(--gold); }
-
-/* ── REVEAL ── */
-.reveal {
-  opacity: 0; transform: translateY(24px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.reveal.visible { opacity: 1; transform: none; }
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: none; }
-}
-@keyframes fadeIn {
-  from { opacity: 0; } to { opacity: 1; }
+.model-arrow-label{
+  font-size:0.6rem;letter-spacing:0.15em;color:var(--gold-dim);
+  text-align:center;font-family:'Cormorant Garamond',serif;
 }
 
-/* ── RESPONSIVE ── */
-@media (max-width: 900px) {
-  .hero { grid-template-columns: 1fr; }
-  .hero-right { display: none; }
-  .hero-left { padding: 120px 32px 72px; min-height: 100vh; }
-  .solution-inner, .free-inner { grid-template-columns: 1fr; gap: 48px; }
-  .pain-grid { grid-template-columns: 1fr; }
-  .flow-steps { flex-direction: column; }
-  .flow-step:not(:last-child)::after { display: none; }
-  .voice-grid { grid-template-columns: 1fr; }
-  nav { padding: 16px 24px; }
-  .nav-links { display: none; }
-  .container { padding: 0 24px; }
-  footer { flex-direction: column; gap: 20px; text-align: center; }
-  .hero-btns { flex-direction: column; gap: 12px; }
-  .cta-btns { flex-direction: column; align-items: center; }
+/* municipality band */
+.muni-band{
+  margin-top:24px;
+  background:var(--navy);
+  border:1px solid var(--line);
+  padding:24px 40px;
+  display:flex;align-items:center;gap:24px;
+}
+.muni-band-icon{font-size:1.6rem;flex-shrink:0}
+.muni-band-label{
+  font-size:0.62rem;letter-spacing:0.3em;color:var(--gold);
+  text-transform:uppercase;font-family:'Cormorant Garamond',serif;
+}
+.muni-band-title{
+  font-family:'Shippori Mincho B1',serif;
+  font-size:0.95rem;font-weight:700;color:var(--cream);margin-bottom:2px;
+}
+.muni-band-desc{font-size:0.78rem;color:var(--smoke);line-height:1.85}
+.muni-badge{
+  margin-left:auto;flex-shrink:0;
+  background:var(--gold-faint);border:1px solid var(--line);
+  padding:10px 20px;text-align:center;
+}
+.muni-badge-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.5rem;color:var(--gold);font-weight:300;display:block;line-height:1;
+}
+.muni-badge-l{font-size:0.62rem;color:var(--smoke);letter-spacing:0.1em;display:block;margin-top:4px}
+
+/* ═══════════════════════════════════════════
+   SERVICE FLOW
+═══════════════════════════════════════════ */
+#service{background:var(--cream);color:var(--navy)}
+.flow-grid{
+  margin-top:60px;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:2px;background:var(--cream-dk);
+}
+.flow-cell{
+  background:var(--white);padding:36px 28px;
+  position:relative;overflow:hidden;
+  transition:background 0.25s;
+}
+.flow-cell:hover{background:var(--cream)}
+.flow-cell-phase{
+  font-size:0.58rem;letter-spacing:0.3em;color:var(--gold-dim);
+  text-transform:uppercase;font-family:'Cormorant Garamond',serif;
+  margin-bottom:10px;
+}
+.flow-cell-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:3rem;font-weight:300;color:rgba(13,27,42,0.08);
+  line-height:1;display:block;
+  position:absolute;bottom:20px;right:20px;
+}
+.flow-cell-title{
+  font-family:'Shippori Mincho B1',serif;
+  font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:10px;
+}
+.flow-cell-desc{font-size:0.78rem;color:var(--warm);line-height:1.95}
+.flow-cell-tag{
+  display:inline-block;margin-top:14px;
+  font-size:0.6rem;letter-spacing:0.18em;color:var(--gold-dim);
+  border:1px solid rgba(198,162,74,0.35);padding:3px 10px;
+}
+
+.flow-bottom{
+  grid-column:1 / -1;
+  margin-top:2px;background:var(--navy);color:var(--cream);
+  padding:36px 40px;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:40px;
+}
+.flow-bottom-item .flow-cell-phase{color:var(--gold-dim)}
+.flow-bottom-item .flow-cell-title{color:var(--cream)}
+.flow-bottom-item .flow-cell-desc{color:var(--smoke)}
+
+/* ═══════════════════════════════════════════
+   GATE SYSTEM
+═══════════════════════════════════════════ */
+#gate{}
+.gate-layout{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:72px;align-items:start;margin-top:60px;
+}
+.gate-axes{display:flex;flex-direction:column;gap:2px}
+.gate-axis{
+  display:grid;grid-template-columns:48px 1fr;
+  gap:20px;align-items:center;
+  padding:20px 24px;
+  background:var(--navy-mid);
+  border:1px solid rgba(255,255,255,0.04);
+  transition:all 0.25s;
+}
+.gate-axis:hover{
+  background:var(--navy-lt);border-color:var(--line);
+  transform:translateX(4px);
+}
+.gate-axis-letter{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.6rem;font-weight:300;color:var(--gold-dim);
+  text-align:center;
+}
+.gate-axis-title{
+  font-family:'Shippori Mincho B1',serif;
+  font-size:0.9rem;font-weight:700;color:var(--cream);margin-bottom:3px;
+}
+.gate-axis-desc{font-size:0.72rem;color:var(--smoke);line-height:1.8}
+
+.gate-visual{
+  position:sticky;top:90px;
+}
+.gate-card{
+  background:var(--navy-mid);
+  border:1px solid var(--line);padding:40px;
+  position:relative;overflow:hidden;
+}
+.gate-card::before{
+  content:'GATE';
+  font-family:'Cormorant Garamond',serif;
+  font-size:7rem;letter-spacing:0.2em;
+  color:rgba(198,162,74,0.05);
+  position:absolute;bottom:-10px;right:-10px;
+  line-height:1;pointer-events:none;
+}
+.gate-card-label{
+  font-size:0.62rem;letter-spacing:0.4em;color:var(--gold);
+  text-transform:uppercase;font-family:'Cormorant Garamond',serif;
+  margin-bottom:18px;
+}
+.gate-card-h{
+  font-family:'Shippori Mincho B1',serif;
+  font-size:1.35rem;font-weight:700;color:var(--cream);
+  line-height:1.5;margin-bottom:14px;
+}
+.gate-card-body{font-size:0.82rem;color:var(--smoke);line-height:2;margin-bottom:28px}
+.gate-score-mock{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
+  margin-bottom:28px;
+}
+.gsm-item{}
+.gsm-label{font-size:0.65rem;color:var(--smoke);margin-bottom:5px;letter-spacing:0.08em}
+.gsm-track{height:5px;background:rgba(255,255,255,0.08);border-radius:2px;overflow:hidden}
+.gsm-fill{height:100%;border-radius:2px;background:var(--gold)}
+.gate-audiences{display:flex;flex-direction:column;gap:10px}
+.gate-audience{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 18px;
+  border:1px solid rgba(255,255,255,0.06);
+  font-size:0.8rem;color:var(--smoke);
+  transition:border-color 0.2s;
+}
+.gate-audience:hover{border-color:var(--gold-dim)}
+.gate-audience-icon{font-size:1.1rem;flex-shrink:0}
+
+/* ═══════════════════════════════════════════
+   PARTNER SYSTEM
+═══════════════════════════════════════════ */
+#partner{background:var(--cream);color:var(--navy)}
+.partner-layout{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:72px;align-items:center;margin-top:60px;
+}
+.partner-text p{font-size:0.88rem;color:var(--warm);line-height:2.2;margin-bottom:18px}
+.partner-cards{display:flex;flex-direction:column;gap:16px}
+.partner-card{
+  background:var(--white);
+  border:1px solid rgba(13,27,42,0.08);
+  padding:28px 32px;
+  display:grid;grid-template-columns:50px 1fr;gap:20px;
+  align-items:flex-start;
+  transition:all 0.25s;box-shadow:0 2px 16px rgba(13,27,42,0.04);
+}
+.partner-card:hover{
+  border-color:var(--gold-dim);transform:translateY(-2px);
+  box-shadow:0 8px 32px rgba(13,27,42,0.08);
+}
+.partner-card-icon{font-size:1.8rem;text-align:center}
+.partner-card-title{
+  font-family:'Shippori Mincho B1',serif;
+  font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:6px;
+}
+.partner-card-desc{font-size:0.78rem;color:var(--warm);line-height:1.9}
+.partner-fee{
+  display:inline-block;margin-top:8px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:0.72rem;color:var(--gold-dim);
+  border-bottom:1px solid rgba(198,162,74,0.3);padding-bottom:2px;
+}
+
+.partner-visual{
+  background:var(--navy);padding:48px 40px;
+  position:relative;overflow:hidden;
+}
+.partner-visual::before{
+  content:'';position:absolute;
+  width:300px;height:300px;border-radius:50%;
+  border:1px solid rgba(198,162,74,0.08);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+}
+.pv-label{
+  font-size:0.62rem;letter-spacing:0.4em;color:var(--gold);
+  text-transform:uppercase;font-family:'Cormorant Garamond',serif;
+  margin-bottom:16px;position:relative;z-index:1;
+}
+.pv-h{
+  font-family:'Shippori Mincho B1',serif;
+  font-size:1.4rem;font-weight:700;color:var(--cream);
+  margin-bottom:10px;line-height:1.5;position:relative;z-index:1;
+}
+.pv-body{
+  font-size:0.8rem;color:var(--smoke);line-height:2;
+  margin-bottom:28px;position:relative;z-index:1;
+}
+.pv-fee-big{
+  font-family:'Cormorant Garamond',serif;
+  font-size:3.2rem;font-weight:300;color:var(--gold);line-height:1;
+  display:block;margin-bottom:4px;position:relative;z-index:1;
+}
+.pv-fee-label{font-size:0.7rem;color:var(--smoke);letter-spacing:0.12em;position:relative;z-index:1}
+.pv-note{font-size:0.65rem;color:var(--gold-dim);margin-top:6px;position:relative;z-index:1}
+
+/* ═══════════════════════════════════════════
+   FOR FOUNDERS BRIDGE
+═══════════════════════════════════════════ */
+#founders{
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.founders-inner{
+  max-width:1140px;margin:0 auto;padding:72px 52px;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:60px;align-items:center;
+}
+.founders-left .sec-label{margin-bottom:14px}
+.founders-left h2{
+  font-family:'Shippori Mincho B1',serif;
+  font-size:clamp(1.5rem,2.5vw,2rem);
+  font-weight:700;line-height:1.4;margin-bottom:14px;
+}
+.founders-left p{font-size:0.85rem;color:var(--smoke);line-height:2.1;margin-bottom:28px}
+.founders-right{
+  background:var(--navy-mid);border:1px solid var(--line);
+  padding:36px;text-align:center;
+}
+.founders-right-icon{font-size:2.5rem;display:block;margin-bottom:16px}
+.founders-right-h{
+  font-family:'Shippori Mincho B1',serif;
+  font-size:1.1rem;font-weight:700;color:var(--cream);margin-bottom:10px;
+}
+.founders-right-body{font-size:0.8rem;color:var(--smoke);line-height:2;margin-bottom:24px}
+.btn-founders{
+  display:inline-block;
+  background:var(--gold);color:var(--navy);
+  font-size:0.78rem;letter-spacing:0.2em;font-weight:700;
+  padding:14px 32px;transition:all 0.25s;
+}
+.btn-founders:hover{background:var(--gold-lt)}
+
+/* ═══════════════════════════════════════════
+   TRUST
+═══════════════════════════════════════════ */
+#trust{background:var(--navy-mid)}
+.trust-nums{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:2px;margin-top:56px;background:rgba(255,255,255,0.03);
+}
+.trust-num-cell{
+  background:var(--navy-mid);padding:44px 28px;text-align:center;
+  border:1px solid rgba(255,255,255,0.04);
+  transition:background 0.25s;
+}
+.trust-num-cell:hover{background:var(--navy-lt)}
+.trust-icon{font-size:1.8rem;display:block;margin-bottom:16px}
+.trust-n{
+  font-family:'Cormorant Garamond',serif;
+  font-size:3rem;font-weight:300;color:var(--gold);
+  line-height:1;display:block;margin-bottom:6px;
+}
+.trust-n small{font-size:1.1rem}
+.trust-l{font-size:0.75rem;color:var(--smoke);line-height:1.75}
+
+.trust-badges{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:2px;margin-top:2px;background:rgba(255,255,255,0.03);
+}
+.trust-badge-cell{
+  background:var(--navy-lt);padding:32px 36px;
+  border:1px solid rgba(255,255,255,0.04);
+  display:flex;gap:20px;align-items:flex-start;
+  transition:background 0.25s;
+}
+.trust-badge-cell:hover{background:var(--navy-pale)}
+.trust-badge-icon{font-size:2rem;flex-shrink:0}
+.trust-badge-title{
+  font-family:'Shippori Mincho B1',serif;
+  font-size:0.9rem;font-weight:700;color:var(--cream);margin-bottom:6px;
+}
+.trust-badge-desc{font-size:0.78rem;color:var(--smoke);line-height:1.9}
+
+/* ═══════════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════════ */
+#contact{background:var(--cream);color:var(--navy)}
+.contact-layout{
+  display:grid;grid-template-columns:1fr 1.5fr;
+  gap:72px;margin-top:56px;align-items:start;
+}
+.contact-info-h{
+  font-family:'Shippori Mincho B1',serif;
+  font-size:1.15rem;font-weight:700;color:var(--navy);
+  margin-bottom:16px;line-height:1.5;
+}
+.contact-info-body{font-size:0.85rem;color:var(--warm);line-height:2.1;margin-bottom:28px}
+.contact-promises{display:flex;flex-direction:column;gap:14px}
+.promise{display:flex;gap:14px;align-items:flex-start}
+.promise-check{color:var(--gold-dim);font-size:1rem;flex-shrink:0;margin-top:2px}
+.promise-text{font-size:0.8rem;color:var(--warm);line-height:1.85}
+.promise-text strong{color:var(--navy)}
+
+/* Form */
+.contact-form{background:var(--white);border:1px solid rgba(13,27,42,0.08);padding:44px 40px}
+.fgroup{margin-bottom:20px}
+.flabel{
+  display:block;font-size:0.7rem;letter-spacing:0.14em;
+  color:var(--navy);margin-bottom:8px;font-weight:700;
+}
+.flabel .req{color:var(--gold-dim);margin-left:5px;font-size:0.62rem}
+.finput,.fselect,.ftextarea{
+  width:100%;padding:12px 15px;
+  border:1.5px solid rgba(13,27,42,0.12);
+  background:var(--cream);color:var(--navy);
+  font-size:0.86rem;font-family:'Noto Serif JP',serif;
+  outline:none;appearance:none;border-radius:0;
+  transition:border-color 0.2s,box-shadow 0.2s;
+}
+.finput:focus,.fselect:focus,.ftextarea:focus{
+  border-color:var(--gold-dim);
+  box-shadow:0 0 0 3px rgba(198,162,74,0.1);
+  background:var(--white);
+}
+.ftextarea{min-height:110px;resize:vertical}
+.fselect{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%237E6530' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 13px center;
+  padding-right:34px;
+}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ferr{font-size:0.68rem;color:#B85C38;margin-top:5px;display:none}
+.finput.err,.fselect.err{border-color:#B85C38}
+
+.fprivacy{font-size:0.7rem;color:var(--warm);line-height:1.85;margin-bottom:20px}
+.btn-submit{
+  width:100%;background:var(--navy);color:var(--gold);
+  font-size:0.82rem;letter-spacing:0.22em;font-weight:700;
+  padding:18px;border:none;cursor:pointer;
+  font-family:'Noto Serif JP',serif;
+  transition:background 0.25s;
+}
+.btn-submit:hover{background:var(--gold);color:var(--navy)}
+.btn-submit:disabled{opacity:0.5;cursor:not-allowed}
+
+.form-success{display:none;text-align:center;padding:48px 32px}
+.form-success.show{display:block}
+.fs-icon{font-size:2.8rem;display:block;margin-bottom:16px}
+.fs-h{
+  font-family:'Shippori Mincho B1',serif;
+  font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:10px;
+}
+.fs-body{font-size:0.82rem;color:var(--warm);line-height:2}
+
+/* ═══════════════════════════════════════════
+   FINAL CTA
+═══════════════════════════════════════════ */
+#final{
+  position:relative;overflow:hidden;
+  background:var(--navy-mid);
+  border-top:1px solid var(--line);
+}
+.final-rings{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+.final-ring{
+  position:absolute;border-radius:50%;
+  border:1px solid rgba(198,162,74,0.07);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+}
+.r1{width:600px;height:600px}
+.r2{width:400px;height:400px;border-color:rgba(198,162,74,0.1)}
+.r3{width:220px;height:220px;border-color:rgba(198,162,74,0.14)}
+
+.final-inner{
+  max-width:680px;margin:0 auto;padding:110px 52px;
+  text-align:center;position:relative;z-index:1;
+}
+.final-sub{
+  font-family:'Cormorant Garamond',serif;
+  font-size:0.7rem;letter-spacing:0.44em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:22px;
+}
+.final-h{
+  font-family:'Shippori Mincho B1',serif;
+  font-size:clamp(2rem,3.8vw,3rem);font-weight:700;
+  color:var(--white);line-height:1.38;margin-bottom:14px;
+}
+.final-h span{color:var(--gold)}
+.final-body{font-size:0.86rem;color:var(--smoke);line-height:2.2;margin-bottom:44px}
+.final-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-fp{
+  display:inline-block;background:var(--gold);color:var(--navy);
+  font-size:0.85rem;letter-spacing:0.2em;font-weight:700;
+  padding:18px 40px;transition:all 0.25s;
+}
+.btn-fp:hover{background:var(--gold-lt);transform:translateY(-2px)}
+.btn-fs{
+  display:inline-block;border:1px solid var(--gold-dim);color:var(--smoke);
+  font-size:0.82rem;letter-spacing:0.15em;padding:18px 32px;transition:all 0.25s;
+}
+.btn-fs:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+footer{
+  background:#060E18;
+  padding:48px 52px 32px;
+}
+.footer-top{
+  display:grid;grid-template-columns:1fr 1fr 1fr;
+  gap:40px;margin-bottom:40px;
+  padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.footer-col-title{
+  font-size:0.64rem;letter-spacing:0.3em;color:var(--gold-dim);
+  text-transform:uppercase;font-family:'Cormorant Garamond',serif;
+  margin-bottom:16px;
+}
+.footer-logo-main{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.05rem;letter-spacing:0.28em;color:var(--smoke);
+  text-transform:uppercase;margin-bottom:10px;display:block;
+}
+.footer-logo-main em{color:var(--gold);font-style:normal}
+.footer-tagline{font-size:0.72rem;color:rgba(196,186,166,0.5);line-height:1.85}
+.footer-links{display:flex;flex-direction:column;gap:10px}
+.footer-links a{
+  font-size:0.72rem;color:rgba(196,186,166,0.55);
+  letter-spacing:0.1em;transition:color 0.2s;
+}
+.footer-links a:hover{color:var(--gold)}
+.footer-contact-item{
+  font-size:0.72rem;color:rgba(196,186,166,0.55);
+  line-height:1.9;
+}
+.footer-contact-item a{color:var(--gold-dim);transition:color 0.2s}
+.footer-contact-item a:hover{color:var(--gold)}
+.footer-bottom{
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;
+}
+.footer-copy{font-size:0.6rem;color:rgba(196,186,166,0.25);letter-spacing:0.1em}
+.footer-sub-links{display:flex;gap:20px}
+.footer-sub-links a{font-size:0.6rem;color:rgba(196,186,166,0.3);letter-spacing:0.1em;transition:color 0.2s}
+.footer-sub-links a:hover{color:var(--gold-dim)}
+
+/* ═══════════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════════ */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes fadeIn{
+  from{opacity:0}to{opacity:1}
+}
+.reveal{
+  opacity:0;transform:translateY(28px);
+  transition:opacity 0.7s var(--ease),transform 0.7s var(--ease);
+}
+.reveal.vis{opacity:1;transform:none}
+.d1{transition-delay:0.1s}.d2{transition-delay:0.2s}
+.d3{transition-delay:0.3s}.d4{transition-delay:0.4s}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════
+   FIGURE FRAMES
+═══════════════════════════════════════════ */
+.fig-frame{
+  margin-top:48px;
+  border:1px solid var(--line);
+  overflow:hidden;
+}
+.fig-frame svg{width:100%;height:auto;display:block}
+.fig-caption{
+  font-size:0.68rem;color:var(--smoke);
+  padding:12px 24px;letter-spacing:0.08em;
+  border-top:1px solid var(--line);
+  background:rgba(0,0,0,0.15);
+}
+/* light section variant */
+.fig-frame.fig-light{border-color:rgba(13,27,42,0.1)}
+.fig-frame.fig-light .fig-caption{
+  background:var(--cream-dk);color:var(--warm);
+  border-color:rgba(13,27,42,0.06);
+}
+
+@media(max-width:1024px){
+  #nav{padding:0 28px}
+  .nav-links{display:none}
+  .ham{display:flex}
+  .hero-inner{grid-template-columns:1fr;padding:0 28px 80px}
+  .hero-stat-card{display:none}
+  .sec{padding:80px 28px}
+  .problem-layout{grid-template-columns:1fr}
+  .model-diagram{grid-template-columns:1fr;gap:16px}
+  .model-arrow{display:none}
+  .flow-grid{grid-template-columns:1fr 1fr}
+  .flow-bottom{grid-template-columns:1fr;gap:24px}
+  .gate-layout{grid-template-columns:1fr;gap:40px}
+  .gate-visual{position:static}
+  .partner-layout{grid-template-columns:1fr;gap:40px}
+  .founders-inner{grid-template-columns:1fr;gap:36px}
+  .trust-nums{grid-template-columns:1fr 1fr}
+  .trust-badges{grid-template-columns:1fr}
+  .contact-layout{grid-template-columns:1fr;gap:36px}
+  .frow{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr;gap:28px}
+  .footer-bottom{flex-direction:column;align-items:flex-start}
+  .final-inner{padding:80px 28px}
+  .hero-scroll{left:28px}
+}
+@media(max-width:600px){
+  .flow-grid{grid-template-columns:1fr}
+  .trust-nums{grid-template-columns:1fr}
+  .muni-band{flex-wrap:wrap}
+  .muni-badge{margin-left:0}
+  .problem-quote{flex-direction:column;gap:20px}
+  .hero-h1{font-size:2.4rem}
 }
 </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
-<nav>
-  <a href="index.html" class="nav-logo">Bridge <em>&</em> Cycle</a>
+<!-- ══ NAV ══ -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Bridge<em>Cycle</em></a>
   <div class="nav-links">
-    <a href="index.html">管理会社の方へ</a>
-    <a href="lp.html">創業希望者の方へ</a>
-    <a href="exit.html">閉店をお考えの方へ</a>
-    <a href="#contact" class="nav-cta">無料相談</a>
+    <a href="#problem">課題</a>
+    <a href="#model">仕組み</a>
+    <a href="#service">サービス</a>
+    <a href="#gate">GATE診断</a>
+    <a href="#partner">パートナー</a>
+    <a href="#contact">お問い合わせ</a>
+  </div>
+  <div class="nav-cta-wrap nav-links">
+    <a href="lp.html" class="btn-nav-ghost">創業希望の方へ</a>
+    <a href="#contact" class="btn-nav-solid">資料請求</a>
+  </div>
+  <div class="ham" id="ham" onclick="toggleMob()">
+    <span></span><span></span><span></span>
   </div>
 </nav>
 
-<!-- ── HERO ── -->
-<section class="hero">
-  <div class="hero-left">
-    <div class="hero-eyebrow">閉店をお考えの飲食店・小売店オーナーへ</div>
-    <h1 class="hero-title">
-      <em>原状回復費用、<br>払わなくていいかもしれません。</em>
-      閉める前に、<br>一度だけ話してください。
-    </h1>
-    <div class="hero-subtitle">
-      <p>スケルトン戻し工事には、<strong>100〜300万円以上</strong>かかることがあります。それが不要になる可能性があります。</p>
-      <p>BRIDGE CYCLEは、設備・内装をそのまま活かせる次の開業者を探します。引き継ぎが成立すれば、<strong>原状回復工事が不要</strong>になる場合があります。</p>
-      <p>退店希望者への費用は<strong>一切かかりません</strong>。管理会社・物件オーナー側が負担する仕組みです。</p>
+<!-- mobile nav -->
+<div class="mob-nav" id="mobNav">
+  <button class="mob-close" onclick="toggleMob()">✕</button>
+  <a href="#problem" onclick="toggleMob()">課題</a>
+  <a href="#model" onclick="toggleMob()">仕組み</a>
+  <a href="#service" onclick="toggleMob()">サービス</a>
+  <a href="#gate" onclick="toggleMob()">GATE診断</a>
+  <a href="#partner" onclick="toggleMob()">パートナー</a>
+  <a href="#contact" onclick="toggleMob()">お問い合わせ</a>
+  <a href="lp.html" onclick="toggleMob()">創業希望の方へ →</a>
+</div>
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-deco">BC</div>
+
+  <div class="hero-inner">
+    <div class="hero-left">
+      <p class="hero-label">物件管理会社・不動産オーナーの方へ</p>
+      <h1 class="hero-h1">
+        <span class="accent">退去の連絡が来てから動いても、遅い。</span>
+        閉まる前に次のテナントを確保する、<br>新しい空室対策です。
+        <span class="sub-line">管理会社入力型 × GATE選抜 × BC認定パートナー診断士による伴走</span>
+      </h1>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-hero-p">まず資料請求・ご相談（無料）</a>
+        <a href="#model" class="btn-hero-s">どんな仕組みか見る →</a>
+      </div>
     </div>
-    <div class="hero-btns">
-      <a href="#contact" class="btn-primary">まず、話してみる（無料）</a>
-      <a href="#flow" class="btn-ghost">相談の流れを見る</a>
+    <div>
+      <div class="hero-stat-card">
+        <div class="stat-row">
+          <span class="stat-n">50<small>%</small></span>
+          <span class="stat-l">創業者の初期費用削減目安<br>承継により実現</span>
+        </div>
+        <div class="stat-div"></div>
+        <div class="stat-row">
+          <span class="stat-n">500<small>社+</small></span>
+          <span class="stat-l">創業・承継・廃業支援の実績<br>20年間のフィールド経験</span>
+        </div>
+        <div class="stat-div"></div>
+        <p class="stat-phrase">
+          退去予兆の段階で管理会社から情報を受け取り、<br>
+          GATE診断・事業計画・融資申込まで<br>
+          <span>物件決定前に完了させる。</span><br>
+          だから、空室期間が短くなります。
+        </p>
+      </div>
     </div>
   </div>
-  <div class="hero-right">
-    <div class="cost-card">
-      <div class="cost-card-label">費用の比較（イメージ）</div>
-      <div class="cost-row">
-        <span class="cost-item-name">スケルトン撤去工事</span>
-        <span>
-          <span class="cost-before">150万<span class="cost-unit">円〜</span></span>
-          <span class="cost-after"> → 0<span class="cost-unit">円</span></span>
-        </span>
+  <p class="hero-scroll">Scroll</p>
+</section>
+
+<!-- ══ STRIP ══ -->
+<div class="strip">
+  <div class="strip-track" id="stripTrack">
+    <span class="strip-item">退去予兆の段階から動く</span>
+    <span class="strip-item">管理会社が情報を入力するだけでいい</span>
+    <span class="strip-item">GATE診断で入居候補者の質を担保する</span>
+    <span class="strip-item">物件決定前に融資の目処を立てる</span>
+    <span class="strip-item">空室期間を最小化する8ステップ</span>
+    <span class="strip-item">BC認定パートナー診断士が伴走</span>
+    <!-- duplicate for seamless loop -->
+    <span class="strip-item">退去予兆の段階から動く</span>
+    <span class="strip-item">管理会社が情報を入力するだけでいい</span>
+    <span class="strip-item">GATE診断で入居候補者の質を担保する</span>
+    <span class="strip-item">物件決定前に融資の目処を立てる</span>
+    <span class="strip-item">空室期間を最小化する8ステップ</span>
+    <span class="strip-item">BC認定パートナー診断士が伴走</span>
+  </div>
+</div>
+
+<!-- ══ PROBLEM ══ -->
+<section id="problem">
+  <div class="sec">
+    <p class="sec-label reveal">The Problem</p>
+    <h2 class="sec-h2 reveal">「退去の連絡が来てから動き始める」<br>それが、空室長期化の本当の原因です</h2>
+    <p class="sec-lead reveal">
+      閉店告知から退去まで、平均2〜3ヶ月。<br>
+      その後から次のテナントを探しても、空室期間は半年以上になりがちです。
+    </p>
+    <div class="problem-layout">
+      <div class="problem-cell reveal">
+        <span class="prob-num">01</span>
+        <p class="prob-title">「退去します」と言われた時点で、もう遅い</p>
+        <p class="prob-desc">告知から退去まで1〜2ヶ月。その後から募集をかけても、入居審査・契約・準備で数ヶ月かかります。結果として空室が半年〜1年続くケースが珍しくありません。</p>
       </div>
-      <div class="cost-row">
-        <span class="cost-item-name">厨房機器の処分費用</span>
-        <span>
-          <span class="cost-before">30万<span class="cost-unit">円〜</span></span>
-          <span class="cost-after"> → 0<span class="cost-unit">円</span></span>
-        </span>
+      <div class="problem-cell reveal d1">
+        <span class="prob-num">02</span>
+        <p class="prob-title">スケルトン返却で、次の入居者が来なくなる</p>
+        <p class="prob-desc">設備・内装を撤去して返却されると、次の入居者の初期費用は数百万円規模に跳ね上がります。それが入居ハードルを上げ、さらに空室が長引く悪循環です。</p>
       </div>
-      <div class="cost-row">
-        <span class="cost-item-name">内装撤去・廃材処分</span>
-        <span>
-          <span class="cost-before">40万<span class="cost-unit">円〜</span></span>
-          <span class="cost-after"> → 0<span class="cost-unit">円</span></span>
-        </span>
+      <div class="problem-cell reveal d2">
+        <span class="prob-num">03</span>
+        <p class="prob-title">「いい入居者かどうか」を判断する基準がない</p>
+        <p class="prob-desc">やる気がある応募者でも、資金計画や事業の実現性がわからないまま契約すると、開業後すぐに退去になるリスクがあります。審査の根拠が「感覚」になっています。</p>
       </div>
-      <div class="cost-total-row">
-        <span class="cost-total-label">あなたの負担</span>
-        <span class="cost-total-val">¥0</span>
+      <div class="problem-cell reveal d3">
+        <span class="prob-num">04</span>
+        <p class="prob-title">「開業したい人」と「空き店舗」がつながっていない</p>
+        <p class="prob-desc">開業を希望している人は地域にいます。でも「どこに相談すればいいかわからない」という状態が続いており、管理会社の空き情報と出会えていません。</p>
       </div>
-      <p class="cost-note">※引き継ぎの成立状況によります。すべての費用が不要になることを保証するものではありません。</p>
+    </div>
+    <!-- ── 空室コスト可視化図 ── -->
+    <div class="fig-frame fig-light reveal" style="margin-top:40px;">
+      <svg viewBox="0 0 960 220" xmlns="http://www.w3.org/2000/svg" aria-label="退去から入居までの時間とコストの比較">
+        <rect width="960" height="220" fill="#FFFFFF"/>
+
+        <!-- タイトル行 -->
+        <text x="40" y="36" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0B1927">退去から次の入居まで —— タイミングで変わる「損失の大きさ」</text>
+
+        <!-- 凡例 -->
+        <rect x="668" y="22" width="12" height="12" rx="2" fill="#C05A40"/>
+        <text x="686" y="33" font-family="sans-serif" font-size="11" fill="#5A4A3A">従来（退去後に動く）</text>
+        <rect x="808" y="22" width="12" height="12" rx="2" fill="#C6A24A"/>
+        <text x="826" y="33" font-family="sans-serif" font-size="11" fill="#5A4A3A">BRIDGE CYCLE</text>
+
+        <!-- 横軸ラベル（月） -->
+        <line x1="40" y1="180" x2="920" y2="180" stroke="#E0D8CC" stroke-width="1"/>
+        <text x="40" y="196" font-family="sans-serif" font-size="10" fill="#9A8A7A" text-anchor="middle">閉店予兆</text>
+        <text x="180" y="196" font-family="sans-serif" font-size="10" fill="#9A8A7A" text-anchor="middle">退去連絡</text>
+        <text x="320" y="196" font-family="sans-serif" font-size="10" fill="#9A8A7A" text-anchor="middle">退去</text>
+        <text x="500" y="196" font-family="sans-serif" font-size="10" fill="#9A8A7A" text-anchor="middle">3ヶ月後</text>
+        <text x="680" y="196" font-family="sans-serif" font-size="10" fill="#9A8A7A" text-anchor="middle">6ヶ月後</text>
+        <text x="860" y="196" font-family="sans-serif" font-size="10" fill="#9A8A7A" text-anchor="middle">入居（従来）</text>
+
+        <!-- 目盛り線 -->
+        <line x1="40" y1="175" x2="40" y2="180" stroke="#C0B8A8" stroke-width="1"/>
+        <line x1="180" y1="175" x2="180" y2="180" stroke="#C0B8A8" stroke-width="1"/>
+        <line x1="320" y1="175" x2="320" y2="180" stroke="#C0B8A8" stroke-width="1"/>
+        <line x1="500" y1="175" x2="500" y2="180" stroke="#C0B8A8" stroke-width="1"/>
+        <line x1="680" y1="175" x2="680" y2="180" stroke="#C0B8A8" stroke-width="1"/>
+        <line x1="860" y1="175" x2="860" y2="180" stroke="#C0B8A8" stroke-width="1"/>
+
+        <!-- 従来の空室バー（退去連絡x=180〜入居x=860） -->
+        <rect x="180" y="100" width="680" height="30" rx="4" fill="#C05A40" opacity="0.15"/>
+        <rect x="180" y="100" width="680" height="30" rx="4" fill="none" stroke="#C05A40" stroke-width="1.5" stroke-dasharray="6,3"/>
+        <text x="520" y="121" font-family="sans-serif" font-size="12" fill="#C05A40" text-anchor="middle" font-weight="bold">従来：空室期間 約6〜8ヶ月（家賃収入ゼロ）</text>
+
+        <!-- BRIDGE CYCLEバー（閉店予兆x=40〜退去x=320） -->
+        <rect x="40" y="136" width="280" height="30" rx="4" fill="#C6A24A" opacity="0.2"/>
+        <rect x="40" y="136" width="280" height="30" rx="4" fill="none" stroke="#C6A24A" stroke-width="1.5"/>
+        <text x="180" y="157" font-family="sans-serif" font-size="11" fill="#7A5A10" text-anchor="middle" font-weight="bold">GATE診断・計画・融資を完了</text>
+
+        <!-- 退去日に即入居のマーカー -->
+        <line x1="320" y1="55" x2="320" y2="180" stroke="#2D9A60" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <rect x="286" y="55" width="68" height="24" rx="4" fill="#EBF8F1" stroke="#2D9A60" stroke-width="1"/>
+        <text x="320" y="72" font-family="sans-serif" font-size="10" fill="#1A6A40" text-anchor="middle" font-weight="bold">退去＝即入居</text>
+      </svg>
+      <p class="fig-caption">退去連絡が来てから動く従来のフローでは、空室期間が6〜8ヶ月になるケースが多く見られます。退去予兆の段階から準備を始めることで、その期間をゼロに近づけられます。</p>
+    </div>
+
+    <div class="problem-quote reveal">
+      <div class="problem-quote-bar"></div>
+      <blockquote>
+        退去前から動ける仕組みがあれば、<br>
+        <span>空室ゼロを目指すことができます。</span>
+      </blockquote>
     </div>
   </div>
 </section>
 
-<!-- ── PAIN ── -->
-<section class="pain-section" id="pain">
-  <div class="container">
-    <div class="sec-label">The Problem</div>
-    <h2 class="sec-title reveal">閉店時に、多くのオーナーが<br>直面する3つの重荷</h2>
-    <p class="sec-lead reveal">「もう続けられない」と思ったとき、次に来るのは費用の問題です。黙って閉めると、予想以上のコストがかかります。</p>
-    <div class="pain-grid">
-      <div class="pain-card reveal">
-        <span class="pain-num">01</span>
-        <div class="pain-icon">🔧</div>
-        <h3 class="pain-title">原状回復工事の費用が<br>想像以上に高い</h3>
-        <p class="pain-body">飲食店の原状回復はスケルトン戻しが求められるケースが多く、厨房設備の撤去・廃材処分・内装解体まで含めると数百万円になることも珍しくありません。</p>
-        <em class="pain-figure">100〜400万円超</em>
-      </div>
-      <div class="pain-card reveal">
-        <span class="pain-num">02</span>
-        <div class="pain-icon">📦</div>
-        <h3 class="pain-title">機器や什器を<br>どうすればいいかわからない</h3>
-        <p class="pain-body">業務用冷蔵庫、厨房機器、テーブル・椅子……。個人では売れず、廃棄するにも費用がかかる。「捨てるにも捨てられない」状態になりがちです。</p>
-        <em class="pain-figure">処分・買取の手間と費用</em>
-      </div>
-      <div class="pain-card reveal">
-        <span class="pain-num">03</span>
-        <div class="pain-icon">🕐</div>
-        <h3 class="pain-title">閉店後も賃料が<br>発生し続ける</h3>
-        <p class="pain-body">片付けや工事の間も、退去が完了するまで賃料は止まりません。閉店を決めてから完全退去まで数か月かかれば、その分だけ費用がかさみます。</p>
-        <em class="pain-figure">1か月の賃料×数か月分</em>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── FIGURE: Cost breakdown ── -->
-<section style="background:var(--cream-dk); padding:80px 0 0;">
-  <div class="container">
+<!-- ══ THREE-PARTY MODEL ══ -->
+<section id="model" class="sec-mid">
+  <div class="sec">
+    <p class="sec-label reveal">The Model</p>
+    <h2 class="sec-h2 reveal">BRIDGE CYCLEがやっていること、<br>シンプルに言うとこうです</h2>
+    <p class="sec-lead reveal">
+      管理会社が退去予兆を入力する→BRIDGE CYCLEが動く→次のテナント候補が決まる。<br>
+      管理会社・閉店テナント・創業者の三者が、全員メリットを得る仕組みです。
+    </p>
+    <!-- ── 比較図：従来 vs BRIDGE CYCLE ── -->
     <div class="fig-frame fig-light reveal">
-      <svg viewBox="0 0 960 240" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
-        <!-- background -->
-        <rect width="960" height="240" fill="#FDFAF2"/>
+      <svg viewBox="0 0 960 306" xmlns="http://www.w3.org/2000/svg" aria-label="従来の空室対策とBRIDGE CYCLEの比較図">
+        <!-- 白背景 -->
+        <rect width="960" height="306" fill="#F6F1E7"/>
 
-        <!-- title -->
-        <text x="480" y="36" text-anchor="middle" font-size="13" fill="#7A6A52" letter-spacing="1">飲食店閉店時のコスト構造（目安）</text>
+        <!-- ═══ 左パネル：従来 ═══ -->
+        <rect x="12" y="12" width="454" height="282" rx="8" fill="#FFFFFF" stroke="#C05A40" stroke-width="1.5"/>
+        <!-- ヘッダー -->
+        <rect x="12" y="12" width="454" height="50" rx="8" fill="#C05A40"/>
+        <rect x="12" y="44" width="454" height="18" fill="#C05A40"/>
+        <text x="239" y="42" font-family="sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF" text-anchor="middle">従来：退去連絡が来てから動く</text>
 
-        <!-- 従来 bar column -->
-        <!-- Skeleton -->
-        <rect x="60" y="60" width="340" height="38" fill="#C05A40" rx="2"/>
-        <text x="72" y="83" font-size="12" fill="#fff">スケルトン撤去工事</text>
-        <text x="388" y="83" text-anchor="end" font-size="13" fill="#C05A40" font-weight="bold">〜150万円</text>
+        <!-- ステップ boxes -->
+        <rect x="28" y="80" width="72" height="46" rx="5" fill="#0B1927"/>
+        <text x="64" y="99" font-family="sans-serif" font-size="12" fill="#F6F1E7" text-anchor="middle">退去</text>
+        <text x="64" y="117" font-family="sans-serif" font-size="12" fill="#F6F1E7" text-anchor="middle">連絡</text>
+        <text x="106" y="106" font-family="sans-serif" font-size="22" fill="#C05A40" text-anchor="middle">→</text>
+        <!-- 空室期間（問題強調） -->
+        <rect x="118" y="68" width="152" height="70" rx="5" fill="#FFF0ED" stroke="#C05A40" stroke-width="2"/>
+        <text x="194" y="90" font-family="sans-serif" font-size="11" fill="#8B3A2A" text-anchor="middle" font-weight="bold">空室期間</text>
+        <text x="194" y="110" font-family="sans-serif" font-size="15" fill="#C05A40" text-anchor="middle" font-weight="bold">6〜12ヶ月</text>
+        <text x="194" y="128" font-family="sans-serif" font-size="9" fill="#A05040" text-anchor="middle">（収益・設備が失われる）</text>
+        <text x="276" y="106" font-family="sans-serif" font-size="22" fill="#BBA090" text-anchor="middle">→</text>
+        <rect x="288" y="80" width="88" height="46" rx="5" fill="#0B1927"/>
+        <text x="332" y="99" font-family="sans-serif" font-size="11" fill="#F6F1E7" text-anchor="middle">募集・審査</text>
+        <text x="332" y="117" font-family="sans-serif" font-size="10" fill="#C4BAA6" text-anchor="middle">2〜3ヶ月</text>
+        <text x="382" y="106" font-family="sans-serif" font-size="22" fill="#BBA090" text-anchor="middle">→</text>
+        <rect x="394" y="80" width="56" height="46" rx="5" fill="#0B1927"/>
+        <text x="422" y="107" font-family="sans-serif" font-size="12" fill="#F6F1E7" text-anchor="middle">入居</text>
 
-        <!-- Kitchen -->
-        <rect x="60" y="104" width="220" height="38" fill="#B85C38" rx="2" opacity="0.8"/>
-        <text x="72" y="127" font-size="12" fill="#fff">厨房機器・設備撤去</text>
-        <text x="388" y="127" text-anchor="end" font-size="13" fill="#B85C38">〜80万円</text>
+        <!-- 結果 -->
+        <rect x="28" y="168" width="420" height="4" rx="2" fill="#C05A40" opacity="0.5"/>
+        <text x="28" y="190" font-family="sans-serif" font-size="12" fill="#8B3A2A" font-weight="bold">✕ 原状回復工事・家賃損失・設備廃棄が積み上がる</text>
+        <!-- コストカード3枚 -->
+        <rect x="28" y="206" width="126" height="52" rx="5" fill="#FFF0ED" stroke="#C05A40" stroke-width="1"/>
+        <text x="91" y="225" font-family="sans-serif" font-size="10" fill="#8B3A2A" text-anchor="middle">原状回復工事</text>
+        <text x="91" y="247" font-family="sans-serif" font-size="12" fill="#C05A40" text-anchor="middle" font-weight="bold">50〜200万円</text>
+        <rect x="162" y="206" width="126" height="52" rx="5" fill="#FFF0ED" stroke="#C05A40" stroke-width="1"/>
+        <text x="225" y="225" font-family="sans-serif" font-size="10" fill="#8B3A2A" text-anchor="middle">家賃損失（6ヶ月）</text>
+        <text x="225" y="247" font-family="sans-serif" font-size="12" fill="#C05A40" text-anchor="middle" font-weight="bold">月賃料 × 6ヶ月</text>
+        <rect x="296" y="206" width="152" height="52" rx="5" fill="#FFF0ED" stroke="#C05A40" stroke-width="1"/>
+        <text x="372" y="225" font-family="sans-serif" font-size="10" fill="#8B3A2A" text-anchor="middle">設備・内装の廃棄</text>
+        <text x="372" y="247" font-family="sans-serif" font-size="12" fill="#C05A40" text-anchor="middle" font-weight="bold">使える資産が失われる</text>
 
-        <!-- Interior -->
-        <rect x="60" y="148" width="180" height="38" fill="#A0522D" rx="2" opacity="0.7"/>
-        <text x="72" y="171" font-size="12" fill="#fff">内装撤去・廃材処分</text>
-        <text x="388" y="171" text-anchor="end" font-size="13" fill="#A0522D">〜60万円</text>
+        <!-- ═══ 区切り ═══ -->
+        <rect x="471" y="0" width="18" height="306" fill="#F6F1E7"/>
+        <text x="480" y="158" font-family="sans-serif" font-size="11" fill="#C6A24A" text-anchor="middle" font-weight="bold">VS</text>
 
-        <!-- Rent -->
-        <rect x="60" y="192" width="140" height="30" fill="#7A6A52" rx="2" opacity="0.6"/>
-        <text x="72" y="211" font-size="11" fill="#fff">退去期間中の賃料負担</text>
-        <text x="388" y="211" text-anchor="end" font-size="12" fill="#7A6A52">数十万円</text>
+        <!-- ═══ 右パネル：BRIDGE CYCLE ═══ -->
+        <rect x="494" y="12" width="454" height="282" rx="8" fill="#FFFFFF" stroke="#C6A24A" stroke-width="1.5"/>
+        <!-- ヘッダー -->
+        <rect x="494" y="12" width="454" height="50" rx="8" fill="#C6A24A"/>
+        <rect x="494" y="44" width="454" height="18" fill="#C6A24A"/>
+        <text x="721" y="42" font-family="sans-serif" font-size="14" font-weight="bold" fill="#0B1927" text-anchor="middle">BRIDGE CYCLE：退去予兆の段階で動く</text>
 
-        <!-- Total label -->
-        <rect x="60" y="226" width="340" height="4" fill="#C05A40" opacity="0.2" rx="2"/>
-        <text x="60" y="238" font-size="10.5" fill="#C05A40">従来の退店コスト合計：200〜400万円以上</text>
+        <!-- ステップ boxes -->
+        <rect x="510" y="80" width="72" height="46" rx="5" fill="#0B1927"/>
+        <text x="546" y="99" font-family="sans-serif" font-size="12" fill="#C4BAA6" text-anchor="middle">退去</text>
+        <text x="546" y="117" font-family="sans-serif" font-size="12" fill="#C4BAA6" text-anchor="middle">予兆</text>
+        <text x="588" y="106" font-family="sans-serif" font-size="22" fill="#C6A24A" text-anchor="middle">→</text>
+        <!-- 前倒しブロック（金枠強調） -->
+        <rect x="600" y="66" width="172" height="74" rx="5" fill="#FDFAF0" stroke="#C6A24A" stroke-width="2.5"/>
+        <text x="686" y="88" font-family="sans-serif" font-size="11" fill="#5A4010" text-anchor="middle" font-weight="bold">GATE診断 ▸ 事業計画</text>
+        <text x="686" y="106" font-family="sans-serif" font-size="11" fill="#5A4010" text-anchor="middle" font-weight="bold">融資申込 ▸ 物件交渉</text>
+        <rect x="618" y="118" width="136" height="16" rx="4" fill="rgba(198,162,74,0.25)"/>
+        <text x="686" y="130" font-family="sans-serif" font-size="9" fill="#8A6820" text-anchor="middle" font-weight="bold">▲ 物件決定より前にすべて完了</text>
+        <text x="778" y="106" font-family="sans-serif" font-size="22" fill="#C6A24A" text-anchor="middle">→</text>
+        <!-- 成功ボックス -->
+        <rect x="790" y="74" width="142" height="58" rx="5" fill="#EBF8F1" stroke="#2D9A60" stroke-width="1.5"/>
+        <text x="861" y="97" font-family="sans-serif" font-size="12" fill="#1A6A40" text-anchor="middle" font-weight="bold">退去日＝</text>
+        <text x="861" y="117" font-family="sans-serif" font-size="12" fill="#1A6A40" text-anchor="middle" font-weight="bold">即・次の入居へ</text>
 
-        <!-- divider -->
-        <line x1="460" y1="50" x2="460" y2="230" stroke="#C9A84C" stroke-width="1" stroke-dasharray="4,4"/>
-        <text x="460" y="40" text-anchor="middle" font-size="10.5" fill="#C9A84C" letter-spacing="1">VS</text>
-
-        <!-- BRIDGE CYCLE side -->
-        <text x="510" y="68" font-size="12" fill="#3D5A4C">BRIDGE CYCLEで引き継ぎが成立した場合</text>
-
-        <!-- Zero cost items -->
-        <rect x="510" y="80" width="400" height="36" fill="rgba(61,90,76,0.06)" stroke="#3D5A4C" stroke-width="1" rx="2"/>
-        <text x="522" y="101" font-size="12" fill="#3D5A4C">スケルトン工事</text>
-        <text x="900" y="101" text-anchor="end" font-size="13" fill="#3D5A4C" font-weight="bold">¥0</text>
-
-        <rect x="510" y="122" width="400" height="36" fill="rgba(61,90,76,0.06)" stroke="#3D5A4C" stroke-width="1" rx="2"/>
-        <text x="522" y="143" font-size="12" fill="#3D5A4C">厨房・設備処分</text>
-        <text x="900" y="143" text-anchor="end" font-size="13" fill="#3D5A4C" font-weight="bold">¥0</text>
-
-        <rect x="510" y="164" width="400" height="36" fill="rgba(61,90,76,0.06)" stroke="#3D5A4C" stroke-width="1" rx="2"/>
-        <text x="522" y="185" font-size="12" fill="#3D5A4C">内装撤去</text>
-        <text x="900" y="185" text-anchor="end" font-size="13" fill="#3D5A4C" font-weight="bold">¥0</text>
-
-        <!-- Total BC -->
-        <rect x="510" y="210" width="400" height="22" fill="rgba(61,90,76,0.12)" rx="2"/>
-        <text x="522" y="225" font-size="11" fill="#3D5A4C" font-weight="bold">あなたの負担合計</text>
-        <text x="900" y="225" text-anchor="end" font-size="13" fill="#3D5A4C" font-weight="bold">¥0</text>
+        <!-- 結果 -->
+        <rect x="510" y="168" width="420" height="4" rx="2" fill="#C6A24A" opacity="0.6"/>
+        <text x="510" y="190" font-family="sans-serif" font-size="12" fill="#5A4010" font-weight="bold">✓ 空室ゼロ・設備引き継ぎ・低コスト開業を同時に実現</text>
+        <!-- ベネフィットカード3枚 -->
+        <rect x="510" y="206" width="126" height="52" rx="5" fill="#FDFAF0" stroke="#C6A24A" stroke-width="1"/>
+        <text x="573" y="225" font-family="sans-serif" font-size="10" fill="#6A5020" text-anchor="middle">空室期間の短縮</text>
+        <text x="573" y="247" font-family="sans-serif" font-size="12" fill="#C6A24A" text-anchor="middle" font-weight="bold">退去と同時</text>
+        <rect x="644" y="206" width="140" height="52" rx="5" fill="#FDFAF0" stroke="#C6A24A" stroke-width="1"/>
+        <text x="714" y="225" font-family="sans-serif" font-size="10" fill="#6A5020" text-anchor="middle">設備引き継ぎ効果</text>
+        <text x="714" y="247" font-family="sans-serif" font-size="12" fill="#C6A24A" text-anchor="middle" font-weight="bold">初期費用 〜50%削減</text>
+        <rect x="792" y="206" width="140" height="52" rx="5" fill="#EBF8F1" stroke="#2D9A60" stroke-width="1"/>
+        <text x="862" y="225" font-family="sans-serif" font-size="10" fill="#1A6A40" text-anchor="middle">開業後も安定継続</text>
+        <text x="862" y="247" font-family="sans-serif" font-size="12" fill="#2D9A60" text-anchor="middle" font-weight="bold">ST8で90日伴走</text>
       </svg>
-      <p class="fig-caption">※引き継ぎの成立状況によって異なります。費用ゼロを保証するものではありません。詳細はご相談ください。</p>
+      <p class="fig-caption">「退去連絡後に動く従来の対策」と「退去予兆の段階でGATE診断・計画・融資を完了させるBRIDGE CYCLEの前倒し介入」の違い。右パネルでは退去日と次の入居日が一致します。</p>
     </div>
-  </div>
-</section>
 
-<!-- ── SOLUTION ── -->
-<section id="solution" style="background:var(--cream-dk); padding-top:80px;">
-  <div class="container">
-    <div class="solution-inner">
-      <div class="solution-text">
-        <div class="sec-label">How it works</div>
-        <h2 class="sec-title reveal">設備を「捨てる」のではなく、<br>「渡す」という選択肢</h2>
-        <p class="sec-lead reveal">BRIDGE CYCLEは、低投資で飲食店を開きたい創業希望者と、閉店を考えるオーナーをつなぐ仕組みです。設備をそのまま活かしてくれる次の店主が見つかれば、工事をせずに退去できます。</p>
-        <ul class="solution-list">
-          <li class="reveal">
-            <span class="check">✓</span>
-            <span>厨房設備・内装・什器が引き継がれるため、<strong>スケルトン戻し工事が不要</strong>になる場合があります</span>
-          </li>
-          <li class="reveal">
-            <span class="check">✓</span>
-            <span>次のテナントを事前に選定するため、<strong>空室期間が短縮</strong>され、賃料負担の期間も短くなります</span>
-          </li>
-          <li class="reveal">
-            <span class="check">✓</span>
-            <span>創業希望者へのマッチングと事業計画策定は管理会社とBC認定診断士が担当。<strong>あなたが動く必要はありません</strong></span>
-          </li>
-          <li class="reveal">
-            <span class="check">✓</span>
-            <span>退店希望者への費用は<strong>一切かかりません</strong>。費用は管理会社・物件オーナー側が負担します</span>
-          </li>
-        </ul>
+    <div class="model-diagram reveal">
+      <div class="model-node">
+        <span class="node-icon">🏢</span>
+        <p class="node-title">物件管理会社</p>
+        <p class="node-desc">退去予兆の段階で物件情報を入力するだけ。次のテナント候補の確保をBRIDGE CYCLEが担います。</p>
+        <div class="node-benefit">✓ 空室期間の短縮</div>
       </div>
-      <div class="solution-visual">
-        <div class="fig-frame fig-light reveal">
-          <svg viewBox="0 0 440 380" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
-            <rect width="440" height="380" fill="#FDFAF2"/>
-
-            <!-- You (closing owner) -->
-            <rect x="20" y="30" width="180" height="80" fill="#FFF5F2" stroke="#C05A40" stroke-width="1.5" rx="3"/>
-            <text x="110" y="62" text-anchor="middle" font-size="11" fill="#7A6A52">閉店希望オーナー</text>
-            <text x="110" y="82" text-anchor="middle" font-size="10" fill="#C05A40">設備・内装が残っている</text>
-            <text x="110" y="98" text-anchor="middle" font-size="10" fill="#C05A40">原状回復費が心配</text>
-
-            <!-- Arrow down -->
-            <line x1="110" y1="110" x2="110" y2="140" stroke="#C9A84C" stroke-width="1.5"/>
-            <polygon points="110,146 106,138 114,138" fill="#C9A84C"/>
-
-            <!-- BC Bridge -->
-            <rect x="20" y="150" width="400" height="80" fill="rgba(201,168,76,0.08)" stroke="#C9A84C" stroke-width="1.5" rx="3"/>
-            <text x="220" y="182" text-anchor="middle" font-size="12" fill="#8A7040" font-weight="bold" letter-spacing="1">BRIDGE CYCLE</text>
-            <text x="220" y="202" text-anchor="middle" font-size="10" fill="#8A7040">管理会社・認定診断士が連携して</text>
-            <text x="220" y="218" text-anchor="middle" font-size="10" fill="#8A7040">次のテナントを事前にマッチング</text>
-
-            <!-- Arrow down right -->
-            <line x1="330" y1="230" x2="330" y2="260" stroke="#3D5A4C" stroke-width="1.5"/>
-            <polygon points="330,266 326,258 334,258" fill="#3D5A4C"/>
-
-            <!-- Arrow down left -->
-            <line x1="110" y1="230" x2="110" y2="260" stroke="#3D5A4C" stroke-width="1.5"/>
-            <polygon points="110,266 106,258 114,258" fill="#3D5A4C"/>
-
-            <!-- Result left - owner -->
-            <rect x="20" y="270" width="180" height="90" fill="rgba(61,90,76,0.05)" stroke="#3D5A4C" stroke-width="1.5" rx="3"/>
-            <text x="110" y="298" text-anchor="middle" font-size="11" fill="#3D5A4C" font-weight="bold">オーナーのメリット</text>
-            <text x="110" y="318" text-anchor="middle" font-size="10" fill="#3D5A4C">工事費用 → 大幅削減</text>
-            <text x="110" y="336" text-anchor="middle" font-size="10" fill="#3D5A4C">空室期間 → 短縮</text>
-            <text x="110" y="352" text-anchor="middle" font-size="10" fill="#3D5A4C">費用負担 → ¥0</text>
-
-            <!-- Result right - new tenant -->
-            <rect x="240" y="270" width="180" height="90" fill="rgba(201,168,76,0.06)" stroke="#C9A84C" stroke-width="1.5" rx="3"/>
-            <text x="330" y="298" text-anchor="middle" font-size="11" fill="#8A7040" font-weight="bold">新テナントのメリット</text>
-            <text x="330" y="318" text-anchor="middle" font-size="10" fill="#8A7040">設備付きで低投資開業</text>
-            <text x="330" y="336" text-anchor="middle" font-size="10" fill="#8A7040">即日入居が可能</text>
-            <text x="330" y="352" text-anchor="middle" font-size="10" fill="#8A7040">融資・事業計画済み</text>
-          </svg>
-          <p class="fig-caption" style="color:var(--warm); background:var(--cream-dk); border-color:rgba(13,27,42,0.06);">引き継ぎの仕組みイメージ。管理会社が中心となって全体をコーディネートします。</p>
-        </div>
+      <div class="model-arrow">
+        <span>⇄</span>
+        <p class="model-arrow-label">情報連携<br>候補者紹介</p>
+      </div>
+      <div class="model-node center-node">
+        <span class="node-icon">🌉</span>
+        <p class="node-title">BRIDGE CYCLE</p>
+        <p class="node-desc">GATE診断・事業計画・融資申込を「物件決定前」に完了させ、すぐ動ける入居候補者を用意します。</p>
+        <div class="node-benefit">8ステップで伴走</div>
+      </div>
+      <div class="model-arrow">
+        <span>⇄</span>
+        <p class="model-arrow-label">マッチング<br>開業伴走</p>
+      </div>
+      <div class="model-node">
+        <span class="node-icon">🔑</span>
+        <p class="node-title">創業希望者</p>
+        <p class="node-desc">設備・内装を引き継ぎ、初期費用を大幅に抑えた状態で開業できます。「融資が通った状態」で交渉に臨めます。</p>
+        <div class="node-benefit">✓ 低コスト開業を実現</div>
+      </div>
+    </div>
+    <div class="muni-band reveal">
+      <span class="muni-band-icon">📋</span>
+      <div>
+        <p class="muni-band-label">管理会社の動き方</p>
+        <p class="muni-band-title">入力するだけ。あとはBRIDGE CYCLEが動きます</p>
+        <p class="muni-band-desc">退去予兆・物件概要・オーナー意向をシステムに入力するだけで、BRIDGE CYCLEがGATE診断済みの創業者候補を手配します。管理会社の業務負荷を増やさずに、空室対策を前倒しで進められます。<strong>実装支援料は基準賃料の50%×3回（目安：75万円）</strong>で、成功報酬型の設計です。</p>
+      </div>
+      <div class="muni-badge">
+        <span class="muni-badge-num">75<small>万円</small></span>
+        <span class="muni-badge-l">実装支援料の目安<br>（成功報酬型）</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── FLOW ── -->
-<section class="flow-section" id="flow">
-  <div class="container">
-    <div class="sec-label">Consultation Flow</div>
-    <h2 class="sec-title reveal">相談から退去まで、<br>あなたが動くのは最初だけ</h2>
-    <p class="sec-lead reveal">「まだ閉店を決めていない」という段階でも構いません。相談は無料。秘密厳守でお話を伺います。</p>
-    <div class="flow-steps">
-      <div class="flow-step highlight reveal">
-        <div class="flow-step-num">STEP 01</div>
-        <h3 class="flow-step-title">無料相談<br>（オンライン可）</h3>
-        <p class="flow-step-body">現状・閉店の時期・設備の状況を伺います。費用のご相談も含め、まずお話ください。</p>
-      </div>
-      <div class="flow-step reveal">
-        <div class="flow-step-num">STEP 02</div>
-        <h3 class="flow-step-title">物件・設備の<br>状況確認</h3>
-        <p class="flow-step-body">管理会社と連携し、引き継ぎ可能な設備・内装の状況を確認します。</p>
-      </div>
-      <div class="flow-step reveal">
-        <div class="flow-step-num">STEP 03</div>
-        <h3 class="flow-step-title">次のテナント<br>マッチング</h3>
-        <p class="flow-step-body">創業希望者のデータベースから、設備を活かせる候補者をGATE診断で選定します。</p>
-      </div>
-      <div class="flow-step reveal">
-        <div class="flow-step-num">STEP 04</div>
-        <h3 class="flow-step-title">退去日＝<br>即入居日の設定</h3>
-        <p class="flow-step-body">退去日に次のテナントが入居。空室期間をゼロに近づけ、工事不要で完了します。</p>
-      </div>
-    </div>
+<!-- ══ SERVICE FLOW ══ -->
+<section id="service" class="sec-light">
+  <div class="sec">
+    <p class="sec-label reveal">Service Flow</p>
+    <h2 class="sec-h2 reveal">ST1〜ST8：管理会社が動かなくても<br>空室が埋まっていく8ステップ</h2>
+    <p class="sec-lead reveal">
+      管理会社がやることは「物件情報を入力する」だけ。<br>
+      あとはBRIDGE CYCLEとBC認定パートナー診断士が動きます。
+    </p>
+    <!-- ── ST1〜ST8 フロー図 ── -->
+    <div class="fig-frame fig-light reveal">
+      <svg viewBox="0 0 960 210" xmlns="http://www.w3.org/2000/svg" aria-label="ST1からST8までの8ステップフロー図">
+        <rect width="960" height="210" fill="#FFFFFF"/>
 
-    <!-- Figure: Timeline -->
-    <div class="fig-frame reveal" style="margin-top:56px;">
-      <svg viewBox="0 0 960 200" xmlns="http://www.w3.org/2000/svg" font-family="sans-serif">
-        <rect width="960" height="200" fill="#132033"/>
+        <!-- 「物件決定前」エリアの背景ハイライト -->
+        <rect x="12" y="12" width="468" height="150" rx="6" fill="rgba(198,162,74,0.06)" stroke="rgba(198,162,74,0.25)" stroke-width="1" stroke-dasharray="5,3"/>
+        <text x="246" y="32" font-family="serif" font-size="10" fill="rgba(198,162,74,0.8)" text-anchor="middle" letter-spacing="2">物件決定前に完了（前倒し）</text>
 
-        <!-- Time axis -->
-        <line x1="60" y1="120" x2="900" y2="120" stroke="rgba(200,190,170,0.3)" stroke-width="1"/>
+        <!-- 「物件決定後」エリアの背景 -->
+        <rect x="492" y="12" width="456" height="150" rx="6" fill="rgba(13,27,42,0.03)" stroke="rgba(13,27,42,0.08)" stroke-width="1" stroke-dasharray="5,3"/>
+        <text x="720" y="32" font-family="serif" font-size="10" fill="#7A6A52" text-anchor="middle" letter-spacing="2">物件決定後</text>
 
-        <!-- Milestones -->
-        <!-- 0: 閉店相談 -->
-        <circle cx="100" cy="120" r="5" fill="#C9A84C"/>
-        <text x="100" y="145" text-anchor="middle" font-size="10" fill="#C8BEAA">相談</text>
+        <!-- ─── ST1〜ST4（前倒しゾーン） ─── -->
+        <!-- ST1 -->
+        <rect x="20" y="46" width="96" height="80" rx="5" fill="#0B1927"/>
+        <text x="68" y="72" font-family="serif" font-size="9" fill="#C6A24A" text-anchor="middle" letter-spacing="1">ST 1</text>
+        <text x="68" y="90" font-family="serif" font-size="11" fill="#F6F1E7" text-anchor="middle">物件情報</text>
+        <text x="68" y="108" font-family="serif" font-size="11" fill="#F6F1E7" text-anchor="middle">入力</text>
+        <text x="68" y="122" font-family="serif" font-size="9" fill="#7A8A94" text-anchor="middle">管理会社が入力</text>
+        <!-- Arrow -->
+        <text x="122" y="92" font-family="serif" font-size="14" fill="#C6A24A" text-anchor="middle">›</text>
 
-        <!-- 1: 現状確認 -->
-        <circle cx="260" cy="120" r="5" fill="rgba(201,168,76,0.5)"/>
-        <text x="260" y="145" text-anchor="middle" font-size="10" fill="#C8BEAA">現状確認</text>
+        <!-- ST2 (key: GATE診断) -->
+        <rect x="132" y="46" width="96" height="80" rx="5" fill="#0B1927" stroke="#C6A24A" stroke-width="1.5"/>
+        <text x="180" y="72" font-family="serif" font-size="9" fill="#C6A24A" text-anchor="middle" letter-spacing="1">ST 2</text>
+        <text x="180" y="90" font-family="serif" font-size="11" fill="#DFC080" text-anchor="middle">GATE</text>
+        <text x="180" y="108" font-family="serif" font-size="11" fill="#DFC080" text-anchor="middle">診断</text>
+        <text x="180" y="122" font-family="serif" font-size="9" fill="#8A7A54" text-anchor="middle">6軸スコアリング</text>
+        <!-- Arrow -->
+        <text x="234" y="92" font-family="serif" font-size="14" fill="#C6A24A" text-anchor="middle">›</text>
 
-        <!-- 2: マッチング -->
-        <circle cx="500" cy="120" r="5" fill="rgba(201,168,76,0.5)"/>
-        <text x="500" y="145" text-anchor="middle" font-size="10" fill="#C8BEAA">マッチング</text>
+        <!-- ST3 (key: 事業計画) -->
+        <rect x="244" y="46" width="96" height="80" rx="5" fill="#0B1927" stroke="#C6A24A" stroke-width="1.5"/>
+        <text x="292" y="72" font-family="serif" font-size="9" fill="#C6A24A" text-anchor="middle" letter-spacing="1">ST 3</text>
+        <text x="292" y="90" font-family="serif" font-size="11" fill="#DFC080" text-anchor="middle">事業計画</text>
+        <text x="292" y="108" font-family="serif" font-size="11" fill="#DFC080" text-anchor="middle">策定</text>
+        <text x="292" y="122" font-family="serif" font-size="9" fill="#8A7A54" text-anchor="middle">BC診断士が伴走</text>
+        <!-- Arrow -->
+        <text x="346" y="92" font-family="serif" font-size="14" fill="#C6A24A" text-anchor="middle">›</text>
 
-        <!-- 3: 退去＝入居 -->
-        <circle cx="800" cy="120" r="8" fill="#C9A84C"/>
-        <text x="800" y="148" text-anchor="middle" font-size="10" fill="#C9A84C">退去＝即入居</text>
+        <!-- ST4 (key: 融資申込) -->
+        <rect x="356" y="46" width="96" height="80" rx="5" fill="#0B1927" stroke="#C6A24A" stroke-width="1.5"/>
+        <text x="404" y="72" font-family="serif" font-size="9" fill="#C6A24A" text-anchor="middle" letter-spacing="1">ST 4</text>
+        <text x="404" y="90" font-family="serif" font-size="11" fill="#DFC080" text-anchor="middle">融資</text>
+        <text x="404" y="108" font-family="serif" font-size="11" fill="#DFC080" text-anchor="middle">申込</text>
+        <text x="404" y="122" font-family="serif" font-size="9" fill="#8A7A54" text-anchor="middle">物件決定より先</text>
 
-        <!-- 従来: 空白期間 bar above -->
-        <rect x="100" y="70" width="700" height="22" fill="rgba(184,92,56,0.25)" stroke="#B85C38" stroke-width="1" stroke-dasharray="5,3"/>
-        <text x="450" y="85" text-anchor="middle" font-size="10.5" fill="#B85C38">従来の空室期間（6〜8か月）と原状回復工事</text>
+        <!-- 区切り矢印 "物件契約" -->
+        <line x1="464" y1="40" x2="464" y2="180" stroke="#C6A24A" stroke-width="1.5" stroke-dasharray="4,3"/>
+        <rect x="438" y="164" width="52" height="18" rx="3" fill="rgba(198,162,74,0.15)"/>
+        <text x="464" y="176" font-family="serif" font-size="9" fill="#C6A24A" text-anchor="middle" letter-spacing="1">物件契約</text>
+        <!-- Arrow after divider -->
+        <text x="480" y="92" font-family="serif" font-size="14" fill="#5A6A7A" text-anchor="middle">›</text>
 
-        <!-- BRIDGE: compressed bar below axis -->
-        <rect x="100" y="128" width="700" height="18" fill="rgba(201,168,76,0.18)" stroke="#C9A84C" stroke-width="1"/>
-        <text x="450" y="141" text-anchor="middle" font-size="10.5" fill="#C9A84C">BRIDGE CYCLE：空室最小化・工事期間短縮</text>
+        <!-- ─── ST5〜ST8（物件決定後） ─── -->
+        <!-- ST5 -->
+        <rect x="500" y="46" width="96" height="80" rx="5" fill="#1C304A"/>
+        <text x="548" y="72" font-family="serif" font-size="9" fill="#C4BAA6" text-anchor="middle" letter-spacing="1">ST 5</text>
+        <text x="548" y="90" font-family="serif" font-size="11" fill="#F6F1E7" text-anchor="middle">物件契約</text>
+        <text x="548" y="108" font-family="serif" font-size="11" fill="#F6F1E7" text-anchor="middle">設備承継</text>
+        <text x="548" y="122" font-family="serif" font-size="9" fill="#6A7A8A" text-anchor="middle">引き継ぎ交渉</text>
+        <!-- Arrow -->
+        <text x="602" y="92" font-family="serif" font-size="14" fill="#5A6A7A" text-anchor="middle">›</text>
 
-        <!-- Labels -->
-        <text x="60" y="68" font-size="9.5" fill="rgba(200,190,170,0.5)">従来</text>
-        <text x="60" y="138" font-size="9.5" fill="rgba(201,168,76,0.6)">BC</text>
+        <!-- ST6 -->
+        <rect x="612" y="46" width="96" height="80" rx="5" fill="#1C304A"/>
+        <text x="660" y="72" font-family="serif" font-size="9" fill="#C4BAA6" text-anchor="middle" letter-spacing="1">ST 6</text>
+        <text x="660" y="90" font-family="serif" font-size="11" fill="#F6F1E7" text-anchor="middle">内装工事</text>
+        <text x="660" y="108" font-family="serif" font-size="11" fill="#F6F1E7" text-anchor="middle">開業準備</text>
+        <text x="660" y="122" font-family="serif" font-size="9" fill="#6A7A8A" text-anchor="middle">最小限の工事</text>
+        <!-- Arrow -->
+        <text x="714" y="92" font-family="serif" font-size="14" fill="#5A6A7A" text-anchor="middle">›</text>
 
-        <!-- Title -->
-        <text x="480" y="30" text-anchor="middle" font-size="12" fill="rgba(200,190,170,0.7)" letter-spacing="1">退店から次のテナント入居までの期間比較</text>
+        <!-- ST7 -->
+        <rect x="724" y="46" width="96" height="80" rx="5" fill="#1C304A"/>
+        <text x="772" y="72" font-family="serif" font-size="9" fill="#C4BAA6" text-anchor="middle" letter-spacing="1">ST 7</text>
+        <text x="772" y="90" font-family="serif" font-size="11" fill="#F6F1E7" text-anchor="middle">グランド</text>
+        <text x="772" y="108" font-family="serif" font-size="11" fill="#F6F1E7" text-anchor="middle">オープン</text>
+        <text x="772" y="122" font-family="serif" font-size="9" fill="#6A7A8A" text-anchor="middle">開業当日まで伴走</text>
+        <!-- Arrow -->
+        <text x="826" y="92" font-family="serif" font-size="14" fill="#5A6A7A" text-anchor="middle">›</text>
+
+        <!-- ST8 -->
+        <rect x="836" y="46" width="108" height="80" rx="5" fill="#0F2A1E" stroke="#2D7A50" stroke-width="1"/>
+        <text x="890" y="72" font-family="serif" font-size="9" fill="#6DB89A" text-anchor="middle" letter-spacing="1">ST 8</text>
+        <text x="890" y="90" font-family="serif" font-size="11" fill="#A0D4B8" text-anchor="middle">開業後</text>
+        <text x="890" y="108" font-family="serif" font-size="11" fill="#A0D4B8" text-anchor="middle">フォロー</text>
+        <text x="890" y="122" font-family="serif" font-size="9" fill="#4A8A60" text-anchor="middle">90〜180日伴走</text>
+
+        <!-- 凡例 -->
+        <rect x="20" y="180" width="10" height="10" rx="2" fill="#0B1927" stroke="#C6A24A" stroke-width="1.5"/>
+        <text x="36" y="190" font-family="serif" font-size="10" fill="#7A6A52">BRIDGE CYCLEが担う前倒しステップ</text>
+        <rect x="220" y="180" width="10" height="10" rx="2" fill="#1C304A"/>
+        <text x="236" y="190" font-family="serif" font-size="10" fill="#7A6A52">物件契約後のステップ</text>
+        <rect x="400" y="180" width="10" height="10" rx="2" fill="#0F2A1E" stroke="#2D7A50" stroke-width="1"/>
+        <text x="416" y="190" font-family="serif" font-size="10" fill="#7A6A52">開業後フォロー（継続率向上）</text>
       </svg>
-      <p class="fig-caption">退去と入居を同日に近づけることで、オーナー側の賃料負担期間を短縮します。</p>
+      <p class="fig-caption">ST2〜ST4（GATE診断・事業計画・融資申込）を物件契約より先に完了させることが、空室期間短縮と低投資開業を同時に実現する核心です。管理会社の追加作業はST1の入力のみです。</p>
     </div>
-  </div>
-</section>
 
-<!-- ── FREE ── -->
-<section class="free-section" id="fee">
-  <div class="container">
-    <div class="free-inner">
-      <div class="free-badge reveal">
-        <div class="free-badge-label">退店希望者の費用負担</div>
-        <div class="free-badge-num">¥0</div>
-        <div class="free-badge-unit">完全無料</div>
-        <p class="free-badge-desc">相談・マッチング・退去サポートまで、退店希望者への請求は一切ありません。</p>
-        <div class="free-badge-rule">費用は管理会社・物件オーナーが負担する仕組みです。新テナントが入ることで空室損失が減り、双方にメリットが生まれます。</div>
+    <div class="flow-grid reveal">
+      <div class="flow-cell">
+        <p class="flow-cell-phase">ST 1</p>
+        <p class="flow-cell-title">管理会社が物件情報を入力</p>
+        <p class="flow-cell-desc">退去予兆・賃料・オーナー意向など物件情報をシステムに入力します。ここからBRIDGE CYCLEが動き始めます。管理会社の追加業務は、これだけです。</p>
+        <span class="flow-cell-tag">管理会社の入力だけで完了</span>
+        <span class="flow-cell-num">01</span>
       </div>
-      <div class="free-text">
-        <div class="sec-label">Fee Structure</div>
-        <h2 class="sec-title reveal">「相談だけ」でも<br>まったく構いません</h2>
-        <p class="sec-lead reveal">閉店の時期が決まっていなくても、まだ迷っている段階でも、相談は無料です。話してみてから、続けるかどうか判断してください。</p>
-        <ul class="solution-list">
-          <li class="reveal">
-            <span class="check">✓</span>
-            <span>初回相談は<strong>完全無料</strong>。オンラインでも対応します</span>
-          </li>
-          <li class="reveal">
-            <span class="check">✓</span>
-            <span>相談後に断っても費用は発生しません。<strong>押し売りは一切ありません</strong></span>
-          </li>
-          <li class="reveal">
-            <span class="check">✓</span>
-            <span>守秘義務のもとでお話を伺います。<strong>第三者への情報共有はしません</strong></span>
-          </li>
-          <li class="reveal">
-            <span class="check">✓</span>
-            <span>引き継ぎが成立しなかった場合も、費用は<strong>かかりません</strong></span>
-          </li>
-        </ul>
+      <div class="flow-cell">
+        <p class="flow-cell-phase">ST 2</p>
+        <p class="flow-cell-title">GATE診断で入居候補者の適性を確認</p>
+        <p class="flow-cell-desc">動機・資金力・適合性・経験・計画性・承継条件の6軸でスコアリング。「なんとなく良さそう」ではなく、客観的な根拠で候補者を絞り込みます。</p>
+        <span class="flow-cell-num">02</span>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── VOICE ── -->
-<section id="voice" style="background:var(--cream); padding:100px 0;">
-  <div class="container">
-    <div class="sec-label">Voice</div>
-    <h2 class="sec-title reveal">「相談してよかった」という声</h2>
-    <p class="sec-lead reveal">閉店を決める前に話したオーナーたちの言葉です。</p>
-    <div class="voice-grid">
-      <div class="voice-card reveal">
-        <p class="voice-quote">スケルトン工事の見積もりが200万を超えていたので、正直もう払えないと思っていました。BRIDGE CYCLEに相談したら、<strong>設備をそのまま使いたいという方が見つかり、工事なしで退去できました</strong>。本当に助かりました。</p>
-        <div class="voice-meta">
-          <span class="voice-tag">飲食店オーナー</span>
-          滋賀県・カフェ経営 10年
+      <div class="flow-cell">
+        <p class="flow-cell-phase">ST 3</p>
+        <p class="flow-cell-title">事業計画を一緒に作る</p>
+        <p class="flow-cell-desc">BC認定パートナー中小企業診断士が、損益シミュレーション・売上計画を含む事業計画書を創業希望者と共同作成。「開業後に失敗しない計画」にします。</p>
+        <span class="flow-cell-num">03</span>
+      </div>
+      <div class="flow-cell">
+        <p class="flow-cell-phase">ST 4</p>
+        <p class="flow-cell-title">物件決定前に融資の目処を立てる</p>
+        <p class="flow-cell-desc">日本政策金融公庫への融資申請を物件契約より先に完了させます。「融資が通った状態」で物件交渉に入るため、オーナーへの説明責任が果たしやすくなります。</p>
+        <span class="flow-cell-tag">補助金・助成金も同時確認</span>
+        <span class="flow-cell-num">04</span>
+      </div>
+      <div class="flow-bottom">
+        <div class="flow-bottom-item">
+          <p class="flow-cell-phase">ST 5</p>
+          <p class="flow-cell-title">物件契約・設備承継交渉</p>
+          <p class="flow-cell-desc">賃貸契約・前テナントからの設備引き継ぎ交渉・食品衛生法等の許認可手続きをチェックリストで管理。抜け漏れなく進めます。</p>
         </div>
-      </div>
-      <div class="voice-card reveal">
-        <p class="voice-quote">閉める日程も決まっていない段階で相談したのですが、親身に聞いてもらえました。「まだ準備できていない」と思わなくて大丈夫です。<strong>早めに動いたおかげで選択肢が増えました</strong>。</p>
-        <div class="voice-meta">
-          <span class="voice-tag">小売店オーナー</span>
-          大阪府・雑貨店 7年
+        <div class="flow-bottom-item">
+          <p class="flow-cell-phase">ST 6</p>
+          <p class="flow-cell-title">内装工事・開業準備</p>
+          <p class="flow-cell-desc">引き継いだ設備を活かした最小限の工事で開業準備を進めます。SNS集客・プレオープン設計もサポートします。</p>
+        </div>
+        <div class="flow-bottom-item">
+          <p class="flow-cell-phase">ST 7</p>
+          <p class="flow-cell-title">グランドオープン</p>
+          <p class="flow-cell-desc">開業当日まで伴走。空室が「次の灯り」に変わる瞬間を、BRIDGE CYCLEと管理会社が一緒に迎えます。</p>
+        </div>
+        <div class="flow-bottom-item">
+          <p class="flow-cell-phase">ST 8</p>
+          <p class="flow-cell-title">開業後90〜180日のフォロー</p>
+          <p class="flow-cell-desc">BC認定パートナー診断士が開業後の経営状況をモニタリング。早期撤退リスクを減らし、テナントの継続率を高めます。</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── CTA ── -->
-<section class="cta-section" id="contact">
-  <div class="container">
-    <div class="cta-eyebrow">Free Consultation</div>
-    <h2 class="cta-title reveal">閉める前に、一度だけ<br>話してみてください。</h2>
-    <p class="cta-sub reveal">費用のこと、時期のこと、設備のこと——どんなことでも構いません。BRIDGE CYCLEの相談は、すべて無料です。判断はその後にしてください。</p>
-    <div class="cta-btns">
-      <a href="mailto:info@bridgecycle.jp" class="cta-btn-main">無料相談を申し込む</a>
+<!-- ══ GATE SYSTEM ══ -->
+<section id="gate">
+  <div class="sec">
+    <p class="sec-label reveal">GATE System</p>
+    <h2 class="sec-h2 reveal">GATE診断 ——「感覚」ではなく<br>「6つの根拠」で入居候補者を選ぶ</h2>
+    <p class="sec-lead reveal">
+      入居希望者のやる気だけで判断すると、開業後に失敗するリスクがあります。<br>
+      GATE診断は、6軸のスコアで「本当に開業できる人か」を客観的に確認します。
+    </p>
+    <!-- ── GATE 6軸スコア可視化図 ── -->
+    <div class="fig-frame fig-light reveal">
+      <svg viewBox="0 0 960 260" xmlns="http://www.w3.org/2000/svg" aria-label="GATE診断6軸の評価イメージ">
+        <rect width="960" height="260" fill="#FFFFFF"/>
+
+        <!-- ヘッダー -->
+        <text x="40" y="34" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0B1927">GATE診断：6つの軸で「開業できる人か」を定量評価する</text>
+        <text x="40" y="52" font-family="sans-serif" font-size="11" fill="#7A6A52">各軸5点満点・合計30点。22点以上で通過推奨、15〜21点で要検討、14点以下で再検討を勧めます。</text>
+
+        <!-- ヘッダー行 -->
+        <line x1="40" y1="64" x2="920" y2="64" stroke="#E0D8CC" stroke-width="1"/>
+        <text x="40" y="80" font-family="sans-serif" font-size="10" fill="#9A8A7A">評価軸</text>
+        <text x="330" y="80" font-family="sans-serif" font-size="10" fill="#9A8A7A">判断のポイント</text>
+        <text x="700" y="80" font-family="sans-serif" font-size="10" fill="#9A8A7A">スコアバー（5点満点）</text>
+        <text x="900" y="80" font-family="sans-serif" font-size="10" fill="#9A8A7A" text-anchor="end">評価</text>
+        <line x1="40" y1="86" x2="920" y2="86" stroke="#E0D8CC" stroke-width="1"/>
+
+        <!-- Row 1: ① 動機・コミット -->
+        <rect x="40" y="90" width="880" height="26" rx="0" fill="rgba(198,162,74,0.04)"/>
+        <text x="50" y="108" font-family="sans-serif" font-size="13" fill="#C6A24A" font-weight="bold">①</text>
+        <text x="72" y="108" font-family="sans-serif" font-size="12" fill="#0B1927" font-weight="bold">動機・コミット</text>
+        <text x="330" y="108" font-family="sans-serif" font-size="11" fill="#5A6A7A">なぜこの場所か。覚悟と理由が明確かどうか。</text>
+        <rect x="680" y="97" width="200" height="10" rx="4" fill="#E8E0D0"/>
+        <rect x="680" y="97" width="160" height="10" rx="4" fill="#C6A24A"/>
+        <text x="900" y="108" font-family="sans-serif" font-size="11" fill="#0B1927" text-anchor="end" font-weight="bold">4 / 5</text>
+
+        <!-- Row 2: ② 資金力 -->
+        <text x="50" y="134" font-family="sans-serif" font-size="13" fill="#C6A24A" font-weight="bold">②</text>
+        <text x="72" y="134" font-family="sans-serif" font-size="12" fill="#0B1927" font-weight="bold">資金力・調達余力</text>
+        <text x="330" y="134" font-family="sans-serif" font-size="11" fill="#5A6A7A">自己資金・融資見込み・月々の返済余力。</text>
+        <rect x="680" y="123" width="200" height="10" rx="4" fill="#E8E0D0"/>
+        <rect x="680" y="123" width="120" height="10" rx="4" fill="#C6A24A"/>
+        <text x="900" y="134" font-family="sans-serif" font-size="11" fill="#0B1927" text-anchor="end" font-weight="bold">3 / 5</text>
+        <line x1="40" y1="144" x2="920" y2="144" stroke="#F0E8D8" stroke-width="1"/>
+
+        <!-- Row 3: ③ 適合性 -->
+        <rect x="40" y="148" width="880" height="26" rx="0" fill="rgba(198,162,74,0.04)"/>
+        <text x="50" y="166" font-family="sans-serif" font-size="13" fill="#C6A24A" font-weight="bold">③</text>
+        <text x="72" y="166" font-family="sans-serif" font-size="12" fill="#0B1927" font-weight="bold">適合性</text>
+        <text x="330" y="166" font-family="sans-serif" font-size="11" fill="#5A6A7A">希望業種と物件の立地・客層が合っているか。</text>
+        <rect x="680" y="155" width="200" height="10" rx="4" fill="#E8E0D0"/>
+        <rect x="680" y="155" width="180" height="10" rx="4" fill="#C6A24A"/>
+        <text x="900" y="166" font-family="sans-serif" font-size="11" fill="#0B1927" text-anchor="end" font-weight="bold">4.5 / 5</text>
+
+        <!-- Row 4: ④ 経験 -->
+        <text x="50" y="192" font-family="sans-serif" font-size="13" fill="#C6A24A" font-weight="bold">④</text>
+        <text x="72" y="192" font-family="sans-serif" font-size="12" fill="#0B1927" font-weight="bold">経験</text>
+        <text x="330" y="192" font-family="sans-serif" font-size="11" fill="#5A6A7A">業界経験・調理歴・接客・経営の実務力。</text>
+        <rect x="680" y="181" width="200" height="10" rx="4" fill="#E8E0D0"/>
+        <rect x="680" y="181" width="80" height="10" rx="4" fill="#C6A24A"/>
+        <text x="900" y="192" font-family="sans-serif" font-size="11" fill="#C05A40" text-anchor="end" font-weight="bold">2 / 5</text>
+        <rect x="770" y="176" width="130" height="20" rx="3" fill="rgba(192,90,64,0.1)" stroke="#C05A40" stroke-width="0.5"/>
+        <text x="835" y="190" font-family="sans-serif" font-size="9" fill="#C05A40" text-anchor="middle">← 補強計画が必要</text>
+        <line x1="40" y1="200" x2="920" y2="200" stroke="#F0E8D8" stroke-width="1"/>
+
+        <!-- Row 5: ⑤ 計画性 -->
+        <rect x="40" y="204" width="880" height="26" rx="0" fill="rgba(198,162,74,0.04)"/>
+        <text x="50" y="222" font-family="sans-serif" font-size="13" fill="#C6A24A" font-weight="bold">⑤</text>
+        <text x="72" y="222" font-family="sans-serif" font-size="12" fill="#0B1927" font-weight="bold">計画性</text>
+        <text x="330" y="222" font-family="sans-serif" font-size="11" fill="#5A6A7A">損益試算・開業スケジュールに現実感があるか。</text>
+        <rect x="680" y="211" width="200" height="10" rx="4" fill="#E8E0D0"/>
+        <rect x="680" y="211" width="140" height="10" rx="4" fill="#C6A24A"/>
+        <text x="900" y="222" font-family="sans-serif" font-size="11" fill="#0B1927" text-anchor="end" font-weight="bold">3.5 / 5</text>
+
+        <!-- Row 6: ⑥ 承継条件 -->
+        <text x="50" y="248" font-family="sans-serif" font-size="13" fill="#C6A24A" font-weight="bold">⑥</text>
+        <text x="72" y="248" font-family="sans-serif" font-size="12" fill="#0B1927" font-weight="bold">承継条件</text>
+        <text x="330" y="248" font-family="sans-serif" font-size="11" fill="#5A6A7A">設備・内装をどこまで活かせるか。コスト適合性。</text>
+        <rect x="680" y="237" width="200" height="10" rx="4" fill="#E8E0D0"/>
+        <rect x="680" y="237" width="200" height="10" rx="4" fill="#C6A24A"/>
+        <text x="900" y="248" font-family="sans-serif" font-size="11" fill="#0B1927" text-anchor="end" font-weight="bold">5 / 5</text>
+      </svg>
+      <p class="fig-caption">スコアの例示です（実際の評価は個別の状況により異なります）。④経験が2/5でも、⑤計画性・⑥承継条件が高ければ総合判断で通過となるケースがあります。GATE診断は「落とす」ための審査ではなく、「補強すべき点を明確にする」ためのツールです。</p>
     </div>
-    <p class="cta-free-note">相談料・紹介料など、退店希望者への費用は一切かかりません</p>
+
+    <div class="gate-layout">
+      <div class="gate-axes">
+        <div class="gate-axis reveal">
+          <span class="gate-axis-letter">①</span>
+          <div>
+            <p class="gate-axis-title">動機・コミット</p>
+            <p class="gate-axis-desc">なぜこのお店をやりたいか。覚悟と理由が明確かどうか。「なんとなく」と「本気」はここで分かれます。</p>
+          </div>
+        </div>
+        <div class="gate-axis reveal d1">
+          <span class="gate-axis-letter">②</span>
+          <div>
+            <p class="gate-axis-title">資金力・調達余力</p>
+            <p class="gate-axis-desc">自己資金・融資見込み・返済余力。「開業できても続かない」を防ぐために、資金面を正直に確認します。</p>
+          </div>
+        </div>
+        <div class="gate-axis reveal d2">
+          <span class="gate-axis-letter">③</span>
+          <div>
+            <p class="gate-axis-title">適合性</p>
+            <p class="gate-axis-desc">希望業種と物件の立地・客層が合っているか。「好きなものを売る」と「その場所で売れる」は違います。</p>
+          </div>
+        </div>
+        <div class="gate-axis reveal d3">
+          <span class="gate-axis-letter">④</span>
+          <div>
+            <p class="gate-axis-title">経験</p>
+            <p class="gate-axis-desc">業界経験・調理歴・接客・経営の実務力。ゼロでも開業は可能ですが、補強計画が必要かどうかを判断します。</p>
+          </div>
+        </div>
+        <div class="gate-axis reveal">
+          <span class="gate-axis-letter">⑤</span>
+          <div>
+            <p class="gate-axis-title">計画性</p>
+            <p class="gate-axis-desc">損益の試算・開業スケジュールの具体度。「何となくいけそう」ではなく数字で語れる状態かどうかを確認します。</p>
+          </div>
+        </div>
+        <div class="gate-axis reveal d1">
+          <span class="gate-axis-letter">⑥</span>
+          <div>
+            <p class="gate-axis-title">承継条件</p>
+            <p class="gate-axis-desc">設備・什器・ノウハウの引き継ぎ条件が整合しているか。居抜き特有のリスクを事前に確認します。</p>
+          </div>
+        </div>
+      </div>
+      <div class="gate-visual reveal d2">
+        <div class="gate-card">
+          <p class="gate-card-label">GATE — 6軸スコアリング</p>
+          <h3 class="gate-card-h">管理会社・オーナーへの<br>説明責任を果たせる根拠になる</h3>
+          <p class="gate-card-body">「感覚的にいい人そう」ではなく、6軸のスコアで入居候補者の適性を示せます。オーナーへの入居者紹介時の説得力が、まったく変わります。</p>
+          <div class="gate-score-mock">
+            <div class="gsm-item">
+              <p class="gsm-label">① 動機・コミット</p>
+              <div class="gsm-track"><div class="gsm-fill" style="width:85%"></div></div>
+            </div>
+            <div class="gsm-item">
+              <p class="gsm-label">② 資金力</p>
+              <div class="gsm-track"><div class="gsm-fill" style="width:70%"></div></div>
+            </div>
+            <div class="gsm-item">
+              <p class="gsm-label">③ 適合性</p>
+              <div class="gsm-track"><div class="gsm-fill" style="width:90%"></div></div>
+            </div>
+            <div class="gsm-item">
+              <p class="gsm-label">④ 経験</p>
+              <div class="gsm-track"><div class="gsm-fill" style="width:60%"></div></div>
+            </div>
+            <div class="gsm-item">
+              <p class="gsm-label">⑤ 計画性</p>
+              <div class="gsm-track"><div class="gsm-fill" style="width:75%"></div></div>
+            </div>
+            <div class="gsm-item">
+              <p class="gsm-label">⑥ 承継条件</p>
+              <div class="gsm-track"><div class="gsm-fill" style="width:80%"></div></div>
+            </div>
+          </div>
+          <div class="gate-audiences">
+            <div class="gate-audience">
+              <span class="gate-audience-icon">🏢</span>
+              管理会社・オーナー向け：「なぜこの人を選んだか」を数字で説明できる
+            </div>
+            <div class="gate-audience">
+              <span class="gate-audience-icon">🎓</span>
+              BC認定パートナー診断士：スコアをもとに補強計画を立て、伴走の質を上げる
+            </div>
+            <div class="gate-audience">
+              <span class="gate-audience-icon">🔑</span>
+              創業希望者：自分の強みと弱みを把握して、準備を効率よく進める
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- ── FOOTER ── -->
+<!-- ══ PARTNER SYSTEM ══ -->
+<section id="partner" class="sec-light">
+  <div class="sec">
+    <p class="sec-label reveal">Partner System</p>
+    <h2 class="sec-h2 reveal">BC認定パートナー中小企業診断士</h2>
+    <p class="sec-lead reveal">
+      GATE診断・事業計画・融資支援・開業後フォロー。<br>この一連を担う専門家が、BRIDGE CYCLEと一緒に動きます。
+    </p>
+    <div class="partner-layout">
+      <div class="partner-text">
+        <p class="reveal">BRIDGE CYCLEの伴走を支える中心的な存在が、<strong>BC認定パートナー中小企業診断士</strong>です。GATE診断のスコアリング、事業計画書の共同作成、融資申請の支援——これらすべてを担う、経営支援の専門家です。</p>
+        <p class="reveal">中小企業診断士として独立している方、もしくは支援機関に所属している方を対象に、BRIDGE CYCLEが案件を紹介します。見込み客を自ら開拓する必要はありません。スコアが出ている案件だけが届くため、支援の質を保ちながら受注できます。</p>
+        <div class="partner-cards">
+          <div class="partner-card reveal">
+            <span class="partner-card-icon">📋</span>
+            <div>
+              <p class="partner-card-title">GATE診断の実施・スコアリング</p>
+              <p class="partner-card-desc">6軸・各5点満点で創業希望者の開業準備度を定量評価。「なぜこのスコアか」を言語化し、管理会社・オーナーへの説明材料にします。</p>
+              <span class="partner-fee">GATEパック 30万円（外国人対応 45万円）の一部</span>
+            </div>
+          </div>
+          <div class="partner-card reveal d1">
+            <span class="partner-card-icon">📊</span>
+            <div>
+              <p class="partner-card-title">事業計画書の共同作成</p>
+              <p class="partner-card-desc">損益シミュレーション・売上計画を含む、融資審査が通る水準の事業計画書を創業希望者と共同で作成します。「開業後に失敗しない計画」にすることが目的です。</p>
+              <span class="partner-fee">融資前倒し支援として機能</span>
+            </div>
+          </div>
+          <div class="partner-card reveal d2">
+            <span class="partner-card-icon">🔄</span>
+            <div>
+              <p class="partner-card-title">開業後フォロー（90〜180日）</p>
+              <p class="partner-card-desc">開業後の経営状況をモニタリング。早期撤退リスクを減らし、テナントの継続率を高めます。管理会社にとっても「長く入居してもらえる」安心感につながります。</p>
+              <span class="partner-fee">ST8 フォロー報酬</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="partner-visual reveal d2">
+        <p class="pv-label">BC認定パートナー中小企業診断士 — 収益モデル</p>
+        <h3 class="pv-h">営業不要。スコア済みの案件が<br>届く仕組みです。</h3>
+        <p class="pv-body">BRIDGE CYCLEが管理会社・物件・創業希望者とのやり取りを担当します。診断士がすべき「診断と計画と伴走」だけに集中できる体制です。</p>
+        <span class="pv-fee-big">15<small style="font-size:1.4rem">万円</small></span>
+        <p class="pv-fee-label">BC認定パートナー診断士への1案件あたり報酬目安</p>
+        <p class="pv-note">※案件規模により異なります。詳細はお問い合わせください。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOR FOUNDERS BRIDGE ══ -->
+<section id="founders">
+  <div class="founders-inner">
+    <div class="founders-left">
+      <p class="sec-label reveal">For Founders</p>
+      <h2 class="reveal">「次の店主」を目指す方へ</h2>
+      <p class="reveal">開業を夢見ているけれど、資金・物件・経験の壁で一歩踏み出せていない方。BRIDGE CYCLEの創業者向けページでは、GATE診断から開業支援の詳細をご覧いただけます。</p>
+      <a href="lp.html" class="btn-founders reveal" target="_blank">創業者向けページへ →</a>
+    </div>
+    <div class="founders-right reveal d2">
+      <span class="founders-right-icon">🔑</span>
+      <p class="founders-right-h">無料GATE診断を受ける</p>
+      <p class="founders-right-body">6軸・12問で開業準備度をスコア化。<br>強みと課題を「見える化」し、<br>あなたに合った開業プランを提案します。</p>
+      <a href="lp.html#gate" class="btn-founders" target="_blank">GATE診断を始める（無料）</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TRUST ══ -->
+<section id="trust" class="sec-mid">
+  <div class="sec">
+    <p class="sec-label reveal">Why Bridge Cycle</p>
+    <h2 class="sec-h2 reveal">信頼の根拠</h2>
+    <div class="trust-nums">
+      <div class="trust-num-cell reveal">
+        <span class="trust-icon">🏆</span>
+        <span class="trust-n">500<small>社+</small></span>
+        <p class="trust-l">創業・事業承継・廃業の<br>中小企業支援実績</p>
+      </div>
+      <div class="trust-num-cell reveal d1">
+        <span class="trust-icon">📅</span>
+        <span class="trust-n">20<small>年</small></span>
+        <p class="trust-l">元商工会経営指導員として<br>蓄積した中小企業支援の現場経験</p>
+      </div>
+      <div class="trust-num-cell reveal d2">
+        <span class="trust-icon">📐</span>
+        <span class="trust-n">GATE<small> 6軸</small></span>
+        <p class="trust-l">動機・資金・適合性など6軸で<br>テナントの質を定量評価</p>
+      </div>
+      <div class="trust-num-cell reveal d3">
+        <span class="trust-icon">⚙️</span>
+        <span class="trust-n">8<small>step</small></span>
+        <p class="trust-l">管理会社入力から<br>開業後フォローまで一貫支援</p>
+      </div>
+    </div>
+    <div class="trust-badges">
+      <div class="trust-badge-cell reveal">
+        <span class="trust-badge-icon">🎖️</span>
+        <div>
+          <p class="trust-badge-title">認定経営革新等支援機関（申請中）</p>
+          <p class="trust-badge-desc">中小企業庁が認定する専門支援機関として、事業計画書作成・融資申請・補助金活用まで一貫してサポートします。金融機関との連携もスムーズに。</p>
+        </div>
+      </div>
+      <div class="trust-badge-cell reveal d1">
+        <span class="trust-badge-icon">🤝</span>
+        <div>
+          <p class="trust-badge-title">非媒介設計による利益相反ゼロ</p>
+          <p class="trust-badge-desc">BRIDGE CYCLEは不動産媒介を行いません。手数料ビジネスではなく、承継成功報酬型の設計により、三者全員の利益が一致します。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact" class="sec-light">
+  <div class="sec">
+    <p class="sec-label reveal">Contact</p>
+    <h2 class="sec-h2 reveal">資料請求・お問い合わせ</h2>
+    <div class="contact-layout">
+      <div class="reveal">
+        <p class="contact-info-h">
+          まず、話してみてください。<br>それだけで、動き始めます。
+        </p>
+        <p class="contact-info-body">
+          「自社の物件で試してみたい」「仕組みをもう少し詳しく知りたい」「BC認定パートナーとして参画したい」——どの段階のご相談でも構いません。<br><br>
+          資料送付・個別ヒアリングのどちらにも対応します。まずはお気軽にご連絡ください。
+        </p>
+        <div class="contact-promises">
+          <div class="promise">
+            <span class="promise-check">✓</span>
+            <p class="promise-text"><strong>初回相談・資料提供は完全無料</strong><br>事業概要資料・料金体系・事例資料をご提供します。</p>
+          </div>
+          <div class="promise">
+            <span class="promise-check">✓</span>
+            <p class="promise-text"><strong>48時間以内にご連絡</strong><br>営業時間内は当日中を目標に対応します。</p>
+          </div>
+          <div class="promise">
+            <span class="promise-check">✓</span>
+            <p class="promise-text"><strong>強引な営業は一切しません</strong><br>情報提供・ご提案のみ。導入をお急ぎしません。</p>
+          </div>
+        </div>
+      </div>
+      <div class="reveal d1">
+        <div class="form-success" id="formSuccess">
+          <span class="fs-icon">✉️</span>
+          <p class="fs-h">お問い合わせを受け付けました</p>
+          <p class="fs-body">ご入力のメールアドレスに確認メールをお送りしました。<br>担当者より48時間以内にご連絡いたします。<br><br><strong>BRIDGE CYCLE 株式会社</strong></p>
+        </div>
+        <div class="contact-form" id="contactFormWrap">
+          <form id="contactForm" novalidate>
+            <input type="hidden" name="_subject" value="【BRIDGE CYCLE HP】新規お問い合わせ">
+            <input type="hidden" name="お問い合わせ種別" id="inqType" value="未選択">
+
+            <div class="fgroup">
+              <label class="flabel">お問い合わせ種別<span class="req">必須</span></label>
+              <select class="fselect" id="ftype" onchange="document.getElementById('inqType').value=this.value">
+                <option value="">選択してください</option>
+                <option>物件管理会社として導入を検討したい</option>
+                <option>自治体として連携を検討したい</option>
+                <option>BC認定パートナーとして参画したい</option>
+                <option>資料請求のみ</option>
+                <option>その他・詳細を聞きたい</option>
+              </select>
+              <p class="ferr" id="err-type">種別を選択してください</p>
+            </div>
+
+            <div class="frow">
+              <div class="fgroup">
+                <label class="flabel" for="fname">お名前<span class="req">必須</span></label>
+                <input class="finput" type="text" id="fname" name="お名前" placeholder="山田 太郎" autocomplete="name">
+                <p class="ferr" id="err-name">お名前を入力してください</p>
+              </div>
+              <div class="fgroup">
+                <label class="flabel" for="fcomp">会社名・団体名</label>
+                <input class="finput" type="text" id="fcomp" name="会社名・団体名" placeholder="株式会社〇〇">
+              </div>
+            </div>
+
+            <div class="fgroup">
+              <label class="flabel" for="femail">メールアドレス<span class="req">必須</span></label>
+              <input class="finput" type="email" id="femail" name="メールアドレス" placeholder="your@email.com" autocomplete="email">
+              <p class="ferr" id="err-email">正しいメールアドレスを入力してください</p>
+            </div>
+
+            <div class="fgroup">
+              <label class="flabel" for="ftel">電話番号</label>
+              <input class="finput" type="tel" id="ftel" name="電話番号" placeholder="090-0000-0000" autocomplete="tel">
+            </div>
+
+            <div class="fgroup">
+              <label class="flabel" for="fmsg">ご相談内容・背景</label>
+              <textarea class="ftextarea" id="fmsg" name="ご相談内容" placeholder="管理物件の状況、ご検討の背景、知りたいことなどをご自由にお書きください。"></textarea>
+            </div>
+
+            <p class="fprivacy">ご入力いただいた個人情報は、お問い合わせへの回答および当社サービスのご案内にのみ使用します。第三者への提供は行いません。</p>
+
+            <button type="button" class="btn-submit" id="subBtn" onclick="doSubmit()">
+              送信する（返信48時間以内）
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FINAL CTA ══ -->
+<section id="final">
+  <div class="final-rings">
+    <div class="final-ring r1"></div>
+    <div class="final-ring r2"></div>
+    <div class="final-ring r3"></div>
+  </div>
+  <div class="final-inner">
+    <p class="final-sub reveal">Take Action</p>
+    <h2 class="final-h reveal">
+      退去の連絡を待つより、<br>
+      <span>閉まる前に動いた方が、早い。</span>
+    </h2>
+    <p class="final-body reveal">
+      管理会社が入力するだけで、<br>BRIDGE CYCLEが次のテナントを探し始めます。<br>
+      空室になる前に、動き出せる仕組みです。
+    </p>
+    <div class="final-btns reveal">
+      <a href="#contact" class="btn-fp">まず、話してみる（無料）</a>
+      <a href="lp.html" class="btn-fs" target="_blank">創業希望者向けページ</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
 <footer>
-  <a href="index.html" class="footer-logo">BRIDGE CYCLE</a>
-  <div class="footer-links">
-    <a href="index.html">管理会社の方へ</a>
-    <a href="lp.html">創業希望者の方へ</a>
-    <a href="exit.html">閉店をお考えの方へ</a>
+  <div class="footer-top">
+    <div>
+      <span class="footer-logo-main">Bridge<em>Cycle</em></span>
+      <p class="footer-tagline">
+        空き店舗を次の灯りへ。<br>
+        閉まる前に動く、承継支援の新しい形。<br><br>
+        BRIDGE CYCLE 株式会社<br>
+        滋賀県大津市
+      </p>
+    </div>
+    <div>
+      <p class="footer-col-title">Navigation</p>
+      <div class="footer-links">
+        <a href="#problem">課題 — The Problem</a>
+        <a href="#model">仕組み — The Model</a>
+        <a href="#service">サービス — Service Flow</a>
+        <a href="#gate">GATE診断</a>
+        <a href="#partner">認定パートナー制度</a>
+        <a href="#trust">信頼の根拠</a>
+        <a href="#contact">お問い合わせ</a>
+        <a href="lp.html" target="_blank">創業希望者向けページ →</a>
+      </div>
+    </div>
+    <div>
+      <p class="footer-col-title">Contact</p>
+      <div class="footer-links">
+        <p class="footer-contact-item">
+          Email：<a href="mailto:info@bridgecycleco.com">info@bridgecycleco.com</a>
+        </p>
+        <p class="footer-contact-item">
+          所在地：滋賀県大津市<br>
+          （詳細はお問い合わせください）
+        </p>
+        <p class="footer-contact-item" style="margin-top:12px">
+          <a href="https://www.bridgecycleco.com/" target="_blank" rel="noopener">www.bridgecycleco.com</a>
+        </p>
+      </div>
+    </div>
   </div>
-  <div class="footer-copy">© 2025 BRIDGE CYCLE. All rights reserved.</div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 BRIDGE CYCLE 株式会社. All rights reserved.</p>
+    <div class="footer-sub-links">
+      <a href="#">プライバシーポリシー</a>
+      <a href="#">特定商取引法に基づく表記</a>
+      <a href="#contact">お問い合わせ</a>
+    </div>
+  </div>
 </footer>
 
+<!-- ══ SCRIPTS ══ -->
 <script>
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+/* NAV */
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').style.borderBottomColor =
+    window.scrollY>60?'rgba(198,162,74,0.3)':'rgba(198,162,74,0.2)';
+});
+
+/* MOBILE MENU */
+function toggleMob(){
+  document.getElementById('mobNav').classList.toggle('open');
+}
+
+/* SCROLL REVEAL */
+const ro=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')});
+},{threshold:0.1,rootMargin:'0px 0px -36px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+/* FORM SUBMIT */
+async function doSubmit(){
+  let ok=true;
+
+  const ftype=document.getElementById('ftype');
+  const errT=document.getElementById('err-type');
+  if(!ftype.value){ftype.classList.add('err');errT.style.display='block';ok=false}
+  else{ftype.classList.remove('err');errT.style.display='none'}
+
+  const fname=document.getElementById('fname');
+  const errN=document.getElementById('err-name');
+  if(!fname.value.trim()){fname.classList.add('err');errN.style.display='block';ok=false}
+  else{fname.classList.remove('err');errN.style.display='none'}
+
+  const femail=document.getElementById('femail');
+  const errE=document.getElementById('err-email');
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(femail.value.trim())){
+    femail.classList.add('err');errE.style.display='block';ok=false
+  }else{femail.classList.remove('err');errE.style.display='none'}
+
+  if(!ok)return;
+
+  const btn=document.getElementById('subBtn');
+  btn.disabled=true;btn.textContent='送信中...';
+
+  /* ────────────────────────────────────────────
+     Formspree設定:
+     https://formspree.io/ で登録後、発行されたエンドポイントを設定
+     例: const EP='https://formspree.io/f/xxxxxxxx';
+  ──────────────────────────────────────────── */
+  const EP=''; // ← Formspreeエンドポイントをここに設定
+
+  const data=new FormData(document.getElementById('contactForm'));
+
+  if(EP){
+    try{
+      const r=await fetch(EP,{method:'POST',body:data,headers:{Accept:'application/json'}});
+      if(r.ok){showSuccess();return}
+    }catch(e){}
+  }
+  // fallback mailto
+  const subj=encodeURIComponent('【BRIDGE CYCLE HP】'+ftype.value||'お問い合わせ');
+  const body=encodeURIComponent(
+    `種別：${ftype.value}\nお名前：${fname.value}\nEmail：${femail.value}\n\n${document.getElementById('fmsg').value}`
+  );
+  window.location.href=`mailto:info@bridgecycleco.com?subject=${subj}&body=${body}`;
+  showSuccess();
+}
+
+function showSuccess(){
+  document.getElementById('contactFormWrap').style.display='none';
+  document.getElementById('formSuccess').classList.add('show');
+}
 </script>
 </body>
 </html>
