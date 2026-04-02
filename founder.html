@@ -964,15 +964,17 @@ function renderGatePage() {
       <div class="plan-sec-title">${q.label}</div>`;
 
     if (q.type === 'radio') {
+      // onchange を各 input に直接付与（innerHTML 内の <script> は実行されないため）
       html += `<div class="radio-group" style="margin-top:10px">` +
         q.opts.map(opt =>
-          `<label class="radio-opt"><input type="radio" name="gq-${i}" value="${esc(opt)}" ${saved===opt?'checked':''}> ${esc(opt)}</label>`
+          `<label class="radio-opt"><input type="radio" name="gq-${i}" value="${esc(opt)}"
+            onchange="saveGateAnswer('${q.key}', this.value)"
+            ${saved === opt ? 'checked' : ''}> ${esc(opt)}</label>`
         ).join('') + '</div>';
     } else {
-      html += `<textarea rows="2" placeholder="${esc(q.placeholder)}" onchange="saveGateAnswer('${q.key}',this.value)" style="margin-top:10px">${esc(saved)}</textarea>`;
-    }
-    if (q.type === 'radio') {
-      html += `<script>document.addEventListener('change',e=>{if(e.target.name==='gq-${i}')saveGateAnswer('${q.key}',e.target.value)});<\/script>`;
+      html += `<textarea rows="2" placeholder="${esc(q.placeholder)}"
+        oninput="saveGateAnswer('${q.key}', this.value)"
+        style="margin-top:10px">${esc(saved)}</textarea>`;
     }
     html += `</div>`;
   });
@@ -995,12 +997,33 @@ function saveGateAnswer(key, val) {
 function submitGate() {
   loadMyData();
   const ans = myData.gateAnswers || {};
-  const required = ['motivation', 'target', 'exp_detail', 'property_cond'];
-  if (required.some(k => !ans[k])) { alert('必須の質問に回答してください（Q1〜Q4は必須です）。'); return; }
-  if (parseInt(myData.st) <= 2) {
-    updateSt('2');
+
+  // 送信前に画面上の最新入力値を確実に収集する
+  GATE_QUESTIONS.forEach((q, i) => {
+    if (q.type === 'radio') {
+      const checked = document.querySelector(`input[name="gq-${i}"]:checked`);
+      if (checked) ans[q.key] = checked.value;
+    } else {
+      const ta = document.querySelectorAll('#gate-form-wrap textarea')[
+        GATE_QUESTIONS.slice(0, i).filter(x => x.type !== 'radio').length
+      ];
+      if (ta && ta.value.trim()) ans[q.key] = ta.value.trim();
+    }
+  });
+  myData.gateAnswers = ans;
+  saveMy();
+
+  // Q1（動機ラジオ）と最低4問の回答を必須とする
+  const answered = GATE_QUESTIONS.filter(q => ans[q.key] && String(ans[q.key]).trim()).length;
+  if (!ans['motivation']) {
+    alert('Q1「開業の動機」を選択してください。'); return;
   }
-  addLog('candidate', 'GATE一次送信', `${myData.name} がGATE一次フォームを提出`);
+  if (answered < 4) {
+    alert(`あと ${4 - answered} 問以上回答してから送信してください。`); return;
+  }
+
+  if (parseInt(myData.st) <= 2) updateSt('2');
+  addLog('candidate', 'GATE一次送信', `${myData.name} がGATE一次フォームを提出（${answered}問回答）`);
   alert('✅ GATE一次診断を送信しました。BCが2営業日以内に確認します。');
   showPage('mypage');
 }
