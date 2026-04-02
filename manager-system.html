@@ -645,6 +645,124 @@ textarea { resize: vertical; min-height: 80px; }
 }
 .tenant-select-card:hover { border-color: var(--gold-dim); }
 .tenant-select-card.selected-tenant { border-color: var(--gold); background: #FFFBEE; }
+
+/* ── ONBOARDING WIDGET ── */
+.onboarding-widget {
+  background: var(--white);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+  border-top: 3px solid var(--gold);
+  padding: 28px 32px;
+  margin-bottom: 24px;
+}
+.onboarding-title {
+  font-size: 0.82rem; font-weight: 700; color: var(--navy);
+  margin-bottom: 6px; letter-spacing: 0.05em;
+}
+.onboarding-lead {
+  font-size: 0.72rem; color: var(--warm); margin-bottom: 20px; line-height: 1.7;
+}
+.onboarding-steps {
+  display: flex; gap: 0; counter-reset: step;
+}
+.onboarding-step {
+  flex: 1; padding: 16px 20px;
+  border-left: 1px solid var(--cream-dk);
+  position: relative;
+}
+.onboarding-step:first-child { border-left: none; }
+.onboarding-step-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem; font-weight: 300;
+  color: rgba(201,168,76,0.3); line-height: 1;
+  margin-bottom: 8px;
+}
+.onboarding-step-h {
+  font-size: 0.82rem; font-weight: 700; color: var(--navy); margin-bottom: 4px;
+}
+.onboarding-step-d { font-size: 0.7rem; color: var(--warm); line-height: 1.6; }
+.onboarding-step-btn {
+  display: inline-block; margin-top: 10px;
+  font-size: 0.7rem; letter-spacing: 0.1em;
+  background: var(--navy); color: var(--gold);
+  border: none; border-radius: var(--r);
+  padding: 6px 14px; cursor: pointer;
+  transition: background 0.2s;
+}
+.onboarding-step-btn:hover { background: var(--navy-lt); }
+
+/* ── BENEFIT PREVIEW CARDS ── */
+.benefit-row {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 12px; margin-bottom: 24px;
+}
+.benefit-card {
+  background: var(--cream);
+  border-radius: var(--r);
+  padding: 16px 20px;
+  border-left: 3px solid rgba(201,168,76,0.4);
+}
+.benefit-card-icon { font-size: 1.4rem; margin-bottom: 8px; }
+.benefit-card-h { font-size: 0.78rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.benefit-card-d { font-size: 0.68rem; color: var(--warm); line-height: 1.6; }
+
+/* ── LOSS VISUALIZATION BANNER ── */
+.loss-banner {
+  background: var(--navy);
+  color: var(--cream);
+  border-radius: var(--r);
+  padding: 16px 24px;
+  display: flex; align-items: center;
+  gap: 24px; margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.loss-banner-label { font-size: 0.68rem; color: var(--smoke); letter-spacing: 0.1em; }
+.loss-banner-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem; font-weight: 300; color: var(--gold);
+  line-height: 1;
+}
+.loss-banner-unit { font-size: 0.72rem; color: var(--smoke); }
+.loss-banner-divider { width: 1px; height: 40px; background: rgba(201,168,76,0.2); }
+.loss-note { font-size: 0.65rem; color: var(--smoke); flex: 1; min-width: 180px; line-height: 1.7; }
+
+/* ── REQUIRED ACTIONS TABLE ── */
+.action-badge {
+  display: inline-block; font-size: 0.65rem; font-weight: 700;
+  padding: 3px 8px; border-radius: 20px; white-space: nowrap;
+}
+.action-now { background: #FEF3C7; color: #92400E; }
+.action-wait { background: #EFF6FF; color: #1E40AF; }
+.action-done { background: #F0FDF4; color: #166534; }
+.stat-card-sub-label {
+  font-size: 0.58rem; letter-spacing: 0.15em; color: var(--gold-dim);
+  text-transform: uppercase; margin-bottom: 4px;
+}
+
+/* ── GATE GUIDE ── */
+.gate-guide {
+  background: var(--white);
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+  padding: 20px 24px;
+  margin-bottom: 20px;
+  border-left: 4px solid var(--gold);
+}
+.gate-guide-title {
+  font-size: 0.75rem; font-weight: 700; color: var(--warm);
+  letter-spacing: 0.1em; margin-bottom: 12px;
+  text-transform: uppercase;
+}
+.gate-guide-grid { display: flex; gap: 12px; flex-wrap: wrap; }
+.gate-guide-item {
+  flex: 1; min-width: 160px;
+  border-radius: var(--r); padding: 12px 16px;
+  font-size: 0.72rem; line-height: 1.7;
+}
+.gate-guide-item strong { display: block; font-size: 0.82rem; margin-bottom: 4px; }
+.gg-pass { background: #F0FDF4; border: 1px solid #BBF7D0; color: #166534; }
+.gg-review { background: #FFFBEB; border: 1px solid #FDE68A; color: #92400E; }
+.gg-fail { background: #FEF2F2; border: 1px solid #FECACA; color: #991B1B; }
 </style>
 </head>
 <body>
@@ -672,7 +790,7 @@ textarea { resize: vertical; min-height: 80px; }
       <span class="icon">🎯</span> GATE診断
     </div>
     <div class="nav-item" data-page="report" onclick="navigate('report')">
-      <span class="icon">📄</span> レポート出力
+      <span class="icon">📄</span> オーナー説明用レポート
     </div>
   </nav>
   <div class="sidebar-footer">
@@ -693,39 +811,58 @@ textarea { resize: vertical; min-height: 80px; }
 
     <!-- ── PAGE: DASHBOARD ── -->
     <div class="page active" id="page-dashboard">
+
+      <!-- 空室損失の見える化バナー -->
+      <div class="loss-banner" id="loss-banner" style="display:none;">
+        <div>
+          <div class="loss-banner-label">VACANCY LOSS</div>
+          <div class="loss-banner-val" id="loss-val">—</div>
+          <div class="loss-banner-unit">万円 / 月　想定賃料損失</div>
+        </div>
+        <div class="loss-banner-divider"></div>
+        <div>
+          <div class="loss-banner-label">RECOVERY FORECAST</div>
+          <div class="loss-banner-val" id="loss-days" style="color:#6DB89A;">—</div>
+          <div class="loss-banner-unit">日　平均短縮見込み</div>
+        </div>
+        <div class="loss-banner-divider"></div>
+        <p class="loss-note">退去予兆の段階から候補者準備を始めることで、空室期間を6〜8ヶ月→30日未満に短縮できます。BRIDGE CYCLEが前倒し介入します。</p>
+      </div>
+
       <div class="stat-grid" id="stat-grid">
         <div class="stat-card">
+          <div class="stat-card-sub-label">退去予兆案件</div>
           <div class="label">登録物件数</div>
           <div class="value" id="stat-props">0</div>
-          <div class="sub">件</div>
+          <div class="sub">件　入力済み</div>
         </div>
         <div class="stat-card">
-          <div class="label">テナント候補数</div>
-          <div class="value" id="stat-tenants">0</div>
-          <div class="sub">名</div>
+          <div class="stat-card-sub-label">オーナー意向</div>
+          <div class="label">意向確認済み</div>
+          <div class="value" id="stat-owner">0</div>
+          <div class="sub">件　説明準備OK</div>
         </div>
         <div class="stat-card">
-          <div class="label">GATE診断済</div>
-          <div class="value" id="stat-gate">0</div>
-          <div class="sub">名</div>
+          <div class="stat-card-sub-label">前倒しフェーズ</div>
+          <div class="label">候補者接続中</div>
+          <div class="value" id="stat-active">0</div>
+          <div class="sub">名　ST1〜ST4</div>
         </div>
-        <div class="stat-card">
-          <div class="label">ST8 開業完了</div>
-          <div class="value" id="stat-st8">0</div>
-          <div class="sub">件</div>
+        <div class="stat-card" style="border-top-color:var(--sage);">
+          <div class="stat-card-sub-label">空室期間短縮実績</div>
+          <div class="label">開業完了</div>
+          <div class="value" id="stat-st8" style="color:var(--sage);">0</div>
+          <div class="sub">件　ST8到達</div>
         </div>
       </div>
 
-      <div class="section-header">
-        <div class="section-title">最近のテナント候補</div>
-        <button class="btn btn-primary btn-sm" onclick="navigate('tenants')">一覧へ →</button>
+      <div id="dash-onboarding"></div>
+
+      <div class="section-header" id="dash-action-header" style="display:none;">
+        <div class="section-title">要対応案件一覧</div>
+        <button class="btn btn-primary btn-sm" onclick="navigate('property')">物件一覧 →</button>
       </div>
-      <div class="table-wrap" id="dash-recent-wrap">
-        <div class="empty-state">
-          <div class="icon">📋</div>
-          <div class="msg">テナント候補を登録すると一覧が表示されます</div>
-        </div>
-      </div>
+      <div id="dash-recent-wrap"></div>
     </div>
 
     <!-- ── PAGE: PROPERTY ── -->
@@ -758,8 +895,22 @@ textarea { resize: vertical; min-height: 80px; }
 
     <!-- ── PAGE: GATE ── -->
     <div class="page" id="page-gate">
+      <div class="gate-guide">
+        <div class="gate-guide-title">スコア判定の目安 — オーナー説明の根拠として使えます</div>
+        <div class="gate-guide-grid">
+          <div class="gate-guide-item gg-pass">
+            <strong>22〜30点：紹介推奨</strong>オーナーへの即時推薦が可能。融資・計画・承継条件が整っており、入居後の継続リスクが低い状態です。
+          </div>
+          <div class="gate-guide-item gg-review">
+            <strong>15〜21点：条件付き推奨</strong>補強計画とセットで推薦します。BC認定診断士が強化ポイントを明示し、再評価のうえ推薦します。
+          </div>
+          <div class="gate-guide-item gg-fail">
+            <strong>14点以下：再検討</strong>現状では推薦困難。改善計画（資金調達・業種転換等）を策定後、再診断を実施します。
+          </div>
+        </div>
+      </div>
       <div class="alert alert-info">
-        対象のテナント候補を選択してGATE診断（6軸スコアリング）を実施します。
+        対象のテナント候補を選択してGATE診断（6軸スコアリング）を実施してください。スコアはオーナーへの入居者紹介時の説明材料になります。
       </div>
       <div id="gate-tenant-select-area">
         <div class="section-title" style="margin-bottom:12px;">テナント候補を選択</div>
@@ -792,7 +943,7 @@ textarea { resize: vertical; min-height: 80px; }
     <!-- ── PAGE: REPORT ── -->
     <div class="page" id="page-report">
       <div id="report-controls" class="section-header" style="margin-bottom:16px;">
-        <div class="section-title">レポート出力</div>
+        <div class="section-title">オーナー説明用レポート（PDF出力対応）</div>
         <div style="display:flex;gap:10px;">
           <select id="report-property-select" style="width:220px;" onchange="renderReport()">
             <option value="">— 物件を選択 —</option>
@@ -1040,8 +1191,8 @@ const PAGE_TITLES = {
   dashboard: 'ダッシュボード',
   property: '空き店舗ヒアリング入力',
   tenants: 'テナント候補管理',
-  gate: 'GATE診断',
-  report: 'レポート出力'
+  gate: 'GATE診断（6軸スコアリング）',
+  report: 'オーナー説明用レポート'
 };
 
 function navigate(page) {
@@ -1071,38 +1222,132 @@ function closeModal(id) { document.getElementById(id).classList.remove('open'); 
 function renderDashboard() {
   const props = DB.load('properties');
   const tenants = DB.load('tenants');
-  const gateDone = tenants.filter(t => t.gate && Object.values(t.gate).some(v => v > 0));
+  const ownerConfirmed = props.filter(p => p.ownerIntent && p.ownerIntent !== '').length;
+  const activeTenants = tenants.filter(t => parseInt(t.st) <= 4);
   const st8 = tenants.filter(t => t.st === '8' || t.st === 8);
 
   document.getElementById('stat-props').textContent = props.length;
-  document.getElementById('stat-tenants').textContent = tenants.length;
-  document.getElementById('stat-gate').textContent = gateDone.length;
+  document.getElementById('stat-owner').textContent = ownerConfirmed;
+  document.getElementById('stat-active').textContent = activeTenants.length;
   document.getElementById('stat-st8').textContent = st8.length;
 
+  // 空室損失バナー
+  const lossBanner = document.getElementById('loss-banner');
+  if (props.length > 0) {
+    const totalRent = props.reduce((s, p) => s + (parseFloat(p.rent) || 0), 0);
+    const lossVal = document.getElementById('loss-val');
+    const lossDays = document.getElementById('loss-days');
+    lossVal.textContent = totalRent.toFixed(1);
+    // 登録物件の中で候補者未接続のものは最大損失
+    const linkedPropIds = new Set(tenants.map(t => t.propertyId));
+    const unlinked = props.filter(p => !linkedPropIds.has(p.id)).length;
+    lossDays.textContent = st8.length > 0 ? `${st8.length * 30}日+` : unlinked > 0 ? '前倒し開始を推奨' : '接続中';
+    lossBanner.style.display = 'flex';
+  } else {
+    lossBanner.style.display = 'none';
+  }
+
+  const onboardingEl = document.getElementById('dash-onboarding');
+  const actionHeader = document.getElementById('dash-action-header');
   const wrap = document.getElementById('dash-recent-wrap');
-  if (!tenants.length) {
-    wrap.innerHTML = `<div class="empty-state"><div class="icon">📋</div><div class="msg">テナント候補を登録すると一覧が表示されます</div></div>`;
+
+  // === 完全0件：オンボーディング表示 ===
+  if (!props.length && !tenants.length) {
+    actionHeader.style.display = 'none';
+    onboardingEl.innerHTML = `
+      <div class="onboarding-widget">
+        <div class="onboarding-title">はじめにやること — 3ステップで空室対策が動き始めます</div>
+        <div class="onboarding-lead">退去予兆の段階から動き始めることで、空室期間を6〜8ヶ月から30日未満に短縮できます。まずは物件情報を1件入力してください。</div>
+        <div class="onboarding-steps">
+          <div class="onboarding-step">
+            <div class="onboarding-step-num">01</div>
+            <div class="onboarding-step-h">退去予兆物件を1件登録</div>
+            <div class="onboarding-step-d">退去理由・オーナー意向・退去予兆を入力するだけ。管理会社の追加業務はここだけです。</div>
+            <button class="onboarding-step-btn" onclick="navigate('property')">空き店舗を登録 →</button>
+          </div>
+          <div class="onboarding-step">
+            <div class="onboarding-step-num">02</div>
+            <div class="onboarding-step-h">テナント候補者を登録</div>
+            <div class="onboarding-step-d">BRIDGE CYCLEが選定した創業希望者を候補者として登録。ST1〜ST4を物件決定前に完了させます。</div>
+            <button class="onboarding-step-btn" onclick="navigate('tenants')" style="opacity:0.4;cursor:not-allowed;">候補者を登録（物件登録後）</button>
+          </div>
+          <div class="onboarding-step">
+            <div class="onboarding-step-num">03</div>
+            <div class="onboarding-step-h">GATE診断を実施</div>
+            <div class="onboarding-step-d">6軸スコアで「なぜこの人を選んだか」をオーナーに説明できる根拠をつくります。</div>
+            <button class="onboarding-step-btn" onclick="navigate('gate')" style="opacity:0.4;cursor:not-allowed;">GATE診断（候補者登録後）</button>
+          </div>
+        </div>
+      </div>
+      <div class="benefit-row">
+        <div class="benefit-card">
+          <div class="benefit-card-icon">📉</div>
+          <div class="benefit-card-h">空室期間の短縮</div>
+          <div class="benefit-card-d">退去日＝即入居日を実現。退去後の募集・審査・契約期間をゼロに近づけます。</div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-card-icon">📋</div>
+          <div class="benefit-card-h">オーナー説明がしやすい</div>
+          <div class="benefit-card-d">GATE診断スコアで「なぜこの候補者か」を数字で説明。感覚ではなく根拠で推薦できます。</div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-card-icon">🔄</div>
+          <div class="benefit-card-h">承継条件の整理</div>
+          <div class="benefit-card-d">設備・内装の引き継ぎ条件が整理され、原状回復工事の削減とテナントの初期費用圧縮が同時に実現します。</div>
+        </div>
+      </div>`;
+    wrap.innerHTML = '';
     return;
   }
-  const recent = [...tenants].sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0)).slice(0, 5);
+
+  // === データあり：要対応案件一覧（物件ベース） ===
+  onboardingEl.innerHTML = '';
+  actionHeader.style.display = 'flex';
+
+  const NEXT_ACTION = (p, pts) => {
+    if (!pts.length) return { label: 'テナント候補を登録する', cls: 'action-now', act: `navigate('tenants')` };
+    const hasGate = pts.some(t => t.gate && Object.values(t.gate).some(v => v > 0));
+    const maxSt = Math.max(...pts.map(t => parseInt(t.st) || 1));
+    if (!hasGate) return { label: 'GATE診断を実施する', cls: 'action-now', act: `navigate('gate')` };
+    if (maxSt <= 2) return { label: 'GATE診断を確認・更新', cls: 'action-now', act: `navigate('gate')` };
+    if (maxSt === 3) return { label: '事業計画を確認する', cls: 'action-wait', act: `navigate('tenants')` };
+    if (maxSt === 4) return { label: '融資申込を確認する', cls: 'action-wait', act: `navigate('tenants')` };
+    if (maxSt >= 5 && maxSt < 8) return { label: '入居準備進行中', cls: 'action-wait', act: `navigate('tenants')` };
+    return { label: '開業完了', cls: 'action-done', act: `navigate('report')` };
+  };
+
+  const rows = props.map(p => {
+    const pts = tenants.filter(t => t.propertyId === p.id);
+    const maxSt = pts.length ? Math.max(...pts.map(t => parseInt(t.st) || 1)) : 0;
+    const gateCount = pts.filter(t => t.gate && Object.values(t.gate).some(v => v > 0)).length;
+    const na = NEXT_ACTION(p, pts);
+    return `
+      <tr>
+        <td><strong>${p.name}</strong><br><span style="font-size:0.68rem;color:var(--smoke);">${p.address || '—'}</span></td>
+        <td>${p.vacancySign || '—'}</td>
+        <td>${p.ownerIntent || '<span style="color:var(--smoke)">未入力</span>'}</td>
+        <td>${pts.length ? `${pts.length}名（GATE済${gateCount}）` : '<span style="color:var(--smoke)">0名</span>'}</td>
+        <td>${maxSt > 0 ? `<span class="badge badge-st${maxSt}">${ST_LABELS[maxSt] || 'ST'+maxSt}</span>` : '<span style="color:var(--smoke)">未登録</span>'}</td>
+        <td><button class="action-badge ${na.cls}" onclick="${na.act}" style="cursor:pointer;border:none;">${na.label}</button></td>
+        <td><div class="td-action">
+          <button class="btn btn-ghost btn-sm" onclick="editProperty('${p.id}')">編集</button>
+          <button class="btn btn-primary btn-sm" onclick="navigate('report')">レポート</button>
+        </div></td>
+      </tr>`;
+  }).join('');
+
   wrap.innerHTML = `
-    <table>
-      <thead><tr><th>氏名</th><th>区分</th><th>業種</th><th>対象物件</th><th>STステータス</th><th>操作</th></tr></thead>
-      <tbody>
-        ${recent.map(t => `
+    <div class="table-wrap">
+      <table>
+        <thead>
           <tr>
-            <td><strong>${t.name}</strong></td>
-            <td><span class="badge badge-${t.type === 'foreign' ? 'foreign' : 'jp'}">${t.type === 'foreign' ? '外国人' : '日本人'}</span></td>
-            <td>${t.business || '—'}</td>
-            <td>${getPropertyName(t.propertyId)}</td>
-            <td><span class="badge badge-st${t.st}">${ST_LABELS[t.st] || 'ST' + t.st}</span></td>
-            <td><div class="td-action">
-              <button class="btn btn-ghost btn-sm" onclick="showTenantDetail('${t.id}')">詳細</button>
-            </div></td>
+            <th>物件名</th><th>退去予兆</th><th>オーナー意向</th>
+            <th>候補者</th><th>現在ST</th><th>次アクション</th><th>操作</th>
           </tr>
-        `).join('')}
-      </tbody>
-    </table>`;
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
 }
 
 // ══════════════════════════════════════════
@@ -1654,7 +1899,7 @@ function renderReport() {
         <tbody>${gateSection}</tbody>
       </table>
       <div style="font-size:0.68rem;color:var(--warm);margin-top:8px;">
-        ※ 判定基準：22点以上＝通過推奨 ／ 15〜21点＝要検討 ／ 14点以下＝再検討
+        ※ 判定基準：22〜30点＝紹介推奨（即時推薦可）／ 15〜21点＝条件付き推奨（補強計画とセット）／ 14点以下＝再検討（改善計画後に再診断）
       </div>
     </div>` : ''}
 
@@ -1666,8 +1911,99 @@ function renderReport() {
 }
 
 // ══════════════════════════════════════════
+//  DEMO DATA (初回のみ投入)
+// ══════════════════════════════════════════
+function initDemoData() {
+  const props = DB.load('properties');
+  const tenants = DB.load('tenants');
+  if (props.length || tenants.length) return; // 既存データがあれば何もしない
+
+  const propId1 = 'demo_prop_1';
+  const propId2 = 'demo_prop_2';
+
+  DB.save('properties', [
+    {
+      id: propId1,
+      name: '大津駅前 路面テナント',
+      address: '滋賀県大津市梅林1丁目',
+      rent: '16.7',
+      area: '42.5',
+      layout: '1F路面・飲食可',
+      vacantSince: '2026年5月',
+      vacancyReason: '閉業（経営不振）',
+      vacancySign: '3ヶ月前に申告',
+      ownerIntent: '業種不問・早期充填希望',
+      loanAdvance: '未対応（要調整）',
+      note: '厨房設備（業務用冷蔵庫・ガスレンジ）一式残置。オーナー希望：5月末までに次テナント確定。',
+      createdAt: Date.now() - 1000*60*60*24*5
+    },
+    {
+      id: propId2,
+      name: 'におの浜商店街 B号室',
+      address: '滋賀県大津市におの浜3丁目',
+      rent: '12.0',
+      area: '35.0',
+      layout: '路面・物販可',
+      vacantSince: '2026年6月',
+      vacancyReason: '閉業（後継者不在）',
+      vacancySign: '6ヶ月前に申告',
+      ownerIntent: '承継・引継ぎ優先',
+      loanAdvance: '未対応（要調整）',
+      note: '什器・カウンター・照明設備残置。後継者引継ぎ優先のため、設備を活かせる方を希望。',
+      createdAt: Date.now() - 1000*60*60*24*2
+    }
+  ]);
+
+  DB.save('tenants', [
+    {
+      id: 'demo_tenant_1',
+      name: '田中 美咲',
+      type: 'jp',
+      tel: '090-1234-5678',
+      email: 'misaki.tanaka@example.com',
+      business: 'ランチカフェ・テイクアウト',
+      propertyId: propId1,
+      st: '3',
+      gatePack: 'jp',
+      note: '飲食経験5年。自己資金150万円。GATE診断済み（23点）。事業計画書をBC診断士と共同作成中。',
+      gate: { motivation: 4, finance: 3, fit: 4, experience: 4, plan: 3, succession: 5 },
+      createdAt: Date.now() - 1000*60*60*24*3
+    },
+    {
+      id: 'demo_tenant_2',
+      name: '李 建国',
+      type: 'foreign',
+      tel: '080-9876-5432',
+      email: 'li.jianguo@example.com',
+      business: '中華料理・テイクアウト専門',
+      propertyId: propId1,
+      st: '2',
+      gatePack: 'foreign',
+      note: '調理師免許あり。日本在住8年。自己資金200万円。GATE診断実施待ち。',
+      gate: null,
+      createdAt: Date.now() - 1000*60*60*24*1
+    },
+    {
+      id: 'demo_tenant_3',
+      name: '山本 健一',
+      type: 'jp',
+      tel: '070-5555-4444',
+      email: 'kenichi.yamamoto@example.com',
+      business: '雑貨・セレクトショップ',
+      propertyId: propId2,
+      st: '4',
+      gatePack: 'jp',
+      note: 'EC運営5年。実店舗進出を検討。融資申込中（日本政策金融公庫）。BC診断士と計画書共同作成済み。',
+      gate: { motivation: 5, finance: 4, fit: 4, experience: 3, plan: 4, succession: 4 },
+      createdAt: Date.now() - 1000*60*60*24*4
+    }
+  ]);
+}
+
+// ══════════════════════════════════════════
 //  INIT
 // ══════════════════════════════════════════
+initDemoData();
 renderDashboard();
 </script>
 </body>
