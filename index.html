@@ -947,6 +947,116 @@ footer{
   .muni-badge{margin-left:0}
   .problem-quote{flex-direction:column;gap:20px}
   .hero-h1{font-size:2.4rem}
+  .cta-cards{grid-template-columns:1fr}
+  .case-grid{grid-template-columns:1fr}
+}
+
+/* ── PHOTO SLOTS ── */
+.photo-slot{
+  margin:48px 0;height:280px;
+  background:var(--navy-mid);
+  border:1px solid rgba(201,168,76,0.12);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.photo-slot::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(
+    45deg,
+    rgba(201,168,76,0.025) 0px,rgba(201,168,74,0.025) 1px,
+    transparent 1px,transparent 32px
+  );
+}
+.photo-slot-inner{text-align:center;z-index:1;padding:0 24px;}
+.photo-slot-lbl{
+  font-family:'Cormorant Garamond',serif;
+  font-size:0.7rem;letter-spacing:0.35em;color:var(--gold-dim);
+  margin-bottom:14px;text-transform:uppercase;
+}
+.photo-slot-title{
+  font-family:'Shippori Mincho B1',serif;
+  font-size:1.05rem;font-weight:700;color:var(--smoke);
+  margin-bottom:8px;line-height:1.6;
+}
+.photo-slot-note{font-size:0.63rem;color:rgba(200,190,170,0.3);letter-spacing:0.1em;}
+.photo-slot-alt{
+  height:auto;min-height:200px;
+  grid-template-columns:1fr 1fr;
+  display:grid;gap:2px;margin:48px 0;
+}
+.photo-slot-alt .photo-slot{margin:0;height:200px;}
+
+/* ── 3-WAY CTA CARDS ── */
+.cta-cards{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
+  margin-bottom:56px;
+}
+.cta-card{
+  background:rgba(255,255,255,0.03);
+  border-top:2px solid rgba(201,168,76,0.2);
+  padding:32px 28px;
+  transition:border-top-color 0.25s,background 0.25s;
+}
+.cta-card:hover{border-top-color:var(--gold);background:rgba(201,168,76,0.05);}
+.cta-card-tag{font-size:0.63rem;letter-spacing:0.25em;color:var(--gold-dim);margin-bottom:14px;}
+.cta-card-h{
+  font-family:'Shippori Mincho B1',serif;
+  font-size:1rem;font-weight:700;color:var(--cream);
+  margin-bottom:10px;line-height:1.5;
+}
+.cta-card-body{font-size:0.78rem;color:var(--smoke);line-height:1.9;margin-bottom:20px;}
+.cta-card-btn{
+  display:inline-block;
+  font-size:0.72rem;letter-spacing:0.15em;
+  color:var(--gold);border:1px solid rgba(201,168,76,0.35);
+  padding:10px 20px;text-decoration:none;transition:all 0.2s;
+}
+.cta-card-btn:hover{background:var(--gold);color:var(--navy);}
+.cta-card-btn.btn-primary-sm{background:var(--gold);color:var(--navy);}
+.cta-card-btn.btn-primary-sm:hover{background:var(--gold-lt);}
+
+/* ── CASE STUDY BOX ── */
+.case-box{
+  background:var(--navy-mid);
+  border:1px solid rgba(201,168,76,0.12);
+  padding:56px 48px;margin-top:0;
+}
+.case-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:0;
+  margin-top:40px;
+}
+.case-step{
+  padding:20px 16px;border-right:1px solid rgba(201,168,76,0.1);
+  position:relative;
+}
+.case-step:last-child{border-right:none;}
+.case-step::after{
+  content:'→';position:absolute;right:-10px;top:30px;
+  font-size:0.9rem;color:var(--gold-dim);
+}
+.case-step:last-child::after{display:none;}
+.case-step-num{font-family:'Cormorant Garamond',serif;font-size:0.7rem;letter-spacing:0.25em;color:var(--gold-dim);margin-bottom:8px;}
+.case-step-h{font-family:'Shippori Mincho B1',serif;font-size:0.88rem;font-weight:700;color:var(--cream);margin-bottom:6px;line-height:1.4;}
+.case-step-d{font-size:0.73rem;color:var(--smoke);line-height:1.8;}
+.case-result{
+  margin-top:32px;padding:20px 24px;
+  background:rgba(61,90,76,0.1);border:1px solid rgba(61,90,76,0.2);
+  display:flex;gap:32px;align-items:center;flex-wrap:wrap;
+}
+.case-result-item{text-align:center;}
+.case-result-num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--sage);}
+.case-result-l{font-size:0.68rem;color:var(--smoke);letter-spacing:0.1em;}
+
+/* ── CONTACT SECTION HEADING AREA ── */
+.contact-intro-h{
+  font-family:'Shippori Mincho B1',serif;
+  font-size:clamp(1.5rem,2.4vw,2.1rem);
+  font-weight:800;line-height:1.5;
+  color:var(--navy);margin-bottom:12px;
+}
+.contact-intro-lead{
+  font-size:0.88rem;color:var(--warm);line-height:2;
+  max-width:600px;margin-bottom:40px;
 }
 </style>
 </head>
@@ -966,7 +1076,7 @@ footer{
   <div class="nav-cta-wrap nav-links">
     <a href="exit.html" class="btn-nav-ghost">退店希望の方へ</a>
     <a href="lp.html" class="btn-nav-ghost">創業希望の方へ</a>
-    <a href="#contact" class="btn-nav-solid">資料請求</a>
+    <a href="#contact" class="btn-nav-solid">PoC相談（無料）</a>
   </div>
   <div class="ham" id="ham" onclick="toggleMob()">
     <span></span><span></span><span></span>
@@ -1000,20 +1110,20 @@ footer{
         <span class="sub-line">管理会社入力型 × GATE選抜 × BC認定パートナー診断士による伴走</span>
       </h1>
       <div class="hero-btns">
-        <a href="#contact" class="btn-hero-p">まず資料請求・ご相談（無料）</a>
-        <a href="#model" class="btn-hero-s">どんな仕組みか見る →</a>
+        <a href="#contact" class="btn-hero-p">1物件からPoC相談（無料）</a>
+        <a href="#model" class="btn-hero-s">仕組みを30秒で見る →</a>
       </div>
     </div>
     <div>
       <div class="hero-stat-card">
         <div class="stat-row">
           <span class="stat-n">50<small>%</small></span>
-          <span class="stat-l">創業者の初期費用削減目安<br>承継により実現</span>
+          <span class="stat-l"><strong style="font-size:0.65rem;letter-spacing:0.15em;color:var(--gold-dim)">初期費用削減目安</strong><br>設備承継により実現する<br>創業コストの圧縮効果</span>
         </div>
         <div class="stat-div"></div>
         <div class="stat-row">
           <span class="stat-n">500<small>社+</small></span>
-          <span class="stat-l">創業・承継・廃業支援の実績<br>20年間のフィールド経験</span>
+          <span class="stat-l"><strong style="font-size:0.65rem;letter-spacing:0.15em;color:var(--gold-dim)">中小企業支援実績</strong><br>創業・承継・廃業支援の<br>20年間のフィールド経験</span>
         </div>
         <div class="stat-div"></div>
         <p class="stat-phrase">
@@ -1044,6 +1154,26 @@ footer{
     <span class="strip-item">物件決定前に融資の目処を立てる</span>
     <span class="strip-item">空室期間を最小化する8ステップ</span>
     <span class="strip-item">BC認定パートナー診断士が伴走</span>
+  </div>
+</div>
+
+<!-- ══ PHOTO SLOT 1: 居抜き物件の実景 ══ -->
+<div style="background:var(--navy);padding:0 0 0 0;">
+  <div class="photo-slot-alt reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:0;">
+    <div class="photo-slot" style="margin:0;height:260px;">
+      <div class="photo-slot-inner">
+        <div class="photo-slot-lbl">Photo Placeholder</div>
+        <div class="photo-slot-title">厨房・設備が残る居抜き物件の実景</div>
+        <div class="photo-slot-note">※「そのまま使える資産」が伝わる写真を配置</div>
+      </div>
+    </div>
+    <div class="photo-slot" style="margin:0;height:260px;">
+      <div class="photo-slot-inner">
+        <div class="photo-slot-lbl">Photo Placeholder</div>
+        <div class="photo-slot-title">シャッターの閉まった店舗・商店街の実景</div>
+        <div class="photo-slot-note">※空き店舗問題を感覚的に伝える写真を配置</div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1274,6 +1404,23 @@ footer{
       <div class="muni-badge">
         <span class="muni-badge-num">75<small>万円</small></span>
         <span class="muni-badge-l">実装支援料の目安<br>（成功報酬型）</span>
+      </div>
+    </div>
+    <!-- Photo slot: 管理会社担当 + 創業希望者 -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:48px;">
+      <div class="photo-slot reveal" style="margin:0;height:220px;">
+        <div class="photo-slot-inner">
+          <div class="photo-slot-lbl">Photo Placeholder</div>
+          <div class="photo-slot-title">管理会社の担当者がシステムを入力する場面</div>
+          <div class="photo-slot-note">※「入力するだけ」という軽さを伝えるB2B感のある写真</div>
+        </div>
+      </div>
+      <div class="photo-slot reveal" style="margin:0;height:220px;">
+        <div class="photo-slot-inner">
+          <div class="photo-slot-lbl">Photo Placeholder</div>
+          <div class="photo-slot-title">創業希望者が事業計画を考えている場面</div>
+          <div class="photo-slot-note">※ノートPC・図面・メモ。夢ではなく「準備」の空気感</div>
+        </div>
       </div>
     </div>
   </div>
@@ -1691,6 +1838,74 @@ footer{
   </div>
 </section>
 
+<!-- ══ CASE STUDY ══ -->
+<section id="case" class="sec-mid">
+  <div class="sec">
+    <p class="sec-label reveal">Case Study</p>
+    <h2 class="sec-h2 reveal">承継から開業まで——匿名事例</h2>
+    <p class="sec-lead reveal">「退去予兆」から「グランドオープン」まで、実際にどう進んだかを時系列で見てください。</p>
+    <div class="case-box reveal">
+      <div style="display:flex;gap:20px;align-items:center;margin-bottom:24px;flex-wrap:wrap;">
+        <span style="font-size:0.68rem;letter-spacing:0.2em;color:var(--gold-dim);border:1px solid rgba(201,168,76,0.3);padding:4px 12px;">飲食店（居酒屋業態）</span>
+        <span style="font-size:0.68rem;letter-spacing:0.2em;color:var(--smoke);">滋賀県内・路面店 約40席</span>
+        <span style="font-size:0.68rem;letter-spacing:0.2em;color:var(--smoke);">自己資金180万円</span>
+      </div>
+      <div class="case-grid">
+        <div class="case-step">
+          <div class="case-step-num">PHASE 01</div>
+          <div class="case-step-h">退去予兆を<br>管理会社が入力</div>
+          <div class="case-step-d">賃料滞納の兆候・オーナーへの相談。BRIDGE CYCLEへ情報提供。</div>
+        </div>
+        <div class="case-step">
+          <div class="case-step-num">PHASE 02</div>
+          <div class="case-step-h">GATE診断で<br>候補者スクリーニング</div>
+          <div class="case-step-d">6軸スコア24点。資金と計画性を補強のうえ通過。</div>
+        </div>
+        <div class="case-step">
+          <div class="case-step-num">PHASE 03</div>
+          <div class="case-step-h">融資申請<br>（物件決定より先）</div>
+          <div class="case-step-d">日本政策金融公庫へ申請。事業計画書もBC診断士と共同作成。</div>
+        </div>
+        <div class="case-step">
+          <div class="case-step-num">PHASE 04</div>
+          <div class="case-step-h">退去日＝<br>即・設備承継</div>
+          <div class="case-step-d">厨房設備・内装をそのまま引き継ぎ。スケルトン工事なし。</div>
+        </div>
+        <div class="case-step">
+          <div class="case-step-num">PHASE 05</div>
+          <div class="case-step-h">グランドオープン<br>→90日フォロー</div>
+          <div class="case-step-d">開業後も月次モニタリング。3か月後の売上計画比105%。</div>
+        </div>
+      </div>
+      <div class="case-result">
+        <div class="case-result-item">
+          <div class="case-result-num">0<small style="font-size:1rem">日</small></div>
+          <div class="case-result-l">空室期間</div>
+        </div>
+        <div class="case-result-item">
+          <div class="case-result-num">約52<small style="font-size:1rem">%</small></div>
+          <div class="case-result-l">初期費用削減（スケルトン工事不要）</div>
+        </div>
+        <div class="case-result-item">
+          <div class="case-result-num">3<small style="font-size:1rem">ヶ月</small></div>
+          <div class="case-result-l">退去予兆→開業までの期間</div>
+        </div>
+        <div style="flex:1;min-width:200px;">
+          <p style="font-size:0.72rem;color:var(--smoke);line-height:1.9;">「融資が先に通っていたから、物件交渉の時点でオーナーへの説明ができた。普通では考えられない速さで進みました。」——BC認定パートナー診断士</p>
+        </div>
+      </div>
+    </div>
+    <!-- Photo slot: 開業後の店舗営業風景 -->
+    <div class="photo-slot reveal" style="height:240px;">
+      <div class="photo-slot-inner">
+        <div class="photo-slot-lbl">Photo Placeholder</div>
+        <div class="photo-slot-title">小さな飲食店の営業風景——開業した店主の日常</div>
+        <div class="photo-slot-note">※1〜2人で切り盛りする現実感。過度におしゃれすぎない写真</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ══ TRUST ══ -->
 <section id="trust" class="sec-mid">
   <div class="sec">
@@ -1699,23 +1914,27 @@ footer{
     <div class="trust-nums">
       <div class="trust-num-cell reveal">
         <span class="trust-icon">🏆</span>
+        <span style="font-size:0.6rem;letter-spacing:0.2em;color:var(--gold-dim);display:block;margin-bottom:4px;">支援実績</span>
         <span class="trust-n">500<small>社+</small></span>
-        <p class="trust-l">創業・事業承継・廃業の<br>中小企業支援実績</p>
+        <p class="trust-l">創業・事業承継・廃業の<br>中小企業支援件数</p>
       </div>
       <div class="trust-num-cell reveal d1">
         <span class="trust-icon">📅</span>
+        <span style="font-size:0.6rem;letter-spacing:0.2em;color:var(--gold-dim);display:block;margin-bottom:4px;">フィールド経験</span>
         <span class="trust-n">20<small>年</small></span>
-        <p class="trust-l">元商工会経営指導員として<br>蓄積した中小企業支援の現場経験</p>
+        <p class="trust-l">元商工会経営指導員として<br>蓄積した中小企業支援の現場</p>
       </div>
       <div class="trust-num-cell reveal d2">
         <span class="trust-icon">📐</span>
+        <span style="font-size:0.6rem;letter-spacing:0.2em;color:var(--gold-dim);display:block;margin-bottom:4px;">テナント評価基準</span>
         <span class="trust-n">GATE<small> 6軸</small></span>
-        <p class="trust-l">動機・資金・適合性など6軸で<br>テナントの質を定量評価</p>
+        <p class="trust-l">感覚ではなくスコアで<br>入居候補者の質を定量評価</p>
       </div>
       <div class="trust-num-cell reveal d3">
         <span class="trust-icon">⚙️</span>
+        <span style="font-size:0.6rem;letter-spacing:0.2em;color:var(--gold-dim);display:block;margin-bottom:4px;">一貫サポート</span>
         <span class="trust-n">8<small>step</small></span>
-        <p class="trust-l">管理会社入力から<br>開業後フォローまで一貫支援</p>
+        <p class="trust-l">管理会社の入力から<br>開業後フォローまで完結</p>
       </div>
     </div>
     <div class="trust-badges">
@@ -1741,7 +1960,33 @@ footer{
 <section id="contact" class="sec-light">
   <div class="sec">
     <p class="sec-label reveal">Contact</p>
-    <h2 class="sec-h2 reveal">資料請求・お問い合わせ</h2>
+    <h2 class="sec-h2 reveal">あなたの立場から、話してみてください</h2>
+    <p class="sec-lead reveal">
+      誰に向けた相談か、によって聞くべきことは変わります。<br>下から選んでください。どの立場でも、最初の相談は無料です。
+    </p>
+
+    <!-- 3-way CTA cards -->
+    <div class="cta-cards reveal">
+      <div class="cta-card">
+        <div class="cta-card-tag">FOR PROPERTY MANAGERS</div>
+        <h3 class="cta-card-h">管理会社として<br>1物件から試してみたい</h3>
+        <p class="cta-card-body">退去予兆の段階で情報を入力するだけ。BRIDGE CYCLEがGATE診断済みの創業者候補を手配します。まず1物件で効果を確認してください。</p>
+        <a href="#contactFormWrap" class="cta-card-btn btn-primary-sm" onclick="document.getElementById('ftype').value='物件管理会社として導入を検討したい';document.getElementById('inqType').value='物件管理会社として導入を検討したい';">PoC相談を申し込む</a>
+      </div>
+      <div class="cta-card">
+        <div class="cta-card-tag">FOR FOUNDERS</div>
+        <h3 class="cta-card-h">創業希望者として<br>GATE診断を受けたい</h3>
+        <p class="cta-card-body">6軸スコアで開業準備度を確認します。強みと弱みを把握してから、物件探しに入ってください。診断は無料です。</p>
+        <a href="lp.html#gate" class="cta-card-btn" target="_blank">GATE診断を受ける（無料）</a>
+      </div>
+      <div class="cta-card">
+        <div class="cta-card-tag">FOR MUNICIPALITIES</div>
+        <h3 class="cta-card-h">自治体として<br>空き店舗対策に連携したい</h3>
+        <p class="cta-card-body">地域の空き店舗問題を、補助金・創業支援と組み合わせて解決する実証相談です。1自治体専任での導入も検討しています。</p>
+        <a href="#contactFormWrap" class="cta-card-btn" onclick="document.getElementById('ftype').value='自治体として連携を検討したい';document.getElementById('inqType').value='自治体として連携を検討したい';">実証相談を申し込む</a>
+      </div>
+    </div>
+
     <div class="contact-layout">
       <div class="reveal">
         <p class="contact-info-h">
@@ -1849,7 +2094,16 @@ footer{
     </p>
     <div class="final-btns reveal">
       <a href="#contact" class="btn-fp">まず、話してみる（無料）</a>
-      <a href="lp.html" class="btn-fs" target="_blank">創業希望者向けページ</a>
+      <a href="lp.html" class="btn-fs" target="_blank">創業希望者向け</a>
+      <a href="exit.html" class="btn-fs" target="_blank">退店希望者向け</a>
+    </div>
+    <!-- Photo slot: 街区夜景 -->
+    <div class="photo-slot reveal" style="height:200px;margin-top:56px;background:rgba(13,27,42,0.6);border-color:rgba(201,168,76,0.08);">
+      <div class="photo-slot-inner">
+        <div class="photo-slot-lbl" style="color:rgba(201,168,76,0.4);">Photo Placeholder</div>
+        <div class="photo-slot-title" style="color:rgba(247,242,232,0.4);">夜の商店街・街区に灯りがともる情景</div>
+        <div class="photo-slot-note">※「次の灯りへ」というブランド世界観を支える写真</div>
+      </div>
     </div>
   </div>
 </section>
