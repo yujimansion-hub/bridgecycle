@@ -6,6 +6,7 @@
 <title>創業者ワークスペース | BRIDGE CYCLE</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;700&family=Shippori+Mincho+B1:wght@400;500;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
 :root {
   --navy:     #0D1B2A;
@@ -675,6 +676,68 @@ textarea { resize: vertical; min-height: 80px; }
 
 <script>
 // ════════════════════════════════════════
+//  EMAIL 設定
+//  ① https://www.emailjs.com/ に無料登録
+//  ② Email Services → Gmail等を接続 → SERVICE_ID をコピー
+//  ③ Email Templates → 新規作成（変数: {{subject}} {{message}} {{to_email}} {{from_name}}）
+//     → TEMPLATE_ID をコピー
+//  ④ Account → Public Key をコピー
+// ════════════════════════════════════════
+const EMAIL_CFG = {
+  publicKey:  'YOUR_PUBLIC_KEY',          // ← EmailJS Public Key
+  serviceId:  'YOUR_SERVICE_ID',          // ← EmailJS Service ID
+  templateId: 'YOUR_TEMPLATE_ID',         // ← EmailJS Template ID
+  bcEmail:    'info@bridgecycleco.com',   // BC宛メール（変更不要）
+};
+
+// EmailJS 初期化（キー設定済みの場合のみ）
+if (!EMAIL_CFG.publicKey.startsWith('YOUR_')) {
+  emailjs.init({ publicKey: EMAIL_CFG.publicKey });
+}
+
+/**
+ * メール送信（EmailJS）
+ * 未設定時は mailto: フォールバック（メーラーが開く）
+ */
+async function sendEmail({ toEmail, subject, message, fromName = 'BRIDGE CYCLE 創業者ポータル' }) {
+  if (EMAIL_CFG.publicKey.startsWith('YOUR_')) {
+    // ── フォールバック：メーラーを開く ──────────────────
+    const body = encodeURIComponent(message);
+    const sub  = encodeURIComponent(subject);
+    window.open(`mailto:${toEmail}?subject=${sub}&body=${body}`, '_blank');
+    return { fallback: true };
+  }
+  // ── EmailJS 送信 ─────────────────────────────────────
+  return emailjs.send(EMAIL_CFG.serviceId, EMAIL_CFG.templateId, {
+    to_email:  toEmail,
+    subject:   subject,
+    message:   message,
+    from_name: fromName,
+  });
+}
+
+/** BC宛通知メール */
+async function notifyBC(subject, lines) {
+  await sendEmail({
+    toEmail:  EMAIL_CFG.bcEmail,
+    subject:  `【BRIDGE CYCLE】${subject}`,
+    message:  lines.join('\n'),
+    fromName: '創業者ポータル（自動送信）',
+  });
+}
+
+/** 創業者宛確認メール */
+async function notifyFounder(toEmail, subject, lines) {
+  if (!toEmail) return;
+  await sendEmail({
+    toEmail,
+    subject:  `【BRIDGE CYCLE】${subject}`,
+    message:  lines.join('\n'),
+    fromName: 'BRIDGE CYCLE サポート',
+  });
+}
+
+// ════════════════════════════════════════
 //  DB
 // ════════════════════════════════════════
 const DB = {
@@ -806,6 +869,40 @@ function submitRegistration() {
   myData = newTenant;
   localStorage.setItem('bc_my_candidate_id', newId);
   addLog('system', '新規登録', `${name} が3分登録を完了`, name);
+
+  // BC宛通知
+  notifyBC(`新規候補者登録 — ${name}`, [
+    `【新規候補者登録】`,
+    ``,
+    `お名前　　: ${name}`,
+    `メール　　: ${email}`,
+    `電話　　　: ${newTenant.tel || '未記入'}`,
+    `希望エリア: ${area}`,
+    `希望業態　: ${business}`,
+    `自己資金　: ${capital}`,
+    `開業希望　: ${timing}`,
+    `経験　　　: ${exp || '未記入'}`,
+    ``,
+    `志望理由:`,
+    motive,
+    ``,
+    `次ステップ: GATE一次診断フォームの送信をお待ちください。`,
+  ]);
+
+  // 創業者宛受付確認
+  notifyFounder(email, '受付完了 — 次のステップをご確認ください', [
+    `${name} 様`,
+    ``,
+    `BRIDGE CYCLE への登録が完了しました。`,
+    ``,
+    `次のステップ：`,
+    `GATE一次診断フォームにご回答ください。`,
+    `（創業者ワークスペース → GATE一次診断）`,
+    ``,
+    `ご不明な点はこちらまでご連絡ください。`,
+    `info@bridgecycleco.com`,
+  ]);
+
   showWorkspace();
 }
 
@@ -994,7 +1091,7 @@ function saveGateAnswer(key, val) {
   setAutosave();
 }
 
-function submitGate() {
+async function submitGate() {
   loadMyData();
   const ans = myData.gateAnswers || {};
 
@@ -1024,6 +1121,33 @@ function submitGate() {
 
   if (parseInt(myData.st) <= 2) updateSt('2');
   addLog('candidate', 'GATE一次送信', `${myData.name} がGATE一次フォームを提出（${answered}問回答）`);
+
+  // BC宛通知
+  const gateLines = [
+    `【GATE一次診断 提出】`,
+    ``,
+    `候補者: ${myData.name}（${myData.email}）`,
+    `希望業態: ${myData.business || '未記入'} / エリア: ${myData.area || '未記入'}`,
+    `自己資金: ${myData.capital || '未記入'} / 開業希望: ${myData.timing || '未記入'}`,
+    ``,
+    `─ 回答内容（${answered}問）─`,
+  ];
+  GATE_QUESTIONS.forEach(q => {
+    if (ans[q.key]) gateLines.push(`▸ ${q.label}: ${ans[q.key]}`);
+  });
+  gateLines.push(``, `▶ 確認ページ: 管理画面 → GATE評価 からご確認ください。`);
+  await notifyBC(`GATE一次診断 提出 — ${myData.name}`, gateLines);
+
+  // 創業者宛確認
+  await notifyFounder(myData.email, 'GATE一次診断を受付しました', [
+    `${myData.name} 様`,
+    ``,
+    `GATE一次診断の送信ありがとうございます。`,
+    `BCスタッフが2営業日以内に確認し、次のステップをご案内します。`,
+    ``,
+    `ご質問はこちらまで: info@bridgecycleco.com`,
+  ]);
+
   alert('✅ GATE一次診断を送信しました。BCが2営業日以内に確認します。');
   showPage('mypage');
 }
@@ -1200,12 +1324,41 @@ function calcFund() {
   if (el) el.innerHTML = `<div class="calc-row"><span>必要資金合計</span><b>${t ? t.toLocaleString() + ' 円' : '上記を入力'}</b></div><div class="calc-row"><span>自己資金帯</span><b>${esc(myData.capital||'未設定')}</b></div>`;
 }
 
-function submitPlan() {
+async function submitPlan() {
   loadMyData();
   const done = countPlanSections();
   if (done < 6) { alert(`あと${6-done}セクション以上記入してから送信してください（最低6セクション）。`); return; }
   if (parseInt(myData.st) <= 6) updateSt('7');
   addLog('candidate', '事業計画送信', `${myData.name} が事業計画（${done}/9セクション）を送信`);
+
+  const p = myData.plan || {};
+  const monthly = calcMonthly();
+  await notifyBC(`事業計画 提出 — ${myData.name}`, [
+    `【事業計画 提出】`,
+    ``,
+    `候補者: ${myData.name}（${myData.email}）`,
+    `希望業態: ${myData.business || '—'} / エリア: ${myData.area || '—'}`,
+    `記入済みセクション: ${done}/9`,
+    ``,
+    `─ 計画サマリー ─`,
+    `事業概要: ${(p.concept || '未記入').slice(0, 80)}`,
+    `月次売上目標: ${monthly ? monthly.toLocaleString() + ' 円' : '未入力'}`,
+    `必要開業資金: ${p.total_fund ? Number(p.total_fund).toLocaleString() + ' 円' : '未入力'}`,
+    `借入希望: ${(p.loan_amount || '未記入').toString().slice(0, 60)}`,
+    ``,
+    `▶ 詳細は管理画面からご確認ください。`,
+  ]);
+
+  await notifyFounder(myData.email, '事業計画を受付しました', [
+    `${myData.name} 様`,
+    ``,
+    `事業計画の送信ありがとうございます。`,
+    `BCスタッフが3営業日以内に内容を確認します。`,
+    `追記・修正が必要な場合はご連絡します。`,
+    ``,
+    `ご質問はこちらまで: info@bridgecycleco.com`,
+  ]);
+
   alert('✅ 事業計画を送信しました。BCが3営業日以内に確認します。');
   showPage('mypage');
 }
@@ -1252,13 +1405,37 @@ function toggleDoc(key) {
   if (parseInt(myData.st) <= 5) updateSt('6');
 }
 
-function submitDocs() {
+async function submitDocs() {
   loadMyData();
   const docs = myData.docs || {};
   const reqDone = ['id_card','resume','capital_proof'].filter(k => docs[k] === 'submitted').length;
+  const optDone = ['estimate','license','other'].filter(k => docs[k] === 'submitted').length;
   if (reqDone < 3) { alert('必須書類（身分証・職歴・自己資金確認）の3点を揃えてから申告してください。'); return; }
   if (parseInt(myData.st) <= 7) updateSt('7');
   addLog('candidate', '書類提出申告', `${myData.name} が書類提出完了を申告（${reqDone}/3必須）`);
+
+  await notifyBC(`書類提出完了 — ${myData.name}`, [
+    `【書類提出完了】`,
+    ``,
+    `候補者: ${myData.name}（${myData.email}）`,
+    `希望業態: ${myData.business || '—'} / エリア: ${myData.area || '—'}`,
+    ``,
+    `提出書類:`,
+    `  必須: ${reqDone}/3点 ✅`,
+    `  任意: ${optDone}/3点`,
+    ``,
+    `▶ BCレビューをお願いします。管理画面からご確認ください。`,
+  ]);
+
+  await notifyFounder(myData.email, '書類提出を受付しました', [
+    `${myData.name} 様`,
+    ``,
+    `書類提出の申告を受付しました。`,
+    `BCスタッフが確認次第、ご連絡いたします。`,
+    ``,
+    `ご質問はこちらまで: info@bridgecycleco.com`,
+  ]);
+
   alert('✅ 書類提出を申告しました。BCが確認します。');
   showPage('mypage');
 }
@@ -1303,13 +1480,30 @@ function savePlanNote(i) {
   alert('メモを保存しました。');
 }
 
-function resolveReturn(i) {
+async function resolveReturn(i) {
   loadMyData();
   if (!myData.returns[i]) return;
-  myData.returns[i].status = 'resolved';
-  myData.returns[i].resolvedAt = Date.now();
+  const ret = myData.returns[i];
+  const replyNote = document.getElementById(`re-note-${i}`)?.value || '';
+  ret.status     = 'resolved';
+  ret.replyNote  = replyNote;
+  ret.resolvedAt = Date.now();
   saveMy();
-  addLog('candidate', '差戻し対応', `${myData.name} が差戻し（${myData.returns[i].type}）に対応・再提出`);
+  addLog('candidate', '差戻し対応', `${myData.name} が差戻し（${ret.type}）に対応・再提出`);
+
+  await notifyBC(`差戻し対応・再提出 — ${myData.name}`, [
+    `【差戻し対応・再提出】`,
+    ``,
+    `候補者: ${myData.name}（${myData.email}）`,
+    `差戻し区分: ${ret.type}`,
+    `元の差戻し理由: ${ret.reason}`,
+    ``,
+    `候補者からの修正メモ:`,
+    replyNote || '（メモなし）',
+    ``,
+    `▶ 管理画面から再確認をお願いします。`,
+  ]);
+
   renderReturnPage();
   alert('✅ 再提出しました。BCが再確認します。');
 }
