@@ -529,6 +529,16 @@ footer {
 .footer-links { display: flex; gap: 24px; }
 .footer-links a { font-size: 0.65rem; color: var(--smoke); text-decoration: none; letter-spacing: 0.1em; }
 .footer-links a:hover { color: var(--gold); }
+.footer-social { display: flex; gap: 12px; margin-top: 16px; }
+.footer-social a {
+  display: flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid rgba(200,190,170,0.2);
+  color: rgba(200,190,170,0.55); transition: all 0.25s; text-decoration: none;
+}
+.footer-social a:hover { border-color: var(--gold); color: var(--gold); background: rgba(196,163,102,0.08); }
+.footer-social svg { width: 15px; height: 15px; flex-shrink: 0; }
+.footer-social .note-icon { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 700; line-height: 1; letter-spacing: 0; }
 
 /* ── REVEAL ── */
 .reveal {
@@ -967,6 +977,17 @@ footer {
     <a href="index.html">管理会社の方へ</a>
     <a href="lp.html">創業希望者の方へ</a>
     <a href="exit.html">閉店をお考えの方へ</a>
+  </div>
+  <div class="footer-social">
+    <a href="https://x.com/hegv33n1eu55345?s=21" target="_blank" rel="noopener" aria-label="X (Twitter)">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.736-8.857L1.24 2.25H8.09l4.261 5.617zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    </a>
+    <a href="https://www.instagram.com/bridge_cycle?igsh=MXE0dmpkb3RpaHd0ZA%3D%3D&utm_source=qr" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+    </a>
+    <a href="https://note.com/bridgecycle_2026" target="_blank" rel="noopener" aria-label="note">
+      <span class="note-icon">n</span>
+    </a>
   </div>
   <div class="footer-copy">© 2026 BRIDGE CYCLE 株式会社. All rights reserved.</div>
 </footer>
