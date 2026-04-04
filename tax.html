@@ -525,6 +525,91 @@ footer {
 .footer-social .note-icon { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 700; line-height: 1; letter-spacing: 0; }
 .footer-copy { font-size: 0.6rem; color: rgba(200,190,170,0.25); letter-spacing: 0.1em; }
 
+/* ── FIXED CTA ── */
+.cta-fixed {
+  position: fixed; bottom: 24px; right: 24px; z-index: 999;
+  background: var(--gold); color: var(--navy);
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.78rem; font-weight: 700; letter-spacing: 0.14em;
+  padding: 14px 24px;
+  text-decoration: none;
+  box-shadow: 0 8px 32px rgba(201,168,76,0.4);
+  transition: all 0.3s;
+  display: flex; align-items: center; gap: 8px;
+  opacity: 0; pointer-events: none;
+  transform: translateY(10px);
+}
+.cta-fixed.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.cta-fixed:hover { background: var(--gold-lt); box-shadow: 0 12px 40px rgba(201,168,76,0.5); }
+.cta-fixed-note { font-size: 0.6rem; font-weight: 400; opacity: 0.75; letter-spacing: 0.05em; display: block; margin-top: 2px; }
+
+/* ── URGENCY SECTION ── */
+.urgency-section { background: var(--navy-mid); }
+.urgency-section .section-title { color: var(--cream); }
+.urgency-section .section-lead { color: var(--smoke); }
+.urgency-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 48px; }
+.urgency-card {
+  border: 1px solid rgba(201,168,76,0.2);
+  padding: 32px 28px;
+  position: relative;
+}
+.urgency-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--rust), rgba(184,92,56,0.3));
+}
+.urgency-card-icon {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem; color: rgba(184,92,56,0.7);
+  margin-bottom: 14px; line-height: 1;
+}
+.urgency-card-title {
+  font-family: 'Shippori Mincho B1', serif;
+  font-size: 0.95rem; font-weight: 700;
+  color: var(--cream); margin-bottom: 10px; line-height: 1.5;
+}
+.urgency-card-body { font-size: 0.78rem; color: var(--smoke); line-height: 1.85; }
+.urgency-card-body strong { color: var(--rust); }
+.urgency-mid-cta { text-align: center; }
+
+/* ── TAX ASSURE ── */
+.tax-assure {
+  background: rgba(201,168,76,0.04);
+  border: 1px solid rgba(201,168,76,0.2);
+  padding: 40px;
+  margin: 56px 0 0;
+  position: relative;
+}
+.tax-assure::before {
+  content: '税理士・会計事務所との関係';
+  position: absolute; top: -12px; left: 32px;
+  background: var(--cream);
+  padding: 2px 16px;
+  font-size: 0.62rem; letter-spacing: 0.25em; color: var(--gold);
+  font-family: 'Cormorant Garamond', serif;
+}
+.tax-assure-body {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+}
+.tax-assure-item { font-size: 0.82rem; color: var(--warm); line-height: 1.9; }
+.tax-assure-item strong { display: block; color: var(--navy); font-size: 0.88rem; margin-bottom: 6px; }
+
+/* ── PRE-FORM TRIGGER ── */
+.pre-form-trigger {
+  background: var(--gold);
+  padding: 36px 48px;
+  text-align: center;
+}
+.pre-form-trigger p {
+  font-family: 'Shippori Mincho B1', serif;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-weight: 700; color: var(--navy);
+  line-height: 1.7; margin-bottom: 6px;
+}
+.pre-form-trigger span {
+  font-size: 0.78rem; color: rgba(13,27,42,0.65);
+}
+
 /* ── ANIMATIONS ── */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(24px); }
@@ -578,30 +663,41 @@ footer {
   </div>
 </nav>
 
+<!-- ── FIXED CTA ── -->
+<a href="#form" class="cta-fixed" id="ctaFixed">
+  <span>
+    無料で一次診断を申し込む
+    <span class="cta-fixed-note">所要5分・売り込みなし・税理士非関与</span>
+  </span>
+</a>
+
 <!-- ── HERO ── -->
 <section class="hero" id="top">
   <div class="hero-left">
     <div class="hero-badge">税理士・会計事務所からご案内を受けた方へ</div>
-    <p class="hero-intro">
-      退店・移転・縮小を考え始めたとき、<br>
-      まず「論点の整理」が必要です。
-    </p>
     <h1 class="hero-title">
-      <em>揉める前に、整理する。</em>
-      退店・移転・縮小時の<br>無料一次診断
+      退店・移転・縮小時の<br>
+      <em>「揉める前の整理」<br>無料一次診断</em>
     </h1>
     <p class="hero-sub">
-      原状回復費用、設備処分、保証人、資金繰り。<br>
+      原状回復・設備処分・保証人・資金繰り。<br>
       判断が遅れる前に、まず整理すべき点を確認します。
     </p>
+
+    <!-- 主役CTA -->
+    <a href="#form" class="btn-primary" style="display:inline-block;margin-bottom:16px;font-size:0.9rem;padding:18px 44px;">
+      無料で一次診断を申し込む
+    </a>
+    <p style="font-size:0.72rem;color:rgba(200,190,170,0.65);line-height:1.9;margin-bottom:36px;">
+      ※ 税理士・会計事務所は本診断に関与しません<br>
+      ※ 売り込み前提ではありません<br>
+      ※ 所要時間：約5分
+    </p>
+
     <div class="reassure-list">
       <div class="reassure-item">
         <div class="reassure-icon">✓</div>
-        売り込み前提ではありません
-      </div>
-      <div class="reassure-item">
-        <div class="reassure-icon">✓</div>
-        税理士・会計事務所は本診断に関与しません
+        まだ退店・移転・縮小を決めていない段階でも利用できます
       </div>
       <div class="reassure-item">
         <div class="reassure-icon">✓</div>
@@ -611,10 +707,6 @@ footer {
         <div class="reassure-icon">✓</div>
         情報は本人同意のもと最小限で扱います
       </div>
-    </div>
-    <div class="hero-btns">
-      <a href="#form" class="btn-primary">無料で一次診断を申し込む</a>
-      <a href="#flow" class="btn-ghost">ご利用の流れを見る</a>
     </div>
   </div>
 
@@ -721,6 +813,47 @@ footer {
   </div>
 </section>
 
+<!-- ── URGENCY ── -->
+<section class="urgency-section">
+  <div class="container">
+    <div class="section-eyebrow reveal">なぜ今、整理が必要なのか</div>
+    <h2 class="section-title reveal">判断が遅れるほど、<br>コストと選択肢が悪化します</h2>
+    <p class="section-lead reveal">
+      退店・移転・縮小の検討を後回しにするほど、3つのリスクが拡大します。<br>
+      「まだ決めていない」段階こそ、整理を始める最適なタイミングです。
+    </p>
+    <div class="urgency-grid">
+      <div class="urgency-card reveal">
+        <div class="urgency-card-icon">¥</div>
+        <div class="urgency-card-title">原状回復費用が増える</div>
+        <div class="urgency-card-body">
+          退去が遅れるほど、設備の劣化・汚損が進みます。<br>
+          早期に論点を整理すると、<strong>交渉余地が広がります。</strong>
+        </div>
+      </div>
+      <div class="urgency-card reveal">
+        <div class="urgency-card-icon">↓</div>
+        <div class="urgency-card-title">設備・内装の価値が下がる</div>
+        <div class="urgency-card-body">
+          厨房設備・内装は時間とともに価値が下がります。<br>
+          居抜き譲渡の選択肢は、<strong>早いほど有効です。</strong>
+        </div>
+      </div>
+      <div class="urgency-card reveal">
+        <div class="urgency-card-icon">!</div>
+        <div class="urgency-card-title">保証人リスクが拡大する</div>
+        <div class="urgency-card-body">
+          滞納・延滞が続くと保証人への影響が広がります。<br>
+          <strong>確認すべき論点を今すぐ整理</strong>することが重要です。
+        </div>
+      </div>
+    </div>
+    <div class="urgency-mid-cta reveal">
+      <a href="#form" class="btn-primary">今すぐ無料で一次診断を申し込む</a>
+    </div>
+  </div>
+</section>
+
 <!-- ── REASSURE ── -->
 <section class="reassure-section">
   <div class="container">
@@ -765,6 +898,20 @@ footer {
           入力いただく情報は、本診断に必要な範囲のみ使用します。<br>
           第三者への提供・販売は行いません。<br>
           本人同意なく情報を活用することはありません。
+        </div>
+      </div>
+    </div>
+
+    <!-- 税理士安心ブロック -->
+    <div class="tax-assure reveal">
+      <div class="tax-assure-body">
+        <div class="tax-assure-item">
+          <strong>税理士・会計事務所はURLをご案内したのみです</strong>
+          本サービスは、税理士・会計事務所からのご案内により、ご自身の判断でご利用いただくものです。ご紹介元は本診断の内容・結果に関与せず、入力情報の共有も行いません。
+        </div>
+        <div class="tax-assure-item">
+          <strong>顧問先情報は税理士に戻りません</strong>
+          お申し込み内容・診断結果はBRIDGE CYCLE のみが取り扱います。税理士への報告・共有は一切行いません。守秘義務は本診断側が負います。
         </div>
       </div>
     </div>
@@ -867,13 +1014,19 @@ footer {
   </div>
 </section>
 
+<!-- ── PRE-FORM TRIGGER ── -->
+<div class="pre-form-trigger">
+  <p>まだ決めきれていなくても、構いません。</p>
+  <span>まずは現状を整理するだけでもご利用いただけます。判断は整理の後でも遅くありません。</span>
+</div>
+
 <!-- ── FORM ── -->
 <section class="form-section" id="form">
   <div class="container">
     <div class="section-eyebrow reveal">無料一次診断のお申し込み</div>
-    <h2 class="section-title reveal">まだ決めきれていなくても<br>構いません</h2>
+    <h2 class="section-title reveal">今すぐ申し込む</h2>
     <p class="section-lead reveal">
-      まずは現状を整理するために、無料一次診断をご利用ください。
+      所要時間：約5分。退店・移転・縮小を決めていない段階でもご利用いただけます。
     </p>
     <div class="form-wrap">
       <div class="form-notes reveal">
@@ -906,6 +1059,10 @@ footer {
       <div class="form-box reveal">
         <div class="form-box-label">無料一次診断 — 申込フォーム</div>
         <form id="taxForm" onsubmit="handleSubmit(event)">
+          <!-- 流入経路追跡 (hidden) -->
+          <input type="hidden" name="source" value="tax">
+          <input type="hidden" name="office" id="officeField" value="direct">
+
           <div class="form-row">
             <label class="form-label">お名前<span>*</span></label>
             <input type="text" class="form-input" name="name" placeholder="山田 太郎" required>
@@ -922,18 +1079,18 @@ footer {
             <label class="form-label">現在の状況<span>*</span></label>
             <select class="form-select form-input" name="status" required>
               <option value="" disabled selected>選択してください</option>
-              <option value="thinking">退店・移転・縮小を検討中</option>
-              <option value="decided">退店・移転・縮小を決めた</option>
-              <option value="negotiating">すでに交渉・手続き中</option>
-              <option value="other">その他</option>
+              <option value="a_thinking">まだ検討段階（迷っている）</option>
+              <option value="b_decided">退店・移転・縮小を決めた</option>
+              <option value="c_urgent">すでに問題が発生している</option>
+              <option value="d_negotiating">交渉・手続き中</option>
             </select>
           </div>
           <div class="form-row">
-            <label class="form-label">主な懸念事項（複数可）</label>
-            <select class="form-select form-input" name="concern">
-              <option value="" disabled selected>最も気になっていること</option>
+            <label class="form-label">最も気になっていること<span>*</span></label>
+            <select class="form-select form-input" name="concern" required>
+              <option value="" disabled selected>選択してください</option>
               <option value="restoration">原状回復費用</option>
-              <option value="equipment">設備・内装の処分</option>
+              <option value="equipment">設備・内装の処分・譲渡</option>
               <option value="guarantor">保証人への影響</option>
               <option value="cashflow">資金繰り</option>
               <option value="timing">退店のタイミング</option>
@@ -1006,6 +1163,19 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+/* ── FIXED CTA 表示制御 ── */
+const ctaFixed = document.getElementById('ctaFixed');
+window.addEventListener('scroll', () => {
+  ctaFixed.classList.toggle('show', window.scrollY > 400);
+});
+
+/* ── 流入元（office）自動判定 ── */
+const params = new URLSearchParams(window.location.search);
+const officeParam = params.get('office');
+if (officeParam) {
+  document.getElementById('officeField').value = officeParam;
+}
+
 /* ── FORM SUBMIT ── */
 async function handleSubmit(e) {
   e.preventDefault();
@@ -1021,17 +1191,19 @@ async function handleSubmit(e) {
   const status  = data.get('status')  || '';
   const concern = data.get('concern') || '';
   const message = data.get('message') || 'なし';
+  const source  = data.get('source')  || 'tax';
+  const office  = data.get('office')  || 'direct';
 
   const statusLabel = {
-    thinking:    '退店・移転・縮小を検討中',
-    decided:     '退店・移転・縮小を決めた',
-    negotiating: 'すでに交渉・手続き中',
-    other:       'その他',
+    a_thinking:   'まだ検討段階（迷っている）',
+    b_decided:    '退店・移転・縮小を決めた',
+    c_urgent:     'すでに問題が発生している',
+    d_negotiating:'交渉・手続き中',
   }[status] || status;
 
   const concernLabel = {
     restoration: '原状回復費用',
-    equipment:   '設備・内装の処分',
+    equipment:   '設備・内装の処分・譲渡',
     guarantor:   '保証人への影響',
     cashflow:    '資金繰り',
     timing:      '退店のタイミング',
@@ -1048,6 +1220,7 @@ async function handleSubmit(e) {
     `主な懸念　：${concernLabel}`,
     `補足・状況：${message}`,
     '',
+    `流入元　　：${source} / office=${office}`,
     '※ tax.html（税理士経由専用LP）から送信されました',
   ].join('\n');
 
