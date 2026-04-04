@@ -57,6 +57,7 @@
   ]
 }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;700&family=Shippori+Mincho+B1:wght@400;500;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
 
@@ -2269,6 +2270,33 @@ const ro=new IntersectionObserver(entries=>{
 },{threshold:0.1,rootMargin:'0px 0px -36px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 
+/* ── EMAILJS CONFIG ─────────────────────────────────
+   emailjs.com でアカウント作成後、以下の3値を設定してください。
+   設定前は mailto: フォールバックで動作します。
+──────────────────────────────────────────────────── */
+const EMAIL_CFG={
+  publicKey: 'YOUR_PUBLIC_KEY',
+  serviceId: 'YOUR_SERVICE_ID',
+  templateId:'YOUR_TEMPLATE_ID',
+  bcEmail:   'info@bridgecycleco.com',
+};
+if(!EMAIL_CFG.publicKey.startsWith('YOUR_')){
+  emailjs.init({publicKey:EMAIL_CFG.publicKey});
+}
+
+async function _sendMail({toEmail,subject,message,fromName}){
+  if(EMAIL_CFG.publicKey.startsWith('YOUR_')){
+    window.open(
+      `mailto:${toEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`,
+      '_blank'
+    );
+    return{fallback:true};
+  }
+  return emailjs.send(EMAIL_CFG.serviceId,EMAIL_CFG.templateId,{
+    to_email:toEmail,subject,message,from_name:fromName
+  });
+}
+
 /* FORM SUBMIT */
 async function doSubmit(){
   let ok=true;
@@ -2294,28 +2322,50 @@ async function doSubmit(){
   const btn=document.getElementById('subBtn');
   btn.disabled=true;btn.textContent='送信中...';
 
-  /* ────────────────────────────────────────────
-     Formspree設定:
-     https://formspree.io/ で登録後、発行されたエンドポイントを設定
-     例: const EP='https://formspree.io/f/xxxxxxxx';
-  ──────────────────────────────────────────── */
-  const EP=''; // ← Formspreeエンドポイントをここに設定
+  const fmsg=document.getElementById('fmsg').value||'';
+  const bcMsg=[
+    '【BRIDGE CYCLE HP】お問い合わせが届きました',
+    '',
+    `種別　　：${ftype.value}`,
+    `お名前　：${fname.value}`,
+    `Email　 ：${femail.value}`,
+    `メッセージ：${fmsg||'なし'}`,
+  ].join('\n');
 
-  const data=new FormData(document.getElementById('contactForm'));
+  const userMsg=[
+    `${fname.value} 様`,
+    '',
+    'お問い合わせありがとうございます。',
+    '内容を確認後、2営業日以内にご連絡いたします。',
+    '',
+    `── お問い合わせ内容 ──`,
+    `種別：${ftype.value}`,
+    fmsg?`メッセージ：${fmsg}`:'',
+    '',
+    'BRIDGE CYCLE 株式会社',
+  ].filter(l=>l!==undefined).join('\n');
 
-  if(EP){
-    try{
-      const r=await fetch(EP,{method:'POST',body:data,headers:{Accept:'application/json'}});
-      if(r.ok){showSuccess();return}
-    }catch(e){}
+  try{
+    await _sendMail({
+      toEmail:EMAIL_CFG.bcEmail,
+      subject:`【BRIDGE CYCLE】${ftype.value} のお問い合わせ`,
+      message:bcMsg,
+      fromName:'BRIDGE CYCLE HP（自動送信）',
+    });
+    if(femail.value){
+      await _sendMail({
+        toEmail:femail.value,
+        subject:'【BRIDGE CYCLE】お問い合わせを受け付けました',
+        message:userMsg,
+        fromName:'BRIDGE CYCLE 株式会社',
+      });
+    }
+    showSuccess();
+  }catch(err){
+    btn.disabled=false;btn.textContent='送信する';
+    alert('送信に失敗しました。時間をおいて再度お試しいただくか、info@bridgecycleco.com までご連絡ください。');
+    console.error('EmailJS error:',err);
   }
-  // fallback mailto
-  const subj=encodeURIComponent('【BRIDGE CYCLE HP】'+ftype.value||'お問い合わせ');
-  const body=encodeURIComponent(
-    `種別：${ftype.value}\nお名前：${fname.value}\nEmail：${femail.value}\n\n${document.getElementById('fmsg').value}`
-  );
-  window.location.href=`mailto:info@bridgecycleco.com?subject=${subj}&body=${body}`;
-  showSuccess();
 }
 
 function showSuccess(){
