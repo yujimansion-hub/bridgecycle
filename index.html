@@ -434,6 +434,96 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 .problem-quote blockquote span{color:var(--gold)}
 
 /* ═══════════════════════════════════════════
+   COMPARE SECTION
+═══════════════════════════════════════════ */
+#compare{background:var(--navy);padding:80px 0}
+.compare-table{
+  display:grid;grid-template-columns:1fr 48px 1fr;
+  gap:0;max-width:820px;margin:0 auto;
+  border:1px solid rgba(201,168,76,0.12);
+}
+.compare-col-head{
+  padding:18px 28px;font-size:0.6rem;letter-spacing:0.3em;
+  font-family:'Cormorant Garamond',serif;text-transform:uppercase;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.compare-col.old .compare-col-head{color:rgba(200,190,170,0.35);background:rgba(255,255,255,0.02)}
+.compare-col.new .compare-col-head{color:var(--gold);background:rgba(201,168,76,0.05)}
+.compare-mid-head{
+  padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.06);
+  background:rgba(255,255,255,0.01);
+}
+.compare-cell{
+  padding:15px 28px;font-size:0.82rem;line-height:1.7;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.compare-mid-cell{
+  display:flex;align-items:center;justify-content:center;
+  border-bottom:1px solid rgba(255,255,255,0.04);
+  font-size:0.7rem;color:var(--gold-dim);
+}
+.compare-col.old .compare-cell{color:rgba(200,190,170,0.4)}
+.compare-col.new .compare-cell{color:var(--smoke)}
+.compare-col.new .compare-cell strong{color:var(--gold-lt)}
+@media(max-width:640px){
+  .compare-table{grid-template-columns:1fr}
+  .compare-mid-head,.compare-mid-cell{display:none}
+  .compare-col.old .compare-col-head::before{content:'【従来】 '}
+  .compare-col.new .compare-col-head::before{content:'【BRIDGE CYCLE】 '}
+}
+
+/* ═══════════════════════════════════════════
+   POC SECTION
+═══════════════════════════════════════════ */
+#poc{background:var(--cream-dk);padding:80px 0}
+.poc-layout{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.poc-steps{display:flex;flex-direction:column;gap:0}
+.poc-step{
+  display:flex;gap:20px;padding:22px 0;
+  border-bottom:1px solid rgba(13,27,42,0.08);
+}
+.poc-step:last-child{border-bottom:none}
+.poc-step-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:0.62rem;letter-spacing:0.2em;
+  color:var(--gold);line-height:1;
+  flex-shrink:0;padding-top:4px;
+}
+.poc-step-body{flex:1}
+.poc-step-h{font-family:'Shippori Mincho B1',serif;font-size:0.92rem;font-weight:700;color:var(--navy);margin-bottom:6px}
+.poc-step-d{font-size:0.8rem;color:var(--warm);line-height:1.85}
+.poc-cta-box{
+  background:var(--navy);padding:44px 40px;
+  border:1px solid rgba(201,168,76,0.15);
+  position:sticky;top:96px;
+}
+.poc-cta-box::before{
+  content:'';display:block;height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-lt),var(--gold));
+  margin:-44px -40px 32px;
+}
+.poc-cta-tag{display:block;font-size:0.6rem;letter-spacing:0.3em;color:var(--gold);font-family:'Cormorant Garamond',serif;margin-bottom:16px}
+.poc-cta-h{font-family:'Shippori Mincho B1',serif;font-size:1.15rem;font-weight:800;color:var(--cream);line-height:1.55;margin-bottom:12px}
+.poc-cta-body{font-size:0.8rem;color:var(--smoke);line-height:1.9;margin-bottom:20px}
+.poc-cta-list{list-style:none;padding:0;margin:0 0 28px;display:flex;flex-direction:column;gap:8px}
+.poc-cta-list li{font-size:0.75rem;color:var(--smoke);padding-left:18px;position:relative;line-height:1.6}
+.poc-cta-list li::before{content:'✓';position:absolute;left:0;color:var(--gold);font-size:0.7rem}
+.poc-cta-note{font-size:0.68rem;color:rgba(200,190,170,0.4);margin-top:12px;line-height:1.7}
+.btn-poc{
+  display:block;text-align:center;
+  background:var(--gold);color:var(--navy);
+  font-size:0.82rem;letter-spacing:0.18em;font-weight:700;
+  font-family:'Noto Serif JP',serif;
+  padding:16px 24px;text-decoration:none;
+  transition:background 0.3s;
+}
+.btn-poc:hover{background:var(--gold-lt)}
+@media(max-width:860px){
+  .poc-layout{grid-template-columns:1fr;gap:32px}
+  .poc-cta-box{position:static}
+}
+
+/* ═══════════════════════════════════════════
    THREE-PARTY MODEL
 ═══════════════════════════════════════════ */
 #model{background:var(--navy-mid)}
@@ -1229,6 +1319,92 @@ footer{
   font-size:0.88rem;color:var(--warm);line-height:2;
   max-width:600px;margin-bottom:40px;
 }
+
+/* ── CONTACT PRIMARY CTA (Property Managers) ── */
+.contact-primary-cta{
+  display:grid;grid-template-columns:1fr auto;
+  gap:40px;align-items:center;
+  background:var(--navy);
+  padding:44px 48px;
+  margin-bottom:20px;
+  position:relative;
+  overflow:hidden;
+}
+.contact-primary-cta::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-lt),var(--gold));
+}
+.cpc-tag{
+  display:block;font-size:0.58rem;letter-spacing:0.3em;
+  color:var(--gold);font-family:'Cormorant Garamond',serif;margin-bottom:10px;
+}
+.cpc-h{
+  font-family:'Shippori Mincho B1',serif;font-size:1.3rem;
+  font-weight:800;color:var(--cream);line-height:1.45;margin-bottom:12px;
+}
+.cpc-body{font-size:0.82rem;color:var(--smoke);line-height:1.9;margin-bottom:18px}
+.cpc-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+.cpc-list li{font-size:0.75rem;color:var(--smoke);padding-left:18px;position:relative}
+.cpc-list li::before{content:'✓';position:absolute;left:0;color:var(--gold);font-size:0.68rem}
+.cpc-right{flex-shrink:0;text-align:center;min-width:220px}
+.btn-cpc{
+  display:block;
+  background:var(--gold);color:var(--navy);
+  font-size:0.82rem;letter-spacing:0.16em;font-weight:700;
+  font-family:'Noto Serif JP',serif;
+  padding:18px 28px;text-decoration:none;
+  transition:background 0.3s;white-space:nowrap;text-align:center;
+}
+.btn-cpc:hover{background:var(--gold-lt)}
+.cpc-note{font-size:0.68rem;color:rgba(200,190,170,0.45);margin-top:10px;line-height:1.65;text-align:center}
+@media(max-width:860px){
+  .contact-primary-cta{grid-template-columns:1fr;gap:28px;padding:36px 28px}
+  .cpc-right{min-width:0}
+  .btn-cpc{white-space:normal}
+}
+
+/* ── CONTACT SECONDARY CTA (Municipalities) ── */
+.contact-secondary-cta{
+  border:1.5px solid rgba(13,27,42,0.12);
+  padding:28px 36px;
+  margin-bottom:16px;
+}
+.csc-inner{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.csc-tag{
+  font-size:0.58rem;letter-spacing:0.28em;color:var(--gold-dim);
+  border:1px solid rgba(201,168,76,0.3);padding:4px 10px;
+  white-space:nowrap;flex-shrink:0;
+  font-family:'Cormorant Garamond',serif;
+}
+.csc-body{flex:1}
+.csc-h{font-family:'Shippori Mincho B1',serif;font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:6px}
+.csc-d{font-size:0.78rem;color:var(--warm);line-height:1.8}
+.btn-csc{
+  flex-shrink:0;
+  border:1.5px solid var(--navy);color:var(--navy);
+  font-size:0.75rem;letter-spacing:0.14em;font-weight:700;
+  font-family:'Noto Serif JP',serif;
+  padding:12px 20px;text-decoration:none;
+  transition:background 0.25s,color 0.25s;white-space:nowrap;
+}
+.btn-csc:hover{background:var(--navy);color:var(--gold)}
+@media(max-width:680px){
+  .csc-inner{gap:16px}
+  .btn-csc{white-space:normal}
+}
+
+/* ── CONTACT OTHER LINKS ── */
+.contact-others{
+  display:flex;gap:8px 32px;flex-wrap:wrap;
+  padding:18px 0 28px;
+  border-top:1px solid rgba(13,27,42,0.08);
+}
+.contact-other-link{
+  font-size:0.78rem;color:var(--warm);text-decoration:none;
+  letter-spacing:0.05em;transition:color 0.2s;
+  font-family:'Noto Serif JP',serif;
+}
+.contact-other-link:hover{color:var(--navy)}
 </style>
 </head>
 <body>
@@ -1278,11 +1454,11 @@ footer{
       <h1 class="hero-h1">
         <span class="accent">退去の連絡が来てから動いても、遅い。</span>
         閉まる前に次のテナントを確保する、<br>新しい空室対策です。
-        <span class="sub-line">管理会社入力型 × GATE選抜 × BC認定パートナー診断士による伴走</span>
+        <span class="sub-line">退去予兆の段階で接続し、空室期間と初期投資ロスを減らします。</span>
       </h1>
       <div class="hero-btns">
-        <a href="#contact" class="btn-hero-p">1物件からPoC相談（無料）</a>
-        <a href="#model" class="btn-hero-s">仕組みを30秒で見る →</a>
+        <a href="#poc" class="btn-hero-p">1物件からPoC相談（無料）</a>
+        <a href="#compare" class="btn-hero-s">従来との違いを見る →</a>
       </div>
     </div>
     <div>
@@ -1313,16 +1489,24 @@ footer{
 <div class="key-stats-bar">
   <div class="key-stats-inner">
     <div class="ks-item">
-      <span class="ks-num">500<small>社+</small></span>
-      <span class="ks-label">経営支援実績</span>
+      <span class="ks-num" style="font-size:0.8rem;letter-spacing:0.08em;">退去予兆</span>
+      <span class="ks-label">段階で接続開始</span>
     </div>
     <div class="ks-div"></div>
     <div class="ks-item">
-      <span class="ks-num">30<small>日</small></span>
-      <span class="ks-label">空室短縮目標</span>
+      <span class="ks-num">6<small>軸</small></span>
+      <span class="ks-label">GATE診断スコア</span>
     </div>
     <div class="ks-div"></div>
-    <p class="ks-text">物件決定前に、GATE診断・事業計画・融資の目処まで整える。<br>だから、退去日に次のテナントが入れる。</p>
+    <div class="ks-item">
+      <span class="ks-num">8<small>ステップ</small></span>
+      <span class="ks-label">開業後まで伴走</span>
+    </div>
+    <div class="ks-div"></div>
+    <div class="ks-item">
+      <span class="ks-num">1<small>物件</small></span>
+      <span class="ks-label">からPoC可能</span>
+    </div>
   </div>
 </div>
 
@@ -1423,10 +1607,53 @@ footer{
     <div class="problem-quote reveal">
       <div class="problem-quote-bar"></div>
       <blockquote>
-        退去前から動ける仕組みがあれば、<br>
-        <span>空室ゼロを目指すことができます。</span>
+        問題は、空いた後に募集していることです。<br>
+        <span>退去前から動ける仕組みが、空室ゼロを実現します。</span>
       </blockquote>
     </div>
+  </div>
+</section>
+
+<!-- ══ COMPARE: 従来 vs BRIDGE CYCLE ══ -->
+<section id="compare">
+  <div class="sec">
+    <p class="sec-label reveal" style="color:var(--gold-dim)">What Changes</p>
+    <h2 class="sec-h2 reveal" style="color:var(--cream)">従来の空室対策と、<br>何が違うのか</h2>
+    <p class="sec-lead reveal" style="color:var(--smoke)">
+      退去後に動くのか、退去前に動くのか。<br>
+      この1点が、空室期間と初期投資コストのすべてを変えます。
+    </p>
+    <div class="compare-table reveal">
+      <!-- ヘッダー行 -->
+      <div class="compare-col old" style="display:contents">
+        <div class="compare-col-head" style="background:rgba(255,255,255,0.02);color:rgba(200,190,170,0.35);">従来の空室対策</div>
+      </div>
+      <div style="display:contents">
+        <div class="compare-mid-head"></div>
+      </div>
+      <div class="compare-col new" style="display:contents">
+        <div class="compare-col-head" style="background:rgba(201,168,76,0.05);color:var(--gold);">BRIDGE CYCLE</div>
+      </div>
+      <!-- 行1 -->
+      <div class="compare-cell compare-col old" style="color:rgba(200,190,170,0.4)">退去確定後に募集を開始する</div>
+      <div class="compare-mid-cell">→</div>
+      <div class="compare-cell compare-col new"><strong>退去予兆の段階</strong>で準備を開始する</div>
+      <!-- 行2 -->
+      <div class="compare-cell compare-col old" style="color:rgba(200,190,170,0.4)">相談が来てから候補者を探す</div>
+      <div class="compare-mid-cell">→</div>
+      <div class="compare-cell compare-col new"><strong>GATE診断済みの候補者</strong>を先に準備する</div>
+      <!-- 行3 -->
+      <div class="compare-cell compare-col old" style="color:rgba(200,190,170,0.4)">誰でも紹介・感覚で審査する</div>
+      <div class="compare-mid-cell">→</div>
+      <div class="compare-cell compare-col new"><strong>6軸スコア通過者のみ</strong>を管理会社に接続する</div>
+      <!-- 行4 -->
+      <div class="compare-cell compare-col old" style="color:rgba(200,190,170,0.4);border-bottom:none">開業して終わり</div>
+      <div class="compare-mid-cell" style="border-bottom:none">→</div>
+      <div class="compare-cell compare-col new" style="border-bottom:none"><strong>開業後8ステップまで</strong>フォローする</div>
+    </div>
+    <p style="text-align:center;margin-top:32px">
+      <a href="#poc" class="btn-hero-p" style="display:inline-block;font-size:0.82rem;padding:14px 36px;">1物件から試してみる →</a>
+    </p>
   </div>
 </section>
 
@@ -2033,45 +2260,114 @@ footer{
   </div>
 </section>
 
+<!-- ══ POC ══ -->
+<section id="poc">
+  <div class="sec">
+    <p class="sec-label reveal">PoC Program</p>
+    <h2 class="sec-h2 reveal">まず1物件で、試してみてください。</h2>
+    <p class="sec-lead reveal">導入リスクをゼロにするために、BRIDGE CYCLEは「1管理会社・1案件・1物件」のPoC（実証）から始める設計にしています。</p>
+
+    <div class="poc-layout">
+      <div class="poc-steps reveal">
+        <div class="poc-step">
+          <div class="poc-step-num">STEP 01</div>
+          <div class="poc-step-body">
+            <div class="poc-step-h">退去予兆を入力するだけ</div>
+            <div class="poc-step-d">賃料の遅れ・オーナーへの相談・契約更新の見合わせ——気になる兆候をフォームに入力するだけです。査定も訪問も不要。</div>
+          </div>
+        </div>
+        <div class="poc-step">
+          <div class="poc-step-num">STEP 02</div>
+          <div class="poc-step-body">
+            <div class="poc-step-h">GATE診断はBC側が実施</div>
+            <div class="poc-step-d">創業希望者の6軸スコアリング、面談、事業計画の審査はすべてBRIDGE CYCLE側が行います。管理会社の追加業務はゼロです。</div>
+          </div>
+        </div>
+        <div class="poc-step">
+          <div class="poc-step-num">STEP 03</div>
+          <div class="poc-step-body">
+            <div class="poc-step-h">通過者のみ、接続します</div>
+            <div class="poc-step-d">診断を通過した創業者候補のみを、管理会社・オーナーにご紹介します。準備不足の候補者を送り込むことはありません。</div>
+          </div>
+        </div>
+        <div class="poc-step">
+          <div class="poc-step-num">STEP 04</div>
+          <div class="poc-step-body">
+            <div class="poc-step-h">開業後90日間フォロー</div>
+            <div class="poc-step-d">承継後も月次でモニタリングします。「開業したら終わり」ではなく、入居継続率を高める構造です。</div>
+          </div>
+        </div>
+      </div>
+      <div class="poc-cta-box reveal d2">
+        <span class="poc-cta-tag">1物件からPoC可能</span>
+        <h3 class="poc-cta-h">管理物件に、<br>退去予兆はありますか？</h3>
+        <p class="poc-cta-body">初期費用・成功報酬の詳細はヒアリング後にご提示します。まず30分のオンライン相談から始めてください。</p>
+        <ul class="poc-cta-list">
+          <li>初回相談・資料提供は完全無料</li>
+          <li>導入実績・事例を個別に共有</li>
+          <li>相談後の押しつけ営業なし</li>
+        </ul>
+        <a href="#contactFormWrap" class="btn-poc" onclick="document.getElementById('ftype').value='物件管理会社として導入を検討したい';document.getElementById('inqType').value='物件管理会社として導入を検討したい';">PoC相談を申し込む（無料）</a>
+        <p class="poc-cta-note">まず話すだけで構いません。48時間以内にご連絡します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ══ CONTACT ══ -->
 <section id="contact" class="sec-light">
   <div class="sec">
     <p class="sec-label reveal">Contact</p>
-    <h2 class="sec-h2 reveal">あなたの立場から、話してみてください</h2>
+    <h2 class="sec-h2 reveal">管理物件に、退去予兆はありますか？</h2>
     <p class="sec-lead reveal">
-      誰に向けた相談か、によって聞くべきことは変わります。<br>下から選んでください。どの立場でも、最初の相談は無料です。
+      まず1物件。それだけで、仕組みを確認できます。<br>初回相談・資料提供は無料です。48時間以内にご連絡します。
     </p>
 
-    <!-- 3-way CTA cards -->
-    <div class="cta-cards reveal">
-      <div class="cta-card">
-        <div class="cta-card-tag">FOR PROPERTY MANAGERS</div>
-        <h3 class="cta-card-h">管理会社として<br>1物件から試してみたい</h3>
-        <p class="cta-card-body">退去予兆の段階で情報を入力するだけ。BRIDGE CYCLEがGATE診断済みの創業者候補を手配します。まず1物件で効果を確認してください。</p>
-        <a href="#contactFormWrap" class="cta-card-btn btn-primary-sm" onclick="document.getElementById('ftype').value='物件管理会社として導入を検討したい';document.getElementById('inqType').value='物件管理会社として導入を検討したい';">PoC相談を申し込む</a>
+    <!-- Primary CTA: Property Managers -->
+    <div class="contact-primary-cta reveal">
+      <div class="cpc-left">
+        <span class="cpc-tag">FOR PROPERTY MANAGERS</span>
+        <h3 class="cpc-h">管理会社として、PoC相談を申し込む</h3>
+        <p class="cpc-body">退去予兆の段階で情報を入力するだけ。BRIDGE CYCLEがGATE診断済みの創業者候補を手配します。初期費用・成功報酬はヒアリング後にご提示します。</p>
+        <ul class="cpc-list">
+          <li>初回相談・資料提供は完全無料</li>
+          <li>管理会社の追加業務ゼロ</li>
+          <li>空室ゼロを1物件で検証</li>
+        </ul>
       </div>
-      <div class="cta-card">
-        <div class="cta-card-tag">FOR FOUNDERS</div>
-        <h3 class="cta-card-h">創業希望者として<br>GATE診断を受けたい</h3>
-        <p class="cta-card-body">6軸スコアで開業準備度を確認します。強みと弱みを把握してから、物件探しに入ってください。診断は無料です。</p>
-        <a href="lp.html#gate" class="cta-card-btn" target="_blank">GATE診断を受ける（無料）</a>
+      <div class="cpc-right">
+        <a href="#contactFormWrap" class="btn-cpc" onclick="document.getElementById('ftype').value='物件管理会社として導入を検討したい';document.getElementById('inqType').value='物件管理会社として導入を検討したい';">PoC相談を申し込む（無料）</a>
+        <p class="cpc-note">まず話すだけで構いません。押しつけ営業は一切しません。</p>
       </div>
-      <div class="cta-card">
-        <div class="cta-card-tag">FOR MUNICIPALITIES</div>
-        <h3 class="cta-card-h">自治体として<br>空き店舗対策に連携したい</h3>
-        <p class="cta-card-body">地域の空き店舗問題を、補助金・創業支援と組み合わせて解決する実証相談です。1自治体専任での導入も検討しています。</p>
-        <a href="#contactFormWrap" class="cta-card-btn" onclick="document.getElementById('ftype').value='自治体として連携を検討したい';document.getElementById('inqType').value='自治体として連携を検討したい';">実証相談を申し込む</a>
+    </div>
+
+    <!-- Secondary CTA: Municipalities -->
+    <div class="contact-secondary-cta reveal">
+      <div class="csc-inner">
+        <span class="csc-tag">FOR MUNICIPALITIES</span>
+        <div class="csc-body">
+          <h4 class="csc-h">自治体として、空き店舗対策の実証相談をしたい</h4>
+          <p class="csc-d">地域の空き店舗問題を補助金・創業支援と組み合わせて解決します。1自治体専任での導入も検討しています。</p>
+        </div>
+        <a href="#contactFormWrap" class="btn-csc" onclick="document.getElementById('ftype').value='自治体として連携を検討したい';document.getElementById('inqType').value='自治体として連携を検討したい';">実証相談を申し込む →</a>
       </div>
+    </div>
+
+    <!-- Text links: Others -->
+    <div class="contact-others reveal">
+      <a href="lp.html#gate" class="contact-other-link" target="_blank">創業希望者の方 — GATE診断を受ける（無料）→</a>
+      <a href="#contactFormWrap" class="contact-other-link" onclick="document.getElementById('ftype').value='BC認定パートナーとして参画したい';document.getElementById('inqType').value='BC認定パートナーとして参画したい';">BC認定パートナー（診断士）として参画したい →</a>
+      <a href="#contactFormWrap" class="contact-other-link" onclick="document.getElementById('ftype').value='資料請求のみ';document.getElementById('inqType').value='資料請求のみ';">資料請求のみ →</a>
     </div>
 
     <div class="contact-layout">
       <div class="reveal">
         <p class="contact-info-h">
-          まず、話してみてください。<br>それだけで、動き始めます。
+          フォームから送ってください。<br>48時間以内に返信します。
         </p>
         <p class="contact-info-body">
-          「自社の物件で試してみたい」「仕組みをもう少し詳しく知りたい」「BC認定パートナーとして参画したい」——どの段階のご相談でも構いません。<br><br>
-          資料送付・個別ヒアリングのどちらにも対応します。まずはお気軽にご連絡ください。
+          「退去予兆がある物件がある」「仕組みをもう少し詳しく知りたい」——それだけで構いません。<br><br>
+          種別を選んで送っていただければ、担当者からご状況に合わせた内容でご連絡します。
         </p>
         <div class="contact-promises">
           <div class="promise">
