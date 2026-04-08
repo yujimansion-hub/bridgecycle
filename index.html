@@ -1715,165 +1715,153 @@ footer{
 </section>
 
 <!-- ══ SERVICE FLOW ══ -->
-<section id="service" class="sec-light">
-  <div class="sec">
-    <p class="sec-label reveal">Service Flow</p>
-    <h2 class="sec-h2 reveal">ST1〜ST8：管理会社が動かなくても<br>空室が埋まっていく8ステップ</h2>
-    <p class="sec-lead reveal">
-      管理会社がやることは「物件情報を入力する」だけ。<br>
-      あとはBRIDGE CYCLEとBC認定パートナー診断士が動きます。
+<!-- ============================================================
+  #service セクション 差し替えコード
+  既存の <section id="service"> ～ </section> をこれで置き換える
+  既存のグローバルCSS（紺/ゴールド変数）はそのまま継承
+  ============================================================ -->
+
+<section id="service" style="background:#0B1927;padding:80px 0;">
+  <div style="max-width:900px;margin:0 auto;padding:0 32px;">
+
+    <!-- セクションヘッダー -->
+    <p style="font-size:11px;letter-spacing:3px;color:#C6A24A;text-transform:uppercase;margin:0 0 12px;">SERVICE</p>
+    <h2 style="font-size:28px;font-weight:700;color:#fff;line-height:1.4;margin:0 0 12px;">
+      状況に合わせて、まず判断材料を受け取る
+    </h2>
+    <p style="font-size:14px;color:#8a9fb0;line-height:1.8;margin:0 0 48px;">
+      相談の前に、実務で使える資料を無料で受け取れます。<br>
+      創業希望・退店検討・管理会社のいずれかから選んでください。
     </p>
-    <!-- ── ST1〜ST8 フロー図 ── -->
-    <div class="fig-frame fig-light reveal">
-      <svg viewBox="0 0 960 210" xmlns="http://www.w3.org/2000/svg" aria-label="ST1からST8までの8ステップフロー図">
-        <rect width="960" height="210" fill="#FFFFFF"/>
 
-        <!-- 「物件決定前」エリアの背景ハイライト -->
-        <rect x="12" y="12" width="468" height="150" rx="6" fill="rgba(198,162,74,0.06)" stroke="rgba(198,162,74,0.25)" stroke-width="1" stroke-dasharray="5,3"/>
-        <text x="246" y="32" font-family="serif" font-size="10" fill="rgba(198,162,74,0.8)" text-anchor="middle" letter-spacing="2">物件決定前に完了（前倒し）</text>
+    <!-- セグメント3分割 -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:48px;">
 
-        <!-- 「物件決定後」エリアの背景 -->
-        <rect x="492" y="12" width="456" height="150" rx="6" fill="rgba(13,27,42,0.03)" stroke="rgba(13,27,42,0.08)" stroke-width="1" stroke-dasharray="5,3"/>
-        <text x="720" y="32" font-family="serif" font-size="10" fill="#7A6A52" text-anchor="middle" letter-spacing="2">物件決定後</text>
+      <!-- 創業希望者 -->
+      <div style="background:#0a2033;border:1px solid #1e3a4f;border-radius:8px;padding:24px 20px;">
+        <p style="font-size:10px;letter-spacing:2px;color:#C6A24A;text-transform:uppercase;margin:0 0 10px;">創業希望者向け</p>
+        <p style="font-size:15px;font-weight:600;color:#fff;line-height:1.5;margin:0 0 12px;">
+          居抜きで始めたいが<br>判断基準が分からない
+        </p>
+        <p style="font-size:12px;color:#6e8b9c;line-height:1.8;margin:0 0 16px;">
+          初期投資の規模感、物件の見極め方、事業計画の順番など、動く前に整理すべき項目が多い。
+        </p>
+        <div style="background:#0d1e2c;border:1px solid rgba(198,162,74,0.25);border-radius:6px;padding:10px 14px;font-size:12px;color:#C6A24A;line-height:1.6;">
+          📄 ほぼゼロ円開業の条件チェック表
+        </div>
+      </div>
 
-        <!-- ─── ST1〜ST4（前倒しゾーン） ─── -->
-        <!-- ST1 -->
-        <rect x="20" y="46" width="96" height="80" rx="5" fill="#0B1927"/>
-        <text x="68" y="72" font-family="serif" font-size="9" fill="#C6A24A" text-anchor="middle" letter-spacing="1">ST 1</text>
-        <text x="68" y="90" font-family="serif" font-size="11" fill="#F6F1E7" text-anchor="middle">物件情報</text>
-        <text x="68" y="108" font-family="serif" font-size="11" fill="#F6F1E7" text-anchor="middle">入力</text>
-        <text x="68" y="122" font-family="serif" font-size="9" fill="#7A8A94" text-anchor="middle">管理会社が入力</text>
-        <!-- Arrow -->
-        <text x="122" y="92" font-family="serif" font-size="14" fill="#C6A24A" text-anchor="middle">›</text>
+      <!-- 退店検討者 -->
+      <div style="background:#0a2033;border:1px solid #1e3a4f;border-radius:8px;padding:24px 20px;">
+        <p style="font-size:10px;letter-spacing:2px;color:#C6A24A;text-transform:uppercase;margin:0 0 10px;">退店検討者向け</p>
+        <p style="font-size:15px;font-weight:600;color:#fff;line-height:1.5;margin:0 0 12px;">
+          退店を考え始めたが<br>何から整理すべきか不明
+        </p>
+        <p style="font-size:12px;color:#6e8b9c;line-height:1.8;margin:0 0 16px;">
+          原状回復の範囲、設備の扱い、タイミングの判断。後から動くと残せたものまで失いやすい。
+        </p>
+        <div style="background:#0d1e2c;border:1px solid rgba(198,162,74,0.25);border-radius:6px;padding:10px 14px;font-size:12px;color:#C6A24A;line-height:1.6;">
+          📄 退店前チェックリスト
+        </div>
+      </div>
 
-        <!-- ST2 (key: GATE診断) -->
-        <rect x="132" y="46" width="96" height="80" rx="5" fill="#0B1927" stroke="#C6A24A" stroke-width="1.5"/>
-        <text x="180" y="72" font-family="serif" font-size="9" fill="#C6A24A" text-anchor="middle" letter-spacing="1">ST 2</text>
-        <text x="180" y="90" font-family="serif" font-size="11" fill="#DFC080" text-anchor="middle">GATE</text>
-        <text x="180" y="108" font-family="serif" font-size="11" fill="#DFC080" text-anchor="middle">診断</text>
-        <text x="180" y="122" font-family="serif" font-size="9" fill="#8A7A54" text-anchor="middle">6軸スコアリング</text>
-        <!-- Arrow -->
-        <text x="234" y="92" font-family="serif" font-size="14" fill="#C6A24A" text-anchor="middle">›</text>
+      <!-- 管理会社 -->
+      <div style="background:#0a2033;border:1px solid #1e3a4f;border-radius:8px;padding:24px 20px;">
+        <p style="font-size:10px;letter-spacing:2px;color:#C6A24A;text-transform:uppercase;margin:0 0 10px;">管理会社・関係者向け</p>
+        <p style="font-size:15px;font-weight:600;color:#fff;line-height:1.5;margin:0 0 12px;">
+          空室期間を短くする<br>初動を整えたい
+        </p>
+        <p style="font-size:12px;color:#6e8b9c;line-height:1.8;margin:0 0 16px;">
+          退去予兆の段階で動けているか。募集開始後では遅い。初動フローの整備が空室期間を左右する。
+        </p>
+        <div style="background:#0d1e2c;border:1px solid rgba(198,162,74,0.25);border-radius:6px;padding:10px 14px;font-size:12px;color:#C6A24A;line-height:1.6;">
+          📄 空室期間短縮の初動フロー
+        </div>
+      </div>
 
-        <!-- ST3 (key: 事業計画) -->
-        <rect x="244" y="46" width="96" height="80" rx="5" fill="#0B1927" stroke="#C6A24A" stroke-width="1.5"/>
-        <text x="292" y="72" font-family="serif" font-size="9" fill="#C6A24A" text-anchor="middle" letter-spacing="1">ST 3</text>
-        <text x="292" y="90" font-family="serif" font-size="11" fill="#DFC080" text-anchor="middle">事業計画</text>
-        <text x="292" y="108" font-family="serif" font-size="11" fill="#DFC080" text-anchor="middle">策定</text>
-        <text x="292" y="122" font-family="serif" font-size="9" fill="#8A7A54" text-anchor="middle">BC診断士が伴走</text>
-        <!-- Arrow -->
-        <text x="346" y="92" font-family="serif" font-size="14" fill="#C6A24A" text-anchor="middle">›</text>
-
-        <!-- ST4 (key: 融資申込) -->
-        <rect x="356" y="46" width="96" height="80" rx="5" fill="#0B1927" stroke="#C6A24A" stroke-width="1.5"/>
-        <text x="404" y="72" font-family="serif" font-size="9" fill="#C6A24A" text-anchor="middle" letter-spacing="1">ST 4</text>
-        <text x="404" y="90" font-family="serif" font-size="11" fill="#DFC080" text-anchor="middle">融資</text>
-        <text x="404" y="108" font-family="serif" font-size="11" fill="#DFC080" text-anchor="middle">申込</text>
-        <text x="404" y="122" font-family="serif" font-size="9" fill="#8A7A54" text-anchor="middle">物件決定より先</text>
-
-        <!-- 区切り矢印 "物件契約" -->
-        <line x1="464" y1="40" x2="464" y2="180" stroke="#C6A24A" stroke-width="1.5" stroke-dasharray="4,3"/>
-        <rect x="438" y="164" width="52" height="18" rx="3" fill="rgba(198,162,74,0.15)"/>
-        <text x="464" y="176" font-family="serif" font-size="9" fill="#C6A24A" text-anchor="middle" letter-spacing="1">物件契約</text>
-        <!-- Arrow after divider -->
-        <text x="480" y="92" font-family="serif" font-size="14" fill="#5A6A7A" text-anchor="middle">›</text>
-
-        <!-- ─── ST5〜ST8（物件決定後） ─── -->
-        <!-- ST5 -->
-        <rect x="500" y="46" width="96" height="80" rx="5" fill="#1C304A"/>
-        <text x="548" y="72" font-family="serif" font-size="9" fill="#C4BAA6" text-anchor="middle" letter-spacing="1">ST 5</text>
-        <text x="548" y="90" font-family="serif" font-size="11" fill="#F6F1E7" text-anchor="middle">物件契約</text>
-        <text x="548" y="108" font-family="serif" font-size="11" fill="#F6F1E7" text-anchor="middle">設備承継</text>
-        <text x="548" y="122" font-family="serif" font-size="9" fill="#6A7A8A" text-anchor="middle">引き継ぎ交渉</text>
-        <!-- Arrow -->
-        <text x="602" y="92" font-family="serif" font-size="14" fill="#5A6A7A" text-anchor="middle">›</text>
-
-        <!-- ST6 -->
-        <rect x="612" y="46" width="96" height="80" rx="5" fill="#1C304A"/>
-        <text x="660" y="72" font-family="serif" font-size="9" fill="#C4BAA6" text-anchor="middle" letter-spacing="1">ST 6</text>
-        <text x="660" y="90" font-family="serif" font-size="11" fill="#F6F1E7" text-anchor="middle">内装工事</text>
-        <text x="660" y="108" font-family="serif" font-size="11" fill="#F6F1E7" text-anchor="middle">開業準備</text>
-        <text x="660" y="122" font-family="serif" font-size="9" fill="#6A7A8A" text-anchor="middle">最小限の工事</text>
-        <!-- Arrow -->
-        <text x="714" y="92" font-family="serif" font-size="14" fill="#5A6A7A" text-anchor="middle">›</text>
-
-        <!-- ST7 -->
-        <rect x="724" y="46" width="96" height="80" rx="5" fill="#1C304A"/>
-        <text x="772" y="72" font-family="serif" font-size="9" fill="#C4BAA6" text-anchor="middle" letter-spacing="1">ST 7</text>
-        <text x="772" y="90" font-family="serif" font-size="11" fill="#F6F1E7" text-anchor="middle">グランド</text>
-        <text x="772" y="108" font-family="serif" font-size="11" fill="#F6F1E7" text-anchor="middle">オープン</text>
-        <text x="772" y="122" font-family="serif" font-size="9" fill="#6A7A8A" text-anchor="middle">開業当日まで伴走</text>
-        <!-- Arrow -->
-        <text x="826" y="92" font-family="serif" font-size="14" fill="#5A6A7A" text-anchor="middle">›</text>
-
-        <!-- ST8 -->
-        <rect x="836" y="46" width="108" height="80" rx="5" fill="#0F2A1E" stroke="#2D7A50" stroke-width="1"/>
-        <text x="890" y="72" font-family="serif" font-size="9" fill="#6DB89A" text-anchor="middle" letter-spacing="1">ST 8</text>
-        <text x="890" y="90" font-family="serif" font-size="11" fill="#A0D4B8" text-anchor="middle">開業後</text>
-        <text x="890" y="108" font-family="serif" font-size="11" fill="#A0D4B8" text-anchor="middle">フォロー</text>
-        <text x="890" y="122" font-family="serif" font-size="9" fill="#4A8A60" text-anchor="middle">90〜180日伴走</text>
-
-        <!-- 凡例 -->
-        <rect x="20" y="180" width="10" height="10" rx="2" fill="#0B1927" stroke="#C6A24A" stroke-width="1.5"/>
-        <text x="36" y="190" font-family="serif" font-size="10" fill="#7A6A52">BRIDGE CYCLEが担う前倒しステップ</text>
-        <rect x="220" y="180" width="10" height="10" rx="2" fill="#1C304A"/>
-        <text x="236" y="190" font-family="serif" font-size="10" fill="#7A6A52">物件契約後のステップ</text>
-        <rect x="400" y="180" width="10" height="10" rx="2" fill="#0F2A1E" stroke="#2D7A50" stroke-width="1"/>
-        <text x="416" y="190" font-family="serif" font-size="10" fill="#7A6A52">開業後フォロー（継続率向上）</text>
-      </svg>
-      <p class="fig-caption">ST2〜ST4（GATE診断・事業計画・融資申込）を物件契約より先に完了させることが、空室期間短縮と低投資開業を同時に実現する核心です。管理会社の追加作業はST1の入力のみです。</p>
     </div>
 
-    <div class="flow-grid reveal">
-      <div class="flow-cell">
-        <p class="flow-cell-phase">ST 1</p>
-        <p class="flow-cell-title">管理会社が物件情報を入力</p>
-        <p class="flow-cell-desc">退去予兆・賃料・オーナー意向など物件情報をシステムに入力します。ここからBRIDGE CYCLEが動き始めます。管理会社の追加業務は、これだけです。</p>
-        <span class="flow-cell-tag">管理会社の入力だけで完了</span>
-        <span class="flow-cell-num">01</span>
-      </div>
-      <div class="flow-cell">
-        <p class="flow-cell-phase">ST 2</p>
-        <p class="flow-cell-title">GATE診断で入居候補者の適性を確認</p>
-        <p class="flow-cell-desc">動機・資金力・適合性・経験・計画性・承継条件の6軸でスコアリング。「なんとなく良さそう」ではなく、客観的な根拠で候補者を絞り込みます。</p>
-        <span class="flow-cell-num">02</span>
-      </div>
-      <div class="flow-cell">
-        <p class="flow-cell-phase">ST 3</p>
-        <p class="flow-cell-title">事業計画を一緒に作る</p>
-        <p class="flow-cell-desc">BC認定パートナー中小企業診断士が、損益シミュレーション・売上計画を含む事業計画書を創業希望者と共同作成。「開業後に失敗しない計画」にします。</p>
-        <span class="flow-cell-num">03</span>
-      </div>
-      <div class="flow-cell">
-        <p class="flow-cell-phase">ST 4</p>
-        <p class="flow-cell-title">物件決定前に融資の目処を立てる</p>
-        <p class="flow-cell-desc">日本政策金融公庫への融資申請を物件契約より先に完了させます。「融資が通った状態」で物件交渉に入るため、オーナーへの説明責任が果たしやすくなります。</p>
-        <span class="flow-cell-tag">補助金・助成金も同時確認</span>
-        <span class="flow-cell-num">04</span>
-      </div>
-      <div class="flow-bottom">
-        <div class="flow-bottom-item">
-          <p class="flow-cell-phase">ST 5</p>
-          <p class="flow-cell-title">物件契約・設備承継交渉</p>
-          <p class="flow-cell-desc">賃貸契約・前テナントからの設備引き継ぎ交渉・食品衛生法等の許認可手続きをチェックリストで管理。抜け漏れなく進めます。</p>
+    <!-- 区切り線 -->
+    <hr style="border:none;border-top:1px solid #1e3a4f;margin:0 0 40px;">
+
+    <!-- 放置リスク -->
+    <div style="background:#0a2033;border-left:3px solid #C6A24A;border-radius:0 8px 8px 0;padding:22px 28px;margin-bottom:48px;">
+      <p style="font-size:10px;letter-spacing:2px;color:#C6A24A;text-transform:uppercase;margin:0 0 16px;">判断が遅れると起きること</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;">
+        <div style="padding-left:14px;border-left:1px solid #1e3a4f;">
+          <p style="font-size:12px;font-weight:600;color:#d8cfc0;margin:0 0 6px;">創業フェーズ</p>
+          <p style="font-size:12px;color:#6e8b9c;line-height:1.7;margin:0;">合わない物件を選び、初期投資が回収できない構造になる</p>
         </div>
-        <div class="flow-bottom-item">
-          <p class="flow-cell-phase">ST 6</p>
-          <p class="flow-cell-title">内装工事・開業準備</p>
-          <p class="flow-cell-desc">引き継いだ設備を活かした最小限の工事で開業準備を進めます。SNS集客・プレオープン設計もサポートします。</p>
+        <div style="padding-left:14px;border-left:1px solid #1e3a4f;">
+          <p style="font-size:12px;font-weight:600;color:#d8cfc0;margin:0 0 6px;">退店フェーズ</p>
+          <p style="font-size:12px;color:#6e8b9c;line-height:1.7;margin:0;">原状回復や設備処分で残せたコストまで失う</p>
         </div>
-        <div class="flow-bottom-item">
-          <p class="flow-cell-phase">ST 7</p>
-          <p class="flow-cell-title">グランドオープン</p>
-          <p class="flow-cell-desc">開業当日まで伴走。空室が「次の灯り」に変わる瞬間を、BRIDGE CYCLEと管理会社が一緒に迎えます。</p>
-        </div>
-        <div class="flow-bottom-item">
-          <p class="flow-cell-phase">ST 8</p>
-          <p class="flow-cell-title">開業後90〜180日のフォロー</p>
-          <p class="flow-cell-desc">BC認定パートナー診断士が開業後の経営状況をモニタリング。早期撤退リスクを減らし、テナントの継続率を高めます。</p>
+        <div style="padding-left:14px;border-left:1px solid #1e3a4f;">
+          <p style="font-size:12px;font-weight:600;color:#d8cfc0;margin:0 0 6px;">募集フェーズ</p>
+          <p style="font-size:12px;color:#6e8b9c;line-height:1.7;margin:0;">退去通知後に動き始めるため、空室期間が長期化する</p>
         </div>
       </div>
     </div>
+
+    <!-- 導線フロー -->
+    <p style="font-size:10px;letter-spacing:2px;color:#C6A24A;text-transform:uppercase;margin:0 0 16px;">相談までの流れ</p>
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:48px;flex-wrap:wrap;">
+      <div style="flex:1;min-width:100px;background:#0a2033;border:1px solid #1e3a4f;border-radius:6px;padding:12px 16px;text-align:center;">
+        <p style="font-size:10px;color:#C6A24A;margin:0 0 4px;letter-spacing:1px;">STEP 1</p>
+        <p style="font-size:13px;color:#fff;font-weight:600;margin:0;">資料受取</p>
+      </div>
+      <span style="color:#C6A24A;font-size:16px;">→</span>
+      <div style="flex:1;min-width:100px;background:#0a2033;border:1px solid #1e3a4f;border-radius:6px;padding:12px 16px;text-align:center;">
+        <p style="font-size:10px;color:#C6A24A;margin:0 0 4px;letter-spacing:1px;">STEP 2</p>
+        <p style="font-size:13px;color:#fff;font-weight:600;margin:0;">LINE登録</p>
+      </div>
+      <span style="color:#C6A24A;font-size:16px;">→</span>
+      <div style="flex:1;min-width:100px;background:#0a2033;border:1px solid #1e3a4f;border-radius:6px;padding:12px 16px;text-align:center;">
+        <p style="font-size:10px;color:#C6A24A;margin:0 0 4px;letter-spacing:1px;">STEP 3</p>
+        <p style="font-size:13px;color:#fff;font-weight:600;margin:0;">3問回答</p>
+      </div>
+      <span style="color:#C6A24A;font-size:16px;">→</span>
+      <div style="flex:1;min-width:100px;background:#0a2033;border:1px solid #1e3a4f;border-radius:6px;padding:12px 16px;text-align:center;">
+        <p style="font-size:10px;color:#C6A24A;margin:0 0 4px;letter-spacing:1px;">STEP 4</p>
+        <p style="font-size:13px;color:#fff;font-weight:600;margin:0;">無料相談</p>
+      </div>
+    </div>
+
+    <!-- CTA 2本立て -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <a href="https://line.me/R/ti/p/@954vjafy"
+         style="display:block;background:#C6A24A;color:#0B1927;border-radius:6px;padding:18px 24px;font-size:14px;font-weight:700;text-align:center;text-decoration:none;line-height:1.5;">
+        LINEで無料資料を受け取る
+        <span style="display:block;font-size:11px;font-weight:400;margin-top:4px;opacity:0.8;">開業・退店・管理会社向けの3種類</span>
+      </a>
+      <a href="#contact"
+         style="display:block;background:transparent;color:#C6A24A;border:1px solid #C6A24A;border-radius:6px;padding:18px 24px;font-size:14px;font-weight:600;text-align:center;text-decoration:none;line-height:1.5;">
+        1物件からPoC相談（無料）
+        <span style="display:block;font-size:11px;font-weight:400;margin-top:4px;opacity:0.75;">資料確認後でも申込可能です</span>
+      </a>
+    </div>
+
+    <!-- スマホ対応 -->
+    <style>
+      @media (max-width: 640px) {
+        #service [style*="grid-template-columns:repeat(3"] {
+          display: grid !important;
+          grid-template-columns: 1fr !important;
+        }
+        #service [style*="grid-template-columns:1fr 1fr 1fr"] {
+          display: grid !important;
+          grid-template-columns: 1fr !important;
+        }
+        #service [style*="grid-template-columns:1fr 1fr"] {
+          display: grid !important;
+          grid-template-columns: 1fr !important;
+        }
+        #service [style*="display:flex"] {
+          flex-direction: column !important;
+        }
+      }
+    </style>
+
   </div>
 </section>
 
