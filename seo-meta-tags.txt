@@ -1,0 +1,149 @@
+=====================================================================
+BRIDGE CYCLE　SEO改善　差し替えコード一式
+=====================================================================
+
+■ 作業内容：各ファイルの <head> 内に以下を追加するだけです
+■ 追加場所：<head> タグの直後（一番上）
+
+=====================================================================
+【1】index.html の <head> 直後に追加
+=====================================================================
+
+<!-- SEO: 基本メタ -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>空き店舗・居抜き物件の承継支援 | BRIDGE CYCLE株式会社【滋賀・関西】</title>
+<meta name="description" content="退去予兆の段階から動く、新しい空室対策。管理会社・不動産オーナー向けに、空室期間を短縮するPoC支援を1物件から提供。BRIDGE CYCLE株式会社（滋賀県大津市）。">
+<meta name="keywords" content="居抜き物件,空き店舗,承継,空室対策,飲食店開業,大津市,滋賀,退店支援,管理会社,不動産">
+<link rel="canonical" href="https://www.bridgecycleco.com/">
+
+<!-- SEO: OGP（SNSシェア用） -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="空き店舗を、次の灯りへ | BRIDGE CYCLE株式会社">
+<meta property="og:description" content="退去予兆の段階から動く、新しい空室対策。管理会社・不動産オーナー向けPoC支援。滋賀県大津市。">
+<meta property="og:url" content="https://www.bridgecycleco.com/">
+<meta property="og:site_name" content="BRIDGE CYCLE株式会社">
+<meta property="og:locale" content="ja_JP">
+
+<!-- SEO: Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="空き店舗を、次の灯りへ | BRIDGE CYCLE株式会社">
+<meta name="twitter:description" content="退去予兆の段階から動く、新しい空室対策。管理会社・不動産オーナー向けPoC支援。滋賀県大津市。">
+
+<!-- SEO: 構造化データ（会社情報） -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "BRIDGE CYCLE株式会社",
+  "url": "https://www.bridgecycleco.com/",
+  "email": "info@bridgecycleco.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "におの浜2-1-28-1302",
+    "addressLocality": "大津市",
+    "addressRegion": "滋賀県",
+    "postalCode": "520-0047",
+    "addressCountry": "JP"
+  },
+  "description": "退去予兆の段階から動く空室対策。居抜き物件・空き店舗の承継支援。",
+  "areaServed": "滋賀県・関西",
+  "serviceType": ["空き店舗承継支援", "飲食店開業支援", "空室対策", "事業計画策定"]
+}
+</script>
+
+
+=====================================================================
+【2】lp.html の <head> 直後に追加
+=====================================================================
+
+<!-- SEO: 基本メタ -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ほぼゼロ円で飲食店を開業する方法 | BRIDGE CYCLE株式会社【滋賀・居抜き物件】</title>
+<meta name="description" content="居抜き物件の設備を引き継ぎ、初期費用を最大50%削減して開業する方法。物件より先に融資の目処を立てる「正しい順番」を、元商工会経営指導員が伴走支援します。滋賀県大津市。">
+<meta name="keywords" content="飲食店開業,居抜き物件,低投資開業,日本政策金融公庫,融資,事業計画,大津市,滋賀,GATE診断">
+<link rel="canonical" href="https://www.bridgecycleco.com/lp.html">
+
+<!-- SEO: OGP -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="ほぼゼロ円で飲食店を開業する方法 | BRIDGE CYCLE">
+<meta property="og:description" content="居抜き物件の設備を引き継ぎ、初期費用を最大50%削減。物件より先に融資の目処を立てる正しい順番で開業をサポートします。">
+<meta property="og:url" content="https://www.bridgecycleco.com/lp.html">
+<meta property="og:site_name" content="BRIDGE CYCLE株式会社">
+<meta property="og:locale" content="ja_JP">
+
+<!-- SEO: Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ほぼゼロ円で飲食店を開業する方法 | BRIDGE CYCLE">
+<meta name="twitter:description" content="居抜き物件の設備を引き継ぎ、初期費用を最大50%削減して開業する方法。">
+
+<!-- SEO: 構造化データ（サービス） -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "飲食店開業支援（GATEパック）",
+  "provider": {
+    "@type": "Organization",
+    "name": "BRIDGE CYCLE株式会社",
+    "url": "https://www.bridgecycleco.com/"
+  },
+  "description": "GATE診断・事業計画書作成・日本政策金融公庫への融資申請サポートをまとめて伴走。居抜き物件の設備承継による低投資開業を支援します。",
+  "areaServed": "滋賀県・関西",
+  "offers": {
+    "@type": "Offer",
+    "price": "300000",
+    "priceCurrency": "JPY",
+    "description": "GATE診断・事業計画・融資申請パック"
+  }
+}
+</script>
+
+
+=====================================================================
+【3】exit.html の <head> 直後に追加
+=====================================================================
+
+<!-- SEO: 基本メタ -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>原状回復費用ゼロで閉店できる方法 | BRIDGE CYCLE株式会社【滋賀・飲食店退店支援】</title>
+<meta name="description" content="閉店・退店をお考えの飲食店・小売店オーナーへ。設備・内装を次の開業者に引き継ぐことで、原状回復工事（100〜300万円）が不要になる可能性があります。退店希望者への費用は一切かかりません。">
+<meta name="keywords" content="飲食店閉店,退店支援,原状回復,居抜き,設備承継,大津市,滋賀,閉店費用,撤退">
+<link rel="canonical" href="https://www.bridgecycleco.com/exit.html">
+
+<!-- SEO: OGP -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="原状回復費用ゼロで閉店できる方法 | BRIDGE CYCLE">
+<meta property="og:description" content="設備・内装を次の開業者に引き継ぐことで、原状回復工事が不要になる可能性があります。退店希望者への費用は一切かかりません。">
+<meta property="og:url" content="https://www.bridgecycleco.com/exit.html">
+<meta property="og:site_name" content="BRIDGE CYCLE株式会社">
+<meta property="og:locale" content="ja_JP">
+
+<!-- SEO: Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="原状回復費用ゼロで閉店できる方法 | BRIDGE CYCLE">
+<meta name="twitter:description" content="設備・内装を次の開業者に引き継ぎ、原状回復工事が不要に。退店希望者への費用は一切かかりません。">
+
+<!-- SEO: 構造化データ（サービス） -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "退店・閉店支援サービス",
+  "provider": {
+    "@type": "Organization",
+    "name": "BRIDGE CYCLE株式会社",
+    "url": "https://www.bridgecycleco.com/"
+  },
+  "description": "飲食店・小売店の閉店時に、設備・内装を次の開業者に承継することで原状回復費用を削減。退店希望者への費用は一切かかりません。",
+  "areaServed": "滋賀県・関西",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "JPY",
+    "description": "退店希望者への費用は無料"
+  }
+}
+</script>
