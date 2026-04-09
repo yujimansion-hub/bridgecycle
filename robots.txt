@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.bridgecycleco.com/sitemap.xml
+# サイトマップの場所をクローラーに通知
+Sitemap: https://yujimansion-hub.github.io/bridgecycle/sitemap.xml
+
+# クロール頻度のヒント（Google は参考程度に扱います）
+Crawl-delay: 1
