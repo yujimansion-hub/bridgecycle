@@ -1,25 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
+  <!-- ① メインページ（管理会社・オーナー向け） -->
   <url>
-    <loc>https://www.bridgecycleco.com/</loc>
-    <lastmod>2026-04-08</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://yujimansion-hub.github.io/bridgecycle/</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
+  <!-- ② 創業希望者向けLP -->
   <url>
-    <loc>https://www.bridgecycleco.com/lp.html</loc>
-    <lastmod>2026-04-08</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://yujimansion-hub.github.io/bridgecycle/lp.html</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
+  <!-- ③ 退店希望者向けLP -->
   <url>
-    <loc>https://www.bridgecycleco.com/exit.html</loc>
-    <lastmod>2026-04-08</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://yujimansion-hub.github.io/bridgecycle/exit.html</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+
+  <!-- ④ 税理士・会計事務所からの紹介向けLP -->
+  <url>
+    <loc>https://yujimansion-hub.github.io/bridgecycle/tax.html</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 
 </urlset>
