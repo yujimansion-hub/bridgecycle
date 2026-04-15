@@ -1,618 +1,170 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>創業希望者 出店適性診断</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-<style>
-  :root {
-    --navy: #0B1927;
-    --navy2: #0a1e30;
-    --gold: #C6A24A;
-    --gold-light: #e8c97a;
-    --gold-dim: rgba(198,162,74,0.15);
-    --white: #f5f0e8;
-    --gray: #8a9ab0;
-    --border: rgba(198,162,74,0.25);
-    --card: rgba(255,255,255,0.04);
-    --danger: #e05c5c;
-    --success: #4caf87;
-    --warn: #e09a3a;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
-    background: var(--navy);
-    color: var(--white);
-    min-height: 100vh;
-    line-height: 1.7;
-  }
-  .app { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
-
-  /* Header */
-  .header { text-align: center; padding: 2rem 0 2.5rem; border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
-  .header-badge { display: inline-block; font-size: 11px; letter-spacing: 0.12em; color: var(--gold); border: 1px solid var(--border); padding: 4px 14px; border-radius: 2px; margin-bottom: 1rem; text-transform: uppercase; }
-  .header h1 { font-size: 1.6rem; font-weight: 300; letter-spacing: 0.05em; color: var(--white); margin-bottom: 0.4rem; }
-  .header h1 span { color: var(--gold); font-weight: 500; }
-  .header p { font-size: 0.85rem; color: var(--gray); }
-
-  /* Progress */
-  .progress-wrap { margin-bottom: 2rem; }
-  .progress-meta { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--gray); margin-bottom: 8px; }
-  .progress-bar { height: 2px; background: rgba(255,255,255,0.08); border-radius: 1px; }
-  .progress-fill { height: 100%; background: var(--gold); border-radius: 1px; transition: width 0.4s ease; }
-  .step-dots { display: flex; gap: 8px; margin-top: 12px; justify-content: center; }
-  .step-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.1); transition: background 0.3s; }
-  .step-dot.active { background: var(--gold); }
-  .step-dot.done { background: rgba(198,162,74,0.4); }
-
-  /* Section card */
-  .section-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 1.8rem; margin-bottom: 1.5rem; }
-  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 1.6rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(198,162,74,0.1); }
-  .section-num { font-size: 0.7rem; color: var(--gold); letter-spacing: 0.1em; min-width: 30px; }
-  .section-title { font-size: 1rem; font-weight: 500; color: var(--white); }
-  .section-sub { font-size: 0.78rem; color: var(--gray); margin-top: 2px; }
-
-  /* Question */
-  .question { margin-bottom: 1.6rem; }
-  .question:last-child { margin-bottom: 0; }
-  .q-text { font-size: 0.88rem; color: var(--white); margin-bottom: 10px; line-height: 1.6; }
-  .q-num { font-size: 0.72rem; color: var(--gold); margin-right: 6px; }
-  .options { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  @media (max-width: 480px) { .options { grid-template-columns: 1fr; } }
-  .option-btn {
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 3px;
-    padding: 10px 12px;
-    color: var(--gray);
-    font-size: 0.8rem;
-    font-family: inherit;
-    cursor: pointer;
-    text-align: left;
-    transition: all 0.2s;
-    line-height: 1.4;
-  }
-  .option-btn:hover { border-color: var(--gold); color: var(--white); background: var(--gold-dim); }
-  .option-btn.selected { border-color: var(--gold); color: var(--gold-light); background: var(--gold-dim); }
-  .option-score { font-size: 0.68rem; color: var(--gray); display: block; margin-top: 2px; }
-  .option-btn.selected .option-score { color: var(--gold); }
-
-  /* Buttons */
-  .btn-row { display: flex; gap: 12px; justify-content: flex-end; margin-top: 1.5rem; }
-  .btn { padding: 10px 24px; border-radius: 2px; font-family: inherit; font-size: 0.85rem; cursor: pointer; transition: all 0.2s; }
-  .btn-secondary { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: var(--gray); }
-  .btn-secondary:hover { border-color: var(--white); color: var(--white); }
-  .btn-primary { background: var(--gold); border: 1px solid var(--gold); color: var(--navy); font-weight: 500; }
-  .btn-primary:hover { background: var(--gold-light); border-color: var(--gold-light); }
-  .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
-
-  /* Intro */
-  .intro-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 1.5rem 0; }
-  @media (max-width: 480px) { .intro-grid { grid-template-columns: 1fr; } }
-  .intro-item { background: var(--card); border: 1px solid var(--border); border-radius: 3px; padding: 1rem; text-align: center; }
-  .intro-item .num { font-size: 1.4rem; font-weight: 300; color: var(--gold); }
-  .intro-item .label { font-size: 0.75rem; color: var(--gray); margin-top: 4px; }
-  .intro-note { font-size: 0.82rem; color: var(--gray); line-height: 1.7; padding: 1rem; background: rgba(198,162,74,0.06); border-left: 2px solid var(--gold); border-radius: 0 3px 3px 0; }
-
-  /* Name input */
-  .name-row { display: flex; flex-direction: column; gap: 6px; margin-bottom: 1.2rem; }
-  .name-row label { font-size: 0.8rem; color: var(--gray); }
-  .name-row input {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 3px;
-    padding: 10px 14px;
-    color: var(--white);
-    font-family: inherit;
-    font-size: 0.9rem;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .name-row input:focus { border-color: var(--gold); }
-
-  /* Business type selector */
-  .biz-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 1.5rem; }
-  @media (max-width: 600px) { .biz-grid { grid-template-columns: repeat(2, 1fr); } }
-  .biz-btn {
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 3px;
-    padding: 10px 8px;
-    color: var(--gray);
-    font-size: 0.78rem;
-    font-family: inherit;
-    cursor: pointer;
-    text-align: center;
-    transition: all 0.2s;
-  }
-  .biz-btn:hover { border-color: var(--gold); color: var(--white); }
-  .biz-btn.selected { border-color: var(--gold); color: var(--gold-light); background: var(--gold-dim); }
-
-  /* Results */
-  .results-header { text-align: center; padding: 2rem 0; }
-  .results-name { font-size: 0.8rem; color: var(--gray); margin-bottom: 4px; }
-  .results-title { font-size: 1.4rem; font-weight: 300; color: var(--white); }
-  .score-big { font-size: 3.5rem; font-weight: 200; color: var(--gold); line-height: 1; }
-  .score-label { font-size: 0.75rem; color: var(--gray); margin-top: 4px; }
-
-  .score-band { display: inline-block; padding: 4px 16px; border-radius: 2px; font-size: 0.78rem; font-weight: 500; margin-top: 8px; }
-  .band-high { background: rgba(76,175,135,0.15); border: 1px solid rgba(76,175,135,0.4); color: #4caf87; }
-  .band-mid { background: rgba(198,162,74,0.12); border: 1px solid rgba(198,162,74,0.4); color: var(--gold); }
-  .band-low { background: rgba(224,92,92,0.12); border: 1px solid rgba(224,92,92,0.4); color: var(--danger); }
-
-  .score-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 1.5rem 0; }
-  @media (max-width: 480px) { .score-grid { grid-template-columns: repeat(2, 1fr); } }
-  .score-card { background: var(--card); border: 1px solid var(--border); border-radius: 3px; padding: 12px; text-align: center; }
-  .score-card .cat { font-size: 0.72rem; color: var(--gray); margin-bottom: 4px; }
-  .score-card .val { font-size: 1.3rem; font-weight: 300; }
-  .val-high { color: var(--success); }
-  .val-mid { color: var(--gold); }
-  .val-low { color: var(--danger); }
-
-  .chart-wrap { position: relative; width: 100%; max-width: 400px; margin: 0 auto 1.5rem; }
-
-  /* AI Analysis */
-  .ai-section { background: var(--card); border: 1px solid var(--border); border-radius: 4px; padding: 1.8rem; margin-top: 1.5rem; }
-  .ai-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid rgba(198,162,74,0.1); }
-  .ai-badge { font-size: 0.68rem; letter-spacing: 0.1em; color: var(--gold); border: 1px solid var(--border); padding: 3px 10px; border-radius: 2px; }
-  .ai-title { font-size: 0.9rem; font-weight: 500; color: var(--white); }
-  .ai-content { font-size: 0.85rem; color: rgba(245,240,232,0.85); line-height: 1.85; }
-  .ai-content h4 { color: var(--gold); font-size: 0.82rem; font-weight: 500; margin: 1rem 0 0.4rem; letter-spacing: 0.05em; }
-  .ai-content p { margin-bottom: 0.6rem; }
-  .ai-loading { display: flex; align-items: center; gap: 10px; color: var(--gray); font-size: 0.85rem; }
-  .spinner { width: 16px; height: 16px; border: 1.5px solid rgba(198,162,74,0.2); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite; flex-shrink: 0; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  .priority-list { margin-top: 0.8rem; }
-  .priority-item { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.83rem; }
-  .priority-item:last-child { border-bottom: none; }
-  .p-rank { min-width: 20px; font-weight: 500; color: var(--gold); }
-
-  .restart-row { text-align: center; margin-top: 2rem; }
-  .btn-restart { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: var(--gray); padding: 8px 20px; border-radius: 2px; font-family: inherit; font-size: 0.82rem; cursor: pointer; transition: all 0.2s; }
-  .btn-restart:hover { border-color: var(--white); color: var(--white); }
-
-  .hidden { display: none; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRIDGE CYCLE | 開業力6軸診断（GATE）</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --navy: #0B1927; --gold: #C6A24A; --gold-l: #e8c97a;
+            --white: #f5f0e8; --gray: #8a9ab0; --border: rgba(198,162,74,0.25);
+            --success: #4caf87; --card: rgba(255,255,255,0.04);
+        }
+        body {
+            background: var(--navy); color: var(--white);
+            font-family: 'Hiragino Kaku Gothic ProN', sans-serif; margin: 0; padding: 20px;
+        }
+        .container { max-width: 800px; margin: 0 auto; }
+        .card { background: var(--card); border: 1px solid var(--border); padding: 2rem; border-radius: 8px; margin-bottom: 2rem; }
+        h1 span { color: var(--gold); }
+        .btn {
+            width: 100%; padding: 15px; border: none; border-radius: 4px;
+            font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 1rem;
+        }
+        .btn-p { background: var(--gold); color: var(--navy); }
+        .btn-p:hover { background: var(--gold-l); }
+        .btn-bank { background: transparent; border: 1px solid var(--success); color: var(--success); }
+        
+        /* 診断パーツ */
+        .q-row { margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 1rem; }
+        .opt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .opt-btn {
+            background: transparent; border: 1px solid var(--border); color: var(--gray);
+            padding: 10px; cursor: pointer; text-align: left; font-size: 0.8rem;
+        }
+        .opt-btn.active { border-color: var(--gold); color: var(--gold); background: rgba(198,162,74,0.1); }
+        
+        /* 銀行判定パーツ */
+        .bank-box { border: 1px solid var(--success); background: rgba(76, 175, 135, 0.05); padding: 1.5rem; border-radius: 4px; }
+        .readiness-text { font-size: 1.1rem; font-weight: bold; color: var(--success); margin: 10px 0; }
+    </style>
 </head>
 <body>
-<div class="app">
-  <div class="header">
-    <div class="header-badge">BRIDGE CYCLE 創業支援</div>
-    <h1>出店適性 <span>診断システム</span></h1>
-    <p>飲食・小売業態の創業希望者向け — 6軸・24項目評価</p>
-  </div>
 
-  <!-- INTRO -->
-  <div id="view-intro">
-    <div class="section-card">
-      <div class="intro-grid">
-        <div class="intro-item"><div class="num">6</div><div class="label">評価軸</div></div>
-        <div class="intro-item"><div class="num">24</div><div class="label">診断項目</div></div>
-        <div class="intro-item"><div class="num">~8分</div><div class="label">所要時間</div></div>
-      </div>
-      <p class="intro-note">
-        コンセプト・商圏・競合・収益・立地・集客の6軸で出店計画の強度を診断します。
-        各項目に正直に回答することで、支援者との対話に使える構造化されたフィードバックが得られます。
-      </p>
+<div class="container">
+    <div id="view-intro" class="card">
+        <h1>開業力 <span>6軸診断</span></h1>
+        <p>創業融資を“持ち込みやすい案件”に整えるための実務整理（GATE）</p>
+        <div style="margin: 2rem 0;">
+            <label>希望業態</label>
+            <select id="biz-type" style="width:100%; padding:10px; margin-top:5px; background:#1a2a3a; color:white; border:1px solid var(--border);">
+                <option value="居酒屋・バル">居酒屋・バル</option>
+                <option value="カフェ・喫茶">カフェ・喫茶</option>
+                <option value="ラーメン・麺類">ラーメン・麺類</option>
+                <option value="小売・その他">小売・その他</option>
+            </select>
+        </div>
+        <button class="btn btn-p" onclick="start()">診断を開始する</button>
     </div>
-    <div class="section-card">
-      <div class="name-row">
-        <label>相談者氏名（任意）</label>
-        <input type="text" id="user-name" placeholder="例：田中 太郎" />
-      </div>
-      <div style="font-size:0.8rem;color:var(--gray);margin-bottom:0.8rem;">業態を選択してください</div>
-      <div class="biz-grid" id="biz-grid">
-        <button class="biz-btn" data-biz="ラーメン・麺類">ラーメン・麺類</button>
-        <button class="biz-btn" data-biz="カフェ・喫茶">カフェ・喫茶</button>
-        <button class="biz-btn" data-biz="居酒屋・バル">居酒屋・バル</button>
-        <button class="biz-btn" data-biz="焼肉・焼き鳥">焼肉・焼き鳥</button>
-        <button class="biz-btn" data-biz="定食・食堂">定食・食堂</button>
-        <button class="biz-btn" data-biz="テイクアウト・弁当">テイクアウト・弁当</button>
-        <button class="biz-btn" data-biz="高単価レストラン">高単価レストラン</button>
-        <button class="biz-btn" data-biz="その他飲食・小売">その他・小売</button>
-      </div>
-    </div>
-    <div class="btn-row">
-      <button class="btn btn-primary" id="btn-start" disabled>診断を開始する →</button>
-    </div>
-  </div>
 
-  <!-- DIAGNOSTIC STEPS -->
-  <div id="view-diagnostic" class="hidden">
-    <div class="progress-wrap">
-      <div class="progress-meta">
-        <span id="prog-label"></span>
-        <span id="prog-pct"></span>
-      </div>
-      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
-      <div class="step-dots" id="step-dots"></div>
+    <div id="view-diag" class="card" style="display:none;">
+        <h2 id="sec-title"></h2>
+        <div id="q-container"></div>
+        <button id="next-btn" class="btn btn-p" onclick="next()" disabled>次へ進む</button>
     </div>
-    <div id="section-container"></div>
-    <div class="btn-row">
-      <button class="btn btn-secondary" id="btn-back">← 戻る</button>
-      <button class="btn btn-primary" id="btn-next" disabled>次へ →</button>
-    </div>
-  </div>
 
-  <!-- RESULTS -->
-  <div id="view-results" class="hidden">
-    <div class="results-header">
-      <div class="results-name" id="res-name"></div>
-      <div class="results-title">診断結果レポート</div>
-      <div class="score-big" id="res-total"></div>
-      <div class="score-label">総合スコア（100点満点）</div>
-      <div id="res-band"></div>
+    <div id="view-res" style="display:none;">
+        <div class="card" style="text-align:center;">
+            <h2>総合スコア</h2>
+            <div id="total-score" style="font-size: 4rem; color:var(--gold);">0</div>
+            <p>開業の解像度スコア</p>
+            <canvas id="radarChart" style="max-height: 300px; margin: 20px 0;"></canvas>
+        </div>
+
+        <div class="bank-box">
+            <div style="font-size:0.7rem; color:var(--success);">BANK READINESS</div>
+            <div class="bank-title">金融機関・融資担当者向け判定</div>
+            <div id="readiness" class="readiness-text">分析中...</div>
+            <p style="font-size:0.8rem; color:var(--gray);">※本診断はSTEP 2の事前整理として機能し、審査負荷を大幅に軽減します。</p>
+            <button class="btn btn-bank" onclick="alert('PDF生成機能をシミュレートします')">銀行提出用サマリーを書き出す</button>
+        </div>
+        
+        <button class="btn btn-p" style="margin-top:2rem;" onclick="location.reload()">診断をやり直す</button>
     </div>
-    <div class="score-grid" id="score-grid"></div>
-    <div class="section-card">
-      <div style="font-size:0.78rem;color:var(--gray);margin-bottom:0.8rem;text-align:center;">6軸 バランスチャート</div>
-      <div class="chart-wrap" style="height:320px;">
-        <canvas id="radar-chart" role="img" aria-label="6軸の診断スコアを示すレーダーチャート"></canvas>
-      </div>
-    </div>
-    <div class="ai-section">
-      <div class="ai-header">
-        <div class="ai-badge">AI ANALYSIS</div>
-        <div class="ai-title">戦略的フィードバック</div>
-      </div>
-      <div id="ai-content">
-        <div class="ai-loading"><div class="spinner"></div>診断データを分析中です...</div>
-      </div>
-    </div>
-    <div class="restart-row">
-      <button class="btn-restart" id="btn-restart">新しい診断を開始</button>
-    </div>
-  </div>
 </div>
 
 <script>
-const SECTIONS = [
-  {
-    id: 'concept',
-    title: 'コンセプト・ターゲット',
-    sub: '店の価値提案とターゲット顧客の明確さを診断します',
-    questions: [
-      { text: 'ターゲット顧客（年齢層・ライフスタイル・来店シーン）を具体的に言語化できますか？', options: ['全く考えていない','なんとなく想定している','ある程度具体的に言える','ペルソナレベルで明確に言える'] },
-      { text: '競合と差別化できる「自店ならではの強み」を一言で言えますか？', options: ['まだない','考えているが曖昧','あるが根拠が弱い','明確かつ検証済み'] },
-      { text: '業態・価格帯・コンセプトが一貫していますか？', options: ['バラバラ','部分的にずれがある','概ね一致している','完全に整合している'] },
-      { text: '「なぜこの店が必要か」を第三者に説明できますか？', options: ['説明できない','なんとか説明できる','ある程度納得してもらえる','誰に話しても共感される'] },
-    ]
-  },
-  {
-    id: 'market',
-    title: '商圏・顧客動線',
-    sub: 'ターゲット顧客の行動パターンと商圏適合性を診断します',
-    questions: [
-      { text: 'ターゲット客が「いつ、どこを通って、どんな目的で来るか」を把握していますか？', options: ['把握していない','なんとなく想定','ある程度調べた','実地で詳細に確認済み'] },
-      { text: '候補エリアの昼間人口・夜間人口の違いを把握していますか？', options: ['調べていない','おおよそ知っている','数字で把握している','業態との相性まで分析済み'] },
-      { text: '平日・休日、昼・夜の人の流れを現地で確認しましたか？', options: ['未確認','1回だけ行った','複数回確認した','曜日・時間帯別に複数回確認した'] },
-      { text: '周辺施設（オフィス・学校・住宅・競合）との立地相性を検討しましたか？', options: ['していない','なんとなく見た','主要施設は確認した','詳細にマッピング・分析した'] },
-    ]
-  },
-  {
-    id: 'competition',
-    title: '競合分析',
-    sub: '近隣競合の強み・弱みの把握と自店の優位性を診断します',
-    questions: [
-      { text: '半径500m〜1km内の競合店舗を実際に調査しましたか？', options: ['していない','存在は知っている','メニュー・価格は把握','口コミ・客層まで詳細に調査した'] },
-      { text: '競合が取れていない「需要の穴（弱点）」を見つけましたか？', options: ['見つけていない','なんとなく感じる','具体的な穴がある','複数の穴を言語化できる'] },
-      { text: '自店が選ばれる理由を競合と比較して説明できますか？', options: ['説明できない','感覚的には言える','ある程度論理的に言える','明確な根拠で説明できる'] },
-      { text: '競合の客単価・席数・回転率を把握していますか？', options: ['全く把握していない','おおよそ知っている','主要指標は把握している','詳細な収益構造まで推計している'] },
-    ]
-  },
-  {
-    id: 'revenue',
-    title: '収益構造',
-    sub: '開業後の採算性・財務計画の健全性を診断します',
-    questions: [
-      { text: '月商（売上）の見込みを試算しましたか？', options: ['していない','大雑把に考えた','客数×客単価で試算した','複数シナリオで詳細試算した'] },
-      { text: '家賃は想定月商の10%以内に収まりますか？', options: ['試算していない','10%を大きく超える','10〜15%程度','10%以内に収まる'] },
-      { text: '原価率・人件費・固定費を合計したFL+家賃比率を試算しましたか？', options: ['していない','費目ごとには考えた','合計比率を試算した','損益分岐点まで計算した'] },
-      { text: '運転資金・開業費用の調達見込みは立っていますか？', options: ['まだ未検討','大まかな見当はある','融資・補助金の目処がある','具体的な資金計画がある'] },
-    ]
-  },
-  {
-    id: 'location',
-    title: '立地・物件適合性',
-    sub: '物件の業態適合性・視認性・使いやすさを診断します',
-    questions: [
-      { text: '候補物件の視認性・入りやすさ・看板の出しやすさを確認しましたか？', options: ['未確認','1度だけ確認','複数回確認した','通行者視点で詳細に検証した'] },
-      { text: '物件の間取り・厨房スペース・導線が業態に合っていますか？', options: ['確認していない','なんとなく合っている気がする','主要設備は確認した','業態に最適化できると判断した'] },
-      { text: '複数の候補物件を比較・検討しましたか？', options: ['1件しか見ていない','2〜3件は見た','5件以上比較した','立地×採算で優先順位付けした'] },
-      { text: '立地を選んだ理由を論理的に説明できますか？', options: ['感覚・雰囲気で選んだ','なんとなく説明できる','導線・商圏で説明できる','数字と論理で明確に説明できる'] },
-    ]
-  },
-  {
-    id: 'acquisition',
-    title: '集客・リピート設計',
-    sub: '開業後の認知獲得・常連化の仕組みを診断します',
-    questions: [
-      { text: '開業後6ヶ月の集客アクションを具体的に計画していますか？', options: ['ほぼ考えていない','何となく考えている','いくつか具体策がある','月次で計画が立っている'] },
-      { text: 'SNS・Googleマップ・グルメサイトへの対応を検討していますか？', options: ['していない','登録くらいはする予定','運用まで考えている','口コミ設計まで考えている'] },
-      { text: 'プレオープン・近隣挨拶・地域連携などの初動を計画していますか？', options: ['考えていない','漠然と考えている','具体的な計画がある','日程・予算まで決まっている'] },
-      { text: 'リピート促進（常連化）の仕組みを考えていますか？', options: ['考えていない','良い店を作れば来ると思う','いくつかアイデアがある','具体的な仕組みを設計している'] },
-    ]
-  }
-];
+    const SECTIONS = [
+        {title: "概念・コンセプト", qs: ["ターゲットは明確か", "強みは一言で言えるか", "メニュー構成は固まったか", "独自性は検証済みか"]},
+        {title: "収益構造・財務", qs: ["売上試算に根拠はあるか", "家賃比率は10%内か", "自己資金は十分か", "損益分岐点を把握したか"]},
+        {title: "商圏・顧客動線", qs: ["人流調査は済んだか", "競合の穴は見えたか", "視認性は確保できるか", "曜日別変動を考慮したか"]},
+        {title: "集客・リピート", qs: ["SNS戦略は具体化か", "MEO対策の準備はか", "リピート施策はあるか", "プレオープンの計画はか"]}
+    ];
 
-const SCORE_MAP = [0, 1, 2, 3];
-const MAX_PER_SECTION = 12;
+    let step = 0;
+    let scores = [];
 
-let state = {
-  step: 0,
-  userName: '',
-  bizType: '',
-  answers: Array.from({length: SECTIONS.length}, () => Array(4).fill(null))
-};
-
-function $(id) { return document.getElementById(id); }
-
-// Biz selection
-document.querySelectorAll('.biz-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.biz-btn').forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-    state.bizType = btn.dataset.biz;
-    checkStartReady();
-  });
-});
-
-$('user-name').addEventListener('input', checkStartReady);
-
-function checkStartReady() {
-  state.userName = $('user-name').value.trim();
-  $('btn-start').disabled = !state.bizType;
-}
-
-$('btn-start').addEventListener('click', () => {
-  state.step = 0;
-  state.answers = Array.from({length: SECTIONS.length}, () => Array(4).fill(null));
-  $('view-intro').classList.add('hidden');
-  $('view-diagnostic').classList.remove('hidden');
-  renderSection();
-});
-
-function renderSection() {
-  const sec = SECTIONS[state.step];
-  const total = SECTIONS.length;
-  const pct = Math.round(((state.step) / total) * 100);
-
-  $('prog-label').textContent = `STEP ${state.step + 1} / ${total} — ${sec.title}`;
-  $('prog-pct').textContent = `${pct}%`;
-  $('progress-fill').style.width = `${pct}%`;
-
-  // Dots
-  const dotsEl = $('step-dots');
-  dotsEl.innerHTML = '';
-  for (let i = 0; i < total; i++) {
-    const d = document.createElement('div');
-    d.className = 'step-dot' + (i === state.step ? ' active' : (i < state.step ? ' done' : ''));
-    dotsEl.appendChild(d);
-  }
-
-  // Section
-  const container = $('section-container');
-  container.innerHTML = '';
-  const card = document.createElement('div');
-  card.className = 'section-card';
-  card.innerHTML = `
-    <div class="section-header">
-      <div class="section-num">0${state.step + 1}</div>
-      <div><div class="section-title">${sec.title}</div><div class="section-sub">${sec.sub}</div></div>
-    </div>
-    ${sec.questions.map((q, qi) => `
-      <div class="question">
-        <div class="q-text"><span class="q-num">Q${qi + 1}</span>${q.text}</div>
-        <div class="options">
-          ${q.options.map((opt, oi) => `
-            <button class="option-btn${state.answers[state.step][qi] === oi ? ' selected' : ''}"
-              data-qi="${qi}" data-oi="${oi}">
-              ${opt}
-              <span class="option-score">${['△ 課題あり','▲ 要改善','◎ 概ね可','★ 十分'][oi]}</span>
-            </button>
-          `).join('')}
-        </div>
-      </div>
-    `).join('')}
-  `;
-  container.appendChild(card);
-
-  card.querySelectorAll('.option-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const qi = parseInt(btn.dataset.qi);
-      const oi = parseInt(btn.dataset.oi);
-      state.answers[state.step][qi] = oi;
-      card.querySelectorAll(`.option-btn[data-qi="${qi}"]`).forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
-      checkNextReady();
-    });
-  });
-
-  checkNextReady();
-  $('btn-back').disabled = state.step === 0;
-}
-
-function checkNextReady() {
-  const all = state.answers[state.step].every(a => a !== null);
-  $('btn-next').disabled = !all;
-  $('btn-next').textContent = state.step === SECTIONS.length - 1 ? '結果を見る →' : '次へ →';
-}
-
-$('btn-next').addEventListener('click', () => {
-  if (state.step < SECTIONS.length - 1) {
-    state.step++;
-    renderSection();
-  } else {
-    showResults();
-  }
-});
-
-$('btn-back').addEventListener('click', () => {
-  if (state.step > 0) { state.step--; renderSection(); }
-});
-
-function calcScores() {
-  return SECTIONS.map((sec, si) => {
-    const sum = state.answers[si].reduce((acc, a) => acc + (SCORE_MAP[a] || 0), 0);
-    return Math.round((sum / MAX_PER_SECTION) * 100);
-  });
-}
-
-function showResults() {
-  $('view-diagnostic').classList.add('hidden');
-  $('view-results').classList.remove('hidden');
-
-  const scores = calcScores();
-  const total = Math.round(scores.reduce((a, b) => a + b, 0) / SECTIONS.length);
-
-  $('res-name').textContent = state.userName ? `${state.userName}（${state.bizType}）` : `業態：${state.bizType}`;
-  $('res-total').textContent = total;
-
-  const band = $('res-band');
-  if (total >= 75) {
-    band.innerHTML = '<span class="score-band band-high">出店準備：高水準</span>';
-  } else if (total >= 50) {
-    band.innerHTML = '<span class="score-band band-mid">出店準備：要強化</span>';
-  } else {
-    band.innerHTML = '<span class="score-band band-low">出店準備：重点課題あり</span>';
-  }
-
-  // Score grid
-  const grid = $('score-grid');
-  grid.innerHTML = '';
-  SECTIONS.forEach((sec, i) => {
-    const s = scores[i];
-    const cls = s >= 75 ? 'val-high' : s >= 50 ? 'val-mid' : 'val-low';
-    grid.innerHTML += `<div class="score-card"><div class="cat">${sec.title}</div><div class="val ${cls}">${s}</div></div>`;
-  });
-
-  // Radar chart
-  const ctx = document.getElementById('radar-chart').getContext('2d');
-  new Chart(ctx, {
-    type: 'radar',
-    data: {
-      labels: SECTIONS.map(s => s.title),
-      datasets: [{
-        label: 'スコア',
-        data: scores,
-        backgroundColor: 'rgba(198,162,74,0.12)',
-        borderColor: 'rgba(198,162,74,0.8)',
-        borderWidth: 1.5,
-        pointBackgroundColor: '#C6A24A',
-        pointRadius: 4,
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: {
-        r: {
-          min: 0, max: 100,
-          ticks: { stepSize: 25, color: '#8a9ab0', font: { size: 10 }, backdropColor: 'transparent' },
-          grid: { color: 'rgba(198,162,74,0.15)' },
-          angleLines: { color: 'rgba(198,162,74,0.15)' },
-          pointLabels: { color: '#C6A24A', font: { size: 11 } }
-        }
-      },
-      plugins: { legend: { display: false } }
+    function start() {
+        document.getElementById('view-intro').style.display='none';
+        document.getElementById('view-diag').style.display='block';
+        render();
     }
-  });
 
-  // AI analysis
-  runAIAnalysis(scores, total);
-}
+    function render() {
+        const s = SECTIONS[step];
+        document.getElementById('sec-title').innerText = s.title;
+        const container = document.getElementById('q-container');
+        container.innerHTML = s.qs.map((q, i) => `
+            <div class="q-row">
+                <p>${q}</p>
+                <div class="opt-grid">
+                    <button class="opt-btn" onclick="answer(${step},${i},1,this)">未着手</button>
+                    <button class="opt-btn" onclick="answer(${step},${i},3,this)">検討中</button>
+                    <button class="opt-btn" onclick="answer(${step},${i},5,this)">準備完了</button>
+                </div>
+            </div>
+        `).join('');
+        document.getElementById('next-btn').disabled = true;
+    }
 
-async function runAIAnalysis(scores, total) {
-  const weak = SECTIONS.map((s, i) => ({name: s.title, score: scores[i]})).sort((a,b) => a.score - b.score);
-  const strong = [...weak].reverse();
+    function answer(s, q, v, btn) {
+        if(!scores[s]) scores[s] = [];
+        scores[s][q] = v;
+        const parent = btn.parentElement;
+        Array.from(parent.children).forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        const answered = scores[step] ? scores[step].filter(n => n).length : 0;
+        if(answered === 4) document.getElementById('next-btn').disabled = false;
+    }
 
-  const answers_text = SECTIONS.map((sec, si) => {
-    return `【${sec.title}】\n` + sec.questions.map((q, qi) => {
-      const ai = state.answers[si][qi];
-      return `  Q${qi+1}: ${q.text}\n  回答: ${q.options[ai]}（${SCORE_MAP[ai]}点）`;
-    }).join('\n');
-  }).join('\n\n');
+    function next() {
+        if(step < SECTIONS.length - 1) {
+            step++; render();
+        } else {
+            showResult();
+        }
+    }
 
-  const prompt = `あなたは中小企業診断士兼経営指導員として、飲食・小売業の創業希望者に対する出店診断レポートを作成します。
+    function showResult() {
+        document.getElementById('view-diag').style.display='none';
+        document.getElementById('view-res').style.display='block';
 
-【診断対象】
-業態：${state.bizType}
-相談者：${state.userName || '未記入'}
-総合スコア：${total}点/100点
+        const rawScores = scores.map(s => s.reduce((a,b)=>a+b, 0));
+        const total = Math.round((rawScores.reduce((a,b)=>a+b, 0) / 80) * 100);
+        document.getElementById('total-score').innerText = total;
 
-【6軸スコア】
-${SECTIONS.map((s, i) => `${s.title}：${scores[i]}点`).join('\n')}
+        // 銀行判定
+        let r = "";
+        if(total >= 80) r = "【融資推奨】計画は成熟しています。即時審査可能です。";
+        else if(total >= 50) r = "【要事前整理】特定項目の補強が必要です。BRIDGE CYCLEが伴走します。";
+        else r = "【整理依頼】計画が未成熟です。STEP 2の再整理を推奨します。";
+        document.getElementById('readiness').innerText = r;
 
-【回答詳細】
-${answers_text}
-
-以下の構成で、実務的かつ具体的な戦略フィードバックを日本語で作成してください。文体は経営指導員が相談者に伝える形で、感情的な励ましではなく論理的な分析にしてください。
-
-出力フォーマット：
-<h4>▍ 全体評価</h4>
-<p>総合スコアと業態特性を踏まえた出店準備の全体評価（3〜4文）</p>
-
-<h4>▍ 強みと活かし方</h4>
-<p>スコアが高い軸について、その戦略的優位性と具体的な活かし方（2〜3文）</p>
-
-<h4>▍ 優先改善課題（上位3項目）</h4>
-<p>スコアが低い軸について、なぜそれが問題で、どう改善すべきか具体的なアクションを含めて（各項目2〜3文）</p>
-
-<h4>▍ ${state.bizType}業態特有の留意点</h4>
-<p>この業態特有の出店リスクと成功要因（2〜3文）</p>
-
-<h4>▍ 次の具体的アクション（3つ）</h4>
-<p>今すぐ着手すべき3つのアクションを優先順で（各1〜2文）</p>`;
-
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: prompt }]
-      })
-    });
-    const data = await res.json();
-    const text = data.content?.find(c => c.type === 'text')?.text || '分析結果を取得できませんでした。';
-    $('ai-content').innerHTML = `<div class="ai-content">${text}</div>`;
-  } catch(e) {
-    // Fallback: rule-based analysis
-    const weakest = weak[0];
-    const fallback = generateFallbackAnalysis(scores, total, weak, strong);
-    $('ai-content').innerHTML = `<div class="ai-content">${fallback}</div>`;
-  }
-}
-
-function generateFallbackAnalysis(scores, total, weak, strong) {
-  const level = total >= 75 ? '出店準備は全体的に高水準です' : total >= 50 ? '出店準備はある程度進んでいますが、強化が必要な軸があります' : '出店準備に重要な課題が複数あります';
-  return `
-    <h4>▍ 全体評価</h4>
-    <p>総合スコア${total}点。${level}。特に「${weak[0].name}（${weak[0].score}点）」と「${weak[1].name}（${weak[1].score}点）」が重点的な強化領域です。</p>
-    <h4>▍ 強みと活かし方</h4>
-    <p>「${strong[0].name}（${strong[0].score}点）」は高水準です。この軸の強みを起点に、弱い軸の補強を進めるのが戦略的です。</p>
-    <h4>▍ 優先改善課題</h4>
-    ${weak.slice(0,3).map((w, i) => `<p><strong>${i+1}. ${w.name}（${w.score}点）</strong>：この軸のスコア向上が出店成功確率を大きく左右します。具体的なアクションプランを立て、次回相談時に持参してください。</p>`).join('')}
-    <h4>▍ 次の具体的アクション</h4>
-    <p>1. ${weak[0].name}の弱点を補強するための具体的な調査・準備を1週間以内に開始する</p>
-    <p>2. 候補物件を3件以上比較し、業態適合性を数値で評価する</p>
-    <p>3. 簡易損益計算書を作成し、家賃比率10%ルールを確認する</p>
-  `;
-}
-
-$('btn-restart').addEventListener('click', () => {
-  state = { step: 0, userName: '', bizType: '', answers: Array.from({length: SECTIONS.length}, () => Array(4).fill(null)) };
-  document.querySelectorAll('.biz-btn').forEach(b => b.classList.remove('selected'));
-  $('user-name').value = '';
-  $('btn-start').disabled = true;
-  $('view-results').classList.add('hidden');
-  $('view-intro').classList.remove('hidden');
-  $('ai-content').innerHTML = '<div class="ai-loading"><div class="spinner"></div>診断データを分析中です...</div>';
-});
+        // チャート表示
+        new Chart(document.getElementById('radarChart'), {
+            type: 'radar',
+            data: {
+                labels: SECTIONS.map(s=>s.title),
+                datasets: [{
+                    label: '解像度', data: rawScores,
+                    backgroundColor: 'rgba(198, 162, 74, 0.2)', borderColor: '#C6A24A'
+                }]
+            },
+            options: { scales: { r: { min: 0, max: 20 } } }
+        });
+    }
 </script>
 </body>
 </html>
