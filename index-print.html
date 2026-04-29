@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TENANT SCOUT | お店の価値を毎月診断 | BRIDGE CYCLE株式会社</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:     #0D1B2A;
+  --ink2:    #1e3250;
+  --body:    #3d4f63;
+  --muted:   #8795a6;
+  --rule:    #dde4ed;
+  --bg:      #FAF9F6;
+  --bg2:     #F2F0EB;
+  --bg3:     #EAE7E0;
+  --dark:    #0D1B2A;
+  --dark2:   #142236;
+  --dark3:   #1c2f45;
+  --dtext:   rgba(255,255,255,0.92);
+  --ddim:    rgba(255,255,255,0.5);
+  --dfaint:  rgba(255,255,255,0.07);
+  --dborder: rgba(255,255,255,0.10);
+  --blue:    oklch(0.52 0.17 252);
+  --blue-hi: oklch(0.60 0.19 250);
+  --blue-bg: oklch(0.52 0.17 252 / 0.08);
+  --blue-bd: oklch(0.52 0.17 252 / 0.22);
+  --amber:   oklch(0.72 0.16 65);
+  --amber-hi:oklch(0.78 0.18 67);
+  --amber-bg:oklch(0.72 0.16 65 / 0.10);
+  --amber-bd:oklch(0.72 0.16 65 / 0.28);
+  --green:   oklch(0.58 0.14 155);
+  --red:     oklch(0.57 0.20 18);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 400;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── LAYOUT ── */
+.wrap   { max-width: 820px; margin: 0 auto; padding: 0 32px; }
+.wrap-w { max-width: 1040px; margin: 0 auto; padding: 0 32px; }
+.sec    { padding: 104px 0; }
+.sec-sm { padding: 72px 0; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  padding: 0 32px;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(250,249,246,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+}
+.nav-logo { display: flex; flex-direction: column; gap: 1px; }
+.nav-logo b { font-size: 15px; font-weight: 900; letter-spacing: 0.1em; color: var(--ink); }
+.nav-logo small { font-size: 9px; font-weight: 400; letter-spacing: 0.15em; color: var(--muted); }
+.nav-links { display: flex; align-items: center; gap: 32px; }
+.nav-link { font-size: 12px; font-weight: 500; color: var(--body); text-decoration: none; letter-spacing: 0.05em; transition: color .15s; }
+.nav-link:hover { color: var(--ink); }
+.nav-btn {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+  padding: 10px 24px;
+  background: var(--ink); color: white;
+  border: none; cursor: pointer; text-decoration: none;
+  transition: background .18s, transform .12s;
+}
+.nav-btn:hover { background: var(--ink2); transform: translateY(-1px); }
+
+/* ── HERO ── */
+.hero {
+  background: var(--dark);
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 100px 32px 80px;
+  position: relative; overflow: hidden;
+}
+.hero-grid {
+  max-width: 1040px; margin: 0 auto; width: 100%;
+  display: grid; grid-template-columns: 1fr 360px; gap: 80px; align-items: center;
+}
+/* decorative circles */
+.hero::before, .hero::after { content: ''; position: absolute; border-radius: 50%; pointer-events: none; }
+.hero::before {
+  width: 600px; height: 600px; right: -100px; top: -150px;
+  background: radial-gradient(circle, oklch(0.52 0.17 252 / 0.12) 0%, transparent 70%);
+}
+.hero::after {
+  width: 400px; height: 400px; left: -80px; bottom: -120px;
+  background: radial-gradient(circle, oklch(0.72 0.16 65 / 0.08) 0%, transparent 70%);
+}
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.25em;
+  color: var(--blue-hi); margin-bottom: 28px;
+}
+.hero-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--blue-hi); }
+
+.hero-h1 {
+  font-size: clamp(32px, 4.5vw, 54px);
+  font-weight: 900; line-height: 1.18; letter-spacing: -0.02em;
+  color: var(--dtext); margin-bottom: 20px; text-wrap: balance;
+}
+.hero-h1 .accent { color: var(--amber); }
+
+/* rotating headline */
+.hero-rotate-wrap {
+  display: block;
+  overflow: visible;
+  min-height: 1.3em;
+}
+.hero-rotate {
+  display: inline-block;
+  color: oklch(0.92 0.12 90);
+  transition: opacity .35s ease, transform .35s ease;
+}
+.hero-rotate.fade-out { opacity: 0; transform: translateY(-14px); }
+.hero-rotate.fade-in  { opacity: 0; transform: translateY(14px); }
+.hero-rotate.visible  { opacity: 1; transform: translateY(0); }
+
+.hero-sub {
+  font-size: 15px; font-weight: 300; color: var(--ddim);
+  line-height: 1.85; margin-bottom: 36px; max-width: 460px;
+}
+.hero-sub strong { color: var(--dtext); font-weight: 600; }
+
+.hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
+.hero-tag-item {
+  font-size: 11px; font-weight: 500; padding: 6px 12px;
+  border: 1px solid var(--dborder); color: var(--ddim);
+  background: var(--dfaint);
+}
+
+.hero-cta { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
+.btn-hero {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 16px; font-weight: 900; letter-spacing: 0.04em;
+  padding: 20px 40px; background: var(--amber); color: var(--ink);
+  border: none; cursor: pointer; text-decoration: none;
+  transition: background .18s, transform .12s;
+}
+.btn-hero:hover { background: var(--amber-hi); transform: translateY(-2px); }
+.btn-hero .arr { font-size: 18px; }
+.cta-note { font-size: 11px; color: var(--ddim); font-weight: 300; }
+
+/* hero right card */
+.hero-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--dborder);
+  padding: 36px 32px;
+  position: relative;
+}
+.hero-card-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
+  color: var(--amber); margin-bottom: 24px; display: block;
+}
+.hero-price-block { margin-bottom: 28px; }
+.hero-price-from { font-size: 12px; color: var(--ddim); font-weight: 300; margin-bottom: 4px; }
+.hero-price-num {
+  font-size: 64px; font-weight: 900; color: white; line-height: 1;
+  letter-spacing: -0.04em; display: flex; align-items: baseline; gap: 4px;
+}
+.hero-price-num .unit { font-size: 16px; font-weight: 400; color: var(--ddim); }
+.hero-card-list { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+.hero-card-list li {
+  font-size: 13px; color: var(--ddim); font-weight: 300; padding-left: 16px;
+  position: relative; line-height: 1.6;
+}
+.hero-card-list li::before {
+  content: '✓'; position: absolute; left: 0;
+  color: var(--amber); font-size: 11px; font-weight: 700;
+}
+
+/* ── SOCIAL PROOF BAR ── */
+.proof-bar {
+  background: var(--bg2); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  padding: 28px 32px;
+}
+.proof-inner {
+  max-width: 1040px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 40px;
+}
+.proof-item { text-align: center; }
+.proof-num { font-size: clamp(24px, 3vw, 36px); font-weight: 900; color: var(--ink); display: block; letter-spacing: -0.02em; }
+.proof-label { font-size: 11px; color: var(--muted); font-weight: 400; margin-top: 2px; }
+.proof-divider { width: 1px; height: 40px; background: var(--rule); flex-shrink: 0; }
+
+/* ── PROBLEM ── */
+.problem { background: var(--bg); }
+.sec-label {
+  display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.25em;
+  color: var(--blue); text-transform: uppercase; margin-bottom: 18px;
+  padding-bottom: 10px; border-bottom: 2px solid var(--blue);
+}
+.sec-label--amber { color: var(--amber); border-color: var(--amber); }
+.sec-label--ink   { color: var(--ink);   border-color: var(--ink); }
+.sec-h {
+  font-size: clamp(26px, 4vw, 42px); font-weight: 900; line-height: 1.2;
+  letter-spacing: -0.02em; margin-bottom: 12px; text-wrap: balance;
+}
+.sec-sub { font-size: 15px; color: var(--body); font-weight: 300; margin-bottom: 48px; line-height: 1.8; }
+.sec-sub strong { color: var(--ink); font-weight: 700; }
+
+.prob-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.prob-card {
+  background: var(--bg2); border: 1px solid var(--rule);
+  padding: 22px 24px; display: flex; align-items: flex-start; gap: 14px;
+  transition: border-color .2s, box-shadow .2s;
+}
+.prob-card:hover { border-color: var(--blue-bd); box-shadow: 0 4px 20px rgba(13,27,42,0.07); }
+.prob-icon {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--blue-bg); border: 1px solid var(--blue-bd);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; color: var(--blue); font-size: 14px; font-weight: 700;
+}
+.prob-text { font-size: 14px; font-weight: 500; line-height: 1.65; color: var(--ink); }
+
+/* ── VALUES ── */
+.values { background: var(--dark); }
+.values .sec-h { color: var(--dtext); }
+.values .sec-sub { color: var(--ddim); }
+
+.val-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.val-card {
+  background: var(--dark3); border: 1px solid var(--dborder);
+  padding: 36px 28px; position: relative; overflow: hidden;
+}
+.val-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+}
+.val-card:nth-child(1)::before { background: var(--blue-hi); }
+.val-card:nth-child(2)::before { background: var(--amber); }
+.val-card:nth-child(3)::before { background: var(--green); }
+
+.val-num-big {
+  font-size: 48px; font-weight: 900; line-height: 1; letter-spacing: -0.03em;
+  margin-bottom: 16px;
+}
+.val-card:nth-child(1) .val-num-big { color: var(--blue-hi); }
+.val-card:nth-child(2) .val-num-big { color: var(--amber); }
+.val-card:nth-child(3) .val-num-big { color: var(--green); }
+
+.val-title { font-size: 18px; font-weight: 900; color: var(--dtext); margin-bottom: 16px; line-height: 1.35; }
+.val-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.val-list li { font-size: 13px; color: var(--ddim); font-weight: 300; padding-left: 14px; position: relative; line-height: 1.65; }
+.val-list li::before { content: '—'; position: absolute; left: 0; color: var(--dborder); font-size: 11px; top: 2px; }
+
+/* ── FLOW ── */
+.flow { background: var(--bg); }
+.flow-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+}
+.flow-card {
+  background: white; border: 1px solid var(--rule);
+  padding: 28px 24px; position: relative;
+  transition: box-shadow .2s, transform .2s;
+}
+.flow-card:hover { box-shadow: 0 8px 32px rgba(13,27,42,0.10); transform: translateY(-2px); }
+.flow-n {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.15em;
+  color: var(--blue); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+}
+.flow-n::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+.flow-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; color: var(--ink); }
+.flow-desc { font-size: 13px; color: var(--body); font-weight: 300; line-height: 1.7; }
+
+/* ── PLANS ── */
+.plans-sec { background: var(--bg2); }
+.plans-sec .sec-h { text-align: center; }
+.plans-sec .sec-sub { text-align: center; }
+
+.plan-grid-main { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 10px; }
+.plan-card {
+  background: white; border: 2px solid var(--rule);
+  padding: 28px 22px; position: relative; overflow: hidden;
+  transition: box-shadow .2s;
+}
+.plan-card:hover { box-shadow: 0 8px 32px rgba(13,27,42,0.10); }
+.plan-card--rec {
+  border-color: var(--blue); background: white;
+}
+.plan-card--rec::before {
+  content: 'おすすめ'; position: absolute; top: 0; left: 0; right: 0;
+  background: var(--blue); color: white;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.15em;
+  text-align: center; padding: 5px 0;
+}
+.plan-card--rec { padding-top: 38px; }
+
+.plan-name { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+.plan-for  { font-size: 11px; color: var(--muted); font-weight: 300; margin-bottom: 18px; line-height: 1.5; }
+.plan-price {
+  margin-bottom: 20px; padding-bottom: 18px; border-bottom: 1px solid var(--rule);
+  display: flex; align-items: baseline; gap: 3px;
+}
+.plan-price .p-num {
+  font-size: clamp(28px, 3vw, 38px); font-weight: 900; color: var(--ink);
+  letter-spacing: -0.02em; line-height: 1;
+}
+.plan-card--rec .plan-price .p-num { color: var(--blue); }
+.plan-price .p-unit { font-size: 12px; color: var(--muted); font-weight: 400; }
+.plan-features { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.plan-features li {
+  font-size: 12px; color: var(--body); font-weight: 300;
+  padding-left: 16px; position: relative; line-height: 1.6;
+}
+.plan-features li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-size: 11px; font-weight: 700; }
+
+/* options */
+.opts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.opt-card {
+  background: white; border: 1px solid var(--rule); padding: 24px 22px;
+  display: flex; align-items: flex-start; gap: 16px;
+}
+.opt-badge {
+  flex-shrink: 0; padding: 8px 12px; font-size: 18px; font-weight: 900;
+  background: var(--amber-bg); border: 1px solid var(--amber-bd);
+  color: var(--amber); text-align: center; min-width: 70px;
+}
+.opt-badge small { display: block; font-size: 9px; font-weight: 700; letter-spacing: 0.1em; color: var(--amber); margin-bottom: 2px; }
+.opt-body .opt-title { font-size: 14px; font-weight: 700; margin-bottom: 5px; }
+.opt-body .opt-desc { font-size: 12px; color: var(--body); font-weight: 300; line-height: 1.65; }
+
+/* ── SAFETY ── */
+.safety { background: var(--dark); }
+.safety .sec-h { color: var(--dtext); }
+
+.safety-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.safety-card {
+  background: var(--dark3); border: 1px solid var(--dborder);
+  padding: 32px 26px;
+}
+.safety-mark {
+  width: 44px; height: 44px;
+  border: 2px solid var(--dborder); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; margin-bottom: 18px;
+}
+.safety-title { font-size: 15px; font-weight: 700; color: var(--dtext); margin-bottom: 10px; }
+.safety-desc { font-size: 13px; color: var(--ddim); font-weight: 300; line-height: 1.7; }
+
+/* ── EXPERTS ── */
+.experts { background: var(--bg); }
+.expert-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.expert-card {
+  background: white; border: 1px solid var(--rule);
+  padding: 24px 20px; text-align: center;
+  transition: box-shadow .2s, transform .2s;
+}
+.expert-card:hover { box-shadow: 0 4px 20px rgba(13,27,42,0.08); transform: translateY(-2px); }
+.expert-avatar {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--blue-bg); border: 1px solid var(--blue-bd);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 12px; font-size: 20px;
+}
+.expert-role { font-size: 14px; font-weight: 700; margin-bottom: 5px; }
+.expert-desc { font-size: 11px; color: var(--muted); font-weight: 300; line-height: 1.65; }
+
+/* ── FAQ ── */
+.faq-sec { background: var(--bg2); }
+.faq-list { display: flex; flex-direction: column; gap: 4px; }
+.faq-item {
+  background: white; border: 1px solid var(--rule); overflow: hidden;
+}
+.faq-q {
+  padding: 22px 24px; font-size: 15px; font-weight: 700; cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  user-select: none; transition: background .15s; color: var(--ink);
+}
+.faq-q:hover { background: var(--bg2); }
+.faq-plus {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--blue-bg); border: 1px solid var(--blue-bd);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--blue); font-size: 18px; font-weight: 300; flex-shrink: 0;
+  transition: transform .22s, background .18s;
+}
+.faq-item.open .faq-plus { transform: rotate(45deg); background: var(--blue); color: white; border-color: var(--blue); }
+.faq-a {
+  display: none; padding: 0 24px 20px; padding-top: 16px;
+  font-size: 14px; color: var(--body); font-weight: 300; line-height: 1.8;
+  border-top: 1px solid var(--rule);
+}
+.faq-item.open .faq-a { display: block; }
+
+/* ── FINAL CTA ── */
+.final-cta {
+  background: var(--bg);
+  padding: 0 32px 104px;
+}
+.final-inner {
+  max-width: 820px; margin: 0 auto;
+  background: var(--ink); padding: 64px 80px;
+  display: grid; grid-template-columns: 1fr auto; gap: 60px; align-items: center;
+  position: relative; overflow: hidden;
+}
+.final-inner::before {
+  content: ''; position: absolute; right: -80px; top: -80px;
+  width: 320px; height: 320px; border-radius: 50%;
+  background: radial-gradient(circle, oklch(0.72 0.16 65 / 0.12), transparent 70%);
+  pointer-events: none;
+}
+.final-h { font-size: clamp(22px, 3vw, 34px); font-weight: 900; color: white; line-height: 1.25; margin-bottom: 10px; }
+.final-sub { font-size: 14px; color: var(--ddim); font-weight: 300; }
+.final-cta-right { display: flex; flex-direction: column; gap: 10px; align-items: flex-end; flex-shrink: 0; }
+.btn-cta {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 15px; font-weight: 900; letter-spacing: 0.04em;
+  padding: 18px 36px; background: var(--amber); color: var(--ink);
+  border: none; cursor: pointer; text-decoration: none; white-space: nowrap;
+  transition: background .18s, transform .12s;
+}
+.btn-cta:hover { background: var(--amber-hi); transform: translateY(-1px); }
+.btn-cta .arr { font-size: 16px; }
+.final-note { font-size: 11px; color: var(--ddim); font-weight: 300; text-align: right; }
+.final-url { font-size: 11px; color: var(--ddim); font-weight: 300; text-align: right; }
+.final-url a { color: var(--blue-hi); text-decoration: none; }
+
+/* ── FOOTER ── */
+footer {
+  padding: 32px; text-align: center;
+  border-top: 1px solid var(--rule);
+  font-size: 11px; color: var(--muted); font-weight: 300;
+}
+
+/* ── MODAL ── */
+.overlay {
+  position: fixed; inset: 0; z-index: 500;
+  background: rgba(13,27,42,0.75); backdrop-filter: blur(8px);
+  display: none; align-items: center; justify-content: center; padding: 20px;
+}
+.overlay.open { display: flex; }
+.modal {
+  background: white; max-width: 520px; width: 100%;
+  max-height: 92vh; overflow-y: auto;
+  box-shadow: 0 24px 80px rgba(13,27,42,0.25);
+}
+.modal-hd {
+  padding: 28px 28px 22px; border-bottom: 1px solid var(--rule);
+  display: flex; justify-content: space-between; align-items: flex-start;
+}
+.modal-hd h3 { font-size: 18px; font-weight: 900; color: var(--ink); }
+.modal-hd p  { font-size: 12px; color: var(--muted); margin-top: 4px; font-weight: 300; }
+.modal-x {
+  background: none; border: none; color: var(--muted); font-size: 22px;
+  cursor: pointer; flex-shrink: 0; margin-left: 12px; margin-top: -2px;
+  transition: color .15s; line-height: 1;
+}
+.modal-x:hover { color: var(--ink); }
+.modal-bd { padding: 28px; }
+
+.fg { margin-bottom: 18px; }
+.fl { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: var(--body); display: block; margin-bottom: 7px; }
+.fl .req { color: var(--red); margin-left: 3px; }
+.fi, .fs, .ft {
+  width: 100%; background: var(--bg); border: 1px solid var(--rule);
+  color: var(--ink); font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px; padding: 13px 15px; outline: none;
+  transition: border-color .18s; appearance: none; -webkit-appearance: none;
+}
+.fi:focus, .fs:focus, .ft:focus { border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-bg); }
+.ft { resize: vertical; min-height: 80px; }
+.fs {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%238795a6' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; cursor: pointer;
+}
+.f-submit {
+  width: 100%; background: var(--ink); color: white;
+  font-family: 'Noto Sans JP', sans-serif; font-size: 15px; font-weight: 900;
+  letter-spacing: 0.05em; padding: 17px; border: none; cursor: pointer;
+  transition: background .18s;
+}
+.f-submit:hover { background: var(--ink2); }
+.f-note { font-size: 10px; color: var(--muted); text-align: center; margin-top: 10px; font-weight: 300; }
+
+.modal-ok { padding: 56px 28px; text-align: center; display: none; }
+.modal-ok .ic {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: oklch(0.58 0.14 155 / 0.12); border: 2px solid oklch(0.58 0.14 155 / 0.4);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; margin: 0 auto 20px; color: var(--green);
+}
+.modal-ok h3 { font-size: 20px; font-weight: 900; margin-bottom: 10px; color: var(--ink); }
+.modal-ok p  { font-size: 14px; color: var(--body); font-weight: 300; line-height: 1.8; }
+
+/* ── OUTCOMES ── */
+.outcomes-sec { background: var(--bg2); overflow: hidden; }
+
+.ba-wrap { margin: 0 0 72px; }
+.ba-inner {
+  max-width: 1040px; margin: 0 auto; padding: 0 32px;
+  display: grid; grid-template-columns: 1fr 140px 1fr; gap: 0; align-items: stretch;
+}
+.ba-before, .ba-after {
+  padding: 40px 36px; border: 1px solid var(--rule);
+}
+.ba-before { background: #f0ede6; border-right: none; }
+.ba-after  { background: white;   border-left: none; }
+
+.ba-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.22em;
+  text-transform: uppercase; margin-bottom: 20px; display: block;
+  padding-bottom: 10px; border-bottom: 2px solid;
+}
+.ba-label--before { color: var(--muted); border-color: var(--muted); }
+.ba-label--after  { color: var(--green); border-color: var(--green); }
+
+.ba-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.ba-before .ba-list li {
+  font-size: 14px; color: var(--body); font-weight: 400; padding-left: 20px;
+  position: relative; line-height: 1.6;
+}
+.ba-before .ba-list li::before {
+  content: '×'; position: absolute; left: 0;
+  color: var(--red); font-size: 12px; font-weight: 700;
+}
+.ba-after .ba-list li {
+  font-size: 14px; color: var(--ink); font-weight: 500; padding-left: 20px;
+  position: relative; line-height: 1.6;
+}
+.ba-after .ba-list li::before {
+  content: '✓'; position: absolute; left: 0;
+  color: var(--green); font-size: 12px; font-weight: 700;
+}
+
+.ba-arrow {
+  background: var(--ink); display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 8px; padding: 28px 8px;
+  position: relative;
+}
+.ba-arrow-line {
+  width: 2px; flex: 1; background: repeating-linear-gradient(
+    to bottom, var(--amber) 0px, var(--amber) 8px, transparent 8px, transparent 16px
+  );
+}
+.ba-arrow-label {
+  font-size: 11px; font-weight: 900; color: var(--amber); letter-spacing: 0.08em;
+  writing-mode: vertical-rl; text-orientation: mixed; white-space: nowrap;
+}
+.ba-arrow-sub {
+  font-size: 9px; font-weight: 400; color: var(--ddim); letter-spacing: 0.1em;
+  writing-mode: vertical-rl; text-orientation: mixed; white-space: nowrap;
+}
+
+/* Scenarios */
+.scenario-intro {
+  font-size: 13px; font-weight: 700; letter-spacing: 0.12em; color: var(--muted);
+  text-transform: uppercase; margin-bottom: 24px;
+}
+.scenario-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.scenario-card {
+  background: white; border: 1px solid var(--rule);
+  overflow: hidden; display: flex; flex-direction: column;
+  transition: box-shadow .2s, transform .2s;
+}
+.scenario-card:hover { box-shadow: 0 8px 32px rgba(13,27,42,0.10); transform: translateY(-2px); }
+.scenario-card--mid {
+  border-color: var(--blue); position: relative;
+}
+.scenario-card--mid::before {
+  content: '最多利用'; position: absolute; top: 0; right: 0;
+  background: var(--blue); color: white;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.1em; padding: 4px 10px;
+}
+
+.scenario-type {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--blue); padding: 16px 22px 0; 
+}
+.scenario-h {
+  font-size: 17px; font-weight: 900; line-height: 1.35; color: var(--ink);
+  padding: 10px 22px 18px; border-bottom: 1px solid var(--rule);
+}
+
+.scenario-body { padding: 20px 22px; flex: 1; }
+.scenario-flow {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 4px;
+  margin-bottom: 20px; padding: 14px 14px; background: var(--bg2);
+}
+.sf-item {
+  font-size: 11px; font-weight: 500; color: var(--body); white-space: nowrap;
+}
+.sf-item--hi { font-weight: 700; color: var(--blue); }
+.sf-item--result {
+  font-weight: 900; color: white; background: var(--green);
+  padding: 3px 8px; font-size: 11px;
+}
+.sf-arr { font-size: 11px; color: var(--muted); }
+
+.scenario-list { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.scenario-list li {
+  font-size: 13px; color: var(--body); font-weight: 300; padding-left: 16px;
+  position: relative; line-height: 1.6;
+}
+.scenario-list li::before {
+  content: '→'; position: absolute; left: 0; color: var(--blue); font-size: 11px; top: 1px;
+}
+
+.scenario-cta {
+  margin: 0 22px 22px; padding: 13px;
+  background: var(--bg2); border: 1px solid var(--rule);
+  font-size: 13px; font-weight: 700; color: var(--blue);
+  text-align: center; cursor: pointer; letter-spacing: 0.03em;
+  transition: background .18s, color .18s;
+}
+.scenario-cta:hover { background: var(--blue); color: white; border-color: var(--blue); }
+
+/* ── REVEAL ANIMATIONS ── */
+.rv {
+  opacity: 0; transform: translateY(18px);
+  transition: opacity .55s ease, transform .55s ease;
+}
+.rv.in { opacity: 1; transform: none; }
+.rv-delay-1 { transition-delay: 0.08s; }
+.rv-delay-2 { transition-delay: 0.16s; }
+.rv-delay-3 { transition-delay: 0.24s; }
+
+/* ── PRINT STYLES ── */
+@media print {
+  @page { size: A4 portrait; margin: 0; }
+
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+  /* Remove interactive / animated elements */
+  nav, .overlay, .modal { display: none !important; }
+
+  /* Make all reveal elements visible */
+  .rv { opacity: 1 !important; transform: none !important; transition: none !important; }
+
+  body { background: var(--bg); padding-top: 0; }
+
+  /* Page breaks between major sections */
+  .hero         { break-after: page; min-height: 0; padding: 48px 32px 40px; }
+  .proof-bar    { break-inside: avoid; }
+  .problem      { break-before: page; break-after: page; padding: 48px 0; }
+  .values       { break-before: page; break-after: page; padding: 48px 0; }
+  .outcomes-sec { break-before: page; break-after: page; padding: 48px 0; }
+  .flow         { break-before: page; break-after: page; padding: 48px 0; }
+  .plans-sec    { break-before: page; break-after: page; padding: 48px 0; }
+  .safety       { break-before: page; break-inside: avoid; padding: 48px 0; }
+  .experts      { break-inside: avoid; padding: 40px 0; }
+  .faq-sec      { break-before: page; padding: 48px 0; }
+  .final-cta    { break-before: page; padding: 40px 32px; break-inside: avoid; }
+  footer        { break-inside: avoid; }
+
+  /* Fix hero for print */
+  .hero { min-height: 0 !important; }
+  .hero-grid { grid-template-columns: 1fr 300px !important; }
+  .hero-card { display: block !important; }
+
+  /* Fix grid layouts */
+  .val-grid        { grid-template-columns: repeat(3,1fr) !important; }
+  .flow-grid       { grid-template-columns: repeat(3,1fr) !important; }
+  .plan-grid-main  { grid-template-columns: repeat(4,1fr) !important; }
+  .safety-grid     { grid-template-columns: repeat(3,1fr) !important; }
+  .expert-grid     { grid-template-columns: repeat(4,1fr) !important; }
+  .scenario-grid   { grid-template-columns: repeat(3,1fr) !important; }
+
+  /* Remove transitions */
+  * { transition: none !important; animation: none !important; }
+
+  /* Fix rotating text — show static */
+  .hero-rotate { opacity: 1 !important; transform: none !important; }
+
+  /* Avoid orphans inside cards */
+  .plan-card, .val-card, .flow-card, .prob-card,
+  .scenario-card, .safety-card, .expert-card,
+  .faq-item, .opt-card { break-inside: avoid; }
+
+  /* Fix links */
+  a { color: inherit !important; text-decoration: none !important; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+  .hero-card { display: none; }
+  .plan-grid-main { grid-template-columns: 1fr 1fr; }
+  .val-grid { grid-template-columns: 1fr; }
+  .flow-grid { grid-template-columns: 1fr 1fr; }
+  .final-inner { grid-template-columns: 1fr; gap: 32px; padding: 48px 36px; }
+  .final-cta-right { align-items: flex-start; }
+  .final-note, .final-url { text-align: left; }
+}
+@media (max-width: 640px) {
+  .prob-grid { grid-template-columns: 1fr; }
+  .plan-grid-main { grid-template-columns: 1fr; }
+  .opts-grid { grid-template-columns: 1fr; }
+  .safety-grid { grid-template-columns: 1fr; }
+  .expert-grid { grid-template-columns: 1fr 1fr; }
+  .flow-grid { grid-template-columns: 1fr; }
+  .proof-inner { flex-wrap: wrap; gap: 24px; justify-content: center; }
+  .proof-divider { display: none; }
+  .nav-links { display: none; }
+  .modal-hd, .modal-bd { padding: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <b>TENANT SCOUT</b>
+    <small>by BRIDGE CYCLE株式会社</small>
+  </div>
+  <div class="nav-links">
+    <a href="#values"  class="nav-link">3つの価値</a>
+    <a href="#plans"   class="nav-link">料金プラン</a>
+    <a href="#experts" class="nav-link">専門家連携</a>
+    <a href="#faq"     class="nav-link">よくある質問</a>
+  </div>
+  <a href="https://yujimansion-hub.github.io/bridgecycle/" target="_blank" class="nav-btn">無料会員登録</a>
+</nav>
+
+<!-- ① HERO -->
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <span class="hero-eyebrow">小規模事業者のための事業価値診断インフラ</span>
+      <h1 class="hero-h1">
+        お店の価値を<br>
+        <span class="accent">毎月</span>診断。<br>
+        <span class="hero-rotate-wrap"><span id="heroRotate" class="hero-rotate">補助金の対象か、わかる。</span></span>
+      </h1>
+      <p class="hero-sub">
+        売上改善・補助金・承継まで、<strong>お店の今の価値</strong>を知ることが最初の一歩。<br>
+        TENANT SCOUTが、判断に必要なデータを継続的に届けます。
+      </p>
+      <div class="hero-tags">
+        <span class="hero-tag-item">飲食店</span>
+        <span class="hero-tag-item">美容室・サロン</span>
+        <span class="hero-tag-item">学習塾・スクール</span>
+        <span class="hero-tag-item">小売店</span>
+        <span class="hero-tag-item">サービス業</span>
+      </div>
+      <div class="hero-cta">
+        <a href="https://yujimansion-hub.github.io/bridgecycle/" target="_blank" class="btn-hero">
+          無料会員登録はこちら <span class="arr">→</span>
+        </a>
+        <span class="cta-note">登録3分・初期費用0円・いつでも解約OK</span>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <span class="hero-card-label">現テナント会員プラン</span>
+      <div class="hero-price-block">
+        <div class="hero-price-from">月額</div>
+        <div class="hero-price-num">980<span class="unit">円〜</span></div>
+      </div>
+      <ul class="hero-card-list">
+        <li>店舗価値を毎月スコアリング</li>
+        <li>市場の売却価格動向を通知</li>
+        <li>補助金・改善ヒントを配信</li>
+        <li>必要時に専門家へ接続</li>
+        <li>いつでも解約可能</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF BAR -->
+<div class="proof-bar">
+  <div class="proof-inner">
+    <div class="proof-item">
+      <span class="proof-num">300<small style="font-size:.6em">件+</small></span>
+      <div class="proof-label">事業計画支援実績</div>
+    </div>
+    <div class="proof-divider"></div>
+    <div class="proof-item">
+      <span class="proof-num">4<small style="font-size:.6em">種</small></span>
+      <div class="proof-label">会員プラン</div>
+    </div>
+    <div class="proof-divider"></div>
+    <div class="proof-item">
+      <span class="proof-num">3<small style="font-size:.6em">日</small></span>
+      <div class="proof-label">結論提示の最短期間</div>
+    </div>
+    <div class="proof-divider"></div>
+    <div class="proof-item">
+      <span class="proof-num">0円</span>
+      <div class="proof-label">初期費用</div>
+    </div>
+    <div class="proof-divider"></div>
+    <div class="proof-item">
+      <span class="proof-num">商工会</span>
+      <div class="proof-label">支援実績あり</div>
+    </div>
+  </div>
+</div>
+
+<!-- ② PROBLEM -->
+<section class="sec problem">
+  <div class="wrap">
+    <span class="sec-label rv">こんな状況ではありませんか</span>
+    <h2 class="sec-h rv">「続けるにも、やめるにも、<br>判断できない」</h2>
+    <p class="sec-sub rv">多くの事業者が、<strong>情報不足のまま</strong>大事な意思決定を迫られています。</p>
+    <div class="prob-grid rv">
+      <div class="prob-card">
+        <div class="prob-icon">?</div>
+        <span class="prob-text">今のお店がいくらの価値か分からない</span>
+      </div>
+      <div class="prob-card">
+        <div class="prob-icon">↻</div>
+        <span class="prob-text">更新するか、やめるか迷っている</span>
+      </div>
+      <div class="prob-card">
+        <div class="prob-icon">¥</div>
+        <span class="prob-text">補助金・助成金をどう活用すべきか分からない</span>
+      </div>
+      <div class="prob-card">
+        <div class="prob-icon">→</div>
+        <span class="prob-text">将来の承継・売却に向けて、今何をすべきか分からない</span>
+      </div>
+      <div class="prob-card">
+        <div class="prob-icon">↗</div>
+        <span class="prob-text">改善すべき点と優先順位が見えない</span>
+      </div>
+      <div class="prob-card">
+        <div class="prob-icon">人</div>
+        <span class="prob-text">専門家に相談したいが、どこから始めればいいか分からない</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ③ VALUES -->
+<section class="sec values" id="values">
+  <div class="wrap-w">
+    <div class="wrap" style="padding: 0;">
+      <span class="sec-label rv" style="border-color: var(--blue-hi); color: var(--blue-hi);">TENANT SCOUTで得られる価値</span>
+      <h2 class="sec-h rv" style="color: var(--dtext);">3つの価値</h2>
+      <p class="sec-sub rv" style="color: var(--ddim); margin-bottom: 48px;">毎月の診断で、意思決定の質を高め続けます。</p>
+    </div>
+    <div class="val-grid rv">
+      <div class="val-card">
+        <div class="val-num-big">01</div>
+        <div class="val-title">今の価値が<br>わかる</div>
+        <ul class="val-list">
+          <li>ポテンシャル価値（将来性）を診断</li>
+          <li>事業価値の目安を見える化</li>
+          <li>強み・改善余地を確認</li>
+        </ul>
+      </div>
+      <div class="val-card">
+        <div class="val-num-big">02</div>
+        <div class="val-title">市場のリアルが<br>わかる</div>
+        <ul class="val-list">
+          <li>会員の実際の売却希望価格・関心状況を定期通知</li>
+          <li>どれくらいの価格感で動いているか把握できる</li>
+          <li>創業段階から市場の反応を確認できる</li>
+        </ul>
+      </div>
+      <div class="val-card">
+        <div class="val-num-big">03</div>
+        <div class="val-title">価値を上げる<br>ヒントが届く</div>
+        <ul class="val-list">
+          <li>売上アップ・販促・内装改善の提案</li>
+          <li>補助金・助成金活用のヒント</li>
+          <li>必要時だけ個別支援を依頼できる</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ③.5 OUTCOMES — 価値がわかるとどうなるか -->
+<section class="sec outcomes-sec">
+  <div class="wrap">
+    <span class="sec-label rv">価値がわかると、何が変わるか</span>
+    <h2 class="sec-h rv">「お店の価値」は、<br>次の一手を決める<br>羅針盤になります。</h2>
+    <p class="sec-sub rv">漠然とした不安が、具体的な行動に変わります。</p>
+  </div>
+
+  <!-- Before / After -->
+  <div class="ba-wrap rv">
+    <div class="ba-inner">
+      <div class="ba-before">
+        <div class="ba-label ba-label--before">知らないまま</div>
+        <ul class="ba-list">
+          <li>「赤字だけど、どうすればいい？」</li>
+          <li>「更新料を払うべきか分からない」</li>
+          <li>「補助金があるらしいが、対象か不明」</li>
+          <li>「将来売れるのか、いくらになるか謎」</li>
+          <li>「とりあえず現状維持…」</li>
+        </ul>
+      </div>
+      <div class="ba-arrow">
+        <div class="ba-arrow-line"></div>
+        <div class="ba-arrow-label">TENANT SCOUT</div>
+        <div class="ba-arrow-sub">お店の価値を数値化</div>
+      </div>
+      <div class="ba-after">
+        <div class="ba-label ba-label--after">知ったあと</div>
+        <ul class="ba-list">
+          <li>「あと2年続ければ価値が○○万円上がる」</li>
+          <li>「今承継すれば＋120万円の手残り」</li>
+          <li>「この補助金が申請できる」</li>
+          <li>「市場で○○万円で売れる可能性がある」</li>
+          <li>根拠をもって次の行動を決められる</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 scenarios -->
+  <div class="wrap">
+    <p class="scenario-intro rv">あなたの状況に合わせた、3つの使い方</p>
+    <div class="scenario-grid">
+      <div class="scenario-card rv rv-delay-1">
+        <div class="scenario-type">続けたい</div>
+        <div class="scenario-h">価値を高めながら<br>経営を続ける</div>
+        <div class="scenario-body">
+          <div class="scenario-flow">
+            <span class="sf-item">価値診断</span>
+            <span class="sf-arr">→</span>
+            <span class="sf-item sf-item--hi">弱点が明確に</span>
+            <span class="sf-arr">→</span>
+            <span class="sf-item">補助金活用</span>
+            <span class="sf-arr">→</span>
+            <span class="sf-item sf-item--result">売上UP</span>
+          </div>
+          <ul class="scenario-list">
+            <li>改善すべき点の優先順位がわかる</li>
+            <li>補助金・助成金の対象か判明する</li>
+            <li>融資審査の根拠資料になる</li>
+          </ul>
+        </div>
+        <div class="scenario-cta" onclick="openModal(event)">このプランを見る →</div>
+      </div>
+
+      <div class="scenario-card scenario-card--mid rv rv-delay-2">
+        <div class="scenario-type">迷っている</div>
+        <div class="scenario-h">数字で判断して<br>後悔しない選択をする</div>
+        <div class="scenario-body">
+          <div class="scenario-flow">
+            <span class="sf-item">価値診断</span>
+            <span class="sf-arr">→</span>
+            <span class="sf-item sf-item--hi">手残りが見える</span>
+            <span class="sf-arr">→</span>
+            <span class="sf-item">意思決定</span>
+            <span class="sf-arr">→</span>
+            <span class="sf-item sf-item--result">損失ゼロ</span>
+          </div>
+          <ul class="scenario-list">
+            <li>今やめた場合の手残りがわかる</li>
+            <li>3ヶ月後・半年後の損失予測がわかる</li>
+            <li>「なんとなく」を根拠ある判断に変える</li>
+          </ul>
+        </div>
+        <div class="scenario-cta" onclick="openModal(event)">このプランを見る →</div>
+      </div>
+
+      <div class="scenario-card rv rv-delay-3">
+        <div class="scenario-type">承継・創業を考えている</div>
+        <div class="scenario-h">適正価格で引き継ぎ、<br>次のステージへ</div>
+        <div class="scenario-body">
+          <div class="scenario-flow">
+            <span class="sf-item">価値診断</span>
+            <span class="sf-arr">→</span>
+            <span class="sf-item sf-item--hi">承継価値確認</span>
+            <span class="sf-arr">→</span>
+            <span class="sf-item">候補者探索</span>
+            <span class="sf-arr">→</span>
+            <span class="sf-item sf-item--result">承継成立</span>
+          </div>
+          <ul class="scenario-list">
+            <li>設備・内装の再利用価値がわかる</li>
+            <li>原状回復コストを大幅削減できる</li>
+            <li>創業者側は初期投資を抑えられる</li>
+          </ul>
+        </div>
+        <div class="scenario-cta" onclick="openModal(event)">このプランを見る →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ④ FLOW -->
+<section class="sec flow">
+  <div class="wrap-w">
+    <div class="wrap" style="padding: 0;">
+      <span class="sec-label rv">ご利用の流れ</span>
+      <h2 class="sec-h rv">6ステップで<br>すぐに使える</h2>
+      <p class="sec-sub rv">登録3分。あとは診断結果を受け取るだけです。</p>
+    </div>
+    <div class="flow-grid rv">
+      <div class="flow-card">
+        <div class="flow-n">STEP 01</div>
+        <div class="flow-title">会員登録（3分）</div>
+        <div class="flow-desc">お名前・連絡先・業種のみ。初期費用0円。</div>
+      </div>
+      <div class="flow-card">
+        <div class="flow-n">STEP 02</div>
+        <div class="flow-title">お店・事業計画を入力</div>
+        <div class="flow-desc">店舗情報・売上概況・今後の意向を登録。</div>
+      </div>
+      <div class="flow-card">
+        <div class="flow-n">STEP 03</div>
+        <div class="flow-title">ポテンシャル価値を診断</div>
+        <div class="flow-desc">設備・内装・立地・事業計画から店舗資産価値をスコアリング。</div>
+      </div>
+      <div class="flow-card">
+        <div class="flow-n">STEP 04</div>
+        <div class="flow-title">定期通知を受け取る</div>
+        <div class="flow-desc">売却希望価格・市場動向・改善ヒントを定期配信。</div>
+      </div>
+      <div class="flow-card">
+        <div class="flow-n">STEP 05</div>
+        <div class="flow-title">価値アップに取り組む</div>
+        <div class="flow-desc">改善提案を実行し、売上と評価を高めます。</div>
+      </div>
+      <div class="flow-card">
+        <div class="flow-n">STEP 06</div>
+        <div class="flow-title">専門家に相談する</div>
+        <div class="flow-desc">補助金・資金調達・承継など、必要時に専門家チームへ依頼。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑤ PLANS -->
+<section class="sec plans-sec" id="plans">
+  <div class="wrap-w">
+    <span class="sec-label sec-label--amber rv" style="display:block;text-align:center;">会員プラン（税込）</span>
+    <h2 class="sec-h rv">目的に合わせて選べる<br>4つのプラン</h2>
+    <p class="sec-sub rv">まずは月額980円の現テナント会員から。いつでもアップグレード・解約可能。</p>
+
+    <div class="plan-grid-main rv">
+      <div class="plan-card plan-card--rec">
+        <div class="plan-name">現テナント会員</div>
+        <div class="plan-for">今のお店・事業を<br>経営中の方</div>
+        <div class="plan-price">
+          <span class="p-num">980</span><span class="p-unit">円／月</span>
+        </div>
+        <ul class="plan-features">
+          <li>自店の価値を毎月チェック</li>
+          <li>実際の売却希望価格を受け取る</li>
+          <li>価値向上のヒントを受け取る</li>
+        </ul>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">創業者会員</div>
+        <div class="plan-for">これから出店・<br>創業する方</div>
+        <div class="plan-price">
+          <span class="p-num">3,000</span><span class="p-unit">円／月</span>
+        </div>
+        <ul class="plan-features">
+          <li>出店計画の市場価値確認</li>
+          <li>案件情報の閲覧</li>
+          <li>価値向上のヒントの受け取り</li>
+        </ul>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">外国人創業者会員</div>
+        <div class="plan-for">外国人の創業・承継を<br>支援希望の方</div>
+        <div class="plan-price">
+          <span class="p-num">9,800</span><span class="p-unit">円／月</span>
+        </div>
+        <ul class="plan-features">
+          <li>制度連携型の出店・承継支援</li>
+          <li>手続き・許認可のサポート</li>
+          <li>多言語サポート</li>
+        </ul>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">オーナー会員</div>
+        <div class="plan-for">物件オーナー・<br>大家様</div>
+        <div class="plan-price">
+          <span class="p-num">5,000</span><span class="p-unit">円／月</span>
+        </div>
+        <ul class="plan-features">
+          <li>空室予防・次候補の把握</li>
+          <li>承継希望者との見える化</li>
+          <li>事業計画済み創業者への接続</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Options -->
+    <p style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; color: var(--muted); margin: 32px 0 12px; text-transform: uppercase;">個別支援オプション</p>
+    <div class="opts-grid rv">
+      <div class="opt-card">
+        <div class="opt-badge">
+          <small>FROM</small>5万円
+        </div>
+        <div class="opt-body">
+          <div class="opt-title">価値向上・資金調達支援</div>
+          <div class="opt-desc">補助金活用・売上改善・資金繰り改善の個別サポート。5〜30万円。</div>
+        </div>
+      </div>
+      <div class="opt-card">
+        <div class="opt-badge">
+          <small>FROM</small>15万円
+        </div>
+        <div class="opt-body">
+          <div class="opt-title">創業・承継準備支援</div>
+          <div class="opt-desc">事業計画策定・GATE診断・専門家接続まで一括対応。15〜80万円。</div>
+        </div>
+      </div>
+      <div class="opt-card">
+        <div class="opt-badge">
+          <small>FROM</small>50万円
+        </div>
+        <div class="opt-body">
+          <div class="opt-title">承継買取助成支援</div>
+          <div class="opt-desc">店舗資産の承継設計・匿名案件化・専門家接続。50〜80万円。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑥ SAFETY -->
+<section class="sec safety">
+  <div class="wrap">
+    <span class="sec-label rv" style="border-color: var(--dborder); color: var(--ddim);">安心ポイント</span>
+    <h2 class="sec-h rv" style="color: var(--dtext);">売るためだけの<br>サービスではありません。</h2>
+    <p style="font-size:15px; color: var(--ddim); font-weight:300; margin-bottom:48px;" class="rv">続けるためにも、譲るためにも。まず価値を知ることが始まりです。</p>
+    <div class="safety-grid rv">
+      <div class="safety-card">
+        <div class="safety-mark">✕</div>
+        <div class="safety-title">売却を保証しません</div>
+        <div class="safety-desc">売却を保証するサービスではありません。意思決定の材料を提供するだけです。</div>
+      </div>
+      <div class="safety-card">
+        <div class="safety-mark">✕</div>
+        <div class="safety-title">しつこい営業はしません</div>
+        <div class="safety-desc">強引な勧誘・強制は行いません。次の行動はオーナーご自身が決めます。</div>
+      </div>
+      <div class="safety-card">
+        <div class="safety-mark">◎</div>
+        <div class="safety-title">小規模事業者の味方です</div>
+        <div class="safety-desc">商工会支援実績300件以上。現場とデータの両面からサポートします。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑦ EXPERTS -->
+<section class="sec experts" id="experts">
+  <div class="wrap">
+    <span class="sec-label rv">専門家ネットワーク</span>
+    <h2 class="sec-h rv">必要な時に、<br>最適な専門家とつながります。</h2>
+    <p class="sec-sub rv">事業の課題や目的に合わせて、信頼できる専門家チームがサポートします。</p>
+    <div class="expert-grid rv">
+      <div class="expert-card">
+        <div class="expert-avatar">📊</div>
+        <div class="expert-role">中小企業診断士</div>
+        <div class="expert-desc">事業計画・経営改善・補助金申請</div>
+      </div>
+      <div class="expert-card">
+        <div class="expert-avatar">📋</div>
+        <div class="expert-role">税理士</div>
+        <div class="expert-desc">廃業判断・節税・資金繰り改善</div>
+      </div>
+      <div class="expert-card">
+        <div class="expert-avatar">🏠</div>
+        <div class="expert-role">宅建業者</div>
+        <div class="expert-desc">物件条件交渉・賃貸借契約</div>
+      </div>
+      <div class="expert-card">
+        <div class="expert-avatar">📝</div>
+        <div class="expert-role">行政書士</div>
+        <div class="expert-desc">許認可・在留資格・各種申請</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑧ FAQ -->
+<section class="sec-sm faq-sec" id="faq">
+  <div class="wrap">
+    <span class="sec-label rv">よくある質問</span>
+    <h2 class="sec-h rv" style="margin-bottom:36px;">よくある質問</h2>
+    <div class="faq-list rv">
+      <div class="faq-item">
+        <div class="faq-q" onclick="tFaq(this)"><span>売却・退店を強制されますか？</span><div class="faq-plus">+</div></div>
+        <div class="faq-a">いいえ。当社は意思決定の材料提供のみです。売却・退店を強制することは一切ありません。続けるにも、譲るにも、最適な判断をサポートするのが目的です。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="tFaq(this)"><span>初期費用はかかりますか？</span><div class="faq-plus">+</div></div>
+        <div class="faq-a">初期費用は0円です。月額980円〜のプランをお選びいただけます。いつでも解約可能です。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="tFaq(this)"><span>どんな業種でも利用できますか？</span><div class="faq-plus">+</div></div>
+        <div class="faq-a">飲食・美容室・サロン・学習塾・小売・サービス業など、実店舗を持つ小規模事業者であれば業種を問わずご利用いただけます。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="tFaq(this)"><span>まだ閉店を考えていない段階でも使えますか？</span><div class="faq-plus">+</div></div>
+        <div class="faq-a">はい、むしろ「今は元気なお店」の段階から利用することで、継続的な価値向上・補助金活用・将来の承継準備に活かせます。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="tFaq(this)"><span>M&amp;A仲介や不動産会社との違いは？</span><div class="faq-plus">+</div></div>
+        <div class="faq-a">当社は診断・情報整理・事業計画策定に特化しています。賃貸借条件の交渉・契約行為・売却成立に連動した報酬は受けません。必要に応じて専門家（宅建士・弁護士等）へ接続します。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<div class="final-cta">
+  <div class="final-inner">
+    <div>
+      <div class="final-h">まずは会員登録から<br>始めませんか？</div>
+      <div class="final-sub">登録3分・初期費用0円・いつでも解約OK</div>
+    </div>
+    <div class="final-cta-right">
+      <a href="https://yujimansion-hub.github.io/bridgecycle/" target="_blank" class="btn-cta">
+        無料会員登録はこちら <span class="arr">→</span>
+      </a>
+      <div class="final-note">強引な勧誘は一切ありません</div>
+      <div class="final-url"><a href="https://yujimansion-hub.github.io/bridgecycle/" target="_blank">https://yujimansion-hub.github.io/bridgecycle/</a></div>
+    </div>
+  </div>
+</div>
+
+<footer>© 2026 BRIDGE CYCLE株式会社 | TENANT SCOUT　｜　<a href="mailto:info@bridgecycleco.com" style="color:var(--muted);text-decoration:none;">info@bridgecycleco.com</a>　｜　<a href="https://yujimansion-hub.github.io/bridgecycle/" target="_blank" style="color:var(--muted);text-decoration:none;">yujimansion-hub.github.io/bridgecycle</a></footer>
+
+<!-- MODAL -->
+<div class="overlay" id="modal" onclick="closeOuter(event)">
+  <div class="modal">
+    <div class="modal-hd">
+      <div>
+        <h3>無料会員登録</h3>
+        <p>3分で完了・初期費用0円・いつでも解約OK</p>
+      </div>
+      <button class="modal-x" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-bd" id="mForm">
+      <form onsubmit="doSubmit(event)">
+        <div class="fg">
+          <label class="fl">お名前<span class="req">*</span></label>
+          <input class="fi" type="text" placeholder="山田 太郎" required>
+        </div>
+        <div class="fg">
+          <label class="fl">電話番号<span class="req">*</span></label>
+          <input class="fi" type="tel" placeholder="090-0000-0000" required>
+        </div>
+        <div class="fg">
+          <label class="fl">ご希望のプラン<span class="req">*</span></label>
+          <select class="fs" required>
+            <option value="" disabled selected>選択してください</option>
+            <option>現テナント会員（980円／月）</option>
+            <option>創業者会員（3,000円／月）</option>
+            <option>外国人創業者会員（9,800円／月）</option>
+            <option>オーナー会員（5,000円／月）</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label class="fl">店舗業種<span class="req">*</span></label>
+          <select class="fs" required>
+            <option value="" disabled selected>選択してください</option>
+            <option>飲食店</option>
+            <option>美容室・サロン</option>
+            <option>学習塾・スクール</option>
+            <option>小売店</option>
+            <option>サービス業</option>
+            <option>その他</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label class="fl">現在の状況・ご相談内容（任意）</label>
+          <textarea class="ft" placeholder="例：3年後の承継を考えている。今の価値を知りたい。補助金を活用したい。"></textarea>
+        </div>
+        <button type="submit" class="f-submit">登録する →</button>
+        <p class="f-note">送信後、24時間以内にご連絡します。個人情報は診断目的のみ使用します。</p>
+      </form>
+    </div>
+    <div class="modal-ok" id="mOk">
+      <div class="ic">✓</div>
+      <h3>登録ありがとうございます</h3>
+      <p>24時間以内にご連絡いたします。<br>まずは現状をそのままお話しください。<br><br>一緒に、お店の価値を見える化しましょう。</p>
+    </div>
+  </div>
+</div>
+
+<script>
+// Auto-print after fonts load
+document.fonts.ready.then(() => { setTimeout(() => window.print(), 500); });
+
+function openModal(e) { e.preventDefault(); document.getElementById('modal').classList.add('open'); document.body.style.overflow='hidden'; }
+function closeModal() { document.getElementById('modal').classList.remove('open'); document.body.style.overflow=''; }
+function closeOuter(e) { if(e.target===document.getElementById('modal')) closeModal(); }
+function doSubmit(e) { e.preventDefault(); document.getElementById('mForm').style.display='none'; document.getElementById('mOk').style.display='block'; setTimeout(closeModal,4500); }
+function tFaq(el) { el.parentElement.classList.toggle('open'); }
+
+// Rotating headline
+const rotateItems = [
+  '3ヶ月後の手残りが、今わかる。',
+  '使える補助金が、すぐ見つかる。',
+  '"続けるべきか" の答えが出る。',
+  'やめ方を変えれば、手元に残る。',
+  '適正価格で、次に渡せる。',
+  '開業コストを、限界まで下げられる。',
+  '損しないやめ方が、ある。',
+  'お店の価値は、まだ残っている。',
+];
+let rotateIdx = 0;
+const rotateEl = document.getElementById('heroRotate');
+rotateEl.classList.add('visible');
+setInterval(() => {
+  rotateEl.classList.remove('visible');
+  rotateEl.classList.add('fade-out');
+  setTimeout(() => {
+    rotateIdx = (rotateIdx + 1) % rotateItems.length;
+    rotateEl.textContent = rotateItems[rotateIdx];
+    rotateEl.classList.remove('fade-out');
+    rotateEl.classList.add('fade-in');
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      rotateEl.classList.remove('fade-in');
+      rotateEl.classList.add('visible');
+    }));
+  }, 370);
+}, 2400);
+
+// Scroll reveal
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); } });
+}, { threshold: 0.06, rootMargin: '0px 0px -32px 0px' });
+document.querySelectorAll('.rv').forEach(el => ro.observe(el));
+</script>
+</body>
+</html>
