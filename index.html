@@ -3,154 +3,640 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>サンプルレポート | TENANT SCOUT × BRIDGE CYCLE</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Noto+Serif+JP:wght@400;700&family=Shippori+Mincho+B1:wght@700;800&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+<title>TENANT SCOUT — 店舗承継OS | サービス概要</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:#0B1927;color:#F6F1E7;font-family:'Noto Serif JP',serif;min-height:100vh}
+body{background:#F8FAFC;font-family:'Noto Sans JP',sans-serif;color:#1E293B;line-height:1.75}
+:root{
+  --navy:#0D1B2A;--navy2:#152336;--navy3:#1E3350;
+  --blue:#2563EB;--blue-hi:#3B82F6;--blue-bg:rgba(37,99,235,.08);--blue-bd:rgba(37,99,235,.22);
+  --orange:#F59E0B;--orange-hi:#FCD34D;--cta:#EA580C;
+  --green:#16A34A;--green-pale:#F0FDF4;
+  --amber:#D97706;--amber-pale:#FFFBEB;
+  --red:#DC2626;--red-pale:#FEF2F2;
+  --text:#1E293B;--text-md:#475569;--text-sm:#64748B;--text-xs:#94A3B8;
+  --border:#E2E8F0;--bg:#F8FAFC;--bg2:#F1F5F9;
+  --white:#fff;
+}
+a{text-decoration:none;color:inherit}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(11,25,39,.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(198,162,74,.2);padding:0 48px;height:64px;display:flex;align-items:center;justify-content:space-between}
-.nav-logo{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:400;letter-spacing:.28em;color:#F6F1E7;text-transform:uppercase;text-decoration:none}
-.nav-logo em{color:#C6A24A;font-style:normal}
-.nav-links{display:flex;gap:24px;align-items:center}
-.nav-links a{font-size:11px;letter-spacing:.12em;color:#C4BAA6;text-decoration:none;transition:color .2s}
-.nav-links a:hover{color:#C6A24A}
-.nav-cta{background:#C6A24A;color:#0B1927;font-size:11px;font-weight:700;padding:8px 18px;letter-spacing:.14em;text-decoration:none;transition:background .2s}
-.nav-cta:hover{background:#DFC080}
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;height:60px;background:rgba(13,27,42,.97);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08);display:flex;align-items:center;padding:0 32px;gap:24px}
+.nav-logo{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.nav-logo-text{font-size:13px;font-weight:900;color:#fff;letter-spacing:.06em}
+.nav-sep{width:1px;height:20px;background:rgba(255,255,255,.12);flex-shrink:0}
+.nav-links{display:flex;gap:20px;align-items:center;flex:1}
+.nav-link{font-size:11px;font-weight:500;color:rgba(255,255,255,.6);transition:color .15s}
+.nav-link:hover{color:#fff}
+.nav-link.active{color:var(--orange);font-weight:700}
+.nav-cta-wrap{display:flex;gap:8px;flex-shrink:0}
+.btn-nav{font-size:11px;font-weight:700;padding:7px 16px;border-radius:4px;transition:all .18s;cursor:pointer;border:none;font-family:inherit}
+.btn-nav-ghost{background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7)}
+.btn-nav-ghost:hover{border-color:rgba(255,255,255,.5);color:#fff}
+.btn-nav-primary{background:var(--orange);color:var(--navy)}
+.btn-nav-primary:hover{background:var(--orange-hi)}
+@media(max-width:768px){.nav-links{display:none}}
 
-/* HERO */
-.hero{padding:140px 48px 80px;text-align:center;position:relative;overflow:hidden}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(198,162,74,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(198,162,74,.04) 1px,transparent 1px);background-size:80px 80px;pointer-events:none}
-.hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 40%,rgba(37,99,235,.06),transparent 60%);pointer-events:none}
-.hero-eyebrow{font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:.44em;color:#C6A24A;text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:16px}
-.hero-eyebrow::before,.hero-eyebrow::after{content:'';display:block;width:36px;height:1px;background:#7E6530}
-.hero-h1{font-family:'Shippori Mincho B1',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:800;line-height:1.3;color:#fff;margin-bottom:16px}
-.hero-h1 span{color:#C6A24A}
-.hero-lead{font-size:14px;color:#C4BAA6;line-height:2;max-width:600px;margin:0 auto}
+/* ── HERO ── */
+.hero{background:var(--navy);padding:90px 32px 72px;position:relative;overflow:hidden}
+.hero-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:80px 80px;pointer-events:none}
+.hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse 70% 70% at 80% 50%,rgba(37,99,235,.1),transparent 60%);pointer-events:none}
+.hero-inner{max-width:1040px;margin:0 auto;display:grid;grid-template-columns:1fr 360px;gap:60px;align-items:center;position:relative;z-index:1}
+@media(max-width:860px){.hero-inner{grid-template-columns:1fr}.hero-card-wrap{display:none}}
+.hero-eyebrow{display:flex;align-items:center;gap:10px;font-size:10px;font-weight:700;letter-spacing:.22em;color:var(--blue-hi);text-transform:uppercase;margin-bottom:20px}
+.hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--blue-hi);flex-shrink:0}
+.hero-h1{font-size:clamp(28px,4vw,48px);font-weight:900;line-height:1.18;letter-spacing:-.02em;color:#fff;margin-bottom:18px}
+.hero-h1 .accent{color:var(--orange)}
+.hero-sub{font-size:15px;font-weight:300;color:rgba(255,255,255,.65);line-height:1.85;margin-bottom:32px;max-width:500px}
+.hero-sub strong{color:#fff;font-weight:600}
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap}
+.btn-hero{display:inline-flex;align-items:center;gap:10px;font-size:14px;font-weight:900;padding:16px 32px;border-radius:0;border:none;cursor:pointer;font-family:inherit;text-decoration:none;transition:all .18s}
+.btn-hero-p{background:var(--orange);color:var(--navy)}.btn-hero-p:hover{background:var(--orange-hi)}
+.btn-hero-s{background:transparent;border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.8)}.btn-hero-s:hover{border-color:rgba(255,255,255,.6);color:#fff}
+/* hero stat card */
+.hero-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);padding:28px}
+.hero-card-label{font-size:9px;font-weight:700;letter-spacing:.2em;color:var(--orange);text-transform:uppercase;margin-bottom:20px;display:block}
+.hero-stat-row{display:flex;flex-direction:column;gap:16px}
+.hstat{display:flex;align-items:baseline;gap:6px}
+.hstat-num{font-size:40px;font-weight:900;color:#fff;line-height:1;letter-spacing:-.02em}
+.hstat-unit{font-size:13px;color:rgba(255,255,255,.5);font-weight:300}
+.hstat-label{font-size:11px;color:rgba(255,255,255,.4);margin-top:2px}
+.hstat-divider{height:1px;background:rgba(255,255,255,.1)}
 
-/* CARDS */
-.cards{max-width:960px;margin:0 auto;padding:64px 24px;display:grid;grid-template-columns:1fr 1fr;gap:20px}
-@media(max-width:700px){.cards{grid-template-columns:1fr}}
+/* ── PROOF BAR ── */
+.proof-bar{background:var(--navy2);border-bottom:1px solid rgba(255,255,255,.07);padding:22px 32px;display:flex;justify-content:center;gap:48px;flex-wrap:wrap}
+.proof-item{text-align:center}
+.proof-num{font-size:26px;font-weight:900;color:#fff;letter-spacing:-.02em;line-height:1}
+.proof-label{font-size:10px;color:rgba(255,255,255,.4);margin-top:3px}
+.proof-div{width:1px;background:rgba(255,255,255,.1);align-self:stretch}
 
-.report-card{background:#132033;border:1px solid rgba(198,162,74,.2);overflow:hidden;transition:transform .25s,box-shadow .25s;display:flex;flex-direction:column;text-decoration:none;color:inherit}
-.report-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.3)}
-.report-card::before{content:'';display:block;height:3px;background:linear-gradient(90deg,#7E6530,#C6A24A,#7E6530)}
-.card-img-wrap{position:relative;overflow:hidden;background:#0B1927}
-.card-img-wrap img{width:100%;height:auto;display:block;transition:transform .4s}
-.report-card:hover .card-img-wrap img{transform:scale(1.02)}
-.card-overlay{position:absolute;inset:0;background:rgba(11,25,39,0);display:flex;align-items:center;justify-content:center;transition:background .25s}
-.report-card:hover .card-overlay{background:rgba(11,25,39,.2)}
-.card-view-btn{background:#C6A24A;color:#0B1927;font-size:12px;font-weight:700;padding:10px 22px;letter-spacing:.12em;opacity:0;transform:translateY(6px);transition:all .25s;font-family:'Noto Serif JP',serif}
-.report-card:hover .card-view-btn{opacity:1;transform:translateY(0)}
-.card-info{padding:22px 24px}
-.card-label{font-family:'Cormorant Garamond',serif;font-size:9px;letter-spacing:.3em;color:#7E6530;text-transform:uppercase;margin-bottom:8px}
-.card-title{font-family:'Shippori Mincho B1',serif;font-size:17px;font-weight:700;color:#F6F1E7;margin-bottom:8px;line-height:1.4}
-.card-desc{font-size:11px;color:#C4BAA6;line-height:1.85}
-.card-tag{display:inline-block;margin-top:12px;font-size:9px;letter-spacing:.14em;color:#C6A24A;border:1px solid rgba(198,162,74,.3);padding:3px 10px}
+/* ── SECTION BASE ── */
+.sec{padding:80px 32px}
+.sec-inner{max-width:1040px;margin:0 auto}
+.sec-narrow{max-width:820px;margin:0 auto}
+.sec-label{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid}
+.sec-label-blue{color:var(--blue);border-color:var(--blue)}
+.sec-label-orange{color:var(--orange);border-color:var(--orange)}
+.sec-label-green{color:var(--green);border-color:var(--green)}
+.sec-label-white{color:rgba(255,255,255,.5);border-color:rgba(255,255,255,.2)}
+.sec-h{font-size:clamp(24px,3.5vw,38px);font-weight:900;line-height:1.2;letter-spacing:-.02em;margin-bottom:12px}
+.sec-sub{font-size:14px;color:var(--text-md);font-weight:300;line-height:1.85;margin-bottom:44px}
+.sec-sub strong{color:var(--text);font-weight:700}
 
-/* CTA */
-.cta-section{text-align:center;padding:40px 24px 80px}
-.cta-inner{max-width:600px;margin:0 auto;background:rgba(19,32,51,.8);border:1px solid rgba(198,162,74,.2);padding:44px 40px}
-.cta-inner::before{content:'';display:block;height:2px;background:linear-gradient(90deg,#7E6530,#C6A24A,#7E6530);margin-bottom:32px}
-.cta-label{font-family:'Cormorant Garamond',serif;font-size:10px;letter-spacing:.4em;color:#C6A24A;text-transform:uppercase;margin-bottom:14px}
-.cta-title{font-family:'Shippori Mincho B1',serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:12px;line-height:1.5}
-.cta-body{font-size:12px;color:#C4BAA6;line-height:2;margin-bottom:28px}
+/* ── PROBLEM ── */
+.prob-dark{background:var(--navy)}
+.persona-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:20px}
+@media(max-width:700px){.persona-grid{grid-template-columns:1fr}}
+.persona-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);padding:32px 28px}
+.persona-icon{font-size:40px;margin-bottom:14px;display:block}
+.persona-name{font-size:16px;font-weight:900;color:#fff;margin-bottom:14px}
+.persona-items{display:flex;flex-direction:column;gap:8px}
+.persona-item{display:flex;gap:8px;font-size:13px;color:rgba(255,255,255,.6);line-height:1.55}
+.persona-dot{color:var(--red);flex-shrink:0;font-size:12px;margin-top:2px}
+.alert-tag{background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3);border-radius:4px;padding:10px 16px;font-size:12px;font-weight:700;color:#FCA5A5;text-align:center;margin-top:16px}
+
+/* ── CORE ENGINE ── */
+.core-light{background:var(--bg)}
+.pillar-row{display:flex;gap:2px;margin-bottom:16px}
+.pillar{flex:1;background:var(--navy);color:#fff;padding:14px 16px;text-align:center;font-size:13px;font-weight:700;position:relative}
+.pillar::after{content:'×';position:absolute;right:-12px;top:50%;transform:translateY(-50%);font-size:16px;color:var(--orange);z-index:1;font-weight:900}
+.pillar:last-child::after{display:none}
+.products-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:700px){.products-grid{grid-template-columns:repeat(2,1fr)}}
+.product-card{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:20px 16px;text-align:center;transition:all .2s;cursor:default}
+.product-card:hover{border-color:var(--blue);background:var(--blue-bg);transform:translateY(-2px)}
+.product-card.linked:hover{cursor:pointer}
+.product-icon{font-size:32px;margin-bottom:10px;display:block}
+.product-name{font-size:12px;font-weight:700;color:var(--text);line-height:1.4}
+.core-note{background:var(--navy);border-radius:6px;padding:14px 20px;font-size:13px;font-weight:700;color:#fff;text-align:center}
+.core-note em{color:var(--orange);font-style:normal}
+
+/* ── SAMPLE REPORTS CTA ── */
+.samples-section{background:linear-gradient(135deg,var(--navy),#1E3A8A);padding:60px 32px}
+.samples-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px}
+@media(max-width:700px){.samples-grid{grid-template-columns:1fr}}
+.sample-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);padding:0;overflow:hidden;transition:transform .25s,box-shadow .25s;display:block;text-decoration:none}
+.sample-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.3)}
+.sample-card-top{height:3px;background:linear-gradient(90deg,var(--blue),var(--orange))}
+.sample-card-body{padding:28px}
+.sample-card-label{font-size:9px;font-weight:700;letter-spacing:.22em;color:rgba(255,255,255,.4);text-transform:uppercase;margin-bottom:8px}
+.sample-card-title{font-size:18px;font-weight:900;color:#fff;margin-bottom:10px;line-height:1.35}
+.sample-card-desc{font-size:13px;color:rgba(255,255,255,.55);line-height:1.75;margin-bottom:20px}
+.sample-card-features{display:flex;flex-direction:column;gap:6px;margin-bottom:24px}
+.sample-feature{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(255,255,255,.6)}
+.sample-check{color:var(--orange);flex-shrink:0}
+.sample-cta{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;background:var(--orange);color:var(--navy);padding:10px 22px;border-radius:4px;transition:background .2s}
+.sample-card:hover .sample-cta{background:var(--orange-hi)}
+.sample-card-tag{display:inline-flex;margin-top:14px;font-size:9px;font-weight:700;padding:3px 8px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.5);border-radius:3px;letter-spacing:.1em}
+
+/* ── VALUE PROPOSITION ── */
+.value-cols{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:700px){.value-cols{grid-template-columns:1fr}}
+.value-col{border-radius:6px;overflow:hidden}
+.value-col-head{padding:14px 18px;font-size:13px;font-weight:700;color:#fff;display:flex;align-items:center;gap:8px}
+.value-col-head-seller{background:#166534}
+.value-col-head-buyer{background:var(--blue)}
+.value-items{background:var(--white);border:1px solid var(--border);border-top:none;padding:16px 18px;display:flex;flex-direction:column;gap:10px;border-radius:0 0 6px 6px}
+.value-item{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--text-md);line-height:1.55}
+.vcheck{width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff;flex-shrink:0;margin-top:1px}
+.vcheck-green{background:var(--green)}
+.vcheck-blue{background:var(--blue)}
+
+/* ── SERVICE FLOW ── */
+.flow-dark{background:var(--navy)}
+.flow-steps{display:flex;gap:0;position:relative;margin-top:12px}
+@media(max-width:768px){.flow-steps{flex-direction:column;gap:0}}
+.flow-step{flex:1;display:flex;flex-direction:column;position:relative}
+.flow-step:not(:last-child)::after{content:'→';position:absolute;right:-14px;top:32px;font-size:22px;color:rgba(245,158,11,.5);font-weight:900;z-index:1}
+@media(max-width:768px){.flow-step:not(:last-child)::after{content:'↓';right:auto;left:28px;top:auto;bottom:-14px}}
+.flow-step-head{background:var(--navy3);border:1px solid rgba(255,255,255,.08);padding:16px 14px 14px;border-radius:6px 6px 0 0}
+.flow-step-head-done{background:rgba(22,163,74,.2);border-color:rgba(22,163,74,.3)}
+.flow-step-head-success{background:rgba(22,163,74,.3);border-color:rgba(22,163,74,.5)}
+.flow-step-num{width:32px;height:32px;border-radius:50%;background:var(--blue);color:#fff;font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.flow-step-num-success{background:var(--green)}
+.flow-step-title{font-size:13px;font-weight:700;color:#fff;line-height:1.35}
+.flow-step-body{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-top:none;padding:12px 14px;border-radius:0 0 6px 6px;flex:1}
+.flow-step-desc{font-size:11px;color:rgba(255,255,255,.5);line-height:1.7}
+.flow-step-tag{display:inline-block;margin-top:8px;font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px}
+.tag-green{background:rgba(22,163,74,.2);color:#86EFAC}
+.tag-blue{background:rgba(37,99,235,.2);color:#93C5FD}
+.tag-orange{background:rgba(245,158,11,.2);color:#FCD34D}
+.flow-tagline{text-align:center;margin-top:20px;font-size:13px;font-weight:700;color:rgba(255,255,255,.5)}
+.flow-tagline strong{color:var(--orange)}
+
+/* ── REVENUE ── */
+.rev-dark{background:var(--navy2)}
+.rev-grid{display:grid;grid-template-columns:80px repeat(4,1fr);gap:12px;align-items:start}
+@media(max-width:768px){.rev-grid{grid-template-columns:1fr 1fr}}
+.rev-free{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:20px 14px;text-align:center}
+.rev-free-icon{font-size:28px;margin-bottom:8px;display:block}
+.rev-free-label{font-size:12px;font-weight:700;color:#fff}
+.rev-free-sub{font-size:10px;color:rgba(255,255,255,.4);margin-top:4px;line-height:1.5}
+.rev-card{border-radius:6px;overflow:hidden}
+.rev-card-head{padding:11px 14px;font-size:11px;font-weight:700;color:#fff;letter-spacing:.04em}
+.rev-card-body{background:var(--white);padding:14px;border-radius:0 0 6px 6px}
+.rev-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:11.5px;color:var(--text-md)}
+.rev-row:last-child{border-bottom:none}
+.rev-val{font-weight:700;color:var(--text)}
+.rev-note{font-size:9.5px;color:var(--text-xs);margin-top:10px;line-height:1.6;font-style:italic;text-align:center;grid-column:1/-1}
+
+/* ── DIFF ── */
+.diff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:700px){.diff-grid{grid-template-columns:1fr}}
+.diff-card{background:var(--white);border:1px solid var(--border);border-radius:6px;padding:24px 20px;transition:all .2s}
+.diff-card:hover{border-color:var(--blue);box-shadow:0 4px 20px rgba(37,99,235,.1);transform:translateY(-2px)}
+.diff-icon{font-size:32px;margin-bottom:12px;display:block}
+.diff-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:8px;line-height:1.35}
+.diff-body{font-size:12px;color:var(--text-md);line-height:1.7}
+
+/* ── CTA STRIP ── */
+.cta-final{background:var(--navy);padding:64px 32px}
+.cta-final-inner{max-width:820px;margin:0 auto;text-align:center}
+.cta-final-label{font-size:10px;font-weight:700;letter-spacing:.22em;color:rgba(255,255,255,.4);text-transform:uppercase;margin-bottom:14px}
+.cta-final-h{font-size:clamp(22px,3.5vw,34px);font-weight:900;color:#fff;margin-bottom:12px;line-height:1.3}
+.cta-final-h em{color:var(--orange);font-style:normal}
+.cta-final-sub{font-size:14px;color:rgba(255,255,255,.55);font-weight:300;line-height:1.85;margin-bottom:36px}
 .cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.btn-gold{background:#C6A24A;color:#0B1927;font-size:12px;font-weight:700;padding:13px 28px;letter-spacing:.16em;text-decoration:none;transition:background .2s;font-family:'Noto Serif JP',serif}
-.btn-gold:hover{background:#DFC080}
-.btn-ghost{border:1px solid #7E6530;color:#C6A24A;font-size:11px;padding:13px 22px;letter-spacing:.1em;text-decoration:none;transition:all .2s;font-family:'Noto Serif JP',serif}
-.btn-ghost:hover{border-color:#C6A24A}
+.btn-cta-p{background:var(--orange);color:var(--navy);font-size:14px;font-weight:900;padding:16px 36px;border-radius:0;text-decoration:none;transition:background .2s}
+.btn-cta-p:hover{background:var(--orange-hi)}
+.btn-cta-s{background:transparent;border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.7);font-size:13px;font-weight:700;padding:16px 28px;text-decoration:none;transition:all .2s}
+.btn-cta-s:hover{border-color:rgba(255,255,255,.6);color:#fff}
 
 /* FOOTER */
-footer{background:#060E18;padding:28px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;border-top:1px solid rgba(255,255,255,.05)}
-.footer-logo{font-family:'Cormorant Garamond',serif;font-size:14px;letter-spacing:.24em;color:#C4BAA6;text-transform:uppercase;text-decoration:none}
-.footer-logo em{color:#C6A24A;font-style:normal}
-.footer-copy{font-size:10px;color:rgba(196,186,166,.25);letter-spacing:.08em}
+footer{background:#060E18;padding:24px 32px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;border-top:1px solid rgba(255,255,255,.05)}
+.footer-logo{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:900;color:rgba(255,255,255,.6);letter-spacing:.06em}
+.footer-links{display:flex;gap:20px}
+.footer-links a{font-size:11px;color:rgba(255,255,255,.3);transition:color .2s}
+.footer-links a:hover{color:rgba(255,255,255,.7)}
+.footer-copy{font-size:10px;color:rgba(255,255,255,.2);letter-spacing:.06em}
+
+/* DIVIDER */
+.divider{height:1px;background:var(--border);margin:32px 0}
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <a href="../index.html" class="nav-logo">Bridge<em>Cycle</em></a>
+  <div class="nav-logo">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2563EB" stroke-width="1.5"/><polygon points="12,3 14,12 12,10 10,12" fill="#F59E0B"/><polygon points="12,21 10,12 12,14 14,12" fill="#94A3B8"/><circle cx="12" cy="12" r="1.5" fill="white"/></svg>
+    <span class="nav-logo-text">TENANT SCOUT</span>
+  </div>
+  <div class="nav-sep"></div>
   <div class="nav-links">
-    <a href="../index.html">管理会社の方へ</a>
-    <a href="../lp.html">創業者の方へ</a>
-    <a href="../exit.html">閉店をお考えの方へ</a>
-    <a href="../lp.html" class="nav-cta">無料相談（創業者向け）</a>
+    <a href="#problem" class="nav-link">課題</a>
+    <a href="#solution" class="nav-link">解決策</a>
+    <a href="#samples" class="nav-link active">サンプル</a>
+    <a href="#value" class="nav-link">提供価値</a>
+    <a href="#flow" class="nav-link">サービスの流れ</a>
+    <a href="#revenue" class="nav-link">料金</a>
+    <a href="#diff" class="nav-link">差別化</a>
+  </div>
+  <div class="nav-cta-wrap">
+    <a href="../lp.html" class="btn-nav btn-nav-ghost">飲食店開業支援</a>
+    <a href="../index.html" class="btn-nav btn-nav-primary">無料会員登録 →</a>
   </div>
 </nav>
 
-<div class="hero">
-  <div class="hero-grid"></div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid-bg"></div>
   <div class="hero-glow"></div>
-  <div style="position:relative;z-index:1">
-    <div class="hero-eyebrow">TENANT SCOUT Sample Reports</div>
-    <h1 class="hero-h1">店舗承継を、<span>データで動かす。</span></h1>
-    <p class="hero-lead">TENANT SCOUT は BRIDGE CYCLE のプロダクト。月次レポートと複数店舗比較レポートのサンプルをご覧ください。</p>
-  </div>
-</div>
-
-<div class="cards">
-  <a href="monthly_report_sample.html" class="report-card">
-    <div class="card-img-wrap">
-      <img src="monthly_report_sample.html" alt="有料会員レポート" onerror="this.style.display='none'">
-      <!-- fallback thumbnail -->
-      <div style="background:linear-gradient(135deg,#132033,#1E3A8A);padding:40px;text-align:center;min-height:180px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2563EB" stroke-width="1.5"/><polygon points="12,3 14,12 12,10 10,12" fill="#F59E0B"/><polygon points="12,21 10,12 12,14 14,12" fill="#94A3B8"/><circle cx="12" cy="12" r="1.5" fill="white"/></svg>
-        <div style="font-size:14px;font-weight:900;color:#fff;letter-spacing:.06em">有料会員レポート</div>
-        <div style="font-size:36px;font-weight:900;color:#F59E0B;line-height:1">78<span style="font-size:16px;color:#fff">点</span></div>
-        <div style="font-size:11px;color:rgba(255,255,255,.5)">今月のスコア・改善ミッション・LIVEパルス</div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">店舗承継OS — TENANT SCOUT</div>
+      <h1 class="hero-h1">閉店前から動かし、<br><span class="accent">価値向上と承継成立</span>を<br>つなぐ「店舗承継OS」</h1>
+      <p class="hero-sub">経営OS × 承継マッチング × 専門家連携。<br><strong>売り手にも買い手にもメリットを生む</strong>、<br>新しい店舗承継のインフラです。</p>
+      <div class="hero-btns">
+        <a href="#samples" class="btn-hero btn-hero-p">サンプルレポートを見る →</a>
+        <a href="../index.html" class="btn-hero btn-hero-s">無料会員登録（980円〜）</a>
       </div>
-      <div class="card-overlay"><div class="card-view-btn">サンプルを見る →</div></div>
     </div>
-    <div class="card-info">
-      <div class="card-label">Monthly Report</div>
-      <div class="card-title">有料会員レポート<br>今月のお店の状態と次の一手</div>
-      <div class="card-desc">6項目スコアリング・改善ミッション・黒字化距離・買い手LIVEパルス・補助金提案・次のアクションまでを1枚で確認。</div>
-      <div class="card-tag">現経営者向け</div>
-    </div>
-  </a>
-
-  <a href="buyer_report_sample.html" class="report-card">
-    <div class="card-img-wrap">
-      <div style="background:linear-gradient(135deg,#1E3A8A,#0D1B2A);padding:40px;text-align:center;min-height:180px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2563EB" stroke-width="1.5"/><polygon points="12,3 14,12 12,10 10,12" fill="#F59E0B"/><polygon points="12,21 10,12 12,14 14,12" fill="#94A3B8"/><circle cx="12" cy="12" r="1.5" fill="white"/></svg>
-        <div style="font-size:14px;font-weight:900;color:#fff;letter-spacing:.06em">買い手比較レポート</div>
-        <div style="display:flex;gap:12px;justify-content:center;margin-top:4px">
-          <div style="text-align:center"><div style="font-size:26px;font-weight:900;color:#94A3B8;line-height:1">76</div><div style="font-size:9px;color:rgba(255,255,255,.4)">店舗A</div></div>
-          <div style="text-align:center"><div style="font-size:26px;font-weight:900;color:#60A5FA;line-height:1">80</div><div style="font-size:9px;color:rgba(255,255,255,.4)">店舗B</div></div>
-          <div style="text-align:center"><div style="font-size:26px;font-weight:900;color:#F59E0B;line-height:1">85</div><div style="font-size:9px;color:rgba(255,255,255,.4)">店舗C</div></div>
+    <div class="hero-card-wrap">
+      <div class="hero-card">
+        <span class="hero-card-label">Key Numbers</span>
+        <div class="hero-stat-row">
+          <div>
+            <div class="hstat"><span class="hstat-num">1,200</span><span class="hstat-unit">件+</span></div>
+            <div class="hstat-label">支援実績</div>
+          </div>
+          <div class="hstat-divider"></div>
+          <div>
+            <div class="hstat"><span class="hstat-num">10</span><span class="hstat-unit">言語+</span></div>
+            <div class="hstat-label">対応言語</div>
+          </div>
+          <div class="hstat-divider"></div>
+          <div>
+            <div class="hstat"><span class="hstat-num">150</span><span class="hstat-unit">名+</span></div>
+            <div class="hstat-label">提携専門家</div>
+          </div>
+          <div class="hstat-divider"></div>
+          <div>
+            <div class="hstat"><span class="hstat-num">980</span><span class="hstat-unit">円/月〜</span></div>
+            <div class="hstat-label">現テナント会員プラン</div>
+          </div>
         </div>
-        <div style="font-size:11px;color:rgba(255,255,255,.5)">3店舗を7ステップで比較・検討</div>
       </div>
-      <div class="card-overlay"><div class="card-view-btn">サンプルを見る →</div></div>
-    </div>
-    <div class="card-info">
-      <div class="card-label">Buyer Comparison Report</div>
-      <div class="card-title">買い手向け複数店舗比較レポート<br>創業者・外国人創業者向け</div>
-      <div class="card-desc">3店舗のスコア・財務データ・リスク・ビザ適合性を横並びで比較。7ステップの検討フローで最適な店舗を選べます。</div>
-      <div class="card-tag">創業者・外国人創業者向け</div>
-    </div>
-  </a>
-</div>
-
-<div class="cta-section">
-  <div class="cta-inner">
-    <div class="cta-label">Next Step — BRIDGE CYCLE</div>
-    <h2 class="cta-title">まず、話してみてください。<br>それだけで、地図が変わります。</h2>
-    <p class="cta-body">「まだ具体的じゃない」「お金がいくら必要かもわからない」——<br>そのくらいの状態からで大丈夫です。初回相談は無料。強引な営業は一切ありません。</p>
-    <div class="cta-btns">
-      <a href="../lp.html" class="btn-gold">飲食店開業支援（創業者向け）</a>
-      <a href="../index.html" class="btn-ghost">管理会社・オーナーの方へ</a>
     </div>
   </div>
+</section>
+
+<!-- PROOF BAR -->
+<div class="proof-bar">
+  <div class="proof-item"><div class="proof-num">1,200<small style="font-size:.55em">+</small></div><div class="proof-label">支援実績</div></div>
+  <div class="proof-div"></div>
+  <div class="proof-item"><div class="proof-num">10<small style="font-size:.55em">言語+</small></div><div class="proof-label">対応言語</div></div>
+  <div class="proof-div"></div>
+  <div class="proof-item"><div class="proof-num">150<small style="font-size:.55em">名+</small></div><div class="proof-label">提携専門家</div></div>
+  <div class="proof-div"></div>
+  <div class="proof-item"><div class="proof-num">980<small style="font-size:.55em">円〜</small></div><div class="proof-label">月額プラン</div></div>
+  <div class="proof-div"></div>
+  <div class="proof-item"><div class="proof-num">0<small style="font-size:.55em">円</small></div><div class="proof-label">初期費用</div></div>
 </div>
 
+<!-- PROBLEM -->
+<section class="sec prob-dark" id="problem">
+  <div class="sec-inner">
+    <span class="sec-label sec-label-white">1. 解決する課題</span>
+    <h2 class="sec-h" style="color:#fff">3者がそれぞれ<span style="color:var(--orange)">「困っている」</span>現実</h2>
+    <p class="sec-sub" style="color:rgba(255,255,255,.55);margin-bottom:28px">閉店後では遅い。「閉店前」に動くことが価値を守る。</p>
+    <div class="persona-grid">
+      <div class="persona-card">
+        <span class="persona-icon">🏪</span>
+        <div class="persona-name">現経営者</div>
+        <div class="persona-items">
+          <div class="persona-item"><span class="persona-dot">▸</span>赤字化・後継不在・利益が遅れる</div>
+          <div class="persona-item"><span class="persona-dot">▸</span>黒字化までの距離が見えない</div>
+          <div class="persona-item"><span class="persona-dot">▸</span>改善すべきポイントがわからない</div>
+          <div class="persona-item"><span class="persona-dot">▸</span>閉店費用（原状回復）が高すぎる</div>
+        </div>
+      </div>
+      <div class="persona-card">
+        <span class="persona-icon">🚀</span>
+        <div class="persona-name">創業者</div>
+        <div class="persona-items">
+          <div class="persona-item"><span class="persona-dot">▸</span>何を買うべきか分からない</div>
+          <div class="persona-item"><span class="persona-dot">▸</span>複数店舗を公平に比較する手段がない</div>
+          <div class="persona-item"><span class="persona-dot">▸</span>融資・物件・設備の正しい順番が不明</div>
+          <div class="persona-item"><span class="persona-dot">▸</span>初期費用が高すぎて踏み出せない</div>
+        </div>
+      </div>
+      <div class="persona-card">
+        <span class="persona-icon">🌏</span>
+        <div class="persona-name">外国人創業者</div>
+        <div class="persona-items">
+          <div class="persona-item"><span class="persona-dot">▸</span>ビザ・契約・日本語の壁</div>
+          <div class="persona-item"><span class="persona-dot">▸</span>法的リスクが見えない</div>
+          <div class="persona-item"><span class="persona-dot">▸</span>専門家へのアクセスが困難</div>
+          <div class="persona-item"><span class="persona-dot">▸</span>店舗との適合性を客観的に確認できない</div>
+        </div>
+      </div>
+    </div>
+    <div class="alert-tag">⚠ 閉店後では遅い。「閉店前」に動くことが価値を守る。</div>
+  </div>
+</section>
+
+<!-- SOLUTION / CORE -->
+<section class="sec core-light" id="solution">
+  <div class="sec-inner">
+    <span class="sec-label sec-label-blue">2. TENANT SCOUTの中核</span>
+    <h2 class="sec-h">経営OS × 承継マッチング × 専門家連携</h2>
+    <p class="sec-sub">毎月見るレポートではなく、仕込みの合間に開く<strong>経営OS</strong></p>
+    <div class="pillar-row">
+      <div class="pillar">経営OS</div>
+      <div class="pillar">承継マッチング</div>
+      <div class="pillar">専門家連携</div>
+    </div>
+    <div class="products-grid">
+      <a href="monthly_report_sample.html" class="product-card linked">
+        <span class="product-icon">📊</span>
+        <div class="product-name">月次<br>レポート</div>
+        <div style="font-size:9px;color:var(--blue);margin-top:6px;font-weight:700">サンプルを見る →</div>
+      </a>
+      <a href="buyer_report_sample.html" class="product-card linked">
+        <span class="product-icon">🏪</span>
+        <div class="product-name">複数店舗<br>比較</div>
+        <div style="font-size:9px;color:var(--blue);margin-top:6px;font-weight:700">サンプルを見る →</div>
+      </a>
+      <div class="product-card">
+        <span class="product-icon">👥</span>
+        <div class="product-name">買い手反応<br>可視化（LIVE）</div>
+      </div>
+      <div class="product-card">
+        <span class="product-icon">💰</span>
+        <div class="product-name">補助金活用<br>投資案</div>
+      </div>
+      <div class="product-card">
+        <span class="product-icon">🤝</span>
+        <div class="product-name">専門家<br>相談導線</div>
+      </div>
+    </div>
+    <div class="core-note">毎月見るレポートではなく、仕込みの合間に開く <em>経営OS</em></div>
+  </div>
+</section>
+
+<!-- SAMPLE REPORTS -->
+<section class="samples-section" id="samples">
+  <div class="sec-inner">
+    <span class="sec-label sec-label-white">サンプルレポート</span>
+    <h2 class="sec-h" style="color:#fff">実際のレポートを<span style="color:var(--orange)">今すぐ</span>確認できます</h2>
+    <p class="sec-sub" style="color:rgba(255,255,255,.55);margin-bottom:0">2種類のレポートサンプルをご覧いただけます。<br>クリックして全ページをブラウザで確認してください。</p>
+    <div class="samples-grid">
+      <a href="monthly_report_sample.html" class="sample-card">
+        <div class="sample-card-top"></div>
+        <div class="sample-card-body">
+          <div class="sample-card-label">For Current Store Owners</div>
+          <div class="sample-card-title">有料会員レポート<br>今月のお店の状態と<br>次の一手がわかるレポート</div>
+          <div class="sample-card-desc">試算表がなくてもOK。概算入力から、今の状態・黒字化への距離・買い手反応・改善ミッションを確認できます。</div>
+          <div class="sample-card-features">
+            <div class="sample-feature"><span class="sample-check">✓</span>6項目スコアリング（収益性・立地・設備など）</div>
+            <div class="sample-feature"><span class="sample-check">✓</span>黒字化までの距離と達成条件を可視化</div>
+            <div class="sample-feature"><span class="sample-check">✓</span>買い手のLIVEパルス（リアルタイム関心度）</div>
+            <div class="sample-feature"><span class="sample-check">✓</span>優先度付きの改善ミッション（今月やること）</div>
+            <div class="sample-feature"><span class="sample-check">✓</span>補助金おすすめ投資候補と次のアクション</div>
+          </div>
+          <div class="sample-cta">サンプルを開く →</div>
+          <div class="sample-card-tag">現経営者向け / 月額980円〜</div>
+        </div>
+      </a>
+      <a href="buyer_report_sample.html" class="sample-card">
+        <div class="sample-card-top" style="background:linear-gradient(90deg,var(--blue),var(--green))"></div>
+        <div class="sample-card-body">
+          <div class="sample-card-label">For Entrepreneurs &amp; Foreign Founders</div>
+          <div class="sample-card-title">買い手向け<br>複数店舗比較レポート<br>創業者・外国人創業者向け</div>
+          <div class="sample-card-desc">3店舗を7ステップで比較・検討。スコア・財務・リスク・ビザ適合性を横並びで確認して、最適な一店を選べます。</div>
+          <div class="sample-card-features">
+            <div class="sample-feature"><span class="sample-check">✓</span>3店舗のスコアと5軸グラフを並べて比較</div>
+            <div class="sample-feature"><span class="sample-check">✓</span>財務データ（月商・家賃・生活防衛ライン）</div>
+            <div class="sample-feature"><span class="sample-check">✓</span>外国人創業者のビザ充足度自動判定</div>
+            <div class="sample-feature"><span class="sample-check">✓</span>物件履歴・リスク開示（誠実な情報開示）</div>
+            <div class="sample-feature"><span class="sample-check">✓</span>専門家連携サポート（行政書士・税理士・通訳）</div>
+          </div>
+          <div class="sample-cta">サンプルを開く →</div>
+          <div class="sample-card-tag">創業者・外国人創業者向け / 月額3,000円〜</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- VALUE PROPOSITION -->
+<section class="sec" id="value" style="background:var(--white)">
+  <div class="sec-inner">
+    <span class="sec-label sec-label-green">3. 提供価値</span>
+    <h2 class="sec-h">売り手にも買い手にも<span style="color:var(--green)">メリット</span>を生む</h2>
+    <p class="sec-sub">価値を上げてからつなぐことで、3者全員がWin-Winになる設計です。</p>
+    <div class="value-cols">
+      <div class="value-col">
+        <div class="value-col-head value-col-head-seller">🏪 現経営者向け</div>
+        <div class="value-items">
+          <div class="value-item"><span class="vcheck vcheck-green">✓</span>今の状態をスコア化して現状把握</div>
+          <div class="value-item"><span class="vcheck vcheck-green">✓</span>黒字化までの距離を可視化</div>
+          <div class="value-item"><span class="vcheck vcheck-green">✓</span>改善ミッション提示（優先度A/B付き）</div>
+          <div class="value-item"><span class="vcheck vcheck-green">✓</span>売却ポテンシャル向上のヒント</div>
+          <div class="value-item"><span class="vcheck vcheck-green">✓</span>買い手のリアルな関心状況が見える</div>
+        </div>
+      </div>
+      <div class="value-col">
+        <div class="value-col-head value-col-head-buyer">🛒 買い手向け（創業者・外国人）</div>
+        <div class="value-items">
+          <div class="value-item"><span class="vcheck vcheck-blue">✓</span>複数店舗をスコアで比較・選定</div>
+          <div class="value-item"><span class="vcheck vcheck-blue">✓</span>生活防衛ライン・回収目安を確認</div>
+          <div class="value-item"><span class="vcheck vcheck-blue">✓</span>ビザ充足度をプロフィールから自動判定</div>
+          <div class="value-item"><span class="vcheck vcheck-blue">✓</span>隠れたお宝・改善余地を把握</div>
+          <div class="value-item"><span class="vcheck vcheck-blue">✓</span>専門家（行政書士・税理士・通訳）とすぐ相談</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE FLOW -->
+<section class="sec flow-dark" id="flow">
+  <div class="sec-inner">
+    <span class="sec-label sec-label-white">4. サービスの流れ</span>
+    <h2 class="sec-h" style="color:#fff">入力・登録から<span style="color:var(--orange)">承継成立</span>まで6ステップ</h2>
+    <p class="sec-sub" style="color:rgba(255,255,255,.5);margin-bottom:28px">価値を上げてからつなぐことで、売り手にも買い手にもメリットを作る。</p>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="flow-step-head">
+          <div class="flow-step-num">1</div>
+          <div class="flow-step-title">入力・登録</div>
+        </div>
+        <div class="flow-step-body">
+          <div class="flow-step-desc">売上・仕入・人件費・家賃・物件情報を入力。試算表がなくてもOK。</div>
+          <span class="flow-step-tag tag-blue">1分で完了</span>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-head">
+          <div class="flow-step-num">2</div>
+          <div class="flow-step-title">診断・スコア化</div>
+        </div>
+        <div class="flow-step-body">
+          <div class="flow-step-desc">6軸スコア・FLR比率・黒字化距離を算出。経営状態を可視化。</div>
+          <span class="flow-step-tag tag-orange">毎月自動更新</span>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-head">
+          <div class="flow-step-num">3</div>
+          <div class="flow-step-title">価値向上</div>
+        </div>
+        <div class="flow-step-body">
+          <div class="flow-step-desc">改善ミッションを実行・補助金活用で承継価値を最大化。補助金80〜150万円可能。</div>
+          <span class="flow-step-tag tag-green">補助金活用可能</span>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-head">
+          <div class="flow-step-num">4</div>
+          <div class="flow-step-title">比較・検討</div>
+        </div>
+        <div class="flow-step-body">
+          <div class="flow-step-desc">創業者・外国人が複数店舗をデータで比較。ビザ適合性も自動判定。</div>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-head">
+          <div class="flow-step-num">5</div>
+          <div class="flow-step-title">専門家連携</div>
+        </div>
+        <div class="flow-step-body">
+          <div class="flow-step-desc">税理士・行政書士・資金調達専門家にワンストップで接続。</div>
+          <span class="flow-step-tag tag-blue">ワンストップ</span>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-head flow-step-head-success">
+          <div class="flow-step-num flow-step-num-success">6</div>
+          <div class="flow-step-title">承継成立🎉</div>
+        </div>
+        <div class="flow-step-body">
+          <div class="flow-step-desc">合意・宣言・成約・営業権譲渡・各種届出・引継完了。</div>
+          <span class="flow-step-tag tag-green">成功報酬型</span>
+        </div>
+      </div>
+    </div>
+    <div class="flow-tagline">価値を上げてからつなぐことで、<strong>売り手にも買い手にもメリットを作る。</strong></div>
+  </div>
+</section>
+
+<!-- REVENUE -->
+<section class="sec rev-dark" id="revenue">
+  <div class="sec-inner">
+    <span class="sec-label sec-label-white">5. 収益モデル・料金プラン</span>
+    <h2 class="sec-h" style="color:#fff">4層の収益構造</h2>
+    <p class="sec-sub" style="color:rgba(255,255,255,.5);margin-bottom:28px">※ 補助金支援は「補助額の10%・最低10万円」</p>
+    <div class="rev-grid">
+      <div class="rev-free">
+        <span class="rev-free-icon">👤</span>
+        <div class="rev-free-label">無料登録</div>
+        <div class="rev-free-sub">入力・<br>母集団形成</div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-card-head" style="background:var(--blue)">月額会員</div>
+        <div class="rev-card-body">
+          <div class="rev-row"><span>現経営者</span><span class="rev-val">980円/月</span></div>
+          <div class="rev-row"><span>創業者</span><span class="rev-val">3,000円/月</span></div>
+          <div class="rev-row"><span>外国人</span><span class="rev-val">9,800円/月</span></div>
+        </div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-card-head" style="background:#0F766E">個別支援</div>
+        <div class="rev-card-body">
+          <div class="rev-row"><span>補助金支援</span><span class="rev-val">成功報酬</span></div>
+          <div class="rev-row"><span>資金調達</span><span class="rev-val">手数料型</span></div>
+          <div class="rev-row"><span>承継準備</span><span class="rev-val">顧問料型</span></div>
+        </div>
+      </div>
+      <div class="rev-card">
+        <div class="rev-card-head" style="background:#92400E">承継サポート料</div>
+        <div class="rev-card-body">
+          <div style="font-size:18px;font-weight:900;color:var(--cta);margin-bottom:8px">成功報酬型</div>
+          <div class="rev-row"><span>補助額の</span><span class="rev-val">10%〜</span></div>
+          <div class="rev-row"><span>最低</span><span class="rev-val">10万円</span></div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:16px;font-size:11px;color:rgba(255,255,255,.35);text-align:center">※ 補助金の公募回・締切は変更される場合があります。最新情報を都度ご確認ください。</div>
+  </div>
+</section>
+
+<!-- DIFF -->
+<section class="sec" id="diff" style="background:var(--bg2)">
+  <div class="sec-inner">
+    <span class="sec-label sec-label-blue">6. 差別化ポイント</span>
+    <h2 class="sec-h">なぜTENANT SCOUTか</h2>
+    <p class="sec-sub">6つの差別化で、既存サービスとは全く異なるアプローチを実現。</p>
+    <div class="diff-grid">
+      <div class="diff-card">
+        <span class="diff-icon">🕐</span>
+        <div class="diff-title">閉店後でなく<br>閉店前から承継</div>
+        <div class="diff-body">退去予兆の段階から動き、価値を守りながら次へつなぐ。既存のM&A仲介とは根本的に異なるアプローチ。</div>
+      </div>
+      <div class="diff-card">
+        <span class="diff-icon">🍽️</span>
+        <div class="diff-title">飲食店の改善と<br>承継業務を一体設計</div>
+        <div class="diff-body">スコアリング→ミッション→マッチングが連動。改善と承継を切り離さない唯一のプラットフォーム。</div>
+      </div>
+      <div class="diff-card">
+        <span class="diff-icon">🌏</span>
+        <div class="diff-title">外国人創業者への<br>法的ゲート対応</div>
+        <div class="diff-body">ビザ充足度判定・10言語以上のサポートで、外国人創業者も安心して店舗承継に参加できる。</div>
+      </div>
+      <div class="diff-card">
+        <span class="diff-icon">💰</span>
+        <div class="diff-title">補助金提案で<br>投資を一気通貫</div>
+        <div class="diff-body">改善→補助金申請→承継まで一体で支援。補助金活用可能額80〜150万円の案件を多数保有。</div>
+      </div>
+      <div class="diff-card">
+        <span class="diff-icon">🏆</span>
+        <div class="diff-title">専門家ネットワークで<br>スケール可能</div>
+        <div class="diff-body">150名以上の税理士・行政書士・通訳・融資専門家と連携。ワンストップで解決できる体制。</div>
+      </div>
+      <div class="diff-card" style="background:var(--navy);border-color:transparent">
+        <span class="diff-icon">⭐</span>
+        <div class="diff-title" style="color:#fff">店主には「誇り」を<br><span style="color:var(--orange)">買い手には「確信」を</span></div>
+        <div class="diff-body" style="color:rgba(255,255,255,.55)">TENANT SCOUTは<strong style="color:var(--orange)">店舗承継のOS</strong>として、業界のスタンダードになることを目指します。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-final">
+  <div class="cta-final-inner">
+    <div class="cta-final-label">Next Step</div>
+    <h2 class="cta-final-h">まず、サンプルを見てください。<br>それだけで、<em>可能性が見えます。</em></h2>
+    <p class="cta-final-sub">有料会員レポートと買い手比較レポートのサンプルを今すぐ確認できます。<br>登録は3分・初期費用0円・いつでも解約OK。強引な営業は一切ありません。</p>
+    <div class="cta-btns">
+      <a href="monthly_report_sample.html" class="btn-cta-p">有料会員レポートを見る →</a>
+      <a href="buyer_report_sample.html" class="btn-cta-p" style="background:var(--blue)">買い手比較レポートを見る →</a>
+    </div>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:16px">
+      <a href="../lp.html" class="btn-cta-s">飲食店開業支援（創業者向け）</a>
+      <a href="../index.html" class="btn-cta-s">TENANT SCOUTに無料登録</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
-  <a href="../index.html" class="footer-logo">Bridge<em>Cycle</em></a>
-  <p class="footer-copy">© 2026 BRIDGE CYCLE 株式会社. All rights reserved.</p>
+  <div class="footer-logo">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2563EB" stroke-width="1.5"/><polygon points="12,3 14,12 12,10 10,12" fill="#F59E0B"/><polygon points="12,21 10,12 12,14 14,12" fill="#94A3B8"/><circle cx="12" cy="12" r="1.5" fill="white"/></svg>
+    TENANT SCOUT
+  </div>
+  <div class="footer-links">
+    <a href="monthly_report_sample.html">有料会員レポート</a>
+    <a href="buyer_report_sample.html">買い手比較レポート</a>
+    <a href="../lp.html">飲食店開業支援</a>
+    <a href="../index.html">トップページ</a>
+    <a href="mailto:info@bridgecycleco.com">お問い合わせ</a>
+  </div>
+  <div class="footer-copy">© 2026 BRIDGE CYCLE株式会社. TENANT SCOUT は BRIDGE CYCLE 株式会社のプロダクトブランドです。</div>
 </footer>
 
 </body>
