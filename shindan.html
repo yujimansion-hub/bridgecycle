@@ -91,6 +91,21 @@
   .leadbox h3{font-family:var(--mincho);font-weight:700;font-size:16px;margin-bottom:6px;}
   .leadbox p{font-size:13px;color:#5A4A42;margin-bottom:12px;}
   .leadbox .row{display:grid;gap:10px;}
+  #copy_zone{background:#fff;border:2px dashed var(--rose);border-radius:12px;padding:14px;text-align:center;margin:14px 0 18px;}
+  #copy_zone .cz_lbl{font-size:12px;color:var(--soft);font-weight:700;display:block;margin-bottom:4px;}
+  #diag_code{font-family:monospace;font-size:19px;font-weight:700;color:var(--rose-d);letter-spacing:1px;cursor:pointer;}
+  #copy_zone .cz_done{display:none;font-size:11px;color:#1a8a4a;font-weight:700;margin-top:4px;}
+  #copy_zone.copied .cz_done{display:block;}
+  .btn.line{background:#06C755;color:#fff;box-shadow:0 10px 26px rgba(6,199,85,.32);}
+  .btn.line:hover{filter:brightness(1.05);transform:translateY(-2px);}
+  .contactbox2{max-width:520px;margin:14px auto 0;}
+  .contactbox2 .crow{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+  .contactbox2 .citem{flex:1;min-width:190px;text-decoration:none;background:var(--blush);border-radius:12px;padding:13px 16px;text-align:center;}
+  .contactbox2 .citem.cline{background:#06C755;}
+  .contactbox2 .citem.cline .cl{color:#EAFBF0;}
+  .contactbox2 .citem.cline .cv{color:#fff;}
+  .contactbox2 .cl{display:block;font-size:12px;color:var(--soft);font-weight:700;margin-bottom:3px;}
+  .contactbox2 .cv{display:block;font-family:var(--mincho);font-weight:800;font-size:18px;color:var(--rose-d);}
   .err{color:var(--rose-d);font-size:13px;margin-top:8px;display:none;}
   .err.show{display:block;}
   footer{background:var(--ink);color:#C9BBAE;padding:30px 0;font-size:12.5px;line-height:1.9;text-align:center;}
@@ -131,6 +146,11 @@
     <p id="vsub"></p>
   </div>
 
+  <div class="rcard" id="reasoncard">
+    <h3>この結果になった理由</h3>
+    <ul id="reasons"></ul>
+  </div>
+
   <div class="rcard">
     <h3>あなたに合うのは</h3>
     <p class="recommend" id="recommend"></p>
@@ -142,6 +162,7 @@
     <p>あなたの想定では、開業に必要な初期費用の目安は</p>
     <p class="big" id="loss"></p>
     <p id="loss_note" style="font-size:13px;color:var(--soft);"></p>
+    <div id="loss_compare" style="margin-top:14px;background:var(--blush);border-radius:12px;padding:14px 16px;"></div>
   </div>
 
   <div class="rcard">
@@ -156,15 +177,26 @@
   </div>
 
   <div class="leadbox">
-    <h3>結果の詳しい説明を受け取る（任意）</h3>
-    <p>下のボタンから申込フォームに進むと、あなたの診断結果をもとに、無料で「デビュー設計」のご案内をお送りします。</p>
+    <h3>診断結果の詳しい解説を受け取る（無料・任意）</h3>
+    <p>下のボタンから「推し店デビュー」公式LINEに登録し、<b>表示された【あなたの診断コード】をそのまま送信</b>してください。診断結果に合わせた具体的なアドバイスと、第1期モニターの空き枠状況を、個別にお返しします。</p>
+    <div id="copy_zone">
+      <span class="cz_lbl">▼ あなたの診断コード（長押し／クリックでコピー）</span>
+      <div id="diag_code" tabindex="0">---</div>
+      <span class="cz_done" id="cz_done">コピーしました</span>
+    </div>
     <div class="rcta">
-      <!-- ★ここを実フォームURLに差し替え（診断申込用Googleフォーム） -->
-      <!-- ★Googleフォーム完成後、href を相談申込フォームURLに差し替え（当面はメール受付） -->
-      <a class="btn" href="mailto:info@bridgecycleco.com?subject=無料相談・デビュー設計の申込&body=お名前／業種／診断結果／ご希望（1日・3か月）／ご連絡先をご記入ください。">無料相談・デビュー設計を申し込む →</a>
-      <!-- ★ここを実フォームURLに差し替え（第1期モニター用Googleフォーム） -->
-      <!-- ★Googleフォーム完成後、href をモニター用フォームURLに差し替え（当面はメール受付） -->
-      <a class="btn outline" href="mailto:info@bridgecycleco.com?subject=第1期モニター申込&body=お名前／業種／希望コース（1日5万・3か月12万）／ご連絡先をご記入ください。">第1期モニター枠に申し込む</a>
+      <!-- ★公式LINEの友だち追加URLに差し替え（未設定時はクリックで案内） -->
+      <a class="btn line" id="lineBtn" href="https://line.me/R/ti/p/@954vjafy">LINEで詳しい解説を受け取る（無料）→</a>
+    </div>
+    <p style="text-align:center;font-size:12px;color:var(--soft);margin-bottom:10px;">LINE・メールでのご相談、第1期モニターのお申し込みも受付中です。</p>
+    <div class="contactbox2">
+      <div class="crow">
+        <a href="https://line.me/R/ti/p/@954vjafy" class="citem cline"><span class="cl">LINE（おすすめ）</span><span class="cv">友だち追加して相談</span></a>
+        <a href="mailto:info@bridgecycleco.com?subject=お店デビュー診断からの相談・申込&body=お名前／業種／診断結果／ご希望（1日・3か月・第1期モニター）／ご連絡先をご記入ください。" class="citem"><span class="cl">メール</span><span class="cv">info@bridgecycleco.com</span></a>
+      </div>
+      <p style="text-align:center;font-size:12.5px;color:var(--soft);margin-top:10px;">第1期モニター（1日5万円／3か月12万円）希望の方も、上記からどうぞ。</p>
+    </div>
+    <div style="display:none">
     </div>
   </div>
 
@@ -173,24 +205,32 @@
 
 <footer>
   推し店デビュー（運営：BRIDGE CYCLE株式会社）<br>
-  TEL：080-5309-9770 ｜ <a href="mailto:info@bridgecycleco.com">info@bridgecycleco.com</a><br><a href="index.html">← 推し店デビューのトップへ</a>
+  <a href="mailto:info@bridgecycleco.com">info@bridgecycleco.com</a><br><a href="index.html">← 推し店デビューのトップへ</a>
 </footer>
 
 <script>
 const QUESTIONS = [
   {id:"stage", q:"いま、どの段階ですか？", opts:[
     {t:"「いつかお店を」と思っている（まだ販売経験は少ない）", v:"dream"},
+    {t:"会社員・パートをしながら、副業で始めたい・育てたい", v:"side"},
     {t:"マルシェ・SNS・自宅などで、すでに売っている", v:"selling"},
+    {t:"資格や経験はあるが、今は現場を離れている（復帰したい）", v:"dormant"},
     {t:"開業を具体的に検討中（物件・資金を考え始めた）", v:"planning"},
-    {t:"すでに事業をしていて、新しい業態・地域を試したい", v:"existing"},
   ]},
-  {id:"category", q:"何を売る予定ですか？", opts:[
+  {id:"category", q:"何を仕事にする予定ですか？", opts:[
+    {t:"ヘアカット・カラーなど美容師の施術（要・美容師免許）", v:"hair"},
+    {t:"ネイル・まつげ・エステ・セラピー等の施術", v:"beauty"},
     {t:"ハンドメイド・雑貨・アクセサリー", v:"craft"},
     {t:"お菓子・パン・食品（菓子製造・飲食系）", v:"food"},
-    {t:"ネイル・まつげ・セラピー等の施術系", v:"beauty"},
     {t:"教室・ワークショップ・相談など", v:"service"},
   ]},
-  {id:"proof", q:"これまでに「売れた実績」はありますか？", opts:[
+  {id:"working", q:"いまの働き方に近いのは？", opts:[
+    {t:"会社員・パート（本業を続けながら試したい）", v:"employed"},
+    {t:"主婦・主夫・育児中（すきま時間で）", v:"home_maker"},
+    {t:"資格はあるがブランクがある（復帰を考えている）", v:"returner"},
+    {t:"すでに個人で活動・開業している", v:"solo"},
+  ]},
+  {id:"proof", q:"これまでに「お客様に喜ばれた・売れた」経験はありますか？", opts:[
     {t:"ほとんどない／これから", v:"none"},
     {t:"イベントやネットで、ときどき売れる", v:"some"},
     {t:"定期的に売れて、リピーターもいる", v:"repeat"},
@@ -202,7 +242,8 @@ const QUESTIONS = [
   ]},
   {id:"goal", q:"最終的に、どうなりたいですか？", opts:[
     {t:"いずれ自分の店舗を持ちたい", v:"shop"},
-    {t:"無理に店は持たず、間借り・週末営業で続けたい", v:"share"},
+    {t:"無理に独立せず、副業・週末営業のまま育てたい", v:"keepside"},
+    {t:"間借り・面貸しで、まず現場に戻りたい", v:"share"},
     {t:"既存店の引き継ぎ（承継）にも興味がある", v:"succeed"},
     {t:"まだ決めていない／まず試したい", v:"undecided"},
   ]},
@@ -227,9 +268,10 @@ const QUESTIONS = [
     {t:"まだ具体的には決めていない", v:"someday"},
   ]},
   {id:"worry", q:"いちばんの不安は？", opts:[
-    {t:"そもそも売れるのか", v:"sell"},
+    {t:"そもそも売れるのか・お客様が来るのか", v:"sell"},
     {t:"お金（借金・初期費用）", v:"cost"},
-    {t:"続けられるか・集客できるか", v:"keep"},
+    {t:"ブランクがあって、勘や技術を取り戻せるか", v:"rust"},
+    {t:"本業・家庭と両立できるか", v:"balance"},
     {t:"家族や周囲に説明できるか", v:"explain"},
   ]},
 ];
@@ -278,32 +320,74 @@ function showResult(a){
   if(a.continue==='low')waitScore+=2; if(a.continue==='mid')waitScore+=1;
   if(a.stage==='dream')waitScore+=2;
   if(a.worry==='sell')waitScore+=1;
-  const go = waitScore<=1 && (a.proof==='repeat') && (a.continue==='high');
+  if(a.worry==='rust')waitScore+=1;
+  // 休眠美容師など、過去に実績がある復帰組はブランク不安を割り引く
+  const returner = (a.stage==='dormant' || a.working==='returner');
+  if(returner && a.proof!=='none') waitScore-=1;
+  const go = waitScore<=1 && (a.proof==='repeat') && (a.continue!=='low');
 
   const v=document.getElementById('verdict');
   if(go){
     v.className='verdict go';
     document.getElementById('vlbl').textContent='診断結果';
-    document.getElementById('vttl').textContent='動き出せる段階です。ただし「街での実証」を一度。';
-    document.getElementById('vsub').textContent='実績もリピートもある今こそ、その手応えを数字に変えて、融資・物件相談を有利に進めましょう。';
+    if(returner){
+      document.getElementById('vttl').textContent='現場に戻る準備は、ほぼ整っています。まずは“小さく一度”。';
+      document.getElementById('vsub').textContent='技術と経験がある今、いきなり店や面貸し契約を決める前に、街で一度デビューして「勘」と「お客様の反応」を取り戻しましょう。';
+    }else{
+      document.getElementById('vttl').textContent='動き出せる段階です。ただし「街での実証」を一度。';
+      document.getElementById('vsub').textContent='実績もリピートもある今こそ、その手応えを数字に変えて、融資・物件・面貸し相談を有利に進めましょう。';
+    }
   }else{
     v.className='verdict wait';
     document.getElementById('vlbl').textContent='診断結果';
-    document.getElementById('vttl').textContent='いきなり借りるのは、まだ早いかもしれません。';
-    document.getElementById('vsub').textContent='いまは「本当に売れるか」を小さく確かめる段階。大きなお金を使う前に、街で一度デビューして確かめましょう。';
+    if(a.stage==='side' || a.goal==='keepside' || a.working==='employed'){
+      document.getElementById('vttl').textContent='いきなり独立しなくて大丈夫。まず副業のまま、試せます。';
+      document.getElementById('vsub').textContent='会社や家庭を続けながら、1日だけ街でデビュー。売れる手応えがついてから、次を考えれば十分です。';
+    }else{
+      document.getElementById('vttl').textContent='いきなり借りるのは、まだ早いかもしれません。';
+      document.getElementById('vsub').textContent='いまは「本当に売れるか」を小さく確かめる段階。大きなお金を使う前に、街で一度デビューして確かめましょう。';
+    }
   }
 
+  // --- WHY: reasons for this verdict (based on answers) ---
+  const R=[];
+  const catJP={hair:'美容師の施術',beauty:'ネイル・エステ等の施術',craft:'ハンドメイド・雑貨',food:'お菓子・食品',service:'教室・相談'};
+  const stageJP={dream:'まだ販売経験が少ない段階',side:'本業を続けながら副業で始めたい段階',selling:'すでに売っている段階',dormant:'資格・経験はあり、現場復帰を考えている段階',planning:'開業を具体的に検討中'};
+  R.push(`いまは「${stageJP[a.stage]||'準備'}」。${a.category?catJP[a.category]+'を仕事にする想定ですね。':''}`);
+  if(a.working==='employed') R.push('会社員・パートとの両立が前提とのこと。1日単位なら、本業を辞めずに街での手応えだけ先に確かめられます。');
+  if(a.working==='home_maker') R.push('育児・家事のすきま時間で、というスタイル。短い時間から無理なく試せる設計です。');
+  if(returner) R.push('資格や経験はあるのにブランクがある——いちばんもったいない状態です。いきなり契約せず、まず一度現場に立って勘を取り戻すのが近道です。');
+  if(a.proof==='none') R.push('「売れた実績」がまだ少ないため、想像ではなく“街での事実”を先に作るのが安全です。');
+  else if(a.proof==='some') R.push('ときどき売れている手応えがあります。これを「再現できる数字」に変えると、次の判断がぶれません。');
+  else R.push('定期的に売れ、リピーターもいる——これは大きな強み。あとはその事実を“他人に見せられる形”にするだけです。');
+  if(a.continue==='low') R.push('続けて売れるかにまだ自信がないとのこと。だからこそ、いきなり契約せず継続需要を確かめる価値があります。');
+  else if(a.continue==='high') R.push('継続して売れる手応えがある。3か月で「リピート率」という最強の証拠まで取りにいけます。');
+  if(a.money==='tiny') R.push('大きなお金は使いたくない、という慎重さは正解です。小さく試して、損を最小化しましょう。');
+  if(a.worry==='sell') R.push('いちばんの不安が「そもそも売れるか」。この診断の本題そのものなので、まず1日のデビューで答えを出せます。');
+  else if(a.worry==='cost') R.push('いちばんの不安が「お金」。だからこそ、不可逆な支出の前に確かめる意味が大きいです。');
+  else if(a.worry==='keep') R.push('いちばんの不安が「続けられるか」。継続需要は、3か月デビューで測れます。');
+  else if(a.worry==='explain') R.push('いちばんの不安が「家族や周囲への説明」。数字と応援コメントは、何よりの説明材料になります。');
+  else if(a.worry==='rust') R.push('いちばんの不安が「ブランク」。だからこそ、本番の契約前に一度だけ街で施術・販売して、感覚を確かめる価値があります。');
+  else if(a.worry==='balance') R.push('いちばんの不安が「本業・家庭との両立」。1日単位のデビューなら、生活を崩さずに試せます。');
+  document.getElementById('reasons').innerHTML=R.map(x=>`<li>${x}</li>`).join('');
+
   // --- recommend course ---
-  let rec, why;
-  if(a.continue==='low' || a.proof==='none' || a.money==='tiny'){
+  let rec, why, courseCode="1DAY-STD";
+  if(a.stage==='side' || a.goal==='keepside' || a.working==='employed' || a.working==='home_maker'){
+    rec='まずは「1日お店デビュー」（副業・両立に最適）';
+    why='本業や家庭を続けながら、1日だけ街に立てます。手応えと時間の余裕を見て、3か月や次の一歩へ無理なく広げられます。'; courseCode='1DAY-SIDE';
+  }else if(returner){
+    rec='まずは「1日お店デビュー」で“勘ならし”を';
+    why='ブランクがあっても、まず1日。技術とお客様の反応を取り戻してから、面貸し・3か月・出店へ進むのが安全で確実です。'; courseCode='1DAY-RET';
+  }else if(a.continue==='low' || a.proof==='none' || a.money==='tiny'){
     rec='まずは「1日お店デビュー」';
-    why='いきなり3か月より、1日で「売れるか・誰に届くか」をまず確かめるのが安全です。手応えがあれば、3か月へ進めます。';
+    why='いきなり3か月より、1日で「売れるか・誰に届くか」をまず確かめるのが安全です。手応えがあれば、3か月へ進めます。'; courseCode='1DAY-SAFE';
   }else if(a.goal==='shop' || a.goal==='succeed' || a.plan_type==='full_shop' || a.continue==='high'){
     rec='「3か月お店デビュー」がおすすめ';
-    why='出店・承継を視野に入れるなら、継続需要（リピート）の確認と、融資・物件相談に使えるデビュー結果レポートまで揃う3か月が向いています。';
+    why='出店・承継・面貸しを視野に入れるなら、継続需要（リピート）の確認と、相談に使えるデビュー結果レポートまで揃う3か月が向いています。'; courseCode='3M-BIZ';
   }else{
     rec='まずは「1日お店デビュー」から';
-    why='1日で反応を確かめ、続けたくなったら3か月へ。段階的に進むのがいちばん損がありません。';
+    why='1日で反応を確かめ、続けたくなったら3か月へ。段階的に進むのがいちばん損がありません。'; courseCode='1DAY-STD';
   }
   document.getElementById('recommend').textContent=rec;
   document.getElementById('recommend_why').textContent=why;
@@ -313,15 +397,29 @@ function showResult(a){
   if(a.plan_type==='home'){lo=5;hi=30;note='自宅・無店舗中心でも、設備・材料・広告などで意外と費用はかかります。';}
   else if(a.plan_type==='small_shop'){lo=80;hi=250;note='小さなテナント・間借りでも、保証金・内装・什器で初期費用がかさみます。';}
   else{lo=200;hi=600;note='実店舗（路面・サロン・カフェ）は、物件取得・内装・設備で大きな初期投資になります。';}
-  if(a.category==='food'||a.category==='beauty'){hi=Math.round(hi*1.3);note+='（飲食・施術系は厨房・設備・衛生対応で上振れしやすい分野です）';}
+  if(a.category==='food'||a.category==='beauty'||a.category==='hair'){hi=Math.round(hi*1.3);note+='（飲食・美容・施術系は、設備・衛生・許認可対応で上振れしやすい分野です）';}
+  if(a.category==='hair'){note+=' 美容師の独立は、シャンプー台・セット面など設備投資が大きい一方、まずは面貸し（シェアサロン）から戻る選択肢もあります。';}
   document.getElementById('loss').textContent=`約 ${lo} 〜 ${hi} 万円`;
   document.getElementById('loss_note').textContent=note+' デビューで先に確かめれば、この大半を「確かめてからの支出」に変えられます。';
+  // budget vs cost + debut comparison
+  const budgetJP={tiny:'数万円まで',small:'数十万円まで',large:'百万円以上も検討'};
+  const debutCost = (courseCode==='3M-BIZ')?20:10;
+  let gapMsg='';
+  if(a.money==='tiny' && hi>=80){ gapMsg=`あなたの「${budgetJP[a.money]}」という予算と、実際にかかりうる<b>約${hi}万円</b>には、大きな開きがあります。`; }
+  else if(a.money==='small' && hi>=200){ gapMsg=`「${budgetJP[a.money]}」というご予算に対し、実店舗だと<b>約${hi}万円</b>規模になり得ます。`; }
+  else { gapMsg=`大切なのは金額の大小より、その支出が<b>「確かめる前」か「確かめた後」か</b>です。`; }
+  document.getElementById('loss_compare').innerHTML =
+    `<p style="font-size:13.5px;line-height:1.9;color:#4A3F39;">${gapMsg}</p>`+
+    `<p style="font-size:13.5px;line-height:1.9;color:var(--rose-d);font-weight:700;margin-top:6px;">推し店デビュー（${debutCost}万円）で先に確かめれば、最大で約${hi}万円の“不可逆な支出”を、「売れると分かってからの投資」に変えられます。</p>`+
+    `<p style="font-size:11.5px;color:var(--soft);margin-top:6px;">※金額は入力内容にもとづく一般的な目安です。実際の費用・成果を保証するものではありません。</p>`;
 
   // --- programs ---
   const progs=[];
   progs.push('小規模事業者持続化補助金〈創業型〉：販路開拓・広報・Web等（最大250万円・要件あり）');
   if(a.timing==='soon'||a.goal==='shop'){progs.push('日本政策金融公庫の創業融資：デビュー結果レポートを相談資料に');}
   if(a.plan_type!=='home'){progs.push('自治体の創業促進補助金（大津市等）：対象・募集時期は要確認');}
+  if(a.stage==='side'||a.working==='employed'){progs.push('副業として小さく開始：開業届の提出時期や本業との兼ね合いは、無料相談で整理できます');}
+  if(returner||a.goal==='share'){progs.push('面貸し・シェアサロンからの復帰：いきなり店を持たず、低リスクで現場に戻る道もご提案します');}
   progs.push('開業費としての経費計上：当サービス費用は開業すれば「開業費」に計上可能（補助金充当分を除く）');
   document.getElementById('programs').innerHTML=progs.map(p=>`<li>${p}</li>`).join('');
 
@@ -332,7 +430,15 @@ function showResult(a){
   else{ns.push('実績を「デビュー結果レポート」にまとめ、融資・物件相談に進む');}
   if(a.fans==='yes'||a.fans==='maybe'){ns.push('デビュー戦で第0期サポーター（最初のファン）を集める');}
   if(a.category==='food'){ns.push('営業許可・設備の条件を、無料相談で先に確認する');}
+  if(a.category==='hair'){ns.push('美容師免許・保健所の確認のうえ、対応できる協力店舗（面貸し可など）を調整する');}
+  if(returner){ns.push('まず1日、施術・接客の勘を取り戻し、自分のペースを確認する');}
+  if(a.stage==='side'||a.working==='employed'){ns.push('本業の休日に合わせて、無理のないデビュー日を設計する');}
   document.getElementById('nextstep').innerHTML=ns.map(p=>`<li>${p}</li>`).join('');
+
+  // --- 診断コード生成（LINE引き継ぎ用・null安全）---
+  const up=(x,n)=>((x||'XX').toString().substring(0,n).toUpperCase());
+  const diagCode = `${up(a.stage,2)}-${up(a.category,4)}-${up(a.working,3)}-${courseCode}`;
+  const dc=document.getElementById('diag_code'); if(dc) dc.textContent=diagCode;
 
   // show + scroll
   const r=document.getElementById('result'); r.classList.add('show');
@@ -345,6 +451,14 @@ function showResult(a){
   // const params=new URLSearchParams({'entry.AAA':a.stage,'entry.BBB':a.category,'entry.CCC':rec});
   // navigator.sendBeacon('https://docs.google.com/forms/d/e/XXXX/formResponse?'+params.toString());
 }
+// クリック/長押しで診断コードをコピー
+document.addEventListener('click',function(e){
+  if(e.target && e.target.id==='diag_code'){
+    const t=e.target.textContent;
+    if(navigator.clipboard){navigator.clipboard.writeText(t).catch(()=>{});}
+    const z=document.getElementById('copy_zone'); if(z){z.classList.add('copied');setTimeout(()=>z.classList.remove('copied'),1800);}
+  }
+});
 update();
 </script>
 </body>
