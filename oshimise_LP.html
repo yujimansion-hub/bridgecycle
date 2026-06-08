@@ -40,6 +40,16 @@
   .btn-primary:hover{background:var(--rose-d);transform:translateY(-2px);box-shadow:0 14px 30px rgba(192,105,122,.42);}
   .btn-outline{background:transparent;color:var(--rose-d);border-color:var(--rose);}
   .btn-outline:hover{background:var(--rose);color:#fff;}
+  .btn-coral{background:var(--terra);color:#fff;}
+  .btn-coral:hover{background:#b5673f;transform:translateY(-2px);}
+  .contactbox{max-width:520px;margin:26px auto 0;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;}
+  .contactbox .cbt{font-family:var(--mincho);font-weight:700;font-size:15px;color:var(--ink);margin-bottom:14px;text-align:center;}
+  .contactbox .crow{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;}
+  .contactbox .citem{flex:1;min-width:200px;text-decoration:none;background:var(--blush);border-radius:12px;padding:14px 18px;text-align:center;transition:transform .15s ease;}
+  .contactbox .citem:hover{transform:translateY(-2px);}
+  .contactbox .cl{display:block;font-size:12px;color:var(--soft);font-weight:700;margin-bottom:3px;}
+  .contactbox .cv{display:block;font-family:var(--mincho);font-weight:800;font-size:19px;color:var(--rose-d);}
+  .contactbox .cnote{font-size:12.5px;color:var(--soft);text-align:center;margin-top:14px;}
   .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.55);}
   .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.12);}
   .btn .arw{transition:transform .25s ease;}.btn:hover .arw{transform:translateX(4px);}
@@ -279,7 +289,7 @@
 <div class="bar"><div class="wrap">
   <div class="logo">推し店<span>デビュー</span><i>お店を借りる前の“開業前デビュー”</i></div>
   <div class="next">次回デビュー戦：<b>7月開催に向けて準備中</b></div>
-  <a class="btn btn-primary" href="#cta">無料診断を受ける</a>
+  <a class="btn btn-primary" href="shindan.html">無料診断を受ける</a>
 </div></div>
 
 <!-- HERO -->
@@ -291,7 +301,7 @@
     <p class="turn anim d2">街が<em>応援したくなる物語</em>が必要だ。<br>推し店デビューは、あなたの物語を、街の売上と応援で証明するサービスです。</p>
     <p class="story anim d3">お店を借りる前に、街の前でデビューしよう。協力店舗で小さく売って、最初の売上・最初のお客様・第0期サポーター・開業前ドキュメンタリーを残します。</p>
     <div class="anim d4"><div class="ribbon-free">いちばん最初の一歩は、ぜんぶ無料</div>
-    <div class="cta-row"><a class="btn btn-primary" href="#cta">無料で「1日向き／3か月向き」を診断する <span class="arw">→</span></a></div></div>
+    <div class="cta-row"><a class="btn btn-primary" href="shindan.html">無料で「1日向き／3か月向き」を診断する <span class="arw">→</span></a></div></div>
     <p class="cta-note anim d4">10分でわかります——<b>いま借りるべきか／まだか</b>、開業にかかる費用（＝防げる損）、使える制度、次の一手。</p>
     <div class="keepsakes anim d5">
       <span class="k">最初の売上</span><span class="k">最初のお客様</span><span class="k">第0期サポーター</span><span class="k">動画</span><span class="k">データ</span>
@@ -381,7 +391,7 @@
       <li><span>売れるかだけでなく、開業前からファンも育てたい</span></li>
       <li><span>自分の想いや物語を、きちんと伝えたい</span></li>
     </ul>
-    <a class="btn btn-outline" href="#cta">無料診断で、わたしに合うデビューを見つける <span class="arw">→</span></a>
+    <a class="btn btn-outline" href="shindan.html">無料診断で、わたしに合うデビューを見つける <span class="arw">→</span></a>
   </div>
 </section>
 
@@ -582,13 +592,17 @@
     <p>いきなり物件を借りなくてもいい。いきなり借入をしなくてもいい。<br>まずは、街の前で小さく、あなたの物語を売ってみる。</p>
     <p class="small">開業する勇気より、まず街に出る機会を。</p>
     <div class="cta-row">
-      <!-- ★公開前に必須：下記 href="" を実フォームURLへ差し替え -->
-      <!--   無料診断   → 診断用Googleフォームのリンク -->
-      <!--   モニター   → モニター専用Googleフォームのリンク -->
-      <a class="btn btn-primary" href="" target="_blank" rel="noopener" onclick="if(!this.getAttribute('href')){alert('診断フォームのURLを設定してください');return false;}">無料で「1日向き／3か月向き」を診断する <span class="arw">→</span></a>
-      <a class="btn btn-outline" href="" target="_blank" rel="noopener" onclick="if(!this.getAttribute('href')){alert('モニターフォームのURLを設定してください');return false;}">第1期モニター枠に申し込む</a>
+      <a class="btn btn-primary" href="shindan.html">無料で「1日向き／3か月向き」を診断する <span class="arw">→</span></a>
+      <a class="btn btn-coral" href="tel:08053099770">電話で申し込む・相談する</a>
     </div>
-    <p style="margin-top:18px;font-size:13.5px;color:var(--soft);">迷っている方は、お気軽に <a href="mailto:info@bridgecycleco.com" style="color:var(--rose-d);font-weight:700;">メール</a> でもご相談いただけます。</p>
+    <div class="contactbox">
+      <p class="cbt">お申し込み・ご相談は、こちらから</p>
+      <div class="crow">
+        <a href="tel:08053099770" class="citem"><span class="cl">お電話</span><span class="cv">080-5309-9770</span></a>
+        <a href="mailto:info@bridgecycleco.com?subject=推し店デビューの相談・申込&body=お名前／業種／ご希望（1日・3か月・第1期モニター）／ご連絡先をご記入ください。" class="citem"><span class="cl">メール</span><span class="cv">info@bridgecycleco.com</span></a>
+      </div>
+      <p class="cnote">第1期モニター（1日5万円／3か月12万円）をご希望の方も、上記からお気軽にどうぞ。</p>
+    </div>
   </div>
 </section>
 
