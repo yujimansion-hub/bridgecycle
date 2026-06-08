@@ -49,6 +49,8 @@
   .bar .wrap{display:flex;align-items:center;gap:16px;padding:14px 26px;}
   .bar .logo{font-family:var(--mincho);font-weight:800;font-size:20px;letter-spacing:.06em;color:var(--ink);}
   .bar .logo span{color:var(--rose);}
+  .bar .logo i{font-family:var(--gothic);font-style:normal;font-weight:500;font-size:11.5px;color:var(--soft);margin-left:10px;letter-spacing:.02em;}
+  @media(max-width:600px){.bar .logo i{display:none;}}
   .bar .next{font-size:12px;color:var(--soft);font-weight:700;margin-left:auto;}
   .bar .next b{color:var(--rose-d);}
   .bar .btn{padding:9px 22px;font-size:14px;}
@@ -64,6 +66,8 @@
   .hero .wrap{position:relative;}
   .ey{font-family:var(--gothic);font-weight:700;font-size:13px;letter-spacing:.28em;color:var(--terra);margin-bottom:24px;}
   .ey::before{content:"";display:inline-block;width:30px;height:1.5px;background:var(--terra);vertical-align:middle;margin-right:12px;}
+  .whatis{font-family:var(--gothic);font-weight:500;font-size:15px;line-height:1.9;color:#5A4A42;max-width:600px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 20px;margin-bottom:26px;}
+  .whatis b{color:var(--rose-d);font-weight:700;}
   .hero h1{font-size:clamp(28px,4.6vw,46px);font-weight:800;letter-spacing:.02em;color:var(--ink);margin-bottom:30px;}
   .hero h1 .accent{color:var(--rose);}
   .story{font-family:var(--mincho);font-size:clamp(16px,2.3vw,20px);font-weight:500;line-height:2.4;color:#5A4A42;max-width:680px;margin-bottom:18px;}
@@ -85,7 +89,8 @@
   .priceband{background:var(--ink);color:var(--cream);}
   .priceband .wrap{display:flex;flex-wrap:wrap;gap:14px 30px;align-items:center;padding:22px 26px;justify-content:center;}
   .priceband .p{font-size:14px;font-weight:500;color:#E8DDD0;}
-  .priceband .p b{font-family:var(--mincho);font-size:22px;color:#fff;font-weight:700;margin-right:4px;}
+  .priceband .p b{font-family:var(--mincho);font-size:20px;color:var(--gold);font-weight:700;margin-right:8px;}
+  .priceband .p span{color:#E8DDD0;}
   .priceband .p.mon b{color:var(--gold);}
   .priceband .dot{width:5px;height:5px;border-radius:50%;background:var(--gold);opacity:.6;}
   @media(max-width:760px){.priceband .dot{display:none;}}
@@ -213,6 +218,58 @@
   .storyflow .sf{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 20px;font-family:var(--mincho);font-weight:600;font-size:16px;color:var(--ink);}
   .storyflow .sf.hi{background:var(--ink);color:var(--cream);border-color:var(--ink);}
   .storyflow .sfar{color:var(--gold);font-size:20px;line-height:1.2;margin:6px 0;font-weight:700;}
+  /* SNS-native motifs */
+  .marker{background:linear-gradient(transparent 58%,rgba(201,162,75,.45) 58%);font-weight:700;}
+  .ribbon-free{display:inline-flex;align-items:center;gap:8px;font-family:var(--mincho);font-weight:700;color:var(--rose-d);font-size:14px;margin-bottom:10px;}
+  .ribbon-free::before,.ribbon-free::after{content:"";width:2px;height:20px;background:var(--rose);}
+  .ribbon-free::before{transform:rotate(-22deg);}.ribbon-free::after{transform:rotate(22deg);}
+  .bubbles{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:16px 22px;margin:28px 0 32px;}
+  .bubbles li{position:relative;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 20px;font-size:15px;line-height:1.8;box-shadow:0 4px 14px rgba(58,46,42,.05);}
+  .bubbles li::after{content:"";position:absolute;left:30px;bottom:-9px;width:16px;height:16px;background:#fff;border-right:1px solid var(--line);border-bottom:1px solid var(--line);transform:rotate(45deg);}
+  .bubbles li::before{content:"“";position:absolute;top:2px;left:12px;font-family:var(--mincho);font-size:30px;color:var(--blush);}
+  .bubbles li span{position:relative;display:block;padding-left:22px;}
+  @media(max-width:720px){.bubbles{grid-template-columns:1fr;}}
+  .voices{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px;}
+  @media(max-width:760px){.voices{grid-template-columns:1fr;}}
+  .voice{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;position:relative;box-shadow:0 6px 18px rgba(58,46,42,.06);}
+  .voice .av{width:46px;height:46px;border-radius:50%;background:var(--blush);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:12px;}
+  .voice .vt{font-family:var(--mincho);font-weight:600;font-size:15px;color:var(--ink);line-height:1.8;min-height:84px;}
+  .voice .vn{font-size:12.5px;color:var(--soft);margin-top:12px;border-top:1px solid var(--line);padding-top:10px;}
+  .voice.invite{background:linear-gradient(155deg,#fff,var(--blush));border-style:dashed;border-color:var(--rose);}
+  .voice.invite .vt{color:var(--rose-d);font-weight:700;}
+  /* vs block */
+  .vsblock{margin-top:18px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:18px;}
+  .vsrow{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:stretch;}
+  @media(max-width:600px){.vsrow{grid-template-columns:1fr;}}
+  .vscol{border-radius:11px;padding:14px 16px;}
+  .vscol.before{background:rgba(140,122,112,.18);border:1px dashed rgba(217,203,192,.4);}
+  .vscol.after{background:linear-gradient(160deg,rgba(201,162,75,.22),rgba(192,105,122,.18));border:1px solid var(--gold);}
+  .vscol .lbl{font-family:var(--gothic);font-weight:700;font-size:11px;letter-spacing:.08em;margin-bottom:8px;display:block;}
+  .vscol.before .lbl{color:#C9BBAE;}
+  .vscol.after .lbl{color:var(--gold);}
+  .vscol .ttl{font-family:var(--mincho);font-weight:700;font-size:15px;color:#fff;margin-bottom:8px;line-height:1.5;}
+  .vscol ul{list-style:none;margin:0;}
+  .vscol li{font-size:12.5px;line-height:1.7;padding-left:18px;position:relative;}
+  .vscol.before li{color:#C2B4AA;}
+  .vscol.before li::before{content:"△";position:absolute;left:0;font-size:10px;top:3px;color:#9C8E84;}
+  .vscol.after li{color:#FBF4EA;}
+  .vscol.after li::before{content:"●";position:absolute;left:0;font-size:8px;top:4px;color:var(--gold);}
+  .vsar{display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--gold);font-weight:700;}
+  @media(max-width:600px){.vsar{transform:rotate(90deg);padding:4px 0;}}
+  .vscap{font-size:12.5px;color:#C9BBAE;margin-top:14px;line-height:1.8;}
+  .vscap b{color:var(--gold);}
+  /* exits */
+  .exits{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:30px;}
+  @media(max-width:720px){.exits{grid-template-columns:1fr;}}
+  .exit{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 28px;position:relative;transition:transform .25s ease,box-shadow .25s ease;}
+  .exit:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(58,46,42,.09);}
+  .exit .no{font-family:var(--mincho);font-weight:800;font-size:34px;line-height:1;color:var(--rose);opacity:.9;}
+  .exit h3{font-size:19px;margin:8px 0 8px;color:var(--ink);}
+  .exit p{font-size:14px;color:#6A5A50;line-height:1.85;}
+  .exit.retreat{background:linear-gradient(160deg,#fff,var(--blush));}
+  .exit.retreat .no{color:var(--terra);}
+  .exit .tag{display:inline-block;font-size:11px;font-weight:700;color:var(--gold-d);background:var(--cream2);border-radius:999px;padding:3px 12px;margin-bottom:10px;}
+  .exits-close{text-align:center;margin-top:30px;}
   .rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
   .rv.in{opacity:1;transform:none;}
 </style>
@@ -220,19 +277,21 @@
 <body>
 
 <div class="bar"><div class="wrap">
-  <div class="logo">推し店<span>デビュー</span></div>
-  <div class="next">次回デビュー戦：<b>＿月＿日</b>／枠 残り<b>＿</b></div>
-  <a class="btn btn-primary" href="#cta">無料診断を受ける</a>
+  <div class="logo">推し店<span>デビュー</span><i>お店を借りる前の“開業前デビュー”</i></div>
+  <div class="next">次回デビュー戦：<b>7月開催に向けて準備中</b></div>
+  <a class="btn btn-primary" href="shindan.html">無料診断を受ける</a>
 </div></div>
 
 <!-- HERO -->
 <header class="hero">
   <div class="wrap">
-    <div class="ey anim d1">OSHIMISE DEBUT ─ お店のデビューサポート</div>
+    <div class="ey anim d1">推し店デビュー ─ お店を借りる前の“開業前デビュー”サービス</div>
+    <p class="whatis anim d1">地域の協力店舗で“小さなお店”としてデビューし、開業前に<b>本当に売れるか</b>を確かめるサービス。商品やサービスを実際に街の人へ届け、最初の売上・最初のお客様・第0期サポーター・動画・データを残します。</p>
     <h1 class="anim d2">いまの創業には、良い商品と<br>仕組みだけでは、足りない。</h1>
     <p class="turn anim d2">街が<em>応援したくなる物語</em>が必要だ。<br>推し店デビューは、あなたの物語を、街の売上と応援で証明するサービスです。</p>
     <p class="story anim d3">お店を借りる前に、街の前でデビューしよう。協力店舗で小さく売って、最初の売上・最初のお客様・第0期サポーター・開業前ドキュメンタリーを残します。</p>
-    <div class="cta-row anim d4"><a class="btn btn-primary" href="#cta">無料でお店デビュー診断を受ける <span class="arw">→</span></a></div>
+    <div class="anim d4"><div class="ribbon-free">いちばん最初の一歩は、ぜんぶ無料</div>
+    <div class="cta-row"><a class="btn btn-primary" href="shindan.html">無料で「1日向き／3か月向き」を診断する <span class="arw">→</span></a></div></div>
     <p class="cta-note anim d4">10分でわかります——<b>いま借りるべきか／まだか</b>、開業にかかる費用（＝防げる損）、使える制度、次の一手。</p>
     <div class="keepsakes anim d5">
       <span class="k">最初の売上</span><span class="k">最初のお客様</span><span class="k">第0期サポーター</span><span class="k">動画</span><span class="k">データ</span>
@@ -242,10 +301,10 @@
 
 <!-- price band -->
 <div class="priceband"><div class="wrap">
-  <div class="p">1日お店デビュー <b>10万円</b></div><span class="dot"></span>
-  <div class="p">3か月お店デビュー <b>20万円</b></div><span class="dot"></span>
-  <div class="p mon">第1期モニター <b>5万／12万円</b></div><span class="dot"></span>
-  <div class="p">協力店舗費込み・売上は全額あなたのもの</div>
+  <div class="p"><b>01</b><span>最初の売上とお客様</span></div><span class="dot"></span>
+  <div class="p"><b>02</b><span>改善点がわかる実需データ</span></div><span class="dot"></span>
+  <div class="p"><b>03</b><span>融資・契約に使える実績レポート</span></div><span class="dot"></span>
+  <div class="p mon"><b>大津・草津エリア限定／第1期生 受付中</b></div>
 </div></div>
 
 <!-- WHAT (story → keepsakes) -->
@@ -275,7 +334,15 @@
     <p class="lead">怖いのは、売れるか分からないまま、先に大きなお金を使ってしまうこと。本当はその前に、確かめておきたいことがあります。</p>
     <div class="stack"><span>物件契約</span><span>内装費</span><span>設備投資</span><span>広告費</span><span>借入</span></div>
     <p class="lead">あなたの商品やサービスは、街の人に本当に求められるのか。あなたの物語は、街の人が応援したくなるものなのか。</p>
-    <p class="accent-line">物語は、語るだけでは足りない。街で売れたときに、はじめて“お店”になる。</p>
+    <p class="accent-line"><span class="marker">物語は、語るだけでは足りない。</span>街で売れたときに、はじめて“お店”になる。</p>
+  </div>
+</section>
+
+<!-- FACT -->
+<section class="sect" style="background:var(--ink);color:var(--cream);">
+  <div class="wrap narrow rv center">
+    <p class="mincho" style="font-size:clamp(20px,3.4vw,28px);font-weight:700;color:#fff;line-height:1.7;margin-bottom:18px;">店を出してから「売れるか試す」時代は、<br>もう終わりにしませんか。</p>
+    <p class="lead" style="color:#D9CBC0;">開業してまもなく閉じてしまうお店は、少なくありません。その多くは「商品が悪かった」のではなく、<b style="color:var(--gold);">その街で・その場所で・その価格で本当に求められるかを、開業前に確かめられなかった</b>ことが理由です。推し店デビューは、その確認を、お金をかける前に終わらせるための仕組みです。</p>
   </div>
 </section>
 
@@ -306,16 +373,15 @@
   <div class="wrap narrow rv">
     <div class="kick">CHECK</div>
     <h2 class="shead">こんな気持ちで、止まっていませんか？</h2>
-    <ul class="checks">
-      <li>「いつかお店を」と思いながら、一歩が出ない</li>
-      <li>マルシェ・SNS・自宅販売の、次の一手を探している</li>
-      <li>家族や金融機関に説明できる材料がほしい</li>
-      <li>物件や借入の前に、本当に売れるか試したい</li>
-      <li>売れるかだけでなく、開業前からファンも育てたい</li>
-      <li>自分のお店に合う場所や、お客様を知りたい</li>
-      <li>自分の想いや物語を、きちんと伝えたい</li>
+    <ul class="bubbles">
+      <li><span>「いつかお店を」と思いながら、一歩が出ない</span></li>
+      <li><span>マルシェ・SNS・自宅販売の、次の一手を探している</span></li>
+      <li><span>家族や金融機関に説明できる材料がほしい</span></li>
+      <li><span>物件や借入の前に、本当に売れるか試したい</span></li>
+      <li><span>売れるかだけでなく、開業前からファンも育てたい</span></li>
+      <li><span>自分の想いや物語を、きちんと伝えたい</span></li>
     </ul>
-    <a class="btn btn-outline" href="#cta">無料診断で、わたしに合うデビューを見つける <span class="arw">→</span></a>
+    <a class="btn btn-outline" href="shindan.html">無料診断で、わたしに合うデビューを見つける <span class="arw">→</span></a>
   </div>
 </section>
 
@@ -330,6 +396,7 @@
         <div class="price">10万円</div>
         <div class="incl">デビュー設計＋協力店舗費込み／申込3万・実施確定残7万</div>
         <div class="tagline">まず街に出て、最初の売上と最初のファンを。</div>
+        <p style="font-size:12.5px;color:#6A5A50;margin-bottom:14px;line-height:1.7;">通常はつながりにくい地域の人気店でも、事務局が主催店舗との条件を整え、デビューの場をプロデュースします。</p>
         <ul><li>デビュー設計</li><li>協力店舗の調整（費用込み）</li><li>1回のデビュー戦・当日測定</li><li>簡易結果まとめ</li><li>SNS用の写真・短尺動画素材</li><li>推し登録・応援コメント取得</li></ul>
         <span class="own">売上は全額あなたのもの</span>
         <div class="forp"><b>こんな方へ</b>まず1日だけ試したい／商品や価格の反応を知りたい／マルシェ・SNS販売の次の一歩に／開業前に写真と数字を残したい</div>
@@ -340,21 +407,40 @@
         <div class="price">20万円</div>
         <div class="incl">設計＋協力店舗費込み／申込3万・実施確定7万・開始時10万</div>
         <div class="tagline">続けて売れるかを見て、出口を判断する。</div>
+        <div style="font-family:var(--mincho);font-weight:700;font-size:15px;color:var(--gold);margin-bottom:10px;line-height:1.6;">“思いつき”のままでは、相談は始まらない。<br>3か月で、それを「事実」に変えます。</div>
+        <div class="vsblock"><div class="vsrow">
+          <div class="vscol before">
+            <span class="lbl">BEFORE｜思いつきの計画書</span>
+            <div class="ttl">たぶん、売れると思います</div>
+            <ul><li>想像の売上予測</li><li>「ニーズはあるはず」</li><li>裏づけとなる数字がない</li></ul>
+          </div>
+          <div class="vsar">→</div>
+          <div class="vscol after">
+            <span class="lbl">AFTER｜売れた事実</span>
+            <div class="ttl">○人が並び、○%が「また来たい」</div>
+            <ul><li>実際の来店数・購入率</li><li>客単価・再来意向の数字</li><li>街の人の応援コメント</li></ul>
+          </div>
+        </div>
+        <p class="vscap">この3か月で集めた<b>事実</b>を、認定経営革新等支援機関の視点で1枚のレポートに。融資や物件の相談窓口で、あなたの計画を裏づける<b>いちばん強い味方</b>になります。<br><span style="color:var(--soft);font-size:11px;">※融資・審査の結果を保証するものではありません。</span></p>
+        </div>
         <ul><li>3か月のデビュー設計</li><li>月1回×3回の実施（費用込み）</li><li>開業前ドキュメンタリー素材づくり</li><li>推し登録・応援コメント取得</li><li>再来・継続需要の確認</li><li>デビュー結果レポート＋次の判断サポート</li></ul>
         <span class="own">売上は全額あなたのもの</span>
         <div class="forp"><b>こんな方へ</b>間借り・出店・承継を本気で考えている／継続需要を確かめたい／家族や金融機関に説明したい／開業前からファンを育てたい</div>
       </div>
     </div>
+    <p style="text-align:center;font-size:12px;color:var(--soft);margin-bottom:14px;">※表示価格はすべて税込です。</p>
     <div class="deduct">この費用は、開業すれば<b>「開業費」として経費に計上できます</b>（補助金充当分を除く・最終的な税務処理は税理士にご確認ください）。</div>
+    <p style="max-width:760px;margin:18px auto 0;font-size:11.5px;color:var(--soft);line-height:1.8;text-align:center;">※推し店デビューは、協力店舗が主催するデビュー機会への参加を前提としたサービスです。当社は、商品・価格・告知導線の設計、事務局運営、記録、結果整理を行います。不動産の賃貸借・売買の代理媒介を行うものではありません。</p>
   </div>
 </section>
 
 <!-- MONITOR -->
 <section class="sect">
   <div class="wrap narrow rv"><div class="monitor">
+    <div class="ribbon-free" style="color:var(--gold-d);">第1期だけの特別価格</div>
     <div class="mhead">第1期モニター募集</div>
     <p class="lead">事例掲載にご協力いただける方限定で、特別価格をご用意しています。</p>
-    <div class="mp"><div>1日お店デビュー <b>5万円</b></div><div>3か月お店デビュー <b>12万円</b></div></div>
+    <div class="mp"><div>1日お店デビュー <b>5万円</b> <span style="font-size:12px;color:var(--soft);font-weight:normal;">（申込2万・実施確定時3万）</span></div><div>3か月お店デビュー <b>12万円</b> <span style="font-size:12px;color:var(--soft);font-weight:normal;">（申込3万・開始時3万・毎月2万×3回）</span></div></div>
     <p class="cond">条件：顔出しまたは活動名掲載／写真・動画の使用／売上・購入率・応援コメント等の数字公開／アンケート回収に、それぞれご協力いただける方。</p>
     <div class="order">進め方：まずは無料診断 → 結果を見て「進めたい」と思った方に、第1期モニター枠をご案内します。</div>
   </div></div>
@@ -386,7 +472,7 @@
       <span>最初の売上</span><span>最初のお客様</span><span>第0期サポーター</span><span>商品・価格へのリアルな反応</span>
       <span>写真・動画素材</span><span>応援コメント</span><span>家族や金融機関に出せる材料</span><span>進む・直す・やめるの判断材料</span>
     </div>
-    <p class="accent-line center">売上の大きさではなく、次に進むための“理由”を残します。</p>
+    <p class="accent-line center">売上の大きさではなく、<span class="marker">次に進むための“理由”</span>を残します。</p>
   </div>
 </section>
 
@@ -416,6 +502,60 @@
   </div>
 </section>
 
+<!-- EXITS -->
+<section class="sect blushbg">
+  <div class="wrap narrow rv center">
+    <div class="kick">NEXT</div>
+    <h2 class="shead">デビュー後、あなたには<br>4つの道があります。</h2>
+    <p class="lead">推し店デビューは、1日売って終わりのイベントではありません。街で売れた結果をもとに、次の一手を一緒に判断します。</p>
+  </div>
+  <div class="wrap rv">
+    <div class="exits">
+      <div class="exit">
+        <div class="no">01</div>
+        <span class="tag">前へ進む</span>
+        <h3>出店へ進む</h3>
+        <p>売上・購入率・応援コメントをもとに、創業融資・補助金・物件相談へ進みます。</p>
+      </div>
+      <div class="exit">
+        <div class="no">02</div>
+        <span class="tag">続ける</span>
+        <h3>間借りで続ける</h3>
+        <p>いきなり店舗を借りず、月1回・週1回の継続営業で、ファンを育てます。</p>
+      </div>
+      <div class="exit">
+        <div class="no">03</div>
+        <span class="tag">受け継ぐ</span>
+        <h3>店舗承継を検討する</h3>
+        <p>街のファンをつかんだあなたは、既存店舗や老舗の後継候補になることもできます。</p>
+      </div>
+      <div class="exit retreat">
+        <div class="no">04</div>
+        <span class="tag">立ち止まる</span>
+        <h3>前向きに撤退する</h3>
+        <p>数字を見て、今は進まない判断をすることも大切な成果です。大きなお金を使う前にやめられることも、推し店デビューの価値です。</p>
+      </div>
+    </div>
+    <p class="accent-line exits-close">あなたの物語を、街の売上と応援で証明し、<span class="marker">次の判断につなげる。</span></p>
+  </div>
+</section>
+
+<!-- VOICES -->
+<section class="sect">
+  <div class="wrap narrow rv center">
+    <div class="kick">VOICE</div>
+    <h2 class="shead">お客様の声は、<br>これから、あなたと一緒に。</h2>
+    <p class="lead">推し店デビューは、いま第1期。だからこのページの「声」は、まだ空席です。最初にデビューした方の言葉と数字が、ここに並びます。——いちばん最初の声は、あなたのものになるかもしれません。</p>
+  </div>
+  <div class="wrap rv">
+    <div class="voices">
+      <div class="voice"><div class="av">🌷</div><div class="vt">（第1期デビューの方の声が、ここに入ります）</div><div class="vn">ハンドメイド・大津市</div></div>
+      <div class="voice"><div class="av">🧁</div><div class="vt">（第1期デビューの方の声が、ここに入ります）</div><div class="vn">お菓子・草津市</div></div>
+      <div class="voice invite"><div class="av">✦</div><div class="vt">最初の主役は、あなたかもしれません。第1期メンバー、募集中です。</div><div class="vn">あなたの声を、ここに</div></div>
+    </div>
+  </div>
+</section>
+
 <!-- FAQ -->
 <section class="sect">
   <div class="wrap narrow rv center"><div class="kick">FAQ</div><h2 class="shead">よくある質問</h2></div>
@@ -425,8 +565,11 @@
       <details><summary>売上はどうなりますか？</summary><div class="a">当日の売上は全額あなたのものです。協力店舗費はコース料金に含まれています。</div></details>
       <details><summary>協力店舗は自分で探す必要がありますか？</summary><div class="a">基本的には事務局が条件に合う協力店舗を調整します。業種や内容によっては調整できない場合があります。</div></details>
       <details><summary>動画はYouTubeに必ず出ますか？</summary><div class="a">標準ではSNS用の短尺素材や写真素材を作成します。公式YouTubeでの長尺ドキュメンタリー化は、選抜事例または別途相談となります。</div></details>
-      <details><summary>この費用は経費にできますか？</summary><div class="a">開業した場合、開業準備のための市場調査・販売実証費用として「開業費」（繰延資産）に計上でき、開業初年度に全額経費化することも可能です（補助金充当分を除く）。最終的な税務処理は顧問税理士・税務署でご確認ください。</div></details>
-      <details><summary>飲食でも参加できますか？</summary><div class="a">飲食・火気・厨房利用・許認可確認が必要な業種は、内容確認のうえ別途見積となります。</div></details>
+      <details><summary>この費用は経費にできますか？</summary><div class="a">開業した場合、開業準備のための市場調査・販売確認費用として「開業費」（繰延資産）に計上でき、開業初年度に全額経費化することも可能です（補助金充当分を除く）。最終的な税務処理は顧問税理士・税務署でご確認ください。</div></details>
+      <details>
+        <summary>カフェや菓子製造など「飲食系」でも参加できますか？</summary>
+        <div class="a"><b>もちろん参加可能です。飲食系は、推し店デビューと相性の良い分野の一つです。</b><br>ただし、飲食・菓子製造・厨房利用・火気使用などは、営業許可・設備・衛生面の確認が必要になります。内容に応じて、対応可能な協力店舗を優先的に調整します。<br>実施可否や費用は、メニュー内容・調理方法・提供方法によって変わる場合がありますので、まずは無料診断でご相談ください。</div>
+      </details>
       <details><summary>売れなかったら失敗ですか？</summary><div class="a">失敗ではありません。売れなかった理由を確かめ、商品・価格・見せ方を直すことも大切な成果です。必要に応じて、前向きな撤退も選択肢になります。</div></details>
     </div>
   </div>
@@ -439,20 +582,24 @@
     <p>いきなり物件を借りなくてもいい。いきなり借入をしなくてもいい。<br>まずは、街の前で小さく、あなたの物語を売ってみる。</p>
     <p class="small">開業する勇気より、まず街に出る機会を。</p>
     <div class="cta-row">
-      <a class="btn btn-primary" href="https://oshimise-debut.jp/shindan">無料でお店デビュー診断を受ける <span class="arw">→</span></a>
-      <a class="btn btn-outline" href="#courses">第1期モニターについて相談する</a>
+      <!-- 無料診断ボタンは診断ページ(shindan.html)へ直行。モニターは当面メール受付（Googleフォーム完成後にhrefを差し替え） -->
+      <a class="btn btn-primary" href="shindan.html">無料で「1日向き／3か月向き」を診断する <span class="arw">→</span></a>
+      <!-- ★Googleフォーム完成後、href をモニター用フォームURLに差し替え（当面はメール受付） -->
+      <a class="btn btn-outline" href="mailto:info@bridgecycleco.com?subject=第1期モニター申込&body=お名前／業種／希望コース（1日5万・3か月12万）／ご連絡先をご記入ください。">第1期モニター枠に申し込む</a>
     </div>
+    <p style="margin-top:18px;font-size:13.5px;color:var(--soft);">迷っている方は、お気軽に <a href="mailto:info@bridgecycleco.com" style="color:var(--rose-d);font-weight:700;">メール</a> でもご相談いただけます。</p>
   </div>
 </section>
 
 <footer><div class="wrap">
   <div>
-    <b>BRIDGE CYCLE株式会社</b>（認定経営革新等支援機関）<br>
-    代表：中村裕二　｜　大津京〜瀬田エリア（大津市）<br>
+    <b>BRIDGE CYCLE株式会社</b>　代表：中村裕二<br>
+    認定経営革新等支援機関（2026年6月 登録手続き中・申請実務実績300件以上）<br>
+    大津京〜瀬田エリア（大津市）<br>
     TEL：080-5309-9770　｜　<a href="mailto:info@bridgecycleco.com">info@bridgecycleco.com</a><br>
     Web：<a href="https://yujimansion-hub.github.io/bridgecycle/">yujimansion-hub.github.io/bridgecycle</a>
   </div>
-  <div class="next">次回デビュー戦：<span class="w">＿</span>月<span class="w">＿</span>日<br>枠 残り：<span class="w">＿</span>枠</div>
+  <div class="next">次回デビュー戦：<span style="color:#fff;font-weight:700;">7月開催に向けて準備中</span><br>（大津京・膳所エリアで第1期生を募集中）</div>
 </div></footer>
 
 <script>
