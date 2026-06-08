@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>お店デビュー診断｜推し店デビュー（無料・10問）</title>
+<meta name="description" content="無料・10問。いま借りるべきか／まだか、防げる損の目安、使える制度、次の一手、1日向き／3か月向きが、その場でわかります。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#3A2E2A;--rose:#C0697A;--rose-d:#A24E60;--terra:#C97B5A;
+    --gold:#C9A24B;--gold-d:#A8852F;--cream:#FBF4EA;--cream2:#F4E9DA;
+    --blush:#F7E7E2;--line:#E6D8C8;--soft:#8C7A70;--card:#FFFCF7;
+    --mincho:"Shippori Mincho",serif;--gothic:"Zen Kaku Gothic New",sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--gothic);color:var(--ink);background:var(--cream);line-height:1.9;font-size:16px;font-weight:500;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,.mincho{font-family:var(--mincho);font-weight:700;line-height:1.5;}
+  .wrap{max-width:720px;margin:0 auto;padding:0 22px;}
+
+  /* header */
+  .top{background:rgba(251,244,234,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;}
+  .top .wrap{display:flex;align-items:center;gap:12px;padding:13px 22px;}
+  .top .logo{font-family:var(--mincho);font-weight:800;font-size:18px;color:var(--ink);}
+  .top .logo span{color:var(--rose);}
+  .top .free{margin-left:auto;font-family:var(--mincho);font-weight:700;color:var(--rose-d);font-size:14px;}
+
+  /* hero intro */
+  .intro{background:radial-gradient(ellipse at 70% 0,var(--blush),transparent 60%),linear-gradient(170deg,var(--cream),var(--cream2));padding:46px 0 34px;text-align:center;}
+  .intro .ey{font-weight:700;font-size:12px;letter-spacing:.24em;color:var(--terra);margin-bottom:12px;}
+  .intro h1{font-size:clamp(23px,4.4vw,32px);color:var(--ink);margin-bottom:14px;}
+  .intro p{font-size:15px;color:#5A4A42;max-width:560px;margin:0 auto;}
+  .intro .meta{margin-top:16px;font-size:13px;color:var(--soft);}
+  .intro .meta b{color:var(--rose-d);}
+
+  /* progress */
+  .prog{position:sticky;top:53px;z-index:15;background:var(--cream);padding:10px 0;border-bottom:1px solid var(--line);}
+  .prog .bar{height:7px;background:var(--cream2);border-radius:999px;overflow:hidden;}
+  .prog .fill{height:100%;width:0;background:linear-gradient(90deg,var(--rose),var(--gold));border-radius:999px;transition:width .3s ease;}
+  .prog .txt{font-size:12px;color:var(--soft);margin-top:6px;text-align:right;font-weight:700;}
+
+  /* questions */
+  .q{padding:26px 0;border-bottom:1px dashed var(--line);}
+  .q .qn{font-family:var(--mincho);font-weight:700;font-size:13px;color:var(--rose);margin-bottom:6px;}
+  .q .qt{font-family:var(--mincho);font-weight:700;font-size:18px;color:var(--ink);margin-bottom:14px;line-height:1.6;}
+  .q .qt .sub{display:block;font-family:var(--gothic);font-weight:500;font-size:13px;color:var(--soft);margin-top:4px;}
+  .opts{display:grid;gap:10px;}
+  .opt{display:flex;align-items:center;gap:12px;background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:13px 16px;cursor:pointer;transition:all .18s ease;font-size:15px;}
+  .opt:hover{border-color:var(--rose);}
+  .opt input{accent-color:var(--rose);width:18px;height:18px;flex:none;}
+  .opt.sel{border-color:var(--rose);background:var(--blush);}
+  .opt.sel .dot{background:var(--rose);}
+  textarea,input[type=text],input[type=email]{width:100%;font-family:var(--gothic);font-size:15px;border:1.5px solid var(--line);border-radius:12px;padding:13px 16px;background:var(--card);color:var(--ink);resize:vertical;}
+  textarea:focus,input:focus{outline:none;border-color:var(--rose);}
+
+  /* button */
+  .actions{padding:30px 0 60px;text-align:center;}
+  .btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--gothic);font-weight:700;font-size:17px;padding:17px 42px;border-radius:999px;border:none;cursor:pointer;background:var(--rose);color:#fff;box-shadow:0 10px 26px rgba(192,105,122,.32);transition:all .2s ease;}
+  .btn:hover{background:var(--rose-d);transform:translateY(-2px);}
+  .btn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+  .note{font-size:12.5px;color:var(--soft);margin-top:14px;}
+
+  /* result */
+  .result{display:none;padding:30px 0 70px;}
+  .result.show{display:block;animation:fade .5s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+  .verdict{border-radius:20px;padding:30px;text-align:center;color:#fff;margin-bottom:22px;}
+  .verdict.go{background:linear-gradient(150deg,var(--rose),var(--terra));}
+  .verdict.wait{background:linear-gradient(150deg,#5B4A52,var(--ink));}
+  .verdict .lbl{font-weight:700;font-size:13px;letter-spacing:.1em;opacity:.9;margin-bottom:8px;}
+  .verdict h2{font-size:clamp(22px,4vw,30px);color:#fff;margin-bottom:10px;}
+  .verdict p{font-size:14.5px;color:rgba(255,255,255,.92);}
+  .rcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 24px;margin-bottom:16px;}
+  .rcard h3{font-size:16px;color:var(--rose-d);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+  .rcard h3::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--gold);}
+  .rcard p,.rcard li{font-size:14.5px;color:#4A3F39;line-height:1.85;}
+  .rcard ul{list-style:none;margin-top:6px;}
+  .rcard li{padding-left:20px;position:relative;}
+  .rcard li::before{content:"✦";position:absolute;left:0;color:var(--gold);}
+  .rcard .big{font-family:var(--mincho);font-weight:800;font-size:26px;color:var(--rose-d);}
+  .rcard .recommend{font-family:var(--mincho);font-weight:700;font-size:18px;color:var(--ink);}
+  .rcta{text-align:center;margin-top:24px;}
+  .rcta .btn{margin:6px;}
+  .rcta .btn.outline{background:transparent;color:var(--rose-d);border:1.5px solid var(--rose);box-shadow:none;}
+  .rcta .btn.outline:hover{background:var(--rose);color:#fff;}
+  .disc{font-size:11.5px;color:var(--soft);margin-top:20px;line-height:1.8;text-align:center;}
+  .leadbox{background:var(--blush);border-radius:16px;padding:22px;margin-top:24px;}
+  .leadbox h3{font-family:var(--mincho);font-weight:700;font-size:16px;margin-bottom:6px;}
+  .leadbox p{font-size:13px;color:#5A4A42;margin-bottom:12px;}
+  .leadbox .row{display:grid;gap:10px;}
+  .err{color:var(--rose-d);font-size:13px;margin-top:8px;display:none;}
+  .err.show{display:block;}
+  footer{background:var(--ink);color:#C9BBAE;padding:30px 0;font-size:12.5px;line-height:1.9;text-align:center;}
+  footer a{color:var(--gold);text-decoration:none;}
+</style>
+</head>
+<body>
+
+<div class="top"><div class="wrap">
+  <div class="logo">推し店<span>デビュー</span></div>
+  <div class="free">お店デビュー診断｜無料</div>
+</div></div>
+
+<div class="intro"><div class="wrap">
+  <div class="ey">FREE DIAGNOSIS ─ 10問・約10分</div>
+  <h1>いま借りるべきか、まだか。<br>10問でわかります。</h1>
+  <p>答えるだけで、あなたに合った進み方・防げる損の目安・使える制度・次の一手、そして「1日向き／3か月向き」がその場でわかります。</p>
+  <div class="meta"><b>無料</b>・登録不要・約10分</div>
+</div></div>
+
+<div class="prog"><div class="wrap">
+  <div class="bar"><div class="fill" id="fill"></div></div>
+  <div class="txt" id="ptxt">0 / 10 問</div>
+</div></div>
+
+<form id="quiz"><div class="wrap" id="qwrap"></div>
+  <div class="wrap actions">
+    <button type="button" class="btn" id="submit">診断結果を見る →</button>
+    <div class="err" id="err">すべての質問にお答えください。</div>
+    <div class="note">※この診断は一般的な目安を表示するもので、結果や成果を保証するものではありません。</div>
+  </div>
+</form>
+
+<div class="result" id="result"><div class="wrap">
+  <div class="verdict" id="verdict">
+    <div class="lbl" id="vlbl"></div>
+    <h2 id="vttl"></h2>
+    <p id="vsub"></p>
+  </div>
+
+  <div class="rcard">
+    <h3>あなたに合うのは</h3>
+    <p class="recommend" id="recommend"></p>
+    <p id="recommend_why" style="margin-top:6px;"></p>
+  </div>
+
+  <div class="rcard">
+    <h3>いま開業した場合の初期費用の目安（＝防げる損）</h3>
+    <p>あなたの想定では、開業に必要な初期費用の目安は</p>
+    <p class="big" id="loss"></p>
+    <p id="loss_note" style="font-size:13px;color:var(--soft);"></p>
+  </div>
+
+  <div class="rcard">
+    <h3>使える可能性のある制度</h3>
+    <ul id="programs"></ul>
+    <p style="font-size:12.5px;color:var(--soft);margin-top:8px;">※利用可否・金額は要件と審査により異なります。認定経営革新等支援機関として、申請の伴走支援が可能です。</p>
+  </div>
+
+  <div class="rcard">
+    <h3>あなたの次の一手</h3>
+    <ul id="nextstep"></ul>
+  </div>
+
+  <div class="leadbox">
+    <h3>結果の詳しい説明を受け取る（任意）</h3>
+    <p>下のボタンから申込フォームに進むと、あなたの診断結果をもとに、無料で「デビュー設計」のご案内をお送りします。</p>
+    <div class="rcta">
+      <!-- ★ここを実フォームURLに差し替え（診断申込用Googleフォーム） -->
+      <!-- ★Googleフォーム完成後、href を相談申込フォームURLに差し替え（当面はメール受付） -->
+      <a class="btn" href="mailto:info@bridgecycleco.com?subject=無料相談・デビュー設計の申込&body=お名前／業種／診断結果／ご希望（1日・3か月）／ご連絡先をご記入ください。">無料相談・デビュー設計を申し込む →</a>
+      <!-- ★ここを実フォームURLに差し替え（第1期モニター用Googleフォーム） -->
+      <!-- ★Googleフォーム完成後、href をモニター用フォームURLに差し替え（当面はメール受付） -->
+      <a class="btn outline" href="mailto:info@bridgecycleco.com?subject=第1期モニター申込&body=お名前／業種／希望コース（1日5万・3か月12万）／ご連絡先をご記入ください。">第1期モニター枠に申し込む</a>
+    </div>
+  </div>
+
+  <p class="disc">この診断結果は、入力内容にもとづく一般的な目安です。融資・補助金・物件契約の可否や成果を保証するものではありません。具体的な税務・融資・許認可については、税理士・金融機関・所轄行政庁・当社（認定経営革新等支援機関）にご相談ください。</p>
+</div></div>
+
+<footer>
+  推し店デビュー（運営：BRIDGE CYCLE株式会社）<br>
+  TEL：080-5309-9770 ｜ <a href="mailto:info@bridgecycleco.com">info@bridgecycleco.com</a><br><a href="index.html">← 推し店デビューのトップへ</a>
+</footer>
+
+<script>
+const QUESTIONS = [
+  {id:"stage", q:"いま、どの段階ですか？", opts:[
+    {t:"「いつかお店を」と思っている（まだ販売経験は少ない）", v:"dream"},
+    {t:"マルシェ・SNS・自宅などで、すでに売っている", v:"selling"},
+    {t:"開業を具体的に検討中（物件・資金を考え始めた）", v:"planning"},
+    {t:"すでに事業をしていて、新しい業態・地域を試したい", v:"existing"},
+  ]},
+  {id:"category", q:"何を売る予定ですか？", opts:[
+    {t:"ハンドメイド・雑貨・アクセサリー", v:"craft"},
+    {t:"お菓子・パン・食品（菓子製造・飲食系）", v:"food"},
+    {t:"ネイル・まつげ・セラピー等の施術系", v:"beauty"},
+    {t:"教室・ワークショップ・相談など", v:"service"},
+  ]},
+  {id:"proof", q:"これまでに「売れた実績」はありますか？", opts:[
+    {t:"ほとんどない／これから", v:"none"},
+    {t:"イベントやネットで、ときどき売れる", v:"some"},
+    {t:"定期的に売れて、リピーターもいる", v:"repeat"},
+  ]},
+  {id:"continue", q:"続けて売れるか（リピート）に自信はありますか？", opts:[
+    {t:"正直、わからない", v:"low"},
+    {t:"たぶん大丈夫だと思う", v:"mid"},
+    {t:"手応えがある", v:"high"},
+  ]},
+  {id:"goal", q:"最終的に、どうなりたいですか？", opts:[
+    {t:"いずれ自分の店舗を持ちたい", v:"shop"},
+    {t:"無理に店は持たず、間借り・週末営業で続けたい", v:"share"},
+    {t:"既存店の引き継ぎ（承継）にも興味がある", v:"succeed"},
+    {t:"まだ決めていない／まず試したい", v:"undecided"},
+  ]},
+  {id:"money", q:"開業に向けて、いくらまで使えそうですか？", opts:[
+    {t:"できれば数万円まで。大きなお金は怖い", v:"tiny"},
+    {t:"数十万円までなら", v:"small"},
+    {t:"場合によっては百万円以上も検討する", v:"large"},
+  ]},
+  {id:"plan_type", q:"想定している開業のかたちは？", opts:[
+    {t:"自宅・無店舗・ネット中心", v:"home"},
+    {t:"小さなテナント・間借り", v:"small_shop"},
+    {t:"路面店・サロン・カフェなどの実店舗", v:"full_shop"},
+  ]},
+  {id:"fans", q:"開業前から「ファン（応援してくれる人）」を増やしたいですか？", opts:[
+    {t:"とても増やしたい", v:"yes"},
+    {t:"できれば増やしたい", v:"maybe"},
+    {t:"今はあまり考えていない", v:"no"},
+  ]},
+  {id:"timing", q:"いつ頃、動きたいですか？", opts:[
+    {t:"できるだけ早く（数か月以内）", v:"soon"},
+    {t:"半年〜1年以内", v:"year"},
+    {t:"まだ具体的には決めていない", v:"someday"},
+  ]},
+  {id:"worry", q:"いちばんの不安は？", opts:[
+    {t:"そもそも売れるのか", v:"sell"},
+    {t:"お金（借金・初期費用）", v:"cost"},
+    {t:"続けられるか・集客できるか", v:"keep"},
+    {t:"家族や周囲に説明できるか", v:"explain"},
+  ]},
+];
+
+// render
+const qwrap = document.getElementById('qwrap');
+QUESTIONS.forEach((qq,i)=>{
+  const div=document.createElement('div');
+  div.className='q';
+  let opts=qq.opts.map(o=>`<label class="opt"><input type="radio" name="${qq.id}" value="${o.v}"><span>${o.t}</span></label>`).join('');
+  div.innerHTML=`<div class="qn">Q${i+1}</div><div class="qt">${qq.q}</div><div class="opts">${opts}</div>`;
+  qwrap.appendChild(div);
+});
+
+// progress + selection styling
+function update(){
+  let answered=0;
+  QUESTIONS.forEach(qq=>{ if(document.querySelector(`input[name="${qq.id}"]:checked`)) answered++; });
+  const pct=Math.round(answered/QUESTIONS.length*100);
+  document.getElementById('fill').style.width=pct+'%';
+  document.getElementById('ptxt').textContent=`${answered} / ${QUESTIONS.length} 問`;
+}
+document.querySelectorAll('.opt').forEach(l=>{
+  l.addEventListener('click',()=>{
+    const name=l.querySelector('input').name;
+    document.querySelectorAll(`input[name="${name}"]`).forEach(r=>r.closest('.opt').classList.remove('sel'));
+    l.classList.add('sel'); update();
+  });
+});
+
+function val(id){const e=document.querySelector(`input[name="${id}"]:checked`);return e?e.value:null;}
+
+document.getElementById('submit').addEventListener('click',()=>{
+  const ans={}; let ok=true;
+  QUESTIONS.forEach(qq=>{ans[qq.id]=val(qq.id); if(!ans[qq.id])ok=false;});
+  if(!ok){document.getElementById('err').classList.add('show');window.scrollTo({top:document.getElementById('qwrap').offsetTop-60,behavior:'smooth'});return;}
+  document.getElementById('err').classList.remove('show');
+  showResult(ans);
+});
+
+function showResult(a){
+  // --- verdict: borrow now or wait ---
+  // "wait" if proof weak OR continuity low OR money tiny/no-data; "go" only if proof+continuity strong
+  let waitScore=0;
+  if(a.proof==='none')waitScore+=2; if(a.proof==='some')waitScore+=1;
+  if(a.continue==='low')waitScore+=2; if(a.continue==='mid')waitScore+=1;
+  if(a.stage==='dream')waitScore+=2;
+  if(a.worry==='sell')waitScore+=1;
+  const go = waitScore<=1 && (a.proof==='repeat') && (a.continue==='high');
+
+  const v=document.getElementById('verdict');
+  if(go){
+    v.className='verdict go';
+    document.getElementById('vlbl').textContent='診断結果';
+    document.getElementById('vttl').textContent='動き出せる段階です。ただし「街での実証」を一度。';
+    document.getElementById('vsub').textContent='実績もリピートもある今こそ、その手応えを数字に変えて、融資・物件相談を有利に進めましょう。';
+  }else{
+    v.className='verdict wait';
+    document.getElementById('vlbl').textContent='診断結果';
+    document.getElementById('vttl').textContent='いきなり借りるのは、まだ早いかもしれません。';
+    document.getElementById('vsub').textContent='いまは「本当に売れるか」を小さく確かめる段階。大きなお金を使う前に、街で一度デビューして確かめましょう。';
+  }
+
+  // --- recommend course ---
+  let rec, why;
+  if(a.continue==='low' || a.proof==='none' || a.money==='tiny'){
+    rec='まずは「1日お店デビュー」';
+    why='いきなり3か月より、1日で「売れるか・誰に届くか」をまず確かめるのが安全です。手応えがあれば、3か月へ進めます。';
+  }else if(a.goal==='shop' || a.goal==='succeed' || a.plan_type==='full_shop' || a.continue==='high'){
+    rec='「3か月お店デビュー」がおすすめ';
+    why='出店・承継を視野に入れるなら、継続需要（リピート）の確認と、融資・物件相談に使えるデビュー結果レポートまで揃う3か月が向いています。';
+  }else{
+    rec='まずは「1日お店デビュー」から';
+    why='1日で反応を確かめ、続けたくなったら3か月へ。段階的に進むのがいちばん損がありません。';
+  }
+  document.getElementById('recommend').textContent=rec;
+  document.getElementById('recommend_why').textContent=why;
+
+  // --- loss-avoidance estimate by plan_type & category ---
+  let lo,hi,note;
+  if(a.plan_type==='home'){lo=5;hi=30;note='自宅・無店舗中心でも、設備・材料・広告などで意外と費用はかかります。';}
+  else if(a.plan_type==='small_shop'){lo=80;hi=250;note='小さなテナント・間借りでも、保証金・内装・什器で初期費用がかさみます。';}
+  else{lo=200;hi=600;note='実店舗（路面・サロン・カフェ）は、物件取得・内装・設備で大きな初期投資になります。';}
+  if(a.category==='food'||a.category==='beauty'){hi=Math.round(hi*1.3);note+='（飲食・施術系は厨房・設備・衛生対応で上振れしやすい分野です）';}
+  document.getElementById('loss').textContent=`約 ${lo} 〜 ${hi} 万円`;
+  document.getElementById('loss_note').textContent=note+' デビューで先に確かめれば、この大半を「確かめてからの支出」に変えられます。';
+
+  // --- programs ---
+  const progs=[];
+  progs.push('小規模事業者持続化補助金〈創業型〉：販路開拓・広報・Web等（最大250万円・要件あり）');
+  if(a.timing==='soon'||a.goal==='shop'){progs.push('日本政策金融公庫の創業融資：デビュー結果レポートを相談資料に');}
+  if(a.plan_type!=='home'){progs.push('自治体の創業促進補助金（大津市等）：対象・募集時期は要確認');}
+  progs.push('開業費としての経費計上：当サービス費用は開業すれば「開業費」に計上可能（補助金充当分を除く）');
+  document.getElementById('programs').innerHTML=progs.map(p=>`<li>${p}</li>`).join('');
+
+  // --- next step ---
+  const ns=[];
+  ns.push('無料相談で、あなたの商品・価格・お客様像を整理する（デビュー設計）');
+  if(!go){ns.push('まず「1日お店デビュー」で、街の反応を数字で確かめる');}
+  else{ns.push('実績を「デビュー結果レポート」にまとめ、融資・物件相談に進む');}
+  if(a.fans==='yes'||a.fans==='maybe'){ns.push('デビュー戦で第0期サポーター（最初のファン）を集める');}
+  if(a.category==='food'){ns.push('営業許可・設備の条件を、無料相談で先に確認する');}
+  document.getElementById('nextstep').innerHTML=ns.map(p=>`<li>${p}</li>`).join('');
+
+  // show + scroll
+  const r=document.getElementById('result'); r.classList.add('show');
+  document.getElementById('quiz').style.display='none';
+  document.querySelector('.prog').style.display='none';
+  window.scrollTo({top:0,behavior:'smooth'});
+
+  // OPTIONAL: send lead to Google Form (prefilled) — see companion doc for setup.
+  // Example (after creating the form, fill IDs):
+  // const params=new URLSearchParams({'entry.AAA':a.stage,'entry.BBB':a.category,'entry.CCC':rec});
+  // navigator.sendBeacon('https://docs.google.com/forms/d/e/XXXX/formResponse?'+params.toString());
+}
+update();
+</script>
+</body>
+</html>
